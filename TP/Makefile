@@ -1,9 +1,9 @@
 #---------------------------------------------------------------------
-# Arquivo	: Makefile
-# Conteúdo	: compilar o programa matop
-# Autor		: Guilherme Mota Bromonschenkel Lima (guilhermebromonschenkel@gmail.com)
+# File	: Makefile
+# Content	: Compiles the Poker Face application.
+# Author		: Guilherme Mota Bromonschenkel Lima (guilhermebromonschenkel@gmail.com)
 #---------------------------------------------------------------------
-# Opções	: make all - compila tudo
+# Options	: make all - compile everything
 #---------------------------------------------------------------------
 
 CC = g++
