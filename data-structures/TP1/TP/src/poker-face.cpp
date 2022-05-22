@@ -87,6 +87,27 @@ ClassifiedHand PokerFace::classifyHand (Hand hand) {
 	} else if (this->isFourOfAKindHand(hand)) {
 		classifiedHand.type = "FK";
 		classifiedHand.value = 8;
+	} else if (this->isFullHouseHand(hand)) {
+		classifiedHand.type = "FH";
+		classifiedHand.value = 7;
+	} else if (this->isFlushHand(hand)) {
+		classifiedHand.type = "F";
+		classifiedHand.value = 6;
+	} else if (this->isStraightHand(hand)) {
+		classifiedHand.type = "S";
+		classifiedHand.value = 5;
+	} else if (this->isThreeOfAKindHand(hand)) {
+		classifiedHand.type = "TK";
+		classifiedHand.value = 4;
+	} else if (this->isTwoPairsHand(hand)) {
+		classifiedHand.type = "TP";
+		classifiedHand.value = 3;
+	} else if (this->isOnePairHand(hand)) {
+		classifiedHand.type = "OP";
+		classifiedHand.value = 2;
+	} else {
+		classifiedHand.type = "HC";
+		classifiedHand.value = 1;
 	}
 
 	return classifiedHand;
@@ -169,23 +190,29 @@ bool PokerFace::isFourOfAKindHand (Hand hand) {
 };
 
 bool PokerFace::isFullHouseHand (Hand hand) {
-	int cardsWithSameValue = 0;
+	return false;
+};
 
-	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
-		Card currentCard = hand[cardIndex];
+bool PokerFace::isFlushHand (Hand hand) {
+	return false;
+};
 
-		int nextCardIndex = cardIndex + 1;
-		Card nextCard = hand[nextCardIndex];
+bool PokerFace::isStraightHand (Hand hand) {
+	return false;
+};
 
-		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
-		bool cardsHasSameValue = currentCard.value == nextCard.value;
+bool PokerFace::isThreeOfAKindHand (Hand hand) {
+	return false;
+};
 
-		if (isValidNextCard && cardsHasSameValue) {
-			cardsWithSameValue++;
-		}
-	}
+bool PokerFace::isTwoPairsHand (Hand hand) {
+	return false;
+};
 
-	bool result = cardsWithSameValue == 4;
+bool PokerFace::isOnePairHand (Hand hand) {
+	return false;
+};
 
-	return result;
+bool PokerFace::isHighCardHand (Hand hand) {
+	return false;
 };
