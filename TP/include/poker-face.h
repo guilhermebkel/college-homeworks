@@ -15,7 +15,7 @@
 typedef struct Play {
 	char playerName[50];
 	int betAmount;
-	char hand[2][MAX_HAND_SIZE];
+	char hand[MAX_HAND_SIZE][2];
 } Play;
 
 typedef struct Round {
@@ -28,7 +28,7 @@ class PokerFace {
   public:
     PokerFace(int totalRounds, int initialMoneyAmountPerParticipant);
 		void startRound(int participantsCount, int dropValue);
-    void readPlay(char playerName[50], int betAmount, char hand[2][MAX_HAND_SIZE]);
+    void readPlay(char playerName[50], int betAmount, char hand[MAX_HAND_SIZE][2]);
     void getResult();
 
 	private:

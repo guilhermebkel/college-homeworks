@@ -34,7 +34,7 @@ int main() {
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
 			char playerName[50];
 			int betAmount;
-			char hand[2][MAX_HAND_SIZE];
+			char hand[MAX_HAND_SIZE][2];
 
 			fscanf(inputFile, "%s ", playerName);
   		fscanf(inputFile, "%d ", &betAmount);
@@ -48,6 +48,8 @@ int main() {
 	}
 
 	fclose(inputFile);
+
+	pokerFace->getResult();
 	
 	return 0;
 }

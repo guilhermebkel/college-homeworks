@@ -21,11 +21,15 @@ void PokerFace::startRound (int participantsCount, int dropValue) {
 	rounds[currentRoundIndex] = round;
 };
 
-void PokerFace::readPlay (char playerName[50], int betAmount, char hand[2][MAX_HAND_SIZE]) {
+void PokerFace::readPlay (char playerName[50], int betAmount, char hand[MAX_HAND_SIZE][2]) {
 	Play play;
 
 	strcpy(play.playerName, playerName);
 	play.betAmount = betAmount;
+	
+	for (int handIndex = 0; handIndex < MAX_HAND_SIZE; handIndex++) {
+		strcpy(play.hand[handIndex], hand[handIndex]);
+	}
 };
 
 void PokerFace::getResult() {
