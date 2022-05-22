@@ -34,7 +34,7 @@ int main() {
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
 			char playerName[MAX_PLAYER_NAME_SIZE];
 			int betAmount;
-			char hand[MAX_HAND_SIZE][HAND_COMBINATION_SIZE];
+			char hand[MAX_HAND_SIZE][CARD_NAME_SIZE];
 
 			fscanf(inputFile, "%s ", playerName);
   		fscanf(inputFile, "%d ", &betAmount);
