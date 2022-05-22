@@ -6,27 +6,25 @@
 # Opções	: make all - compila tudo
 #---------------------------------------------------------------------
 
-CC = gcc
+CC = g++
 LIBS = -lm
 SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/poker-face.o $(OBJ)/memlog.o
-HDRS = $(INC)/poker-face.h $(INC)/memlog.h $(INC)/msgassert.h
-CFLAGS = -pg -Wall -c -I$(INC)
+CFLAGS = -g -O3 -std=c++11 -I$(INC) -I third_party/ -I src/
 
 EXE = $(BIN)/main
 
 all: main
 
 build:
-	$(CC) $(CFLAGS) -c src/main.cpp -o $(BIN)/main
-	$(CC) $(CFLAGS) -c src/poker-face.cpp -o $(BIN)/poker-face
+	$(CC) $(CFLAGS) -c src/poker-face-app.cpp -o $(OBJ)/poker-face-app.o
+	$(CC) $(CFLAGS) -c src/poker-face.cpp -o $(OBJ)/poker-face.o
 
-main: build
-	$(CC) $(CFLAGS) $(BIN)/* -o main
+main: clean build
+	$(CC) $(CFLAGS) $(OBJ)/*.o -o $(BIN)/main
 	$(EXE)
 	
 clean:
-	rm -f $(EXE) $(OBJS)
+	rm -f $(EXE) $(OBJ)/*.o
