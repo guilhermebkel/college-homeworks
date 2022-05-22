@@ -11,8 +11,6 @@ int main() {
 	FILE *inputFile;
   inputFile = fopen ("../../inputs/input.txt", "r");
 
-	std::cout << "TESTEEEEE" << endl;
-
 	int totalRounds;
 	int initialMoneyAmountPerParticipant;
 
