@@ -54,20 +54,32 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 };
 
 void PokerFace::getRoundResult(Round round) {
-	for (int i = 0; i < round.participantsCount; i++) {
-		Play currentPlay = round.plays[i];
+	ClassifiedHand winnerClassifiedHand;
+	int winnerParticipantIndex = 0;
+
+	winnerClassifiedHand.value = 0;
+
+	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
+		Play currentPlay = round.plays[participantIndex];
 
 		ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
 
-		std::cout << currentPlay.playerName << " " << classifiedHand.type << std::endl;
+		if (classifiedHand.value > winnerClassifiedHand.value) {
+			winnerClassifiedHand = classifiedHand;
+			winnerParticipantIndex = participantIndex;
+		}		
 	}
+
+	Play winnerPlay = round.plays[winnerParticipantIndex];
+
+	std::cout << winnerPlay.playerName << " " << winnerClassifiedHand.type << std::endl;
 };
 
 void PokerFace::finish() {
 	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
 		Round round = rounds[roundIndex];
 
-		std::cout << "ROUND::: " << roundIndex << ": " << std::endl;
+		std::cout << "\nROUND::: " << roundIndex << ":" << std::endl;
 
 		this->getRoundResult(round);
 	}
@@ -157,6 +169,40 @@ bool PokerFace::handHasSequentialCombination (Hand hand) {
 	return isSequentialCombination;
 }
 
+bool PokerFace::handHasCardsWithEqualValues (Hand hand, int group1 = 1, int group2 = 1, int group3 = 1, int group4 = 1, int group5 = 1) {
+	int equalCards[MAX_HAND_SIZE];
+
+	for (int i = 0; i < MAX_HAND_SIZE; i++) {
+		equalCards[i] = 1;
+
+		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
+			Card currentCard = hand[i];
+			Card comparedCard = hand[j];
+
+			if (currentCard.value == comparedCard.value) {
+				equalCards[i]++;
+			}
+		}
+	}
+
+	/**
+	 * Orders cards in descending ordering by amount of equal cards, in order to
+	 * handle easily some business rules later.
+	 */
+	for (int i = 0; i < MAX_HAND_SIZE; i++) {
+		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
+			if (equalCards[i] < equalCards[j]) {
+				int equalCardValue = equalCards[i];
+
+				equalCards[i] = equalCards[j];
+				equalCards[j] = equalCardValue;
+			}
+		}
+	}
+
+	return equalCards[0] == group1 && equalCards[1] == group2 && equalCards[2] == group3 && equalCards[3] == group4 && equalCards[4] == group5;
+}
+
 bool PokerFace::isStraightFlushHand (Hand hand) {
 	return this->handHasSingleSuit(hand) && this->handHasSequentialCombination(hand);
 };
@@ -172,29 +218,11 @@ bool PokerFace::isRoyalStraightFlushHand (Hand hand) {
 };
 
 bool PokerFace::isFourOfAKindHand (Hand hand) {
-	int cardsWithSameValue = 0;
-
-	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
-		Card currentCard = hand[cardIndex];
-
-		int nextCardIndex = cardIndex + 1;
-		Card nextCard = hand[nextCardIndex];
-
-		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
-		bool cardsHasSameValue = currentCard.value == nextCard.value;
-
-		if (isValidNextCard && cardsHasSameValue) {
-			cardsWithSameValue++;
-		}
-	}
-
-	bool result = cardsWithSameValue == 4;
-
-	return result;
+	return this->handHasCardsWithEqualValues(hand, 4);
 };
 
 bool PokerFace::isFullHouseHand (Hand hand) {
-	return false;
+	return this->handHasCardsWithEqualValues(hand, 3, 2);
 };
 
 bool PokerFace::isFlushHand (Hand hand) {
@@ -206,15 +234,15 @@ bool PokerFace::isStraightHand (Hand hand) {
 };
 
 bool PokerFace::isThreeOfAKindHand (Hand hand) {
-	return false;
+	return this->handHasCardsWithEqualValues(hand, 3);
 };
 
 bool PokerFace::isTwoPairsHand (Hand hand) {
-	return false;
+	return this->handHasCardsWithEqualValues(hand, 2, 2);
 };
 
 bool PokerFace::isOnePairHand (Hand hand) {
-	return false;
+	return this->handHasCardsWithEqualValues(hand, 2);
 };
 
 bool PokerFace::isHighCardHand (Hand hand) {

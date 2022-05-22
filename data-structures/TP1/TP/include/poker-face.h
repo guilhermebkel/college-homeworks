@@ -56,6 +56,7 @@ class PokerFace {
 		ClassifiedHand classifyHand (Hand hand);
 		void getRoundResult (Round round);
 		bool handHasSingleSuit (Hand hand);
+		bool handHasCardsWithEqualValues (Hand hand, int group1, int group2, int group3, int group4, int group5);
 		bool handHasSequentialCombination (Hand hand);
 		bool isRoyalStraightFlushHand (Hand hand);
 		bool isStraightFlushHand (Hand hand);
