@@ -67,7 +67,6 @@ class PokerFace {
 		bool isThreeOfAKindHand (Hand hand);
 		bool isTwoPairsHand (Hand hand);
 		bool isOnePairHand (Hand hand);
-		bool isHighCardHand (Hand hand);
     int totalRounds;
     int initialMoneyAmountPerParticipant;
 		int currentRoundIndex;

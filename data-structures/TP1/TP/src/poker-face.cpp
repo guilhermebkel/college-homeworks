@@ -244,7 +244,3 @@ bool PokerFace::isTwoPairsHand (Hand hand) {
 bool PokerFace::isOnePairHand (Hand hand) {
 	return this->handHasCardsWithEqualValues(hand, 2);
 };
-
-bool PokerFace::isHighCardHand (Hand hand) {
-	return false;
-};
