@@ -1,5 +1,5 @@
 #include <iomanip>
-#include <string>
+#include <string.h>
 
 #include "poker-face.h"
 
@@ -21,10 +21,10 @@ void PokerFace::startRound (int participantsCount, int dropValue) {
 	rounds[currentRoundIndex] = round;
 };
 
-void PokerFace::readPlay (std::string playerName, int betAmount, std::string hand[MAX_HAND_SIZE]) {
+void PokerFace::readPlay (char playerName[50], int betAmount, char hand[2][MAX_HAND_SIZE]) {
 	Play play;
 
-	play.playerName = playerName;
+	strcpy(play.playerName, playerName);
 	play.betAmount = betAmount;
 };
 

@@ -34,18 +34,16 @@ int main() {
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
 			char playerName[50];
 			int betAmount;
-			std::string hand[MAX_HAND_SIZE];
+			char hand[2][MAX_HAND_SIZE];
 
 			fscanf(inputFile, "%s ", playerName);
   		fscanf(inputFile, "%d ", &betAmount);
 
-			std::cout << playerName << endl;
+			for (int playerHandIndex = 0; playerHandIndex < MAX_HAND_SIZE; playerHandIndex++) {
+				fscanf(inputFile, "%s ", hand[playerHandIndex]);
+			}
 
-			// for (int playerHandIndex = 0; playerHandIndex < MAX_HAND_SIZE; playerHandIndex++) {
-			// 	fscanf(inputFile, "%s ", &hand[playerHandIndex]);
-			// }
-
-			// pokerFace->readPlay(playerName, betAmount, hand);
+			pokerFace->readPlay(playerName, betAmount, hand);
 		}
 	}
 
