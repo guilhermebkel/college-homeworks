@@ -27,41 +27,10 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	strcpy(play.playerName, playerName);
 	play.betAmount = betAmount;
 
-	for (int handIndex = 0; handIndex < MAX_HAND_SIZE; handIndex++) {
-		play.hand[handIndex] = hand[handIndex];
-	}
-
-	Round currentRound = rounds[currentRoundIndex];
-
-	this->rounds[currentRoundIndex].plays[currentRound.currentPlayIndex] = play;
-	this->rounds[currentRoundIndex].currentPlayIndex++;
-};
-
-void PokerFace::getResult() {
-	Round round = rounds[0];
-
-	for (int i = 0; i < round.participantsCount; i++) {
-		Play currentPlay = round.plays[i];
-
-		this->classifyHand(currentPlay.hand);
-	}
-};
-
-ClassifiedHand PokerFace::classifyHand (Hand hand) {
-	ClassifiedHand classifiedHand;
-
-	bool isRoyalStraightFlushHand = this->isRoyalStraightFlushHand(hand);
-
-	return classifiedHand;
-};
-
-bool PokerFace::handHasSingleSuit (Hand hand) {
-	return (hand[0].suit == hand[1].suit) && (hand[1].suit == hand[2].suit) && (hand[2].suit == hand[3].suit) && (hand[3].suit == hand[4].suit) && (hand[4].suit == hand[5].suit);
-}
-
-bool PokerFace::isStraightFlushHand (Hand hand) {
-	bool hasSameSuit = handHasSingleSuit(hand);
-
+	/**
+	 * Orders cards in ascending ordering by its value, in order to
+	 * handle easily some business rules later.
+	 */
 	for (int i = 0; i < MAX_HAND_SIZE; i++) {
 		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
 			if (hand[i].value > hand[j].value) {
@@ -74,10 +43,90 @@ bool PokerFace::isStraightFlushHand (Hand hand) {
 		}
 	}
 
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		play.hand[cardIndex] = hand[cardIndex];
+	}
+
+	Round currentRound = rounds[currentRoundIndex];
+
+	this->rounds[currentRoundIndex].plays[currentRound.currentPlayIndex] = play;
+	this->rounds[currentRoundIndex].currentPlayIndex++;
+};
+
+void PokerFace::getRoundResult(Round round) {
+	for (int i = 0; i < round.participantsCount; i++) {
+		Play currentPlay = round.plays[i];
+
+		this->classifyHand(currentPlay.hand);
+	}
+};
+
+void PokerFace::finish() {
+	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
+		Round round = rounds[roundIndex];
+
+		this->getRoundResult(round);
+	}
+};
+
+ClassifiedHand PokerFace::classifyHand (Hand hand) {
+	ClassifiedHand classifiedHand;
+
+	classifiedHand.greaterCard = hand[MAX_HAND_SIZE - 1];
+
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		classifiedHand.hand[cardIndex] = hand[cardIndex];
+	}
+
+	if (this->isRoyalStraightFlushHand(hand)) {
+		classifiedHand.type = "RSF";
+		classifiedHand.value = 10;
+	} else if (this->isStraightFlushHand(hand)) {
+		classifiedHand.type = "SF";
+		classifiedHand.value = 9;
+	} else if (this->isFourOfAKindHand(hand)) {
+		classifiedHand.type = "FK";
+		classifiedHand.value = 8;
+	}
+
+	return classifiedHand;
+};
+
+bool PokerFace::handHasSingleSuit (Hand hand) {
+	bool handHasSingleSuit = true;
+
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		Card currentCard = hand[cardIndex];
+
+		int nextCardIndex = cardIndex + 1;
+		Card nextCard = hand[nextCardIndex];
+
+		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
+		bool cardsHaveSameSuit = nextCard.suit == currentCard.suit;
+
+		if (isValidNextCard && !cardsHaveSameSuit) {
+			handHasSingleSuit = false;
+		}
+	}
+
+	return handHasSingleSuit;
+};
+
+bool PokerFace::isStraightFlushHand (Hand hand) {
+	bool hasSameSuit = handHasSingleSuit(hand);
+
 	bool isSequentialCombination = true;
 
-	for (int i = 0; i < MAX_HAND_SIZE; i++) {
-		if (hand[i].value - hand[i + 1].value > 1) {
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		Card currentCard = hand[cardIndex];
+
+		int nextCardIndex = cardIndex + 1;
+		Card nextCard = hand[nextCardIndex];
+
+		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
+		bool areSequentialCards = currentCard.value - nextCard.value == 1;
+
+		if (isValidNextCard && !areSequentialCards) {
 			isSequentialCombination = false;
 		}
 	}
@@ -90,21 +139,53 @@ bool PokerFace::isStraightFlushHand (Hand hand) {
 bool PokerFace::isRoyalStraightFlushHand (Hand hand) {
 	bool hasSameSuit = handHasSingleSuit(hand);
 
-	for (int i = 0; i < MAX_HAND_SIZE; i++) {
-		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
-			if (hand[i].value > hand[j].value) {
-				Card auxCard = hand[i];
-
-				hand[i] = hand[j];
-
-				hand[j] = auxCard;
-			}
-		}
-	}
-
 	bool hasCorrectCombination = (hand[0].value == 1) && (hand[1].value == 10) && (hand[2].value == 11) && (hand[3].value == 12) && (hand[4].value == 13);
 
 	bool result = hasSameSuit && hasCorrectCombination;
+
+	return result;
+};
+
+bool PokerFace::isFourOfAKindHand (Hand hand) {
+	int cardsWithSameValue = 0;
+
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		Card currentCard = hand[cardIndex];
+
+		int nextCardIndex = cardIndex + 1;
+		Card nextCard = hand[nextCardIndex];
+
+		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
+		bool cardsHasSameValue = currentCard.value == nextCard.value;
+
+		if (isValidNextCard && cardsHasSameValue) {
+			cardsWithSameValue++;
+		}
+	}
+
+	bool result = cardsWithSameValue == 4;
+
+	return result;
+};
+
+bool PokerFace::isFullHouseHand (Hand hand) {
+	int cardsWithSameValue = 0;
+
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		Card currentCard = hand[cardIndex];
+
+		int nextCardIndex = cardIndex + 1;
+		Card nextCard = hand[nextCardIndex];
+
+		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
+		bool cardsHasSameValue = currentCard.value == nextCard.value;
+
+		if (isValidNextCard && cardsHasSameValue) {
+			cardsWithSameValue++;
+		}
+	}
+
+	bool result = cardsWithSameValue == 4;
 
 	return result;
 };

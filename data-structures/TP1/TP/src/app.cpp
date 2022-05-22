@@ -53,7 +53,7 @@ int main() {
 
 	fclose(inputFile);
 
-	pokerFace->getResult();
+	pokerFace->finish();
 	
 	return 0;
 }

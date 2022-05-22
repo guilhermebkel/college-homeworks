@@ -29,6 +29,7 @@ typedef struct ClassifiedHand {
 	int value;
 	std::string type;
 	Hand hand;
+	Card greaterCard;
 } ClassifiedHand;
 
 typedef struct Play {
@@ -49,10 +50,11 @@ class PokerFace {
     PokerFace(int totalRounds, int initialMoneyAmountPerParticipant);
 		void startRound(int participantsCount, int dropValue);
     void readPlay(PlayerName playerName, int betAmount, Hand hand);
-    void getResult();
+    void finish();
 
 	private:
 		ClassifiedHand classifyHand (Hand hand);
+		void getRoundResult (Round round);
 		bool handHasSingleSuit (Hand hand);
 		bool isRoyalStraightFlushHand (Hand hand);
 		bool isStraightFlushHand (Hand hand);
