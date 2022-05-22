@@ -57,13 +57,17 @@ void PokerFace::getRoundResult(Round round) {
 	for (int i = 0; i < round.participantsCount; i++) {
 		Play currentPlay = round.plays[i];
 
-		this->classifyHand(currentPlay.hand);
+		ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
+
+		std::cout << currentPlay.playerName << " " << classifiedHand.type << std::endl;
 	}
 };
 
 void PokerFace::finish() {
 	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
 		Round round = rounds[roundIndex];
+
+		std::cout << "ROUND::: " << roundIndex << ": " << std::endl;
 
 		this->getRoundResult(round);
 	}
@@ -123,7 +127,7 @@ bool PokerFace::handHasSingleSuit (Hand hand) {
 		Card nextCard = hand[nextCardIndex];
 
 		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
-		bool cardsHaveSameSuit = nextCard.suit == currentCard.suit;
+		bool cardsHaveSameSuit = nextCard.suit[0] == currentCard.suit[0];
 
 		if (isValidNextCard && !cardsHaveSameSuit) {
 			handHasSingleSuit = false;
@@ -133,9 +137,7 @@ bool PokerFace::handHasSingleSuit (Hand hand) {
 	return handHasSingleSuit;
 };
 
-bool PokerFace::isStraightFlushHand (Hand hand) {
-	bool hasSameSuit = handHasSingleSuit(hand);
-
+bool PokerFace::handHasSequentialCombination (Hand hand) {
 	bool isSequentialCombination = true;
 
 	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
@@ -145,16 +147,18 @@ bool PokerFace::isStraightFlushHand (Hand hand) {
 		Card nextCard = hand[nextCardIndex];
 
 		bool isValidNextCard = nextCardIndex < MAX_HAND_SIZE;
-		bool areSequentialCards = currentCard.value - nextCard.value == 1;
+		bool areSequentialCards = nextCard.value - currentCard.value == 1;
 
 		if (isValidNextCard && !areSequentialCards) {
 			isSequentialCombination = false;
 		}
 	}
 
-	bool result = hasSameSuit && isSequentialCombination;
+	return isSequentialCombination;
+}
 
-	return result;
+bool PokerFace::isStraightFlushHand (Hand hand) {
+	return this->handHasSingleSuit(hand) && this->handHasSequentialCombination(hand);
 };
 
 bool PokerFace::isRoyalStraightFlushHand (Hand hand) {
@@ -194,11 +198,11 @@ bool PokerFace::isFullHouseHand (Hand hand) {
 };
 
 bool PokerFace::isFlushHand (Hand hand) {
-	return false;
+	return this->handHasSingleSuit(hand) && !this->handHasSequentialCombination(hand);
 };
 
 bool PokerFace::isStraightHand (Hand hand) {
-	return false;
+	return this->handHasSequentialCombination(hand);
 };
 
 bool PokerFace::isThreeOfAKindHand (Hand hand) {
