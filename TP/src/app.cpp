@@ -32,15 +32,19 @@ int main() {
 		pokerFace->startRound(participantsCount, dropValue);
 
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
-			char playerName[MAX_PLAYER_NAME_SIZE];
+			PlayerName playerName;
 			int betAmount;
-			char hand[MAX_HAND_SIZE][CARD_NAME_SIZE];
+			Hand hand;
 
 			fscanf(inputFile, "%s ", playerName);
   		fscanf(inputFile, "%d ", &betAmount);
 
 			for (int playerHandIndex = 0; playerHandIndex < MAX_HAND_SIZE; playerHandIndex++) {
-				fscanf(inputFile, "%s ", hand[playerHandIndex]);
+				Card card;
+
+				fscanf(inputFile, "%d%s ", &card.value, card.suit);
+
+				hand[playerHandIndex] = card;
 			}
 
 			pokerFace->readPlay(playerName, betAmount, hand);

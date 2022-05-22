@@ -16,30 +16,54 @@
 #define MAX_PLAYER_NAME_SIZE 50
 #endif
 
-#ifndef CARD_NAME_SIZE 
-#define CARD_NAME_SIZE 2
-#endif
+typedef struct Card {
+	int value;
+	char suit[1];
+} Card;
+
+typedef Card Hand[MAX_HAND_SIZE];
+
+typedef char PlayerName[MAX_PLAYER_NAME_SIZE];
+
+typedef struct ClassifiedHand {
+	int value;
+	std::string type;
+	Hand hand;
+} ClassifiedHand;
 
 typedef struct Play {
-	char playerName[MAX_PLAYER_NAME_SIZE];
+	PlayerName playerName;
 	int betAmount;
-	char hand[MAX_HAND_SIZE][CARD_NAME_SIZE];
+	Hand hand;
 } Play;
 
 typedef struct Round {
 	int participantsCount;
 	int dropValue;
 	Play plays[MAX_PLAYERS_COUNT];
+	int currentPlayIndex;
 } Round;
 
 class PokerFace {
   public:
     PokerFace(int totalRounds, int initialMoneyAmountPerParticipant);
 		void startRound(int participantsCount, int dropValue);
-    void readPlay(char playerName[MAX_PLAYER_NAME_SIZE], int betAmount, char hand[MAX_HAND_SIZE][CARD_NAME_SIZE]);
+    void readPlay(PlayerName playerName, int betAmount, Hand hand);
     void getResult();
 
 	private:
+		ClassifiedHand classifyHand (Hand hand);
+		bool handHasSingleSuit (Hand hand);
+		bool isRoyalStraightFlushHand (Hand hand);
+		bool isStraightFlushHand (Hand hand);
+		bool isFourOfAKindHand (Hand hand);
+		bool isFullHouseHand (Hand hand);
+		bool isFlushHand (Hand hand);
+		bool isStraightHand (Hand hand);
+		bool isThreeOfAKindHand (Hand hand);
+		bool isTwoPairsHand (Hand hand);
+		bool isOnePairHand (Hand hand);
+		bool isHighCardHand (Hand hand);
     int totalRounds;
     int initialMoneyAmountPerParticipant;
 		int currentRoundIndex;
