@@ -1,4 +1,6 @@
 #include <iomanip>
+#include <iostream>
+#include <string.h>
 #include <stdlib.h>
 
 #include "poker-face.h"
@@ -8,6 +10,8 @@ using namespace std;
 int main() {
 	FILE *inputFile;
   inputFile = fopen ("../../inputs/input.txt", "r");
+
+	std::cout << "TESTEEEEE" << endl;
 
 	int totalRounds;
 	int initialMoneyAmountPerParticipant;

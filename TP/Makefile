@@ -20,19 +20,13 @@ EXE = $(BIN)/main
 
 all: main
 
-main: $(EXE)
+build:
+	$(CC) $(CFLAGS) -c src/main.cpp -o $(BIN)/main
+	$(CC) $(CFLAGS) -c src/poker-face.cpp -o $(BIN)/poker-face
 
-$(BIN)/main: $(OBJS)
-	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
-
-$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
-
-$(OBJ)/poker-face.o: $(HDRS) $(SRC)/poker-face.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/poker-face.o $(SRC)/poker-face.cpp
-
-$(OBJ)/memlog.o: $(HDRS) $(SRC)/memlog.c
-	$(CC) $(CFLAGS) -o $(OBJ)/memlog.o $(SRC)/memlog.c 
+main: build
+	$(CC) $(CFLAGS) $(BIN)/* -o main
+	$(EXE)
 	
 clean:
 	rm -f $(EXE) $(OBJS)
