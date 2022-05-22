@@ -10,7 +10,7 @@ using namespace std;
  
 int main() {
 	FILE *inputFile;
-  inputFile = fopen("../inputs/input.txt", "r");
+  inputFile = fopen("../data/input.txt", "r");
 	erroAssert(inputFile != NULL, "O arquivo de entrada não foi encontrado.");
 
 	int totalRounds;
