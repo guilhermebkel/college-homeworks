@@ -32,9 +32,9 @@ int main() {
 		pokerFace->startRound(participantsCount, dropValue);
 
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
-			char playerName[50];
+			char playerName[MAX_PLAYER_NAME_SIZE];
 			int betAmount;
-			char hand[MAX_HAND_SIZE][2];
+			char hand[MAX_HAND_SIZE][HAND_COMBINATION_SIZE];
 
 			fscanf(inputFile, "%s ", playerName);
   		fscanf(inputFile, "%d ", &betAmount);

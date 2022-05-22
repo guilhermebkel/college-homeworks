@@ -12,10 +12,18 @@
 #define MAX_PLAYERS_COUNT 8
 #endif
 
+#ifndef MAX_PLAYER_NAME_SIZE 
+#define MAX_PLAYER_NAME_SIZE 50
+#endif
+
+#ifndef HAND_COMBINATION_SIZE 
+#define HAND_COMBINATION_SIZE 2
+#endif
+
 typedef struct Play {
-	char playerName[50];
+	char playerName[MAX_PLAYER_NAME_SIZE];
 	int betAmount;
-	char hand[MAX_HAND_SIZE][2];
+	char hand[MAX_HAND_SIZE][HAND_COMBINATION_SIZE];
 } Play;
 
 typedef struct Round {
@@ -28,7 +36,7 @@ class PokerFace {
   public:
     PokerFace(int totalRounds, int initialMoneyAmountPerParticipant);
 		void startRound(int participantsCount, int dropValue);
-    void readPlay(char playerName[50], int betAmount, char hand[MAX_HAND_SIZE][2]);
+    void readPlay(char playerName[MAX_PLAYER_NAME_SIZE], int betAmount, char hand[MAX_HAND_SIZE][HAND_COMBINATION_SIZE]);
     void getResult();
 
 	private:
