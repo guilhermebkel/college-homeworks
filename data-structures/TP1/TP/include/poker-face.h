@@ -26,7 +26,7 @@ typedef Card Hand[MAX_HAND_SIZE];
 typedef char PlayerName[MAX_PLAYER_NAME_SIZE];
 
 typedef struct ClassifiedHand {
-	int value;
+	int score;
 	std::string type;
 	Hand hand;
 	Card greaterCard;
@@ -45,11 +45,18 @@ typedef struct Round {
 	int currentPlayIndex;
 } Round;
 
+typedef struct RoundWinner {
+	ClassifiedHand classifiedHand;
+	Play play;
+	int participantIndex;
+} RoundWinner;
+
 typedef struct RoundResult {
 	Round round;
 	PlayerName winners[MAX_PLAYERS_COUNT];
 	int winnersCount;
 	std::string classifiedHandType;
+	int moneyPerWinner;
 } RoundResult;
 
 typedef struct Balance {
@@ -60,6 +67,7 @@ typedef struct Balance {
 typedef struct Result {
 	RoundResult roundResults[1000];
 	Balance balanceResults[MAX_PLAYERS_COUNT];
+	int totalRounds;
 } Result;
 
 class PokerFace {

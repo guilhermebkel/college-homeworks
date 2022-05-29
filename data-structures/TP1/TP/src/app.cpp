@@ -53,7 +53,21 @@ int main() {
 
 	fclose(inputFile);
 
-	pokerFace->finish();
+	Result result = pokerFace->finish();
+
+	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
+		RoundResult roundResult = result.roundResults[roundIndex];
+
+		cout << roundResult.winnersCount << " " << roundResult.moneyPerWinner << " " << roundResult.classifiedHandType << endl;
+
+		for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
+			cout << roundResult.winners[winnerIndex];
+		}
+
+		cout << endl;
+	}
+
+	cout << "####" << endl;
 	
 	return 0;
 }

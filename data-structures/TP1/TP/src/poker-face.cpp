@@ -59,29 +59,43 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 RoundResult PokerFace::getRoundResult(Round round) {
 	RoundResult roundResult;
 
-	ClassifiedHand winnerClassifiedHand;
-	int winnerParticipantIndex = 0;
+	std::string roundClassifiedHandType;
+	int totalRoundMoney = 0;
 
-	winnerClassifiedHand.value = 0;
+	RoundWinner roundWinners[round.participantsCount];
+	int winnersCount = 1;
+
+	int greatestHandScore = 0;
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
 		Play currentPlay = round.plays[participantIndex];
 
 		ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
 
-		if (classifiedHand.value > winnerClassifiedHand.value) {
-			winnerClassifiedHand = classifiedHand;
-			winnerParticipantIndex = participantIndex;
-		}		
+		if (classifiedHand.score > greatestHandScore) {
+			roundClassifiedHandType = classifiedHand.type;
+			
+			RoundWinner roundWinner;
+			roundWinner.classifiedHand = classifiedHand;
+			roundWinner.play = currentPlay;
+			roundWinner.participantIndex = participantIndex;
+
+			roundWinners[0] = roundWinner;
+
+			greatestHandScore = classifiedHand.score;
+		}
+
+		totalRoundMoney += currentPlay.betAmount;
 	}
 
-	Play winnerPlay = round.plays[winnerParticipantIndex];
-	std::cout << winnerPlay.playerName << " " << winnerClassifiedHand.type << std::endl;
+	for (int winnerIndex = 0; winnerIndex < winnersCount; winnerIndex++) {
+		strcpy(roundResult.winners[winnerIndex], roundWinners[winnerIndex].play.playerName);
+	}
 
 	roundResult.round = round;
-	roundResult.classifiedHandType = winnerClassifiedHand.type;
-	strcpy(roundResult.winners[0], winnerPlay.playerName);
-	roundResult.winnersCount = 1;
+	roundResult.classifiedHandType = roundClassifiedHandType;
+	roundResult.winnersCount = winnersCount;
+	roundResult.moneyPerWinner = totalRoundMoney/winnersCount;
 
 	return roundResult;
 };
@@ -92,10 +106,10 @@ Result PokerFace::finish() {
 	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
 		Round round = rounds[roundIndex];
 
-		std::cout << "\nROUND::: " << roundIndex << ":" << std::endl;
-
 		RoundResult roundResult = this->getRoundResult(round);
 		result.roundResults[roundIndex] = roundResult;
+
+		result.totalRounds = this->totalRounds;
 	}
 
 	return result;
@@ -112,34 +126,34 @@ ClassifiedHand PokerFace::classifyHand (Hand hand) {
 
 	if (this->isRoyalStraightFlushHand(hand)) {
 		classifiedHand.type = "RSF";
-		classifiedHand.value = 10;
+		classifiedHand.score = 10;
 	} else if (this->isStraightFlushHand(hand)) {
 		classifiedHand.type = "SF";
-		classifiedHand.value = 9;
+		classifiedHand.score = 9;
 	} else if (this->isFourOfAKindHand(hand)) {
 		classifiedHand.type = "FK";
-		classifiedHand.value = 8;
+		classifiedHand.score = 8;
 	} else if (this->isFullHouseHand(hand)) {
 		classifiedHand.type = "FH";
-		classifiedHand.value = 7;
+		classifiedHand.score = 7;
 	} else if (this->isFlushHand(hand)) {
 		classifiedHand.type = "F";
-		classifiedHand.value = 6;
+		classifiedHand.score = 6;
 	} else if (this->isStraightHand(hand)) {
 		classifiedHand.type = "S";
-		classifiedHand.value = 5;
+		classifiedHand.score = 5;
 	} else if (this->isThreeOfAKindHand(hand)) {
 		classifiedHand.type = "TK";
-		classifiedHand.value = 4;
+		classifiedHand.score = 4;
 	} else if (this->isTwoPairsHand(hand)) {
 		classifiedHand.type = "TP";
-		classifiedHand.value = 3;
+		classifiedHand.score = 3;
 	} else if (this->isOnePairHand(hand)) {
 		classifiedHand.type = "OP";
-		classifiedHand.value = 2;
+		classifiedHand.score = 2;
 	} else {
 		classifiedHand.type = "HC";
-		classifiedHand.value = 1;
+		classifiedHand.score = 1;
 	}
 
 	return classifiedHand;
