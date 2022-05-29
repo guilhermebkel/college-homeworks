@@ -61,7 +61,7 @@ int main() {
 		cout << roundResult.winnersCount << " " << roundResult.moneyPerWinner << " " << roundResult.classifiedHandSlug << endl;
 
 		for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
-			cout << roundResult.winners[winnerIndex];
+			cout << roundResult.winners[winnerIndex] << " ";
 		}
 
 		cout << endl;
