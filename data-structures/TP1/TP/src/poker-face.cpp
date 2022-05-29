@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "poker-face.h"
+#include "msgassert.h"
 
 PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 	this->currentRoundIndex = -1;
@@ -23,6 +24,10 @@ void PokerFace::startRound (int participantsCount, int dropValue) {
 
 void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	Play play;
+
+	Round currentRound = rounds[currentRoundIndex];
+
+	erroAssert(betAmount >= currentRound.dropValue, "Bet amount must be greater than round drop value.");
 
 	strcpy(play.playerName, playerName);
 	play.betAmount = betAmount;
@@ -47,13 +52,13 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 		play.hand[cardIndex] = hand[cardIndex];
 	}
 
-	Round currentRound = rounds[currentRoundIndex];
-
 	this->rounds[currentRoundIndex].plays[currentRound.currentPlayIndex] = play;
 	this->rounds[currentRoundIndex].currentPlayIndex++;
 };
 
-void PokerFace::getRoundResult(Round round) {
+RoundResult PokerFace::getRoundResult(Round round) {
+	RoundResult roundResult;
+
 	ClassifiedHand winnerClassifiedHand;
 	int winnerParticipantIndex = 0;
 
@@ -71,18 +76,29 @@ void PokerFace::getRoundResult(Round round) {
 	}
 
 	Play winnerPlay = round.plays[winnerParticipantIndex];
-
 	std::cout << winnerPlay.playerName << " " << winnerClassifiedHand.type << std::endl;
+
+	roundResult.round = round;
+	roundResult.classifiedHandType = winnerClassifiedHand.type;
+	strcpy(roundResult.winners[0], winnerPlay.playerName);
+	roundResult.winnersCount = 1;
+
+	return roundResult;
 };
 
-void PokerFace::finish() {
+Result PokerFace::finish() {
+	Result result;
+
 	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
 		Round round = rounds[roundIndex];
 
 		std::cout << "\nROUND::: " << roundIndex << ":" << std::endl;
 
-		this->getRoundResult(round);
+		RoundResult roundResult = this->getRoundResult(round);
+		result.roundResults[roundIndex] = roundResult;
 	}
+
+	return result;
 };
 
 ClassifiedHand PokerFace::classifyHand (Hand hand) {

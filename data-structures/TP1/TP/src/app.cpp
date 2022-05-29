@@ -11,7 +11,7 @@ using namespace std;
 int main() {
 	FILE *inputFile;
   inputFile = fopen("../data/input.txt", "r");
-	erroAssert(inputFile != NULL, "O arquivo de entrada não foi encontrado.");
+	erroAssert(inputFile != NULL, "Input file was not found.");
 
 	int totalRounds;
 	int initialMoneyAmountPerParticipant;

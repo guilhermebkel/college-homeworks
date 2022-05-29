@@ -45,16 +45,33 @@ typedef struct Round {
 	int currentPlayIndex;
 } Round;
 
+typedef struct RoundResult {
+	Round round;
+	PlayerName winners[MAX_PLAYERS_COUNT];
+	int winnersCount;
+	std::string classifiedHandType;
+} RoundResult;
+
+typedef struct Balance {
+	PlayerName playerName;
+	int money;
+} Balance;
+
+typedef struct Result {
+	RoundResult roundResults[1000];
+	Balance balanceResults[MAX_PLAYERS_COUNT];
+} Result;
+
 class PokerFace {
   public:
     PokerFace(int totalRounds, int initialMoneyAmountPerParticipant);
 		void startRound(int participantsCount, int dropValue);
     void readPlay(PlayerName playerName, int betAmount, Hand hand);
-    void finish();
+    Result finish();
 
 	private:
 		ClassifiedHand classifyHand (Hand hand);
-		void getRoundResult (Round round);
+		RoundResult getRoundResult (Round round);
 		bool handHasSingleSuit (Hand hand);
 		bool handHasCardsWithEqualValues (Hand hand, int group1, int group2, int group3, int group4, int group5);
 		bool handHasSequentialCombination (Hand hand);
