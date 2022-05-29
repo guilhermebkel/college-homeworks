@@ -25,11 +25,24 @@ typedef Card Hand[MAX_HAND_SIZE];
 
 typedef char PlayerName[MAX_PLAYER_NAME_SIZE];
 
+enum ClassifiedHandType {
+	ROYAL_STRAIGHT_FLUSH = 10,
+	STRAIGHT_FLUSH = 9,
+	FOUR_OF_A_KIND = 8,
+	FULL_HOUSE = 7,
+	FLUSH = 6,
+	STRAIGHT = 5,
+	THREE_OF_A_KIND = 4,
+	TWO_PAIRS = 3,
+	ONE_PAIR = 2,
+	HIGH_CARD = 1
+};
+
 typedef struct ClassifiedHand {
 	int score;
-	std::string type;
+	int type;
+	std::string slug;
 	Hand hand;
-	Card greaterCard;
 } ClassifiedHand;
 
 typedef struct Play {
@@ -55,7 +68,8 @@ typedef struct RoundResult {
 	Round round;
 	PlayerName winners[MAX_PLAYERS_COUNT];
 	int winnersCount;
-	std::string classifiedHandType;
+	std::string classifiedHandSlug;
+	int classifiedHandType;
 	int moneyPerWinner;
 } RoundResult;
 
@@ -70,6 +84,19 @@ typedef struct Result {
 	int totalRounds;
 } Result;
 
+typedef struct CardCombo {
+	Hand cards;
+	int totalCards;
+} CardCombo;
+
+typedef struct GroupedCardCombo {
+	CardCombo group1;
+	CardCombo group2;
+	CardCombo group3;
+	CardCombo group4;
+	CardCombo group5;
+} GroupedCardCombo;
+
 class PokerFace {
   public:
     PokerFace(int totalRounds, int initialMoneyAmountPerParticipant);
@@ -81,17 +108,10 @@ class PokerFace {
 		ClassifiedHand classifyHand (Hand hand);
 		RoundResult getRoundResult (Round round);
 		bool handHasSingleSuit (Hand hand);
+		GroupedCardCombo groupCardsWithEqualValues (Hand hand);
 		bool handHasCardsWithEqualValues (Hand hand, int group1, int group2, int group3, int group4, int group5);
 		bool handHasSequentialCombination (Hand hand);
-		bool isRoyalStraightFlushHand (Hand hand);
-		bool isStraightFlushHand (Hand hand);
-		bool isFourOfAKindHand (Hand hand);
-		bool isFullHouseHand (Hand hand);
-		bool isFlushHand (Hand hand);
-		bool isStraightHand (Hand hand);
-		bool isThreeOfAKindHand (Hand hand);
-		bool isTwoPairsHand (Hand hand);
-		bool isOnePairHand (Hand hand);
+		bool isClassifiedHand (Hand hand, ClassifiedHandType classifiedHandType);
     int totalRounds;
     int initialMoneyAmountPerParticipant;
 		int currentRoundIndex;

@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <string.h>
+#include <algorithm>
 
 #include "poker-face.h"
 #include "msgassert.h"
@@ -59,7 +60,8 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 RoundResult PokerFace::getRoundResult(Round round) {
 	RoundResult roundResult;
 
-	std::string roundClassifiedHandType;
+	std::string roundClassifiedHandSlug;
+	int roundClassifiedHandType;
 	int totalRoundMoney = 0;
 
 	RoundWinner roundWinners[round.participantsCount];
@@ -73,6 +75,7 @@ RoundResult PokerFace::getRoundResult(Round round) {
 		ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
 
 		if (classifiedHand.score > greatestHandScore) {
+			roundClassifiedHandSlug = classifiedHand.slug;
 			roundClassifiedHandType = classifiedHand.type;
 			
 			RoundWinner roundWinner;
@@ -88,11 +91,27 @@ RoundResult PokerFace::getRoundResult(Round round) {
 		totalRoundMoney += currentPlay.betAmount;
 	}
 
+	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
+		RoundWinner currentWinner = roundWinners[0];
+
+		if (currentWinner.participantIndex != participantIndex) {
+			Play currentPlay = round.plays[participantIndex];
+			ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
+
+			bool isTie = classifiedHand.score == currentWinner.classifiedHand.score;
+
+			if (isTie) {
+				Card greaterCard = currentPlay.hand[MAX_HAND_SIZE - 1];
+			}
+		}
+	}
+
 	for (int winnerIndex = 0; winnerIndex < winnersCount; winnerIndex++) {
 		strcpy(roundResult.winners[winnerIndex], roundWinners[winnerIndex].play.playerName);
 	}
 
 	roundResult.round = round;
+	roundResult.classifiedHandSlug = roundClassifiedHandSlug;
 	roundResult.classifiedHandType = roundClassifiedHandType;
 	roundResult.winnersCount = winnersCount;
 	roundResult.moneyPerWinner = totalRoundMoney/winnersCount;
@@ -118,41 +137,49 @@ Result PokerFace::finish() {
 ClassifiedHand PokerFace::classifyHand (Hand hand) {
 	ClassifiedHand classifiedHand;
 
-	classifiedHand.greaterCard = hand[MAX_HAND_SIZE - 1];
-
 	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
 		classifiedHand.hand[cardIndex] = hand[cardIndex];
 	}
 
-	if (this->isRoyalStraightFlushHand(hand)) {
-		classifiedHand.type = "RSF";
+	if (this->isClassifiedHand(hand, ClassifiedHandType::ROYAL_STRAIGHT_FLUSH)) {
+		classifiedHand.type = ClassifiedHandType::ROYAL_STRAIGHT_FLUSH;
+		classifiedHand.slug = "RSF";
 		classifiedHand.score = 10;
-	} else if (this->isStraightFlushHand(hand)) {
-		classifiedHand.type = "SF";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::STRAIGHT_FLUSH)) {
+		classifiedHand.type = ClassifiedHandType::STRAIGHT_FLUSH;
+		classifiedHand.slug = "SF";
 		classifiedHand.score = 9;
-	} else if (this->isFourOfAKindHand(hand)) {
-		classifiedHand.type = "FK";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::FOUR_OF_A_KIND)) {
+		classifiedHand.type = ClassifiedHandType::FOUR_OF_A_KIND;
+		classifiedHand.slug = "FK";
 		classifiedHand.score = 8;
-	} else if (this->isFullHouseHand(hand)) {
-		classifiedHand.type = "FH";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::FULL_HOUSE)) {
+		classifiedHand.type = ClassifiedHandType::FULL_HOUSE;
+		classifiedHand.slug = "FH";
 		classifiedHand.score = 7;
-	} else if (this->isFlushHand(hand)) {
-		classifiedHand.type = "F";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::FLUSH)) {
+		classifiedHand.type = ClassifiedHandType::FLUSH;
+		classifiedHand.slug = "F";
 		classifiedHand.score = 6;
-	} else if (this->isStraightHand(hand)) {
-		classifiedHand.type = "S";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::STRAIGHT)) {
+		classifiedHand.type = ClassifiedHandType::STRAIGHT;
+		classifiedHand.slug = "S";
 		classifiedHand.score = 5;
-	} else if (this->isThreeOfAKindHand(hand)) {
-		classifiedHand.type = "TK";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::THREE_OF_A_KIND)) {
+		classifiedHand.type = ClassifiedHandType::THREE_OF_A_KIND;
+		classifiedHand.slug = "TK";
 		classifiedHand.score = 4;
-	} else if (this->isTwoPairsHand(hand)) {
-		classifiedHand.type = "TP";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::TWO_PAIRS)) {
+		classifiedHand.type = ClassifiedHandType::TWO_PAIRS;
+		classifiedHand.slug = "TP";
 		classifiedHand.score = 3;
-	} else if (this->isOnePairHand(hand)) {
-		classifiedHand.type = "OP";
+	} else if (this->isClassifiedHand(hand, ClassifiedHandType::ONE_PAIR)) {
+		classifiedHand.type = ClassifiedHandType::ONE_PAIR;
+		classifiedHand.slug = "OP";
 		classifiedHand.score = 2;
 	} else {
-		classifiedHand.type = "HC";
+		classifiedHand.type = ClassifiedHandType::HIGH_CARD;
+		classifiedHand.slug = "HC";
 		classifiedHand.score = 1;
 	}
 
@@ -199,18 +226,22 @@ bool PokerFace::handHasSequentialCombination (Hand hand) {
 	return isSequentialCombination;
 }
 
-bool PokerFace::handHasCardsWithEqualValues (Hand hand, int group1 = 1, int group2 = 1, int group3 = 1, int group4 = 1, int group5 = 1) {
-	int equalCards[MAX_HAND_SIZE];
+GroupedCardCombo PokerFace::groupCardsWithEqualValues (Hand hand) {
+	GroupedCardCombo groupedCardCombo;
+
+	CardCombo cardComboGroups[MAX_HAND_SIZE];
 
 	for (int i = 0; i < MAX_HAND_SIZE; i++) {
-		equalCards[i] = 1;
+		cardComboGroups[i].totalCards = 1;
+		cardComboGroups[i].cards[0] = hand[i];
 
 		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
 			Card currentCard = hand[i];
 			Card comparedCard = hand[j];
 
 			if (currentCard.value == comparedCard.value) {
-				equalCards[i]++;
+				cardComboGroups[i].totalCards++;
+				cardComboGroups[i].cards[cardComboGroups[i].totalCards] = hand[j];
 			}
 		}
 	}
@@ -221,56 +252,82 @@ bool PokerFace::handHasCardsWithEqualValues (Hand hand, int group1 = 1, int grou
 	 */
 	for (int i = 0; i < MAX_HAND_SIZE; i++) {
 		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
-			if (equalCards[i] < equalCards[j]) {
-				int equalCardValue = equalCards[i];
+			if (cardComboGroups[i].totalCards < cardComboGroups[j].totalCards) {
+				CardCombo equalCardValue = cardComboGroups[i];
 
-				equalCards[i] = equalCards[j];
-				equalCards[j] = equalCardValue;
+				cardComboGroups[i] = cardComboGroups[j];
+				cardComboGroups[j] = equalCardValue;
 			}
 		}
 	}
 
-	return equalCards[0] == group1 && equalCards[1] == group2 && equalCards[2] == group3 && equalCards[3] == group4 && equalCards[4] == group5;
+	groupedCardCombo.group1 = cardComboGroups[0];
+	groupedCardCombo.group2 = cardComboGroups[1];
+	groupedCardCombo.group3 = cardComboGroups[2];
+	groupedCardCombo.group4 = cardComboGroups[3];
+	groupedCardCombo.group5 = cardComboGroups[4];
+
+	return groupedCardCombo;
 }
 
-bool PokerFace::isStraightFlushHand (Hand hand) {
-	return this->handHasSingleSuit(hand) && this->handHasSequentialCombination(hand);
-};
+bool PokerFace::handHasCardsWithEqualValues (Hand hand, int group1 = 1, int group2 = 1, int group3 = 1, int group4 = 1, int group5 = 1) {
+	GroupedCardCombo groupedCardWithEqualValues = this->groupCardsWithEqualValues(hand);
 
-bool PokerFace::isRoyalStraightFlushHand (Hand hand) {
+	return (
+		groupedCardWithEqualValues.group1.totalCards == group1 &&
+		groupedCardWithEqualValues.group2.totalCards == group2 &&
+		groupedCardWithEqualValues.group3.totalCards == group3 &&
+		groupedCardWithEqualValues.group4.totalCards == group4 &&
+		groupedCardWithEqualValues.group5.totalCards == group5
+	);
+}
+
+bool PokerFace::isClassifiedHand (Hand hand, ClassifiedHandType classifiedHandType) {
+	bool result = false;
+
 	bool hasSameSuit = handHasSingleSuit(hand);
-
 	bool hasCorrectCombination = (hand[0].value == 1) && (hand[1].value == 10) && (hand[2].value == 11) && (hand[3].value == 12) && (hand[4].value == 13);
 
-	bool result = hasSameSuit && hasCorrectCombination;
+	switch (classifiedHandType){
+		case ClassifiedHandType::ROYAL_STRAIGHT_FLUSH:
+			result = hasSameSuit && hasCorrectCombination;
+			break;
+
+		case ClassifiedHandType::STRAIGHT_FLUSH:
+			result = this->handHasSingleSuit(hand) && this->handHasSequentialCombination(hand);
+			break;
+
+		case ClassifiedHandType::FOUR_OF_A_KIND:
+			result = this->handHasCardsWithEqualValues(hand, 4);
+			break;
+
+		case ClassifiedHandType::FULL_HOUSE:
+			result = this->handHasCardsWithEqualValues(hand, 3, 2);
+			break;
+
+		case ClassifiedHandType::FLUSH:
+			result = this->handHasSingleSuit(hand) && !this->handHasSequentialCombination(hand);
+			break;
+
+		case ClassifiedHandType::STRAIGHT:
+			result = this->handHasSequentialCombination(hand);
+			break;
+
+		case ClassifiedHandType::THREE_OF_A_KIND:
+			result = this->handHasCardsWithEqualValues(hand, 3);
+			break;
+
+		case ClassifiedHandType::TWO_PAIRS:
+			result = this->handHasCardsWithEqualValues(hand, 2, 2);
+			break;
+
+		case ClassifiedHandType::ONE_PAIR:
+			result = this->handHasCardsWithEqualValues(hand, 2);
+			break;
+
+		default:
+			break;
+	}
 
 	return result;
-};
-
-bool PokerFace::isFourOfAKindHand (Hand hand) {
-	return this->handHasCardsWithEqualValues(hand, 4);
-};
-
-bool PokerFace::isFullHouseHand (Hand hand) {
-	return this->handHasCardsWithEqualValues(hand, 3, 2);
-};
-
-bool PokerFace::isFlushHand (Hand hand) {
-	return this->handHasSingleSuit(hand) && !this->handHasSequentialCombination(hand);
-};
-
-bool PokerFace::isStraightHand (Hand hand) {
-	return this->handHasSequentialCombination(hand);
-};
-
-bool PokerFace::isThreeOfAKindHand (Hand hand) {
-	return this->handHasCardsWithEqualValues(hand, 3);
-};
-
-bool PokerFace::isTwoPairsHand (Hand hand) {
-	return this->handHasCardsWithEqualValues(hand, 2, 2);
-};
-
-bool PokerFace::isOnePairHand (Hand hand) {
-	return this->handHasCardsWithEqualValues(hand, 2);
 };

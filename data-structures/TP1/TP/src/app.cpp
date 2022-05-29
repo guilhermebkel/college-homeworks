@@ -58,7 +58,7 @@ int main() {
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
 		RoundResult roundResult = result.roundResults[roundIndex];
 
-		cout << roundResult.winnersCount << " " << roundResult.moneyPerWinner << " " << roundResult.classifiedHandType << endl;
+		cout << roundResult.winnersCount << " " << roundResult.moneyPerWinner << " " << roundResult.classifiedHandSlug << endl;
 
 		for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
 			cout << roundResult.winners[winnerIndex];
