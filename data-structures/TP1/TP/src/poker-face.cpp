@@ -57,7 +57,7 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	this->rounds[currentRoundIndex].currentPlayIndex++;
 };
 
-RoundResult PokerFace::getRoundResult(Round round) {
+RoundResult PokerFace::consolidateRoundResult(Round round) {
 	RoundResult roundResult;
 
 	std::string roundClassifiedHandSlug;
@@ -190,7 +190,7 @@ Result PokerFace::finish() {
 	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
 		Round round = rounds[roundIndex];
 
-		RoundResult roundResult = this->getRoundResult(round);
+		RoundResult roundResult = this->consolidateRoundResult(round);
 		result.roundResults[roundIndex] = roundResult;
 
 		result.totalRounds = this->totalRounds;

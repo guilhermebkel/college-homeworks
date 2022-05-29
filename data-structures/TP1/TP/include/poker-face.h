@@ -106,7 +106,7 @@ class PokerFace {
 
 	private:
 		ClassifiedHand classifyHand (Hand hand);
-		RoundResult getRoundResult (Round round);
+		RoundResult consolidateRoundResult (Round round);
 		GroupedCardCombo groupCardsWithEqualValues (Hand hand);
 		int getCardComboScore (CardCombo cardCombo);
 		Card getGreaterCard (Hand hand);
