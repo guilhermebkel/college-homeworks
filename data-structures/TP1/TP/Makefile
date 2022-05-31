@@ -19,12 +19,10 @@ EXE = $(BIN)/main
 all: main
 
 build:
-	$(CC) $(CFLAGS) -c src/app.cpp -o $(OBJ)/app.o
-	$(CC) $(CFLAGS) -c src/poker-face.cpp -o $(OBJ)/poker-face.o
-	$(CC) $(CFLAGS) -c src/arrangement-list.cpp -o $(OBJ)/arrangement-list.o
+	$(CC) $(CFLAGS) src/*.cpp -o $(OBJ)/app.o
 
 main: clean build
-	$(CC) $(CFLAGS) $(OBJ)/*.o -o $(BIN)/main
+	$(CC) $(CFLAGS) $(OBJ)/app.o -o $(BIN)/main
 	$(EXE)
 	
 clean:

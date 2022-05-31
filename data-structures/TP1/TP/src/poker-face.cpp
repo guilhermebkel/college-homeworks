@@ -4,6 +4,7 @@
 
 #include "poker-face.h"
 #include "msgassert.h"
+#include "arrangement-list.h"
 
 PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 	this->currentRoundIndex = -1;
@@ -11,6 +12,8 @@ PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 	this->totalRounds = totalRounds;
 	this->initialMoneyAmountPerParticipant = initialMoneyAmountPerParticipant;
 	this->finished = false;
+
+	new ArrangementList<Round, int>();
 };
 
 void PokerFace::startRound (int participantsCount, int dropValue) {
