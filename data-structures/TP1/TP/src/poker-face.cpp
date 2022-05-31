@@ -10,9 +10,12 @@ PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 
 	this->totalRounds = totalRounds;
 	this->initialMoneyAmountPerParticipant = initialMoneyAmountPerParticipant;
+	this->finished = false;
 };
 
 void PokerFace::startRound (int participantsCount, int dropValue) {
+	erroAssert(!finished, "Game already ended.");
+
 	Round round;
 
 	round.participantsCount = participantsCount;
@@ -24,6 +27,8 @@ void PokerFace::startRound (int participantsCount, int dropValue) {
 };
 
 void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
+	erroAssert(!finished, "Game already ended.");
+
 	Play play;
 
 	Round currentRound = rounds[currentRoundIndex];
@@ -185,18 +190,22 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 };
 
 Result PokerFace::finish() {
-	Result result;
+	if (finished) {
+		return this->result;
+	}
 
 	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
 		Round round = rounds[roundIndex];
 
 		RoundResult roundResult = this->consolidateRoundResult(round);
-		result.roundResults[roundIndex] = roundResult;
+		this->result.roundResults[roundIndex] = roundResult;
 
-		result.totalRounds = this->totalRounds;
+		this->result.totalRounds = this->totalRounds;
 	}
 
-	return result;
+	this->finished = true;
+
+	return this->result;
 };
 
 ClassifiedHand PokerFace::classifyHand (Hand hand) {

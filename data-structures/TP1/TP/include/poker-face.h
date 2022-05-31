@@ -105,6 +105,7 @@ class PokerFace {
     Result finish();
 
 	private:
+		bool finished;
 		ClassifiedHand classifyHand (Hand hand);
 		RoundResult consolidateRoundResult (Round round);
 		GroupedCardCombo groupCardsWithEqualValues (Hand hand);
@@ -118,6 +119,8 @@ class PokerFace {
     int initialMoneyAmountPerParticipant;
 		int currentRoundIndex;
 		Round rounds[1000];
+		Balance balances[MAX_PLAYERS_COUNT];
+		Result result;
 };
 
 #endif
