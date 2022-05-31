@@ -12,7 +12,7 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-CFLAGS = -g -std=c++11 -I$(INC)
+CFLAGS = -g -std=c++11 -I $(INC)
 
 EXE = $(BIN)/main
 

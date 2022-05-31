@@ -1,9 +1,6 @@
 #ifndef ARRANGEMENT_LIST_H
 #define ARRANGEMENT_LIST_H
 
-#include <iostream>
-#include <string>
-
 #ifndef MAX_ARRANGEMENT_LIST_SIZE 
 #define MAX_ARRANGEMENT_LIST_SIZE 1000
 #endif
