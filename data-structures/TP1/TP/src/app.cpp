@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "poker-face.h"
+#include "arrangement-list.h"
 #include "msgassert.h"
 
 using namespace std;
@@ -56,7 +57,7 @@ int main() {
 	Result result = pokerFace->finish();
 
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
-		RoundResult roundResult = result.roundResults[roundIndex];
+		RoundResult roundResult = result.roundResults->find(roundIndex);
 
 		cout << roundResult.winnersCount << " " << roundResult.moneyPerWinner << " " << roundResult.classifiedHandSlug << endl;
 

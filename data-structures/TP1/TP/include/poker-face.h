@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include "arrangement-list.h"
+
 #ifndef MAX_HAND_SIZE 
 #define MAX_HAND_SIZE 5
 #endif
@@ -14,6 +16,10 @@
 
 #ifndef MAX_PLAYER_NAME_SIZE 
 #define MAX_PLAYER_NAME_SIZE 50
+#endif
+
+#ifndef INITIAL_PLAYER_MONEY 
+#define INITIAL_PLAYER_MONEY 1000
 #endif
 
 typedef struct Card {
@@ -54,7 +60,7 @@ typedef struct Play {
 typedef struct Round {
 	int participantsCount;
 	int dropValue;
-	Play plays[MAX_PLAYERS_COUNT];
+	ArrangementList<Play> *plays;
 	int currentPlayIndex;
 } Round;
 
@@ -79,8 +85,8 @@ typedef struct Balance {
 } Balance;
 
 typedef struct Result {
-	RoundResult roundResults[1000];
-	Balance balanceResults[MAX_PLAYERS_COUNT];
+	ArrangementList<RoundResult> *roundResults;
+	ArrangementList<Balance> *balanceResults;
 	int totalRounds;
 } Result;
 
@@ -118,8 +124,8 @@ class PokerFace {
     int totalRounds;
     int initialMoneyAmountPerParticipant;
 		int currentRoundIndex;
-		Round rounds[1000];
-		Balance balances[MAX_PLAYERS_COUNT];
+		ArrangementList<Round> *rounds;
+		ArrangementList<Balance> *balances;
 		Result result;
 };
 

@@ -18,10 +18,13 @@ EXE = $(BIN)/main
 all: main
 
 build:
-	$(CC) $(CFLAGS) $(SRC)/*.cpp -o $(OBJ)/app.o
+	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -o $(OBJ)/app.o
+	$(CC) $(CFLAGS) -c $(SRC)/poker-face.cpp -o $(OBJ)/poker-face.o
+	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -o $(OBJ)/arrangement-list.o
+	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -o $(OBJ)/memlog.o
 
 main: clean build
-	$(CC) $(CFLAGS) $(OBJ)/app.o -o $(BIN)/main
+	$(CC) $(CFLAGS) $(OBJ)/*.o -o $(BIN)/main
 	$(EXE)
 	
 clean:

@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <iostream>
 #include <string.h>
 #include <algorithm>
 
@@ -13,7 +14,8 @@ PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 	this->initialMoneyAmountPerParticipant = initialMoneyAmountPerParticipant;
 	this->finished = false;
 
-	new ArrangementList<Round, int>();
+	this->rounds = new ArrangementList<Round>();
+	this->balances = new ArrangementList<Balance>();
 };
 
 void PokerFace::startRound (int participantsCount, int dropValue) {
@@ -24,9 +26,10 @@ void PokerFace::startRound (int participantsCount, int dropValue) {
 	round.participantsCount = participantsCount;
 	round.dropValue = dropValue;
 	round.currentPlayIndex = 0;
+	round.plays = new ArrangementList<Play>();
 	
 	this->currentRoundIndex++;
-	this->rounds[currentRoundIndex] = round;
+	this->rounds->save(currentRoundIndex, round);
 };
 
 void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
@@ -34,7 +37,7 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 
 	Play play;
 
-	Round currentRound = rounds[currentRoundIndex];
+	Round currentRound = this->rounds->find(currentRoundIndex);
 
 	erroAssert(betAmount >= currentRound.dropValue, "Bet amount must be greater than round drop value.");
 
@@ -61,8 +64,10 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 		play.hand[cardIndex] = hand[cardIndex];
 	}
 
-	this->rounds[currentRoundIndex].plays[currentRound.currentPlayIndex] = play;
-	this->rounds[currentRoundIndex].currentPlayIndex++;
+	currentRound.plays->save(playerName, play);
+	currentRound.currentPlayIndex++;
+
+	this->rounds->save(currentRoundIndex, currentRound);
 };
 
 RoundResult PokerFace::consolidateRoundResult(Round round) {
@@ -73,12 +78,19 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 	int totalRoundMoney = 0;
 
 	RoundWinner roundWinners[round.participantsCount];
-	int winnersCount = 1;
+	int winnersCount = 0;
 
 	int greatestHandScore = 0;
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Play currentPlay = round.plays[participantIndex];
+		Play currentPlay = round.plays->get(participantIndex);
+
+		if (!this->balances->exists(currentPlay.playerName)) {
+			Balance balance;
+			balance.money = INITIAL_PLAYER_MONEY;
+
+			this->balances->save(currentPlay.playerName, balance);
+		}
 
 		ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
 
@@ -99,11 +111,13 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 		totalRoundMoney += currentPlay.betAmount;
 	}
 
+	winnersCount++;
+
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
 		RoundWinner currentWinner = roundWinners[0];
 
 		if (currentWinner.participantIndex != participantIndex) {
-			Play possibleWinnerPlay = round.plays[participantIndex];
+			Play possibleWinnerPlay = round.plays->get(participantIndex);
 			ClassifiedHand possibleWinnerClassifiedHand = this->classifyHand(possibleWinnerPlay.hand);
 
 			bool isTie = possibleWinnerClassifiedHand.score == currentWinner.classifiedHand.score;
@@ -197,11 +211,13 @@ Result PokerFace::finish() {
 		return this->result;
 	}
 
-	for (int roundIndex = 0; roundIndex < this->totalRounds; roundIndex++) {
-		Round round = rounds[roundIndex];
+	this->result.roundResults = new ArrangementList<RoundResult>();
+
+	for (int roundIndex = 0; roundIndex < this->rounds->getSize(); roundIndex++) {
+		Round round = this->rounds->find(roundIndex);
 
 		RoundResult roundResult = this->consolidateRoundResult(round);
-		this->result.roundResults[roundIndex] = roundResult;
+		this->result.roundResults->save(roundIndex, roundResult);
 
 		this->result.totalRounds = this->totalRounds;
 	}

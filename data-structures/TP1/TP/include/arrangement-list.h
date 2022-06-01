@@ -5,21 +5,37 @@
 #define MAX_ARRANGEMENT_LIST_SIZE 1000
 #endif
 
-template <typename Model, typename Key> struct Item {
+#ifndef MAX_KEY_SIZE 
+#define MAX_KEY_SIZE 100
+#endif
+
+typedef char *StringKey;
+typedef int NumberKey;
+
+template <typename Model> struct Item {
 	Model model;
-	Key key;
+	StringKey key;
 };
 
-template <typename Model, typename Key> class ArrangementList {
+template <typename Model> class ArrangementList {
 	public:
 		ArrangementList();
 		int getSize();
-		void save(Model item, Key key);
-		Model find(Key key);
+		void save(StringKey key, Model item);
+		void save(NumberKey key, Model item);
+		Model find(StringKey key);
+		Model find(NumberKey key);
+		bool exists(StringKey key);
+		bool exists(NumberKey key);
+		Model get(int index);
 
 	private:
-		Item<Model, Key> itens[MAX_ARRANGEMENT_LIST_SIZE];
+		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];
 		int size;
+		int findIndex(StringKey key);
+		int findIndex(NumberKey key);
+		StringKey castStringKey (NumberKey numberKey);
+		bool existsByIndex (int index);
 };
 
 #endif
