@@ -212,6 +212,7 @@ Result PokerFace::finish() {
 	}
 
 	this->result.roundResults = new ArrangementList<RoundResult>();
+	this->result.balanceResults = this->balances;
 
 	for (int roundIndex = 0; roundIndex < this->rounds->getSize(); roundIndex++) {
 		Round round = this->rounds->find(roundIndex);
