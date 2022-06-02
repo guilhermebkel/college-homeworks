@@ -111,7 +111,6 @@ class PokerFace {
 
 	private:
 		bool finished;
-		
 		RoundResult consolidateRoundResult (Round round);
     int totalRounds;
     int initialMoneyAmountPerParticipant;
