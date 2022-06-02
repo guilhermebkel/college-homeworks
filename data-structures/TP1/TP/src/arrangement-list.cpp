@@ -129,22 +129,15 @@ void ArrangementList<Model>::sort(SortingType type, int (*func)(Model)) {
 			int firstItemParam = func(this->itens[i].model);
 			int secondItemParam = func(this->itens[j].model);
 
-			if (type == SortingType::DESC) {
-				if (firstItemParam < secondItemParam) {
-					Item<Model> tempModel = itens[i];
+			bool canSortAsc = type == SortingType::DESC && firstItemParam < secondItemParam;
+			bool canSortDesc = type == SortingType::ASC && firstItemParam > secondItemParam;
+			bool canSort = canSortAsc || canSortDesc;
 
-					itens[i] = itens[j];
-					itens[j] = tempModel;
-				}
-			}
+			if (canSort) {
+				Item<Model> tempModel = itens[i];
 
-			if (type == SortingType::ASC) {
-				if (firstItemParam > secondItemParam) {
-					Item<Model> tempModel = itens[i];
-
-					itens[i] = itens[j];
-					itens[j] = tempModel;
-				}
+				itens[i] = itens[j];
+				itens[j] = tempModel;
 			}
 		}
 	}
