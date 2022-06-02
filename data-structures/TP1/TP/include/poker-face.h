@@ -111,15 +111,8 @@ class PokerFace {
 
 	private:
 		bool finished;
-		ClassifiedHand classifyHand (Hand hand);
+		
 		RoundResult consolidateRoundResult (Round round);
-		GroupedCardCombo groupCardsWithEqualValues (Hand hand);
-		int getCardComboScore (CardCombo cardCombo);
-		Card getGreaterCard (Hand hand);
-		bool handHasSingleSuit (Hand hand);
-		bool handHasCardsWithEqualValues (Hand hand, int group1, int group2, int group3, int group4, int group5);
-		bool handHasSequentialCombination (Hand hand);
-		bool handHasClassificationType (Hand hand, ClassifiedHandType classifiedHandType);
     int totalRounds;
     int initialMoneyAmountPerParticipant;
 		int currentRoundIndex;

@@ -20,6 +20,8 @@ all: main
 build:
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -o $(OBJ)/app.o
 	$(CC) $(CFLAGS) -c $(SRC)/poker-face.cpp -o $(OBJ)/poker-face.o
+	$(CC) $(CFLAGS) -c $(SRC)/poker-face-util.cpp -o $(OBJ)/poker-face-util.o
+	$(CC) $(CFLAGS) -c $(SRC)/poker-face-validation.cpp -o $(OBJ)/poker-face-validation.o
 	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -o $(OBJ)/arrangement-list.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -o $(OBJ)/memlog.o
 
