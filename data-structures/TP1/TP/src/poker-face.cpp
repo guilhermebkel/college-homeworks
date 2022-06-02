@@ -7,6 +7,18 @@
 #include "msgassert.h"
 #include "arrangement-list.h"
 
+int getBalanceSortingParam (Balance balance) {
+	return balance.money;
+};
+
+int getCardComboSortingParam (CardCombo cardCombo) {
+	return cardCombo.totalCards;
+};
+
+int getCardSortingParam (Card card) {
+	return card.value;
+};
+
 PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 	this->currentRoundIndex = -1;
 
@@ -37,31 +49,26 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 
 	Play play;
 
-	Round currentRound = this->rounds->find(currentRoundIndex);
-
-	erroAssert(betAmount >= currentRound.dropValue, "Bet amount must be greater than round drop value.");
+	Round currentRound = this->rounds->findByKey(currentRoundIndex);
 
 	strcpy(play.playerName, playerName);
 	play.betAmount = betAmount;
+
+	ArrangementList<Card> *cards = new ArrangementList<Card>();
+	cards->save(0, hand[0]);
+	cards->save(1, hand[1]);
+	cards->save(2, hand[2]);
+	cards->save(3, hand[3]);
+	cards->save(4, hand[4]);
 
 	/**
 	 * Orders cards in ascending ordering by its value, in order to
 	 * handle easily some business rules later.
 	 */
-	for (int i = 0; i < MAX_HAND_SIZE; i++) {
-		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
-			if (hand[i].value > hand[j].value) {
-				Card auxCard = hand[i];
-
-				hand[i] = hand[j];
-
-				hand[j] = auxCard;
-			}
-		}
-	}
+	cards->sort(SortingType::ASC, &getCardSortingParam);
 
 	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
-		play.hand[cardIndex] = hand[cardIndex];
+		play.hand[cardIndex] = cards->findByIndex(cardIndex);
 	}
 
 	currentRound.plays->save(playerName, play);
@@ -73,30 +80,47 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 RoundResult PokerFace::consolidateRoundResult(Round round) {
 	RoundResult roundResult;
 
-	std::string roundClassifiedHandSlug;
-	int roundClassifiedHandType;
 	int totalRoundMoney = 0;
 
 	RoundWinner roundWinners[round.participantsCount];
-	int winnersCount = 0;
+	roundResult.winnersCount = 0;
+	roundResult.moneyPerWinner = 0;
+	roundResult.round = round;
 
 	int greatestHandScore = 0;
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Play currentPlay = round.plays->get(participantIndex);
+		Play currentPlay = round.plays->findByIndex(participantIndex);
 
-		if (!this->balances->exists(currentPlay.playerName)) {
+		if (!this->balances->existsByKey(currentPlay.playerName)) {
 			Balance balance;
 			balance.money = INITIAL_PLAYER_MONEY;
+			strcpy(balance.playerName, currentPlay.playerName);
 
 			this->balances->save(currentPlay.playerName, balance);
 		}
+	}
+
+	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
+		Play currentPlay = round.plays->findByIndex(participantIndex);
+
+		bool isPlayerTryingToBetAValueBelowDropValue = currentPlay.betAmount < round.dropValue;
+		bool isInvalidPlay = isPlayerTryingToBetAValueBelowDropValue;
+
+		if (isInvalidPlay) {
+			roundResult.classifiedHandSlug = "I";
+
+			return roundResult;
+		}
+	}
+
+	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
+		Play currentPlay = round.plays->findByIndex(participantIndex);
 
 		ClassifiedHand classifiedHand = this->classifyHand(currentPlay.hand);
 
 		if (classifiedHand.score > greatestHandScore) {
-			roundClassifiedHandSlug = classifiedHand.slug;
-			roundClassifiedHandType = classifiedHand.type;
+			roundResult.classifiedHandSlug = classifiedHand.slug;
 			
 			RoundWinner roundWinner;
 			roundWinner.classifiedHand = classifiedHand;
@@ -109,15 +133,19 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 		}
 
 		totalRoundMoney += currentPlay.betAmount;
+
+		Balance playerBalance = this->balances->findByKey(currentPlay.playerName);
+		playerBalance.money -= currentPlay.betAmount;
+		this->balances->save(currentPlay.playerName, playerBalance);
 	}
 
-	winnersCount++;
+	roundResult.winnersCount++;
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
 		RoundWinner currentWinner = roundWinners[0];
 
 		if (currentWinner.participantIndex != participantIndex) {
-			Play possibleWinnerPlay = round.plays->get(participantIndex);
+			Play possibleWinnerPlay = round.plays->findByIndex(participantIndex);
 			ClassifiedHand possibleWinnerClassifiedHand = this->classifyHand(possibleWinnerPlay.hand);
 
 			bool isTie = possibleWinnerClassifiedHand.score == currentWinner.classifiedHand.score;
@@ -186,22 +214,33 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 				}
 
 				if (addWinner) {
-					winnersCount++;
-					roundWinners[winnersCount - 1] = roundWinner;
+					roundResult.winnersCount++;
+					roundWinners[roundResult.winnersCount - 1] = roundWinner;
 				}
 			}
 		}
 	}
 
-	for (int winnerIndex = 0; winnerIndex < winnersCount; winnerIndex++) {
+	for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
 		strcpy(roundResult.winners[winnerIndex], roundWinners[winnerIndex].play.playerName);
 	}
 
-	roundResult.round = round;
-	roundResult.classifiedHandSlug = roundClassifiedHandSlug;
-	roundResult.classifiedHandType = roundClassifiedHandType;
-	roundResult.winnersCount = winnersCount;
-	roundResult.moneyPerWinner = totalRoundMoney/winnersCount;
+	bool isThereAnyWinner = roundResult.winnersCount > 0;
+
+	if (isThereAnyWinner) {
+		roundResult.moneyPerWinner = totalRoundMoney / roundResult.winnersCount;
+		
+		for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
+			PlayerName selectedWinner;
+			
+			strcpy(selectedWinner, roundResult.winners[winnerIndex]);
+
+			Balance selectedWinnerBalance = this->balances->findByKey(selectedWinner);
+			selectedWinnerBalance.money += roundResult.moneyPerWinner;
+
+			this->balances->save(selectedWinner, selectedWinnerBalance);
+		}
+	}
 
 	return roundResult;
 };
@@ -215,13 +254,15 @@ Result PokerFace::finish() {
 	this->result.balanceResults = this->balances;
 
 	for (int roundIndex = 0; roundIndex < this->rounds->getSize(); roundIndex++) {
-		Round round = this->rounds->find(roundIndex);
+		Round round = this->rounds->findByKey(roundIndex);
 
 		RoundResult roundResult = this->consolidateRoundResult(round);
 		this->result.roundResults->save(roundIndex, roundResult);
 
 		this->result.totalRounds = this->totalRounds;
 	}
+
+	this->result.balanceResults->sort(SortingType::DESC, &getBalanceSortingParam);
 
 	this->finished = true;
 
@@ -323,43 +364,38 @@ bool PokerFace::handHasSequentialCombination (Hand hand) {
 GroupedCardCombo PokerFace::groupCardsWithEqualValues (Hand hand) {
 	GroupedCardCombo groupedCardCombo;
 
-	CardCombo cardComboGroups[MAX_HAND_SIZE];
+	ArrangementList<CardCombo> *cardComboGroups = new ArrangementList<CardCombo>();
 
 	for (int i = 0; i < MAX_HAND_SIZE; i++) {
-		cardComboGroups[i].totalCards = 1;
-		cardComboGroups[i].cards[0] = hand[i];
+		CardCombo cardCombo;
+
+		cardCombo.totalCards = 1;
+		cardCombo.cards[0] = hand[i];
 
 		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
 			Card currentCard = hand[i];
 			Card comparedCard = hand[j];
 
 			if (currentCard.value == comparedCard.value) {
-				cardComboGroups[i].totalCards++;
-				cardComboGroups[i].cards[cardComboGroups[i].totalCards] = hand[j];
+				cardCombo.totalCards++;
+				cardCombo.cards[cardCombo.totalCards] = hand[j];
 			}
 		}
+
+		cardComboGroups->save(i, cardCombo);
 	}
 
 	/**
 	 * Orders cards in descending ordering by amount of equal cards, in order to
 	 * handle easily some business rules later.
 	 */
-	for (int i = 0; i < MAX_HAND_SIZE; i++) {
-		for (int j = i + 1; j < MAX_HAND_SIZE; j++) {
-			if (cardComboGroups[i].totalCards < cardComboGroups[j].totalCards) {
-				CardCombo equalCardValue = cardComboGroups[i];
+	cardComboGroups->sort(SortingType::DESC, &getCardComboSortingParam);
 
-				cardComboGroups[i] = cardComboGroups[j];
-				cardComboGroups[j] = equalCardValue;
-			}
-		}
-	}
-
-	groupedCardCombo.group1 = cardComboGroups[0];
-	groupedCardCombo.group2 = cardComboGroups[1];
-	groupedCardCombo.group3 = cardComboGroups[2];
-	groupedCardCombo.group4 = cardComboGroups[3];
-	groupedCardCombo.group5 = cardComboGroups[4];
+	groupedCardCombo.group1 = cardComboGroups->findByIndex(0);
+	groupedCardCombo.group2 = cardComboGroups->findByIndex(1);
+	groupedCardCombo.group3 = cardComboGroups->findByIndex(2);
+	groupedCardCombo.group4 = cardComboGroups->findByIndex(3);
+	groupedCardCombo.group5 = cardComboGroups->findByIndex(4);
 
 	return groupedCardCombo;
 }

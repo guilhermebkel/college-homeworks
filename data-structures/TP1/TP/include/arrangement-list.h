@@ -12,6 +12,11 @@
 typedef char *StringKey;
 typedef int NumberKey;
 
+enum SortingType {
+	ASC = 1,
+	DESC = 2
+};
+
 template <typename Model> struct Item {
 	Model model;
 	StringKey key;
@@ -23,11 +28,12 @@ template <typename Model> class ArrangementList {
 		int getSize();
 		void save(StringKey key, Model item);
 		void save(NumberKey key, Model item);
-		Model find(StringKey key);
-		Model find(NumberKey key);
-		bool exists(StringKey key);
-		bool exists(NumberKey key);
-		Model get(int index);
+		Model findByKey(StringKey key);
+		Model findByKey(NumberKey key);
+		bool existsByKey(StringKey key);
+		bool existsByKey(NumberKey key);
+		Model findByIndex(int index);
+		void sort(SortingType type, int (*func)(Model));
 
 	private:
 		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];

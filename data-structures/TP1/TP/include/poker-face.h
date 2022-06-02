@@ -75,7 +75,6 @@ typedef struct RoundResult {
 	PlayerName winners[MAX_PLAYERS_COUNT];
 	int winnersCount;
 	std::string classifiedHandSlug;
-	int classifiedHandType;
 	int moneyPerWinner;
 } RoundResult;
 

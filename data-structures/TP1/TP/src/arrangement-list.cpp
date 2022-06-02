@@ -54,7 +54,7 @@ void ArrangementList<Model>::save (NumberKey key, Model model) {
 };
 
 template <typename Model>
-Model ArrangementList<Model>::find (StringKey key) {
+Model ArrangementList<Model>::findByKey (StringKey key) {
 	int modelIndex = this->findIndex(key);
 
 	if (!this->existsByIndex(modelIndex)) {
@@ -65,12 +65,12 @@ Model ArrangementList<Model>::find (StringKey key) {
 };
 
 template <typename Model>
-Model ArrangementList<Model>::find (NumberKey key) {
-	return this->find(this->castStringKey(key));
+Model ArrangementList<Model>::findByKey (NumberKey key) {
+	return this->findByKey(this->castStringKey(key));
 };
 
 template <typename Model>
-Model ArrangementList<Model>::get (int index) {
+Model ArrangementList<Model>::findByIndex (int index) {
 	return this->itens[index].model;
 };
 
@@ -95,15 +95,15 @@ int ArrangementList<Model>::findIndex (NumberKey key) {
 };
 
 template <typename Model>
-bool ArrangementList<Model>::exists (StringKey key) {
+bool ArrangementList<Model>::existsByKey (StringKey key) {
 	int modelIndex = this->findIndex(key);
 
 	return this->existsByIndex(modelIndex);
 };
 
 template <typename Model>
-bool ArrangementList<Model>::exists (NumberKey key) {
-	this->exists(this->castStringKey(key));
+bool ArrangementList<Model>::existsByKey (NumberKey key) {
+	this->existsByKey(this->castStringKey(key));
 };
 
 template <typename Model>
@@ -122,7 +122,37 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 	return index != -1;
 };
 
+template <typename Model>
+void ArrangementList<Model>::sort(SortingType type, int (*func)(Model)) {
+	for (int i = 0; i < this->getSize(); i++) {
+		for (int j = i + 1; j < this->getSize(); j++) {
+			int firstItemParam = func(this->itens[i].model);
+			int secondItemParam = func(this->itens[j].model);
+
+			if (type == SortingType::DESC) {
+				if (firstItemParam < secondItemParam) {
+					Item<Model> tempModel = itens[i];
+
+					itens[i] = itens[j];
+					itens[j] = tempModel;
+				}
+			}
+
+			if (type == SortingType::ASC) {
+				if (firstItemParam > secondItemParam) {
+					Item<Model> tempModel = itens[i];
+
+					itens[i] = itens[j];
+					itens[j] = tempModel;
+				}
+			}
+		}
+	}
+};
+
 template class ArrangementList<Round>;
 template class ArrangementList<RoundResult>;
 template class ArrangementList<Play>;
 template class ArrangementList<Balance>;
+template class ArrangementList<CardCombo>;
+template class ArrangementList<Card>;

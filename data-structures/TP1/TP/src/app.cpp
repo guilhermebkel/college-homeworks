@@ -54,21 +54,35 @@ int main() {
 
 	fclose(inputFile);
 
+	FILE *outputFile;
+  outputFile = fopen("../data/output.txt", "wt");
+	erroAssert(outputFile != NULL, "Failed to create output file.");
+
 	Result result = pokerFace->finish();
 
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
-		RoundResult roundResult = result.roundResults->find(roundIndex);
+		RoundResult roundResult = result.roundResults->findByKey(roundIndex);
 
-		cout << roundResult.winnersCount << " " << roundResult.moneyPerWinner << " " << roundResult.classifiedHandSlug << endl;
+		fprintf(outputFile, "%d %d %s\n", roundResult.winnersCount, roundResult.moneyPerWinner, roundResult.classifiedHandSlug.c_str());
 
-		for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
-			cout << roundResult.winners[winnerIndex] << " ";
+		if (roundResult.winnersCount > 0) {
+			for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
+				fprintf(outputFile, "%s ", roundResult.winners[winnerIndex]);
+			}
+
+			fprintf(outputFile, "\n");
 		}
-
-		cout << endl;
 	}
 
-	cout << "####" << endl;
+	fprintf(outputFile, "####\n");
+
+	for (int balanceIndex = 0; balanceIndex < result.balanceResults->getSize(); balanceIndex++) {
+		Balance balance = result.balanceResults->findByIndex(balanceIndex);
+
+		fprintf(outputFile, "%s %d\n", balance.playerName, balance.money);
+	}
+
+	fclose(outputFile);
 	
 	return 0;
 }
