@@ -20,8 +20,7 @@ int main() {
 	fscanf(inputFile, "%d ", &totalRounds);
   fscanf(inputFile, "%d ", &initialMoneyAmountPerParticipant);
 
-	PokerFace *pokerFace;
-	pokerFace = new PokerFace(totalRounds, initialMoneyAmountPerParticipant);
+	PokerFace *pokerFace = new PokerFace(totalRounds, initialMoneyAmountPerParticipant);
 
 	for (int roundIndex = 0; roundIndex < totalRounds; roundIndex++) {
 		int participantsCount;
