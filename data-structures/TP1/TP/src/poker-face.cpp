@@ -92,8 +92,10 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
 		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
 
-		bool isPlayerTryingToBetAValueBelowDropValue = currentPlay.model.betAmount < round.dropValue;
-		bool isInvalidPlay = isPlayerTryingToBetAValueBelowDropValue;
+		bool isBetValueBelowDropValue = currentPlay.model.betAmount < round.dropValue;
+		bool isBetValueNull = currentPlay.model.betAmount == 0;
+		bool isBetValueMultipleOfFifty = currentPlay.model.betAmount % 50 == 0;
+		bool isInvalidPlay = isBetValueBelowDropValue || isBetValueNull || !isBetValueMultipleOfFifty;
 
 		if (isInvalidPlay) {
 			roundResult.classifiedHandSlug = "I";
