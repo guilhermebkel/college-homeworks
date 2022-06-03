@@ -6,6 +6,7 @@
 #include "poker-face.h"
 #include "arrangement-list.h"
 #include "msgassert.h"
+#include "memlog.h"
 
 using namespace std;
  

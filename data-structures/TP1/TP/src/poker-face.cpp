@@ -44,11 +44,10 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	play.betAmount = betAmount;
 
 	ArrangementList<Card> *cards = new ArrangementList<Card>();
-	cards->create(0, hand[0]);
-	cards->create(1, hand[1]);
-	cards->create(2, hand[2]);
-	cards->create(3, hand[3]);
-	cards->create(4, hand[4]);
+
+	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
+		cards->create(cardIndex, hand[cardIndex]);
+	}
 
 	/**
 	 * Orders cards in ascending ordering by its value, in order to
