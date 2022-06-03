@@ -103,6 +103,15 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 		}
 	}
 
+	for (int balanceIndex = 0; balanceIndex < this->balances->getSize(); balanceIndex++) {
+		totalRoundMoney += round.dropValue;
+
+		Item<Balance> playerBalance = this->balances->findByIndex(balanceIndex);
+		playerBalance.model.money -= round.dropValue;
+
+		this->balances->update(playerBalance.key, playerBalance.model);
+	}
+
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
 		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
 
@@ -122,11 +131,9 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 		}
 
 		totalRoundMoney += currentPlay.model.betAmount;
-		totalRoundMoney += round.dropValue;
 
 		Item<Balance> playerBalance = this->balances->findByKey(currentPlay.model.playerName);
 		playerBalance.model.money -= currentPlay.model.betAmount;
-		playerBalance.model.money -= round.dropValue;
 
 		this->balances->update(playerBalance.key, playerBalance.model);
 	}
