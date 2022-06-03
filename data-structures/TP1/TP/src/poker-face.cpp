@@ -38,7 +38,7 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 
 	Play play;
 
-	Round currentRound = this->rounds->findByKey(currentRoundIndex);
+	Item<Round> currentRound = this->rounds->findByKey(currentRoundIndex);
 
 	strcpy(play.playerName, playerName);
 	play.betAmount = betAmount;
@@ -57,13 +57,13 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	cards->sort(SortingType::ASC, &getCardSortingParam);
 
 	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
-		play.hand[cardIndex] = cards->findByIndex(cardIndex);
+		play.hand[cardIndex] = cards->findByIndex(cardIndex).model;
 	}
 
-	currentRound.plays->create(playerName, play);
-	currentRound.currentPlayIndex++;
+	currentRound.model.plays->create(playerName, play);
+	currentRound.model.currentPlayIndex++;
 
-	this->rounds->update(currentRoundIndex, currentRound);
+	this->rounds->update(currentRound.key, currentRound.model);
 };
 
 RoundResult PokerFace::consolidateRoundResult(Round round) {
@@ -79,21 +79,21 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 	int greatestHandScore = 0;
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Play currentPlay = round.plays->findByIndex(participantIndex);
+		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
 
-		if (!this->balances->existsByKey(currentPlay.playerName)) {
+		if (!this->balances->existsByKey(currentPlay.model.playerName)) {
 			Balance balance;
 			balance.money = INITIAL_PLAYER_MONEY;
-			strcpy(balance.playerName, currentPlay.playerName);
+			strcpy(balance.playerName, currentPlay.model.playerName);
 
-			this->balances->create(currentPlay.playerName, balance);
+			this->balances->create(currentPlay.model.playerName, balance);
 		}
 	}
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Play currentPlay = round.plays->findByIndex(participantIndex);
+		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
 
-		bool isPlayerTryingToBetAValueBelowDropValue = currentPlay.betAmount < round.dropValue;
+		bool isPlayerTryingToBetAValueBelowDropValue = currentPlay.model.betAmount < round.dropValue;
 		bool isInvalidPlay = isPlayerTryingToBetAValueBelowDropValue;
 
 		if (isInvalidPlay) {
@@ -104,16 +104,16 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 	}
 
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Play currentPlay = round.plays->findByIndex(participantIndex);
+		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
 
-		ClassifiedHand classifiedHand = pokerFaceUtil->classifyHand(currentPlay.hand);
+		ClassifiedHand classifiedHand = pokerFaceUtil->classifyHand(currentPlay.model.hand);
 
 		if (classifiedHand.score > greatestHandScore) {
 			roundResult.classifiedHandSlug = classifiedHand.slug;
 			
 			RoundWinner roundWinner;
 			roundWinner.classifiedHand = classifiedHand;
-			roundWinner.play = currentPlay;
+			roundWinner.play = currentPlay.model;
 			roundWinner.participantIndex = participantIndex;
 
 			roundWinners[0] = roundWinner;
@@ -121,11 +121,14 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 			greatestHandScore = classifiedHand.score;
 		}
 
-		totalRoundMoney += currentPlay.betAmount;
+		totalRoundMoney += currentPlay.model.betAmount;
+		totalRoundMoney += round.dropValue;
 
-		Balance playerBalance = this->balances->findByKey(currentPlay.playerName);
-		playerBalance.money -= currentPlay.betAmount;
-		this->balances->update(currentPlay.playerName, playerBalance);
+		Item<Balance> playerBalance = this->balances->findByKey(currentPlay.model.playerName);
+		playerBalance.model.money -= currentPlay.model.betAmount;
+		playerBalance.model.money -= round.dropValue;
+
+		this->balances->update(playerBalance.key, playerBalance.model);
 	}
 
 	roundResult.winnersCount++;
@@ -134,8 +137,8 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 		RoundWinner currentWinner = roundWinners[0];
 
 		if (currentWinner.participantIndex != participantIndex) {
-			Play possibleWinnerPlay = round.plays->findByIndex(participantIndex);
-			ClassifiedHand possibleWinnerClassifiedHand = pokerFaceUtil->classifyHand(possibleWinnerPlay.hand);
+			Item<Play> possibleWinnerPlay = round.plays->findByIndex(participantIndex);
+			ClassifiedHand possibleWinnerClassifiedHand = pokerFaceUtil->classifyHand(possibleWinnerPlay.model.hand);
 
 			bool isTie = possibleWinnerClassifiedHand.score == currentWinner.classifiedHand.score;
 
@@ -143,12 +146,12 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 				Card currentWinnerGreaterCard = pokerFaceUtil->getGreaterCard(currentWinner.play.hand);
 				GroupedCardCombo currentWinnerGroupedCardCombo = pokerFaceUtil->groupCardsWithEqualValues(currentWinner.play.hand);
 
-				Card possibleWinnerGreaterCard = pokerFaceUtil->getGreaterCard(possibleWinnerPlay.hand);
-				GroupedCardCombo possibleWinnerGroupedCardCombo = pokerFaceUtil->groupCardsWithEqualValues(possibleWinnerPlay.hand);
+				Card possibleWinnerGreaterCard = pokerFaceUtil->getGreaterCard(possibleWinnerPlay.model.hand);
+				GroupedCardCombo possibleWinnerGroupedCardCombo = pokerFaceUtil->groupCardsWithEqualValues(possibleWinnerPlay.model.hand);
 
 				RoundWinner roundWinner;
 				roundWinner.classifiedHand = possibleWinnerClassifiedHand;
-				roundWinner.play = possibleWinnerPlay;
+				roundWinner.play = possibleWinnerPlay.model;
 				roundWinner.participantIndex = participantIndex;
 
 				bool overwriteWinner = false;
@@ -224,10 +227,10 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 			
 			strcpy(selectedWinner, roundResult.winners[winnerIndex]);
 
-			Balance selectedWinnerBalance = this->balances->findByKey(selectedWinner);
-			selectedWinnerBalance.money += roundResult.moneyPerWinner;
+			Item<Balance> selectedWinnerBalance = this->balances->findByKey(selectedWinner);
+			selectedWinnerBalance.model.money += roundResult.moneyPerWinner;
 
-			this->balances->update(selectedWinner, selectedWinnerBalance);
+			this->balances->update(selectedWinnerBalance.key, selectedWinnerBalance.model);
 		}
 	}
 
@@ -243,9 +246,9 @@ Result PokerFace::finish() {
 	this->result.balanceResults = this->balances;
 
 	for (int roundIndex = 0; roundIndex < this->rounds->getSize(); roundIndex++) {
-		Round round = this->rounds->findByKey(roundIndex);
+		Item<Round> round = this->rounds->findByKey(roundIndex);
 
-		RoundResult roundResult = this->consolidateRoundResult(round);
+		RoundResult roundResult = this->consolidateRoundResult(round.model);
 		this->result.roundResults->create(roundIndex, roundResult);
 
 		this->result.totalRounds = this->totalRounds;

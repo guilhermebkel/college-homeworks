@@ -60,13 +60,13 @@ int main() {
 	Result result = pokerFace->finish();
 
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
-		RoundResult roundResult = result.roundResults->findByKey(roundIndex);
+		Item<RoundResult> roundResult = result.roundResults->findByKey(roundIndex);
 
-		fprintf(outputFile, "%d %d %s\n", roundResult.winnersCount, roundResult.moneyPerWinner, roundResult.classifiedHandSlug.c_str());
+		fprintf(outputFile, "%d %d %s\n", roundResult.model.winnersCount, roundResult.model.moneyPerWinner, roundResult.model.classifiedHandSlug.c_str());
 
-		if (roundResult.winnersCount > 0) {
-			for (int winnerIndex = 0; winnerIndex < roundResult.winnersCount; winnerIndex++) {
-				fprintf(outputFile, "%s ", roundResult.winners[winnerIndex]);
+		if (roundResult.model.winnersCount > 0) {
+			for (int winnerIndex = 0; winnerIndex < roundResult.model.winnersCount; winnerIndex++) {
+				fprintf(outputFile, "%s ", roundResult.model.winners[winnerIndex]);
 			}
 
 			fprintf(outputFile, "\n");
@@ -76,9 +76,9 @@ int main() {
 	fprintf(outputFile, "####\n");
 
 	for (int balanceIndex = 0; balanceIndex < result.balanceResults->getSize(); balanceIndex++) {
-		Balance balance = result.balanceResults->findByIndex(balanceIndex);
+		Item<Balance> balance = result.balanceResults->findByIndex(balanceIndex);
 
-		fprintf(outputFile, "%s %d\n", balance.playerName, balance.money);
+		fprintf(outputFile, "%s %d\n", balance.model.playerName, balance.model.money);
 	}
 
 	fclose(outputFile);

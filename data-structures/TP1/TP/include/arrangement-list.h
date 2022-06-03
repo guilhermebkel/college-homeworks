@@ -30,11 +30,11 @@ template <typename Model> class ArrangementList {
 		void create(NumberKey key, Model item);
 		void update(StringKey key, Model item);
 		void update(NumberKey key, Model item);
-		Model findByKey(StringKey key);
-		Model findByKey(NumberKey key);
+		Item<Model> findByKey(StringKey key);
+		Item<Model> findByKey(NumberKey key);
 		bool existsByKey(StringKey key);
 		bool existsByKey(NumberKey key);
-		Model findByIndex(int index);
+		Item<Model> findByIndex(int index);
 		void sort(SortingType type, int (*func)(Model));
 
 	private:

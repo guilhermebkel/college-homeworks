@@ -45,24 +45,24 @@ void ArrangementList<Model>::create (NumberKey key, Model model) {
 };
 
 template <typename Model>
-Model ArrangementList<Model>::findByKey (StringKey key) {
+Item<Model> ArrangementList<Model>::findByKey (StringKey key) {
 	int modelIndex = this->findIndex(key);
 
 	if (!this->existsByIndex(modelIndex)) {
 		throw "Model not found";
 	}
 	
-	return this->itens[modelIndex].model;
+	return this->itens[modelIndex];
 };
 
 template <typename Model>
-Model ArrangementList<Model>::findByKey (NumberKey key) {
+Item<Model> ArrangementList<Model>::findByKey (NumberKey key) {
 	return this->findByKey(this->castStringKey(key));
 };
 
 template <typename Model>
-Model ArrangementList<Model>::findByIndex (int index) {
-	return this->itens[index].model;
+Item<Model> ArrangementList<Model>::findByIndex (int index) {
+	return this->itens[index];
 };
 
 template <typename Model>

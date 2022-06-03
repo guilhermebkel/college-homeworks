@@ -46,11 +46,11 @@ GroupedCardCombo PokerFaceUtil::groupCardsWithEqualValues (Hand hand) {
 	 */
 	cardComboGroups->sort(SortingType::DESC, &getCardComboSortingParam);
 
-	groupedCardCombo.group1 = cardComboGroups->findByIndex(0);
-	groupedCardCombo.group2 = cardComboGroups->findByIndex(1);
-	groupedCardCombo.group3 = cardComboGroups->findByIndex(2);
-	groupedCardCombo.group4 = cardComboGroups->findByIndex(3);
-	groupedCardCombo.group5 = cardComboGroups->findByIndex(4);
+	groupedCardCombo.group1 = cardComboGroups->findByIndex(0).model;
+	groupedCardCombo.group2 = cardComboGroups->findByIndex(1).model;
+	groupedCardCombo.group3 = cardComboGroups->findByIndex(2).model;
+	groupedCardCombo.group4 = cardComboGroups->findByIndex(3).model;
+	groupedCardCombo.group5 = cardComboGroups->findByIndex(4).model;
 
 	return groupedCardCombo;
 };
