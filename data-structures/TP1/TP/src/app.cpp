@@ -11,6 +11,10 @@
 using namespace std;
  
 int main() {
+	char memoryLogName[20] = {'p', 'o', 'k', 'e', 'r', '-', 'f', 'a', 'c', 'e'};
+	iniciaMemLog(memoryLogName);
+	ativaMemLog();
+
 	FILE *inputFile;
   inputFile = fopen("../data/input.txt", "r");
 	erroAssert(inputFile != NULL, "Input file was not found.");
@@ -30,6 +34,7 @@ int main() {
 		fscanf(inputFile, "%d ", &participantsCount);
   	fscanf(inputFile, "%d ", &dropValue);
 
+		defineFaseMemLog(1);
 		pokerFace->startRound(participantsCount, dropValue);
 
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
@@ -48,6 +53,7 @@ int main() {
 				hand[playerHandIndex] = card;
 			}
 
+			defineFaseMemLog(2);
 			pokerFace->readPlay(playerName, betAmount, hand);
 		}
 	}
@@ -58,7 +64,10 @@ int main() {
   outputFile = fopen("../data/output.txt", "wt");
 	erroAssert(outputFile != NULL, "Failed to create output file.");
 
+	defineFaseMemLog(3);
 	Result result = pokerFace->finish();
+
+	finalizaMemLog();
 
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
 		Item<RoundResult> roundResult = result.roundResults->findByKey(roundIndex);
