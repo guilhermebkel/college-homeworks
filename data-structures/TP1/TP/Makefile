@@ -23,6 +23,7 @@ build:
 	$(CC) $(CFLAGS) -c $(SRC)/poker-face-util.cpp -o $(OBJ)/poker-face-util.o
 	$(CC) $(CFLAGS) -c $(SRC)/poker-face-validation.cpp -o $(OBJ)/poker-face-validation.o
 	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -o $(OBJ)/arrangement-list.o
+	$(CC) $(CFLAGS) -c $(SRC)/shared-util.cpp -o $(OBJ)/shared-util.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -o $(OBJ)/memlog.o
 
 main: clean build

@@ -1,7 +1,9 @@
 #include <string.h>
+#include <iostream>
 
 #include "poker-face.h"
 #include "arrangement-list.h"
+#include "shared-util.h"
 
 template <typename Model>
 ArrangementList<Model>::ArrangementList () {
@@ -101,11 +103,7 @@ template <typename Model>
 StringKey ArrangementList<Model>::castStringKey (int number) {
 	std::string stringValue = std::to_string(number);
 
-	StringKey charValue = new char[stringValue.length()];
-
-	strcpy(charValue, stringValue.c_str());
-
-	return charValue;
+	return castChar(stringValue);
 };
 
 template <typename Model>

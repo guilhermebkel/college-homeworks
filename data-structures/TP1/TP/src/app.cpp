@@ -7,16 +7,20 @@
 #include "arrangement-list.h"
 #include "msgassert.h"
 #include "memlog.h"
+#include "shared-util.h"
 
 using namespace std;
  
 int main() {
-	char memoryLogName[20] = {'p', 'o', 'k', 'e', 'r', '-', 'f', 'a', 'c', 'e'};
-	iniciaMemLog(memoryLogName);
+	std::string memoryLogOutputFilePath = "../data/memory-log.out";
+	std::string inputFilePath = "../data/input.txt";
+	std::string outputFilePath = "../data/output.txt";
+
+	iniciaMemLog(castChar(memoryLogOutputFilePath));
 	ativaMemLog();
 
 	FILE *inputFile;
-  inputFile = fopen("../data/input.txt", "r");
+  inputFile = fopen(castChar(inputFilePath), "r");
 	erroAssert(inputFile != NULL, "Input file was not found.");
 
 	int totalRounds;
@@ -61,7 +65,7 @@ int main() {
 	fclose(inputFile);
 
 	FILE *outputFile;
-  outputFile = fopen("../data/output.txt", "wt");
+  outputFile = fopen(castChar(outputFilePath), "wt");
 	erroAssert(outputFile != NULL, "Failed to create output file.");
 
 	defineFaseMemLog(3);
