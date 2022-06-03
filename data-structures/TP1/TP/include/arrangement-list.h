@@ -26,8 +26,10 @@ template <typename Model> class ArrangementList {
 	public:
 		ArrangementList();
 		int getSize();
-		void save(StringKey key, Model item);
-		void save(NumberKey key, Model item);
+		void create(StringKey key, Model item);
+		void create(NumberKey key, Model item);
+		void update(StringKey key, Model item);
+		void update(NumberKey key, Model item);
 		Model findByKey(StringKey key);
 		Model findByKey(NumberKey key);
 		bool existsByKey(StringKey key);

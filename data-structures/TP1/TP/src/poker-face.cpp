@@ -30,7 +30,7 @@ void PokerFace::startRound (int participantsCount, int dropValue) {
 	round.plays = new ArrangementList<Play>();
 	
 	this->currentRoundIndex++;
-	this->rounds->save(currentRoundIndex, round);
+	this->rounds->create(currentRoundIndex, round);
 };
 
 void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
@@ -44,11 +44,11 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	play.betAmount = betAmount;
 
 	ArrangementList<Card> *cards = new ArrangementList<Card>();
-	cards->save(0, hand[0]);
-	cards->save(1, hand[1]);
-	cards->save(2, hand[2]);
-	cards->save(3, hand[3]);
-	cards->save(4, hand[4]);
+	cards->create(0, hand[0]);
+	cards->create(1, hand[1]);
+	cards->create(2, hand[2]);
+	cards->create(3, hand[3]);
+	cards->create(4, hand[4]);
 
 	/**
 	 * Orders cards in ascending ordering by its value, in order to
@@ -60,10 +60,10 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 		play.hand[cardIndex] = cards->findByIndex(cardIndex);
 	}
 
-	currentRound.plays->save(playerName, play);
+	currentRound.plays->create(playerName, play);
 	currentRound.currentPlayIndex++;
 
-	this->rounds->save(currentRoundIndex, currentRound);
+	this->rounds->update(currentRoundIndex, currentRound);
 };
 
 RoundResult PokerFace::consolidateRoundResult(Round round) {
@@ -86,7 +86,7 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 			balance.money = INITIAL_PLAYER_MONEY;
 			strcpy(balance.playerName, currentPlay.playerName);
 
-			this->balances->save(currentPlay.playerName, balance);
+			this->balances->create(currentPlay.playerName, balance);
 		}
 	}
 
@@ -125,7 +125,7 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 
 		Balance playerBalance = this->balances->findByKey(currentPlay.playerName);
 		playerBalance.money -= currentPlay.betAmount;
-		this->balances->save(currentPlay.playerName, playerBalance);
+		this->balances->update(currentPlay.playerName, playerBalance);
 	}
 
 	roundResult.winnersCount++;
@@ -227,7 +227,7 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 			Balance selectedWinnerBalance = this->balances->findByKey(selectedWinner);
 			selectedWinnerBalance.money += roundResult.moneyPerWinner;
 
-			this->balances->save(selectedWinner, selectedWinnerBalance);
+			this->balances->update(selectedWinner, selectedWinnerBalance);
 		}
 	}
 
@@ -246,7 +246,7 @@ Result PokerFace::finish() {
 		Round round = this->rounds->findByKey(roundIndex);
 
 		RoundResult roundResult = this->consolidateRoundResult(round);
-		this->result.roundResults->save(roundIndex, roundResult);
+		this->result.roundResults->create(roundIndex, roundResult);
 
 		this->result.totalRounds = this->totalRounds;
 	}

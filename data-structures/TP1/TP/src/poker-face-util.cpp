@@ -37,7 +37,7 @@ GroupedCardCombo PokerFaceUtil::groupCardsWithEqualValues (Hand hand) {
 			}
 		}
 
-		cardComboGroups->save(i, cardCombo);
+		cardComboGroups->create(i, cardCombo);
 	}
 
 	/**
