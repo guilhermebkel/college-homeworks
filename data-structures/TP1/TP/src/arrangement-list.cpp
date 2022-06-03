@@ -1,6 +1,4 @@
-#include <iostream>
 #include <string.h>
-#include <limits.h>
 
 #include "poker-face.h"
 #include "arrangement-list.h"
