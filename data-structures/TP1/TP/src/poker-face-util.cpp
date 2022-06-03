@@ -2,8 +2,6 @@
 #include "poker-face-util.h"
 #include "poker-face-validation.h"
 
-PokerFaceValidation *pokerFaceValidation = new PokerFaceValidation();
-
 int getBalanceSortingParam (Balance balance) {
 	return balance.money;
 };
@@ -16,7 +14,7 @@ int getCardSortingParam (Card card) {
 	return card.value;
 };
 
-GroupedCardCombo PokerFaceUtil::groupCardsWithEqualValues (Hand hand) {
+GroupedCardCombo groupCardsWithEqualValues (Hand hand) {
 	GroupedCardCombo groupedCardCombo;
 
 	ArrangementList<CardCombo> *cardComboGroups = new ArrangementList<CardCombo>();
@@ -55,7 +53,7 @@ GroupedCardCombo PokerFaceUtil::groupCardsWithEqualValues (Hand hand) {
 	return groupedCardCombo;
 };
 
-int PokerFaceUtil::getCardComboScore (CardCombo cardCombo) {
+int getCardComboScore (CardCombo cardCombo) {
 	int score = 0;
 
 	for (int i = 0; i < cardCombo.totalCards; i++) {
@@ -65,50 +63,50 @@ int PokerFaceUtil::getCardComboScore (CardCombo cardCombo) {
 	return score;
 };
 
-Card PokerFaceUtil::getGreaterCard (Hand hand) {
+Card getGreaterCard (Hand hand) {
 	return hand[MAX_HAND_SIZE - 1];
 };
 
-ClassifiedHand PokerFaceUtil::classifyHand (Hand hand) {
+ClassifiedHand classifyHand (Hand hand) {
 	ClassifiedHand classifiedHand;
 
 	for (int cardIndex = 0; cardIndex < MAX_HAND_SIZE; cardIndex++) {
 		classifiedHand.hand[cardIndex] = hand[cardIndex];
 	}
 
-	if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::ROYAL_STRAIGHT_FLUSH)) {
+	if (handHasClassificationType(hand, ClassifiedHandType::ROYAL_STRAIGHT_FLUSH)) {
 		classifiedHand.type = ClassifiedHandType::ROYAL_STRAIGHT_FLUSH;
 		classifiedHand.slug = "RSF";
 		classifiedHand.score = 10;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::STRAIGHT_FLUSH)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::STRAIGHT_FLUSH)) {
 		classifiedHand.type = ClassifiedHandType::STRAIGHT_FLUSH;
 		classifiedHand.slug = "SF";
 		classifiedHand.score = 9;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::FOUR_OF_A_KIND)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::FOUR_OF_A_KIND)) {
 		classifiedHand.type = ClassifiedHandType::FOUR_OF_A_KIND;
 		classifiedHand.slug = "FK";
 		classifiedHand.score = 8;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::FULL_HOUSE)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::FULL_HOUSE)) {
 		classifiedHand.type = ClassifiedHandType::FULL_HOUSE;
 		classifiedHand.slug = "FH";
 		classifiedHand.score = 7;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::FLUSH)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::FLUSH)) {
 		classifiedHand.type = ClassifiedHandType::FLUSH;
 		classifiedHand.slug = "F";
 		classifiedHand.score = 6;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::STRAIGHT)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::STRAIGHT)) {
 		classifiedHand.type = ClassifiedHandType::STRAIGHT;
 		classifiedHand.slug = "S";
 		classifiedHand.score = 5;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::THREE_OF_A_KIND)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::THREE_OF_A_KIND)) {
 		classifiedHand.type = ClassifiedHandType::THREE_OF_A_KIND;
 		classifiedHand.slug = "TK";
 		classifiedHand.score = 4;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::TWO_PAIRS)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::TWO_PAIRS)) {
 		classifiedHand.type = ClassifiedHandType::TWO_PAIRS;
 		classifiedHand.slug = "TP";
 		classifiedHand.score = 3;
-	} else if (pokerFaceValidation->handHasClassificationType(hand, ClassifiedHandType::ONE_PAIR)) {
+	} else if (handHasClassificationType(hand, ClassifiedHandType::ONE_PAIR)) {
 		classifiedHand.type = ClassifiedHandType::ONE_PAIR;
 		classifiedHand.slug = "OP";
 		classifiedHand.score = 2;

@@ -2,11 +2,10 @@
 #include <string.h>
 
 #include "poker-face.h"
+#include "poker-face-validation.h"
 #include "poker-face-util.h"
 #include "msgassert.h"
 #include "arrangement-list.h"
-
-PokerFaceUtil *pokerFaceUtil = new PokerFaceUtil();
 
 PokerFace::PokerFace (int totalRounds, int initialMoneyAmountPerParticipant) {
 	this->currentRoundIndex = -1;
@@ -89,28 +88,10 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 		}
 	}
 
-	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
-		Item<Balance> currentParticipantBalance = this->balances->findByKey(currentPlay.model.playerName);
+	if (isInvalidPlay(round, this->balances)) {
+		roundResult.classifiedHandSlug = "I";
 
-		bool isBetValueBelowDropValue = currentPlay.model.betAmount < round.dropValue;
-		bool isBetValueNull = currentPlay.model.betAmount == 0;
-		bool isBetValueMultipleOfFifty = currentPlay.model.betAmount % 50 == 0;
-		bool isBalanceMoneySmallerThanBetValue = currentParticipantBalance.model.money < currentPlay.model.betAmount;
-		bool isBalanceMoneySmallerThanDropValue = currentParticipantBalance.model.money < round.dropValue;
-		bool isInvalidPlay = (
-			isBetValueBelowDropValue ||
-			isBetValueNull ||
-			!isBetValueMultipleOfFifty ||
-			isBalanceMoneySmallerThanBetValue ||
-			isBalanceMoneySmallerThanDropValue
-		);
-
-		if (isInvalidPlay) {
-			roundResult.classifiedHandSlug = "I";
-
-			return roundResult;
-		}
+		return roundResult;
 	}
 
 	for (int balanceIndex = 0; balanceIndex < this->balances->getSize(); balanceIndex++) {
@@ -125,7 +106,7 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
 		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
 
-		ClassifiedHand classifiedHand = pokerFaceUtil->classifyHand(currentPlay.model.hand);
+		ClassifiedHand classifiedHand = classifyHand(currentPlay.model.hand);
 
 		if (classifiedHand.score > greatestHandScore) {
 			roundResult.classifiedHandSlug = classifiedHand.slug;
@@ -155,16 +136,16 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 
 		if (currentWinner.participantIndex != participantIndex) {
 			Item<Play> possibleWinnerPlay = round.plays->findByIndex(participantIndex);
-			ClassifiedHand possibleWinnerClassifiedHand = pokerFaceUtil->classifyHand(possibleWinnerPlay.model.hand);
+			ClassifiedHand possibleWinnerClassifiedHand = classifyHand(possibleWinnerPlay.model.hand);
 
 			bool isTie = possibleWinnerClassifiedHand.score == currentWinner.classifiedHand.score;
 
 			if (isTie) {
-				Card currentWinnerGreaterCard = pokerFaceUtil->getGreaterCard(currentWinner.play.hand);
-				GroupedCardCombo currentWinnerGroupedCardCombo = pokerFaceUtil->groupCardsWithEqualValues(currentWinner.play.hand);
+				Card currentWinnerGreaterCard = getGreaterCard(currentWinner.play.hand);
+				GroupedCardCombo currentWinnerGroupedCardCombo = groupCardsWithEqualValues(currentWinner.play.hand);
 
-				Card possibleWinnerGreaterCard = pokerFaceUtil->getGreaterCard(possibleWinnerPlay.model.hand);
-				GroupedCardCombo possibleWinnerGroupedCardCombo = pokerFaceUtil->groupCardsWithEqualValues(possibleWinnerPlay.model.hand);
+				Card possibleWinnerGreaterCard = getGreaterCard(possibleWinnerPlay.model.hand);
+				GroupedCardCombo possibleWinnerGroupedCardCombo = groupCardsWithEqualValues(possibleWinnerPlay.model.hand);
 
 				RoundWinner roundWinner;
 				roundWinner.classifiedHand = possibleWinnerClassifiedHand;
@@ -174,10 +155,10 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 				bool overwriteWinner = false;
 				bool addWinner = false;
 
-				int possibleWinnerFirstCardComboScore = pokerFaceUtil->getCardComboScore(currentWinnerGroupedCardCombo.group1);
-				int currentWinnerFirstCardComboScore = pokerFaceUtil->getCardComboScore(currentWinnerGroupedCardCombo.group1);
-				int possibleWinnerSecondCardComboScore = pokerFaceUtil->getCardComboScore(currentWinnerGroupedCardCombo.group2);
-				int currentWinnerSecondCardComboScore = pokerFaceUtil->getCardComboScore(currentWinnerGroupedCardCombo.group2);
+				int possibleWinnerFirstCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group1);
+				int currentWinnerFirstCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group1);
+				int possibleWinnerSecondCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group2);
+				int currentWinnerSecondCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group2);
 
 				if (
 					possibleWinnerClassifiedHand.type == ClassifiedHandType::FOUR_OF_A_KIND ||
