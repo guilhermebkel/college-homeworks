@@ -35,7 +35,7 @@ template <typename Model> class ArrangementList {
 		bool existsByKey(StringKey key);
 		bool existsByKey(NumberKey key);
 		Item<Model> findByIndex(int index);
-		void sort(SortingType type, int (*func)(Model));
+		void sort(SortingType type, int (*getSortingParam)(Model));
 
 	private:
 		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];
