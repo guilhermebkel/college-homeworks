@@ -61,6 +61,14 @@ void PokerFace::readPlay (PlayerName playerName, int betAmount, Hand hand) {
 	currentRound.model.plays->create(playerName, play);
 	currentRound.model.currentPlayIndex++;
 
+	if (!this->balances->existsByKey(playerName)) {
+		Balance balance;
+		balance.money = INITIAL_PLAYER_MONEY;
+		strcpy(balance.playerName, playerName);
+
+		this->balances->create(playerName, balance);
+	}
+
 	this->rounds->update(currentRound.key, currentRound.model);
 };
 
@@ -75,18 +83,6 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 	roundResult.round = round;
 
 	int greatestHandScore = 0;
-
-	for (int participantIndex = 0; participantIndex < round.participantsCount; participantIndex++) {
-		Item<Play> currentPlay = round.plays->findByIndex(participantIndex);
-
-		if (!this->balances->existsByKey(currentPlay.model.playerName)) {
-			Balance balance;
-			balance.money = INITIAL_PLAYER_MONEY;
-			strcpy(balance.playerName, currentPlay.model.playerName);
-
-			this->balances->create(currentPlay.model.playerName, balance);
-		}
-	}
 
 	if (isInvalidPlay(round, this->balances)) {
 		roundResult.classifiedHandSlug = "I";
