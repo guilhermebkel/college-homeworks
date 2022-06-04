@@ -134,72 +134,19 @@ RoundResult PokerFace::consolidateRoundResult(Round round) {
 			Item<Play> possibleWinnerPlay = round.plays->findByIndex(participantIndex);
 			ClassifiedHand possibleWinnerClassifiedHand = classifyHand(possibleWinnerPlay.model.hand);
 
-			bool isTie = possibleWinnerClassifiedHand.score == currentWinner.classifiedHand.score;
+			TieResult tieResult = assertTie(currentWinner, possibleWinnerPlay.model);
 
-			if (isTie) {
-				Card currentWinnerGreaterCard = getGreaterCard(currentWinner.play.hand);
-				GroupedCardCombo currentWinnerGroupedCardCombo = groupCardsWithEqualValues(currentWinner.play.hand);
-
-				Card possibleWinnerGreaterCard = getGreaterCard(possibleWinnerPlay.model.hand);
-				GroupedCardCombo possibleWinnerGroupedCardCombo = groupCardsWithEqualValues(possibleWinnerPlay.model.hand);
-
+			if (tieResult != TieResult::NO_TIE_FOUND) {
 				RoundWinner roundWinner;
 				roundWinner.classifiedHand = possibleWinnerClassifiedHand;
 				roundWinner.play = possibleWinnerPlay.model;
 				roundWinner.participantIndex = participantIndex;
 
-				bool overwriteWinner = false;
-				bool addWinner = false;
-
-				int possibleWinnerFirstCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group1);
-				int currentWinnerFirstCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group1);
-				int possibleWinnerSecondCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group2);
-				int currentWinnerSecondCardComboScore = getCardComboScore(currentWinnerGroupedCardCombo.group2);
-
-				if (
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::FOUR_OF_A_KIND ||
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::THREE_OF_A_KIND ||
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::TWO_PAIRS ||
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::ONE_PAIR
-				) {
-					if (possibleWinnerFirstCardComboScore > currentWinnerFirstCardComboScore) {
-						overwriteWinner = true;
-					} else if (possibleWinnerGreaterCard.value > currentWinnerGreaterCard.value) {
-						overwriteWinner = true;
-					} else {
-						addWinner = true;
-					}
-				}
-
-				if (possibleWinnerClassifiedHand.type == ClassifiedHandType::FULL_HOUSE) {
-					if (possibleWinnerFirstCardComboScore > currentWinnerFirstCardComboScore) {
-						overwriteWinner = true;
-					} else if (possibleWinnerSecondCardComboScore > currentWinnerSecondCardComboScore) {
-						overwriteWinner = true;
-					} else if (possibleWinnerGreaterCard.value > currentWinnerGreaterCard.value) {
-						overwriteWinner = true;
-					} else {
-						addWinner = true;
-					}
-				}
-
-				if (
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::STRAIGHT ||
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::FLUSH ||
-					possibleWinnerClassifiedHand.type == ClassifiedHandType::HIGH_CARD
-				) {
-					if (possibleWinnerGreaterCard.value > currentWinnerGreaterCard.value) {
-						overwriteWinner = true;
-					} else {
-						addWinner = true;
-					}
-				}
-
-				if (overwriteWinner) {
+				if (tieResult == TieResult::OVERWRITE_WINNER) {
 					roundWinners[0] = roundWinner;
 				}
 
-				if (addWinner) {
+				if (tieResult == TieResult::ADD_WINNER) {
 					roundResult.winnersCount++;
 					roundWinners[roundResult.winnersCount - 1] = roundWinner;
 				}
