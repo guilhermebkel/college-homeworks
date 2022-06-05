@@ -118,9 +118,9 @@ void ArrangementList<Model>::sort(SortingType type, int (*getSortingParam)(Model
 			int firstItemSortingParam = getSortingParam(this->itens[i].model);
 			int secondItemSortingParam = getSortingParam(this->itens[j].model);
 
-			bool canSortAsc = type == SortingType::DESC && firstItemSortingParam < secondItemSortingParam;
-			bool canSortDesc = type == SortingType::ASC && firstItemSortingParam > secondItemSortingParam;
-			bool canSort = canSortAsc || canSortDesc;
+			bool canSortDesc = type == SortingType::DESC && firstItemSortingParam < secondItemSortingParam;
+			bool canSortAsc = type == SortingType::ASC && firstItemSortingParam > secondItemSortingParam;
+			bool canSort = canSortDesc || canSortAsc;
 
 			if (canSort) {
 				Item<Model> tempModel = itens[i];
