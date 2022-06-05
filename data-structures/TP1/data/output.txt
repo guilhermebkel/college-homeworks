@@ -1,12 +1,12 @@
 1 1000 S
-Gisele 
+Gisele  
 1 800 OP
-Wagner 
+Wagner  
 1 1000 F
-Gisele 
+Gisele  
 ####
-Gisele 2050
-Wagner 1350
-John 600
-Giovanni 550
-Thiago 450
+Gisele  2050
+Wagner  1350
+John  600
+Giovanni  550
+Thiago  450

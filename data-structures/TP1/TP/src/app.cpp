@@ -46,7 +46,7 @@ int main() {
 			int betAmount;
 			Hand hand;
 
-			fscanf(inputFile, "%s ", playerName);
+			fscanf(inputFile, "%[^0-9]", playerName);
   		fscanf(inputFile, "%d ", &betAmount);
 
 			for (int playerHandIndex = 0; playerHandIndex < MAX_HAND_SIZE; playerHandIndex++) {

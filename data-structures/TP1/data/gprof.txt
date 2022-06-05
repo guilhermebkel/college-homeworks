@@ -1,92 +1,114 @@
 Flat profile:
 
 Each sample counts as 0.01 seconds.
+ no time accumulated
+
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
- 40.01      0.38     0.38    50004     0.01     0.01  ArrangementList<Round>::findIndex(char*)
- 27.37      0.64     0.26 12517500     0.00     0.00  RoundResult::RoundResult(RoundResult const&)
- 11.58      0.75     0.11     5000     0.02     0.10  ArrangementList<RoundResult>::findIndex(char*)
-  6.84      0.82     0.07 12827527     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
-  3.16      0.85     0.03 12527500     0.00     0.00  RoundResult::~RoundResult()
-  2.11      0.87     0.02 12507500     0.00     0.00  Item<RoundResult>::Item(Item<RoundResult> const&)
-  2.11      0.89     0.02    22502     0.00     0.00  ArrangementList<Card>::ArrangementList()
-  1.58      0.90     0.02 12827527     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char>(char*)
-  1.05      0.91     0.01 12827527     0.00     0.00  std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
-  1.05      0.92     0.01   450040     0.00     0.00  getCardSortingParam(Card)
-  1.05      0.93     0.01   155012     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
-  1.05      0.94     0.01    22502     0.00     0.00  ArrangementList<Card>::sort(SortingType, int (*)(Card))
-  1.05      0.95     0.01     5000     0.00     0.00  ArrangementList<Play>::ArrangementList()
-  0.00      0.95     0.00 12827527     0.00     0.00  std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
-  0.00      0.95     0.00 12827527     0.00     0.00  std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
-  0.00      0.95     0.00 12512500     0.00     0.00  Item<RoundResult>::~Item()
-  0.00      0.95     0.00   472542     0.00     0.00  ArrangementList<Card>::getSize()
-  0.00      0.95     0.00   155015     0.00     0.00  castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
-  0.00      0.95     0.00   155012     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
-  0.00      0.95     0.00   155012     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
-  0.00      0.95     0.00   155012     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
-  0.00      0.95     0.00   155012     0.00     0.00  std::__cxx11::to_string(int)
-  0.00      0.95     0.00   112510     0.00     0.00  ArrangementList<Card>::findByIndex(int)
-  0.00      0.95     0.00   112510     0.00     0.00  ArrangementList<Card>::castStringKey(int)
-  0.00      0.95     0.00   112510     0.00     0.00  ArrangementList<Card>::create(char*, Card)
-  0.00      0.95     0.00   112510     0.00     0.00  ArrangementList<Card>::create(int, Card)
-  0.00      0.95     0.00    32502     0.00     0.00  ArrangementList<Round>::castStringKey(int)
-  0.00      0.95     0.00    27602     0.00     0.00  ArrangementList<Balance>::existsByIndex(int)
-  0.00      0.95     0.00    27602     0.00     0.00  ArrangementList<Balance>::findIndex(char*)
-  0.00      0.95     0.00    27503     0.00     0.00  defineFaseMemLog(int)
-  0.00      0.95     0.00    27502     0.00     0.00  ArrangementList<Round>::existsByIndex(int)
-  0.00      0.95     0.00    27502     0.00     0.01  ArrangementList<Round>::findByKey(char*)
-  0.00      0.95     0.00    27502     0.00     0.01  ArrangementList<Round>::findByKey(int)
-  0.00      0.95     0.00    22502     0.00     0.00  RoundWinner::RoundWinner()
-  0.00      0.95     0.00    22502     0.00     0.00  RoundWinner::~RoundWinner()
-  0.00      0.95     0.00    22502     0.00     0.00  ClassifiedHand::ClassifiedHand()
-  0.00      0.95     0.00    22502     0.00     0.00  ClassifiedHand::~ClassifiedHand()
-  0.00      0.95     0.00    22502     0.00     0.00  ArrangementList<Play>::create(char*, Play)
-  0.00      0.95     0.00    22502     0.00     0.01  ArrangementList<Round>::update(char*, Round)
-  0.00      0.95     0.00    22502     0.00     0.00  ArrangementList<Balance>::existsByKey(char*)
-  0.00      0.95     0.00    22502     0.00     0.02  PokerFace::readPlay(char*, int, Card*)
-  0.00      0.95     0.00    20000     0.00     0.00  RoundResult::RoundResult()
-  0.00      0.95     0.00    15000     0.00     0.00  Item<RoundResult>::Item()
-  0.00      0.95     0.00    10000     0.00     0.00  RoundResult::operator=(RoundResult const&)
-  0.00      0.95     0.00    10000     0.00     0.00  ArrangementList<RoundResult>::castStringKey(int)
-  0.00      0.95     0.00     5100     0.00     0.00  ArrangementList<Play>::findByIndex(int)
-  0.00      0.95     0.00     5100     0.00     0.00  ArrangementList<Balance>::findByKey(char*)
-  0.00      0.95     0.00     5001     0.00     0.00  ArrangementList<Round>::getSize()
-  0.00      0.95     0.00     5000     0.00     0.00  isInvalidPlay(Round, ArrangementList<Balance>*)
-  0.00      0.95     0.00     5000     0.00     0.00  ArrangementList<RoundResult>::existsByIndex(int)
-  0.00      0.95     0.00     5000     0.00     0.00  ArrangementList<RoundResult>::create(char*, RoundResult)
-  0.00      0.95     0.00     5000     0.00     0.00  ArrangementList<RoundResult>::create(int, RoundResult)
-  0.00      0.95     0.00     5000     0.00     0.10  ArrangementList<RoundResult>::findByKey(char*)
-  0.00      0.95     0.00     5000     0.00     0.10  ArrangementList<RoundResult>::findByKey(int)
-  0.00      0.95     0.00     5000     0.00     0.00  ArrangementList<Round>::create(char*, Round)
-  0.00      0.95     0.00     5000     0.00     0.00  ArrangementList<Round>::create(int, Round)
-  0.00      0.95     0.00     5000     0.00     0.00  Item<RoundResult>::operator=(Item<RoundResult> const&)
-  0.00      0.95     0.00     5000     0.00     0.00  PokerFace::startRound(int, int)
-  0.00      0.95     0.00     5000     0.00     0.00  PokerFace::consolidateRoundResult(Round)
-  0.00      0.95     0.00       56     0.00     0.00  getBalanceSortingParam(Balance)
-  0.00      0.95     0.00       54     0.00     0.00  ArrangementList<Balance>::getSize()
-  0.00      0.95     0.00        8     0.00     0.00  ArrangementList<Balance>::findByIndex(int)
-  0.00      0.95     0.00        8     0.00     0.00  ArrangementList<Balance>::create(char*, Balance)
-  0.00      0.95     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance
-  0.00      0.95     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card
-  0.00      0.95     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
-  0.00      0.95     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN9PokerFaceC2Eii
-  0.00      0.95     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
-  0.00      0.95     0.00        1     0.00     0.00  ativaMemLog()
-  0.00      0.95     0.00        1     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
-  0.00      0.95     0.00        1     0.00     0.00  iniciaMemLog(char*)
-  0.00      0.95     0.00        1     0.00     0.00  finalizaMemLog()
-  0.00      0.95     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
-  0.00      0.95     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
-  0.00      0.95     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
-  0.00      0.95     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
-  0.00      0.95     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
-  0.00      0.95     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
-  0.00      0.95     0.00        1     0.00     0.00  ArrangementList<RoundResult>::ArrangementList()
-  0.00      0.95     0.00        1     0.00     0.00  ArrangementList<Round>::ArrangementList()
-  0.00      0.95     0.00        1     0.00     0.00  ArrangementList<Balance>::sort(SortingType, int (*)(Balance))
-  0.00      0.95     0.00        1     0.00     0.00  ArrangementList<Balance>::ArrangementList()
-  0.00      0.95     0.00        1     0.00    39.11  PokerFace::finish()
-  0.00      0.95     0.00        1     0.00     0.00  PokerFace::PokerFace(int, int)
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+  0.00      0.00     0.00    10006     0.00     0.00  RoundResult::RoundResult()
+  0.00      0.00     0.00    10003     0.00     0.00  Item<RoundResult>::Item()
+  0.00      0.00     0.00     2331     0.00     0.00  ArrangementList<CardCombo>::getSize()
+  0.00      0.00     0.00     2220     0.00     0.00  getCardComboSortingParam(CardCombo)
+  0.00      0.00     0.00     1289     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char>(char*)
+  0.00      0.00     0.00     1289     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+  0.00      0.00     0.00     1289     0.00     0.00  std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
+  0.00      0.00     0.00     1289     0.00     0.00  std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
+  0.00      0.00     0.00     1289     0.00     0.00  std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+  0.00      0.00     0.00      630     0.00     0.00  castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.00     0.00      627     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
+  0.00      0.00     0.00      627     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
+  0.00      0.00     0.00      627     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
+  0.00      0.00     0.00      627     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+  0.00      0.00     0.00      627     0.00     0.00  std::__cxx11::to_string(int)
+  0.00      0.00     0.00      555     0.00     0.00  ArrangementList<CardCombo>::findByIndex(int)
+  0.00      0.00     0.00      555     0.00     0.00  ArrangementList<CardCombo>::castStringKey(int)
+  0.00      0.00     0.00      555     0.00     0.00  ArrangementList<CardCombo>::create(char*, CardCombo)
+  0.00      0.00     0.00      555     0.00     0.00  ArrangementList<CardCombo>::create(int, CardCombo)
+  0.00      0.00     0.00      254     0.00     0.00  handHasSingleSuit(Card*)
+  0.00      0.00     0.00      210     0.00     0.00  ArrangementList<Card>::getSize()
+  0.00      0.00     0.00      206     0.00     0.00  handHasClassificationType(Card*, ClassifiedHandType)
+  0.00      0.00     0.00      200     0.00     0.00  getCardSortingParam(Card)
+  0.00      0.00     0.00      111     0.00     0.00  groupCardsWithEqualValues(Card*)
+  0.00      0.00     0.00      111     0.00     0.00  handHasCardsWithEqualValues(Card*, int, int, int, int, int)
+  0.00      0.00     0.00      111     0.00     0.00  ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo))
+  0.00      0.00     0.00      111     0.00     0.00  ArrangementList<CardCombo>::ArrangementList()
+  0.00      0.00     0.00       61     0.00     0.00  ArrangementList<Balance>::findIndex(char*)
+  0.00      0.00     0.00       57     0.00     0.00  ClassifiedHand::~ClassifiedHand()
+  0.00      0.00     0.00       50     0.00     0.00  ArrangementList<Card>::findByIndex(int)
+  0.00      0.00     0.00       50     0.00     0.00  ArrangementList<Card>::castStringKey(int)
+  0.00      0.00     0.00       50     0.00     0.00  ArrangementList<Card>::create(char*, Card)
+  0.00      0.00     0.00       50     0.00     0.00  ArrangementList<Card>::create(int, Card)
+  0.00      0.00     0.00       45     0.00     0.00  ArrangementList<Balance>::getSize()
+  0.00      0.00     0.00       40     0.00     0.00  ClassifiedHand::ClassifiedHand()
+  0.00      0.00     0.00       33     0.00     0.00  RoundWinner::~RoundWinner()
+  0.00      0.00     0.00       33     0.00     0.00  ArrangementList<Balance>::existsByIndex(int)
+  0.00      0.00     0.00       28     0.00     0.00  ArrangementList<Balance>::update(char*, Balance)
+  0.00      0.00     0.00       27     0.00     0.00  ArrangementList<Play>::findByIndex(int)
+  0.00      0.00     0.00       25     0.00     0.00  handHasSequentialCombination(Card*)
+  0.00      0.00     0.00       24     0.00     0.00  classifyHand(Card*)
+  0.00      0.00     0.00       23     0.00     0.00  ArrangementList<Round>::findIndex(char*)
+  0.00      0.00     0.00       23     0.00     0.00  ArrangementList<Balance>::findByKey(char*)
+  0.00      0.00     0.00       21     0.00     0.00  RoundResult::~RoundResult()
+  0.00      0.00     0.00       20     0.00     0.00  getBalanceSortingParam(Balance)
+  0.00      0.00     0.00       20     0.00     0.00  ArrangementList<Balance>::findByIndex(int)
+  0.00      0.00     0.00       17     0.00     0.00  RoundWinner::RoundWinner(RoundWinner const&)
+  0.00      0.00     0.00       17     0.00     0.00  ClassifiedHand::ClassifiedHand(ClassifiedHand const&)
+  0.00      0.00     0.00       16     0.00     0.00  RoundWinner::RoundWinner()
+  0.00      0.00     0.00       16     0.00     0.00  ArrangementList<Round>::castStringKey(int)
+  0.00      0.00     0.00       15     0.00     0.00  RoundResult::RoundResult(RoundResult const&)
+  0.00      0.00     0.00       14     0.00     0.00  defineFaseMemLog(int)
+  0.00      0.00     0.00       13     0.00     0.00  ArrangementList<Round>::existsByIndex(int)
+  0.00      0.00     0.00       13     0.00     0.00  ArrangementList<Round>::findByKey(char*)
+  0.00      0.00     0.00       13     0.00     0.00  ArrangementList<Round>::findByKey(int)
+  0.00      0.00     0.00       12     0.00     0.00  ClassifiedHand::operator=(ClassifiedHand const&)
+  0.00      0.00     0.00       12     0.00     0.00  Item<RoundResult>::~Item()
+  0.00      0.00     0.00       10     0.00     0.00  ArrangementList<Card>::sort(SortingType, int (*)(Card))
+  0.00      0.00     0.00       10     0.00     0.00  ArrangementList<Card>::ArrangementList()
+  0.00      0.00     0.00       10     0.00     0.00  ArrangementList<Play>::create(char*, Play)
+  0.00      0.00     0.00       10     0.00     0.00  ArrangementList<Round>::update(char*, Round)
+  0.00      0.00     0.00       10     0.00     0.00  ArrangementList<Balance>::existsByKey(char*)
+  0.00      0.00     0.00       10     0.00     0.00  PokerFace::readPlay(char*, int, Card*)
+  0.00      0.00     0.00        9     0.00     0.00  Item<RoundResult>::Item(Item<RoundResult> const&)
+  0.00      0.00     0.00        7     0.00     0.00  assertTie(RoundWinner, Play)
+  0.00      0.00     0.00        6     0.00     0.00  RoundResult::operator=(RoundResult const&)
+  0.00      0.00     0.00        6     0.00     0.00  RoundWinner::operator=(RoundWinner const&)
+  0.00      0.00     0.00        6     0.00     0.00  ArrangementList<RoundResult>::castStringKey(int)
+  0.00      0.00     0.00        5     0.00     0.00  ArrangementList<Balance>::create(char*, Balance)
+  0.00      0.00     0.00        4     0.00     0.00  ArrangementList<Round>::getSize()
+  0.00      0.00     0.00        3     0.00     0.00  isInvalidPlay(Round, ArrangementList<Balance>*)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<RoundResult>::existsByIndex(int)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<RoundResult>::create(char*, RoundResult)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<RoundResult>::create(int, RoundResult)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<RoundResult>::findByKey(char*)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<RoundResult>::findByKey(int)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<RoundResult>::findIndex(char*)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<Play>::ArrangementList()
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<Round>::create(char*, Round)
+  0.00      0.00     0.00        3     0.00     0.00  ArrangementList<Round>::create(int, Round)
+  0.00      0.00     0.00        3     0.00     0.00  Item<RoundResult>::operator=(Item<RoundResult> const&)
+  0.00      0.00     0.00        3     0.00     0.00  PokerFace::startRound(int, int)
+  0.00      0.00     0.00        3     0.00     0.00  PokerFace::consolidateRoundResult(Round)
+  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance
+  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card
+  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
+  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN9PokerFaceC2Eii
+  0.00      0.00     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
+  0.00      0.00     0.00        1     0.00     0.00  ativaMemLog()
+  0.00      0.00     0.00        1     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
+  0.00      0.00     0.00        1     0.00     0.00  iniciaMemLog(char*)
+  0.00      0.00     0.00        1     0.00     0.00  finalizaMemLog()
+  0.00      0.00     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.00     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.00     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.00     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.00     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.00     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.00     0.00        1     0.00     0.00  ArrangementList<RoundResult>::ArrangementList()
+  0.00      0.00     0.00        1     0.00     0.00  ArrangementList<Round>::ArrangementList()
+  0.00      0.00     0.00        1     0.00     0.00  ArrangementList<Balance>::sort(SortingType, int (*)(Balance))
+  0.00      0.00     0.00        1     0.00     0.00  ArrangementList<Balance>::ArrangementList()
+  0.00      0.00     0.00        1     0.00     0.00  PokerFace::finish()
+  0.00      0.00     0.00        1     0.00     0.00  PokerFace::PokerFace(int, int)
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -124,397 +146,488 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 1.05% of 0.95 seconds
+granularity: each sample hit covers 2 byte(s) no time propagated
 
 index % time    self  children    called     name
-                                                 <spontaneous>
-[1]    100.0    0.00    0.95                 main [1]
-                0.00    0.51    5000/5000        ArrangementList<RoundResult>::findByKey(int) [2]
-                0.00    0.39   22502/22502       PokerFace::readPlay(char*, int, Card*) [5]
-                0.00    0.04       1/1           PokerFace::finish() [13]
-                0.00    0.01    5000/5000        PokerFace::startRound(int, int) [24]
-                0.00    0.00    5000/12512500     Item<RoundResult>::~Item() [15]
-                0.00    0.00       3/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-                0.00    0.00   27503/27503       defineFaseMemLog(int) [49]
-                0.00    0.00       9/54          ArrangementList<Balance>::getSize() [69]
-                0.00    0.00       8/8           ArrangementList<Balance>::findByIndex(int) [70]
-                0.00    0.00       3/155015      castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [44]
-                0.00    0.00       1/1           iniciaMemLog(char*) [79]
-                0.00    0.00       1/1           ativaMemLog() [77]
-                0.00    0.00       1/1           PokerFace::PokerFace(int, int) [91]
-                0.00    0.00       1/1           finalizaMemLog() [80]
------------------------------------------------
-                0.00    0.51    5000/5000        main [1]
-[2]     53.5    0.00    0.51    5000         ArrangementList<RoundResult>::findByKey(int) [2]
-                0.00    0.51    5000/5000        ArrangementList<RoundResult>::findByKey(char*) [3]
-                0.00    0.00    5000/10000       ArrangementList<RoundResult>::castStringKey(int) [31]
------------------------------------------------
-                0.00    0.51    5000/5000        ArrangementList<RoundResult>::findByKey(int) [2]
-[3]     53.4    0.00    0.51    5000         ArrangementList<RoundResult>::findByKey(char*) [3]
-                0.11    0.40    5000/5000        ArrangementList<RoundResult>::findIndex(char*) [4]
-                0.00    0.00    5000/12507500     Item<RoundResult>::Item(Item<RoundResult> const&) [7]
-                0.00    0.00    5000/5000        ArrangementList<RoundResult>::existsByIndex(int) [64]
------------------------------------------------
-                0.11    0.40    5000/5000        ArrangementList<RoundResult>::findByKey(char*) [3]
-[4]     53.4    0.11    0.40    5000         ArrangementList<RoundResult>::findIndex(char*) [4]
-                0.02    0.35 12502500/12507500     Item<RoundResult>::Item(Item<RoundResult> const&) [7]
-                0.00    0.03 12502500/12512500     Item<RoundResult>::~Item() [15]
------------------------------------------------
-                0.00    0.39   22502/22502       main [1]
-[5]     41.3    0.00    0.39   22502         PokerFace::readPlay(char*, int, Card*) [5]
-                0.00    0.17   22502/27502       ArrangementList<Round>::findByKey(int) [9]
-                0.00    0.17   22502/22502       ArrangementList<Round>::update(char*, Round) [11]
-                0.02    0.00   22502/22502       ArrangementList<Card>::ArrangementList() [17]
-                0.01    0.01   22502/22502       ArrangementList<Card>::sort(SortingType, int (*)(Card)) [16]
-                0.00    0.01  112510/112510      ArrangementList<Card>::create(int, Card) [29]
-                0.00    0.00  112510/112510      ArrangementList<Card>::findByIndex(int) [45]
-                0.00    0.00   22502/22502       ArrangementList<Play>::create(char*, Play) [55]
-                0.00    0.00   22502/22502       ArrangementList<Balance>::existsByKey(char*) [56]
-                0.00    0.00       8/8           ArrangementList<Balance>::create(char*, Balance) [71]
------------------------------------------------
-                0.17    0.00   22502/50004       ArrangementList<Round>::update(char*, Round) [11]
-                0.21    0.00   27502/50004       ArrangementList<Round>::findByKey(char*) [10]
-[6]     40.0    0.38    0.00   50004         ArrangementList<Round>::findIndex(char*) [6]
------------------------------------------------
-                0.00    0.00    5000/12507500     ArrangementList<RoundResult>::findByKey(char*) [3]
-                0.02    0.35 12502500/12507500     ArrangementList<RoundResult>::findIndex(char*) [4]
-[7]     38.7    0.02    0.35 12507500         Item<RoundResult>::Item(Item<RoundResult> const&) [7]
-                0.26    0.09 12507500/12517500     RoundResult::RoundResult(RoundResult const&) [8]
------------------------------------------------
-                0.00    0.00    5000/12517500     ArrangementList<RoundResult>::create(int, RoundResult) [32]
-                0.00    0.00    5000/12517500     PokerFace::finish() [13]
-                0.26    0.09 12507500/12517500     Item<RoundResult>::Item(Item<RoundResult> const&) [7]
-[8]     36.6    0.26    0.09 12517500         RoundResult::RoundResult(RoundResult const&) [8]
-                0.06    0.02 12517500/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
------------------------------------------------
-                0.00    0.04    5000/27502       PokerFace::finish() [13]
-                0.00    0.17   22502/27502       PokerFace::readPlay(char*, int, Card*) [5]
-[9]     22.2    0.00    0.21   27502         ArrangementList<Round>::findByKey(int) [9]
-                0.00    0.21   27502/27502       ArrangementList<Round>::findByKey(char*) [10]
-                0.00    0.00   27502/32502       ArrangementList<Round>::castStringKey(int) [30]
------------------------------------------------
-                0.00    0.21   27502/27502       ArrangementList<Round>::findByKey(int) [9]
-[10]    22.0    0.00    0.21   27502         ArrangementList<Round>::findByKey(char*) [10]
-                0.21    0.00   27502/50004       ArrangementList<Round>::findIndex(char*) [6]
-                0.00    0.00   27502/27502       ArrangementList<Round>::existsByIndex(int) [50]
------------------------------------------------
-                0.00    0.17   22502/22502       PokerFace::readPlay(char*, int, Card*) [5]
-[11]    18.0    0.00    0.17   22502         ArrangementList<Round>::update(char*, Round) [11]
-                0.17    0.00   22502/50004       ArrangementList<Round>::findIndex(char*) [6]
------------------------------------------------
-                0.00    0.00       3/12827527     main [1]
-                0.00    0.00   10000/12827527     ArrangementList<RoundResult>::castStringKey(int) [31]
-                0.00    0.00   32502/12827527     ArrangementList<Round>::castStringKey(int) [30]
-                0.00    0.00  112510/12827527     ArrangementList<Card>::castStringKey(int) [28]
-                0.00    0.00  155012/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [21]
-                0.06    0.02 12517500/12827527     RoundResult::RoundResult(RoundResult const&) [8]
-[12]     9.5    0.07    0.03 12827527         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-                0.02    0.00 12827527/12827527     bool __gnu_cxx::__is_null_pointer<char>(char*) [18]
-                0.01    0.00 12827527/12827527     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [27]
------------------------------------------------
-                0.00    0.04       1/1           main [1]
-[13]     4.1    0.00    0.04       1         PokerFace::finish() [13]
-                0.00    0.04    5000/27502       ArrangementList<Round>::findByKey(int) [9]
-                0.00    0.00    5000/5000        ArrangementList<RoundResult>::create(int, RoundResult) [32]
-                0.00    0.00    5000/12517500     RoundResult::RoundResult(RoundResult const&) [8]
-                0.00    0.00   10000/12527500     RoundResult::~RoundResult() [14]
-                0.00    0.00    5001/5001        ArrangementList<Round>::getSize() [62]
-                0.00    0.00    5000/5000        PokerFace::consolidateRoundResult(Round) [67]
-                0.00    0.00       1/1           ArrangementList<RoundResult>::ArrangementList() [87]
-                0.00    0.00       1/1           ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [89]
------------------------------------------------
-                0.00    0.00    5000/12527500     ArrangementList<RoundResult>::create(int, RoundResult) [32]
-                0.00    0.00   10000/12527500     PokerFace::finish() [13]
-                0.03    0.00 12512500/12527500     Item<RoundResult>::~Item() [15]
-[14]     3.2    0.03    0.00 12527500         RoundResult::~RoundResult() [14]
------------------------------------------------
-                0.00    0.00    5000/12512500     main [1]
-                0.00    0.00    5000/12512500     ArrangementList<RoundResult>::create(char*, RoundResult) [34]
-                0.00    0.03 12502500/12512500     ArrangementList<RoundResult>::findIndex(char*) [4]
-[15]     3.2    0.00    0.03 12512500         Item<RoundResult>::~Item() [15]
-                0.03    0.00 12512500/12527500     RoundResult::~RoundResult() [14]
------------------------------------------------
-                0.01    0.01   22502/22502       PokerFace::readPlay(char*, int, Card*) [5]
-[16]     2.1    0.01    0.01   22502         ArrangementList<Card>::sort(SortingType, int (*)(Card)) [16]
-                0.01    0.00  450040/450040      getCardSortingParam(Card) [25]
-                0.00    0.00  472542/472542      ArrangementList<Card>::getSize() [43]
------------------------------------------------
-                0.02    0.00   22502/22502       PokerFace::readPlay(char*, int, Card*) [5]
-[17]     2.1    0.02    0.00   22502         ArrangementList<Card>::ArrangementList() [17]
------------------------------------------------
-                0.02    0.00 12827527/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-[18]     1.6    0.02    0.00 12827527         bool __gnu_cxx::__is_null_pointer<char>(char*) [18]
------------------------------------------------
-                0.00    0.01  155012/155012      std::__cxx11::to_string(int) [23]
-[19]     1.2    0.00    0.01  155012         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [19]
-                0.00    0.01  155012/155012      std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [22]
------------------------------------------------
-                0.00    0.01  155012/155012      std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [22]
-[20]     1.2    0.00    0.01  155012         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [20]
-                0.01    0.00  155012/155012      void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [21]
------------------------------------------------
-                0.01    0.00  155012/155012      void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [20]
-[21]     1.2    0.01    0.00  155012         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [21]
-                0.00    0.00  155012/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
------------------------------------------------
-                0.00    0.01  155012/155012      std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [19]
-[22]     1.2    0.00    0.01  155012         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [22]
-                0.00    0.01  155012/155012      void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [20]
------------------------------------------------
-                0.00    0.00   10000/155012      ArrangementList<RoundResult>::castStringKey(int) [31]
-                0.00    0.00   32502/155012      ArrangementList<Round>::castStringKey(int) [30]
-                0.00    0.01  112510/155012      ArrangementList<Card>::castStringKey(int) [28]
-[23]     1.2    0.00    0.01  155012         std::__cxx11::to_string(int) [23]
-                0.00    0.01  155012/155012      std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [19]
------------------------------------------------
-                0.00    0.01    5000/5000        main [1]
-[24]     1.1    0.00    0.01    5000         PokerFace::startRound(int, int) [24]
-                0.01    0.00    5000/5000        ArrangementList<Play>::ArrangementList() [26]
-                0.00    0.00    5000/5000        ArrangementList<Round>::create(int, Round) [33]
------------------------------------------------
-                0.01    0.00  450040/450040      ArrangementList<Card>::sort(SortingType, int (*)(Card)) [16]
-[25]     1.1    0.01    0.00  450040         getCardSortingParam(Card) [25]
------------------------------------------------
-                0.01    0.00    5000/5000        PokerFace::startRound(int, int) [24]
-[26]     1.1    0.01    0.00    5000         ArrangementList<Play>::ArrangementList() [26]
------------------------------------------------
-                0.01    0.00 12827527/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-[27]     1.1    0.01    0.00 12827527         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [27]
-                0.00    0.00 12827527/12827527     std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [42]
-                0.00    0.00 12827527/12827527     std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [41]
------------------------------------------------
-                0.00    0.01  112510/112510      ArrangementList<Card>::create(int, Card) [29]
-[28]     0.9    0.00    0.01  112510         ArrangementList<Card>::castStringKey(int) [28]
-                0.00    0.01  112510/155012      std::__cxx11::to_string(int) [23]
-                0.00    0.00  112510/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-                0.00    0.00  112510/155015      castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [44]
------------------------------------------------
-                0.00    0.01  112510/112510      PokerFace::readPlay(char*, int, Card*) [5]
-[29]     0.9    0.00    0.01  112510         ArrangementList<Card>::create(int, Card) [29]
-                0.00    0.01  112510/112510      ArrangementList<Card>::castStringKey(int) [28]
-                0.00    0.00  112510/112510      ArrangementList<Card>::create(char*, Card) [46]
------------------------------------------------
-                0.00    0.00    5000/32502       ArrangementList<Round>::create(int, Round) [33]
-                0.00    0.00   27502/32502       ArrangementList<Round>::findByKey(int) [9]
-[30]     0.3    0.00    0.00   32502         ArrangementList<Round>::castStringKey(int) [30]
-                0.00    0.00   32502/155012      std::__cxx11::to_string(int) [23]
-                0.00    0.00   32502/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-                0.00    0.00   32502/155015      castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [44]
------------------------------------------------
-                0.00    0.00    5000/10000       ArrangementList<RoundResult>::create(int, RoundResult) [32]
-                0.00    0.00    5000/10000       ArrangementList<RoundResult>::findByKey(int) [2]
-[31]     0.1    0.00    0.00   10000         ArrangementList<RoundResult>::castStringKey(int) [31]
-                0.00    0.00   10000/155012      std::__cxx11::to_string(int) [23]
-                0.00    0.00   10000/12827527     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [12]
-                0.00    0.00   10000/155015      castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [44]
------------------------------------------------
-                0.00    0.00    5000/5000        PokerFace::finish() [13]
-[32]     0.1    0.00    0.00    5000         ArrangementList<RoundResult>::create(int, RoundResult) [32]
-                0.00    0.00    5000/10000       ArrangementList<RoundResult>::castStringKey(int) [31]
-                0.00    0.00    5000/12517500     RoundResult::RoundResult(RoundResult const&) [8]
-                0.00    0.00    5000/5000        ArrangementList<RoundResult>::create(char*, RoundResult) [34]
-                0.00    0.00    5000/12527500     RoundResult::~RoundResult() [14]
------------------------------------------------
-                0.00    0.00    5000/5000        PokerFace::startRound(int, int) [24]
-[33]     0.0    0.00    0.00    5000         ArrangementList<Round>::create(int, Round) [33]
-                0.00    0.00    5000/32502       ArrangementList<Round>::castStringKey(int) [30]
-                0.00    0.00    5000/5000        ArrangementList<Round>::create(char*, Round) [65]
------------------------------------------------
-                0.00    0.00    5000/5000        ArrangementList<RoundResult>::create(int, RoundResult) [32]
-[34]     0.0    0.00    0.00    5000         ArrangementList<RoundResult>::create(char*, RoundResult) [34]
-                0.00    0.00    5000/12512500     Item<RoundResult>::~Item() [15]
-                0.00    0.00    5000/15000       Item<RoundResult>::Item() [58]
-                0.00    0.00    5000/10000       RoundResult::operator=(RoundResult const&) [59]
-                0.00    0.00    5000/5000        Item<RoundResult>::operator=(Item<RoundResult> const&) [66]
------------------------------------------------
-                0.00    0.00 12827527/12827527     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [27]
-[41]     0.0    0.00    0.00 12827527         std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [41]
------------------------------------------------
-                0.00    0.00 12827527/12827527     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [27]
-[42]     0.0    0.00    0.00 12827527         std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [42]
------------------------------------------------
-                0.00    0.00  472542/472542      ArrangementList<Card>::sort(SortingType, int (*)(Card)) [16]
-[43]     0.0    0.00    0.00  472542         ArrangementList<Card>::getSize() [43]
------------------------------------------------
-                0.00    0.00       3/155015      main [1]
-                0.00    0.00   10000/155015      ArrangementList<RoundResult>::castStringKey(int) [31]
-                0.00    0.00   32502/155015      ArrangementList<Round>::castStringKey(int) [30]
-                0.00    0.00  112510/155015      ArrangementList<Card>::castStringKey(int) [28]
-[44]     0.0    0.00    0.00  155015         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [44]
------------------------------------------------
-                0.00    0.00  112510/112510      PokerFace::readPlay(char*, int, Card*) [5]
-[45]     0.0    0.00    0.00  112510         ArrangementList<Card>::findByIndex(int) [45]
------------------------------------------------
-                0.00    0.00  112510/112510      ArrangementList<Card>::create(int, Card) [29]
-[46]     0.0    0.00    0.00  112510         ArrangementList<Card>::create(char*, Card) [46]
------------------------------------------------
-                0.00    0.00    5100/27602       ArrangementList<Balance>::findByKey(char*) [61]
-                0.00    0.00   22502/27602       ArrangementList<Balance>::existsByKey(char*) [56]
-[47]     0.0    0.00    0.00   27602         ArrangementList<Balance>::existsByIndex(int) [47]
------------------------------------------------
-                0.00    0.00    5100/27602       ArrangementList<Balance>::findByKey(char*) [61]
-                0.00    0.00   22502/27602       ArrangementList<Balance>::existsByKey(char*) [56]
-[48]     0.0    0.00    0.00   27602         ArrangementList<Balance>::findIndex(char*) [48]
------------------------------------------------
-                0.00    0.00   27503/27503       main [1]
-[49]     0.0    0.00    0.00   27503         defineFaseMemLog(int) [49]
------------------------------------------------
-                0.00    0.00   27502/27502       ArrangementList<Round>::findByKey(char*) [10]
-[50]     0.0    0.00    0.00   27502         ArrangementList<Round>::existsByIndex(int) [50]
------------------------------------------------
-                0.00    0.00   22502/22502       PokerFace::consolidateRoundResult(Round) [67]
-[51]     0.0    0.00    0.00   22502         RoundWinner::RoundWinner() [51]
-                0.00    0.00   22502/22502       ClassifiedHand::ClassifiedHand() [53]
------------------------------------------------
-                0.00    0.00   22502/22502       PokerFace::consolidateRoundResult(Round) [67]
-[52]     0.0    0.00    0.00   22502         RoundWinner::~RoundWinner() [52]
-                0.00    0.00   22502/22502       ClassifiedHand::~ClassifiedHand() [54]
------------------------------------------------
-                0.00    0.00   22502/22502       RoundWinner::RoundWinner() [51]
-[53]     0.0    0.00    0.00   22502         ClassifiedHand::ClassifiedHand() [53]
------------------------------------------------
-                0.00    0.00   22502/22502       RoundWinner::~RoundWinner() [52]
-[54]     0.0    0.00    0.00   22502         ClassifiedHand::~ClassifiedHand() [54]
------------------------------------------------
-                0.00    0.00   22502/22502       PokerFace::readPlay(char*, int, Card*) [5]
-[55]     0.0    0.00    0.00   22502         ArrangementList<Play>::create(char*, Play) [55]
------------------------------------------------
-                0.00    0.00   22502/22502       PokerFace::readPlay(char*, int, Card*) [5]
-[56]     0.0    0.00    0.00   22502         ArrangementList<Balance>::existsByKey(char*) [56]
-                0.00    0.00   22502/27602       ArrangementList<Balance>::findIndex(char*) [48]
-                0.00    0.00   22502/27602       ArrangementList<Balance>::existsByIndex(int) [47]
------------------------------------------------
-                0.00    0.00    5000/20000       PokerFace::consolidateRoundResult(Round) [67]
-                0.00    0.00   15000/20000       Item<RoundResult>::Item() [58]
-[57]     0.0    0.00    0.00   20000         RoundResult::RoundResult() [57]
------------------------------------------------
-                0.00    0.00    5000/15000       ArrangementList<RoundResult>::create(char*, RoundResult) [34]
-                0.00    0.00   10000/15000       ArrangementList<RoundResult>::ArrangementList() [87]
-[58]     0.0    0.00    0.00   15000         Item<RoundResult>::Item() [58]
-                0.00    0.00   15000/20000       RoundResult::RoundResult() [57]
------------------------------------------------
-                0.00    0.00    5000/10000       ArrangementList<RoundResult>::create(char*, RoundResult) [34]
-                0.00    0.00    5000/10000       Item<RoundResult>::operator=(Item<RoundResult> const&) [66]
-[59]     0.0    0.00    0.00   10000         RoundResult::operator=(RoundResult const&) [59]
------------------------------------------------
-                0.00    0.00    5100/5100        isInvalidPlay(Round, ArrangementList<Balance>*) [63]
-[60]     0.0    0.00    0.00    5100         ArrangementList<Play>::findByIndex(int) [60]
------------------------------------------------
-                0.00    0.00    5100/5100        isInvalidPlay(Round, ArrangementList<Balance>*) [63]
-[61]     0.0    0.00    0.00    5100         ArrangementList<Balance>::findByKey(char*) [61]
-                0.00    0.00    5100/27602       ArrangementList<Balance>::findIndex(char*) [48]
-                0.00    0.00    5100/27602       ArrangementList<Balance>::existsByIndex(int) [47]
------------------------------------------------
-                0.00    0.00    5001/5001        PokerFace::finish() [13]
-[62]     0.0    0.00    0.00    5001         ArrangementList<Round>::getSize() [62]
------------------------------------------------
-                0.00    0.00    5000/5000        PokerFace::consolidateRoundResult(Round) [67]
-[63]     0.0    0.00    0.00    5000         isInvalidPlay(Round, ArrangementList<Balance>*) [63]
-                0.00    0.00    5100/5100        ArrangementList<Play>::findByIndex(int) [60]
-                0.00    0.00    5100/5100        ArrangementList<Balance>::findByKey(char*) [61]
------------------------------------------------
-                0.00    0.00    5000/5000        ArrangementList<RoundResult>::findByKey(char*) [3]
-[64]     0.0    0.00    0.00    5000         ArrangementList<RoundResult>::existsByIndex(int) [64]
------------------------------------------------
-                0.00    0.00    5000/5000        ArrangementList<Round>::create(int, Round) [33]
-[65]     0.0    0.00    0.00    5000         ArrangementList<Round>::create(char*, Round) [65]
------------------------------------------------
-                0.00    0.00    5000/5000        ArrangementList<RoundResult>::create(char*, RoundResult) [34]
-[66]     0.0    0.00    0.00    5000         Item<RoundResult>::operator=(Item<RoundResult> const&) [66]
-                0.00    0.00    5000/10000       RoundResult::operator=(RoundResult const&) [59]
------------------------------------------------
-                0.00    0.00    5000/5000        PokerFace::finish() [13]
-[67]     0.0    0.00    0.00    5000         PokerFace::consolidateRoundResult(Round) [67]
-                0.00    0.00   22502/22502       RoundWinner::RoundWinner() [51]
-                0.00    0.00   22502/22502       RoundWinner::~RoundWinner() [52]
-                0.00    0.00    5000/20000       RoundResult::RoundResult() [57]
-                0.00    0.00    5000/5000        isInvalidPlay(Round, ArrangementList<Balance>*) [63]
------------------------------------------------
-                0.00    0.00      56/56          ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [89]
-[68]     0.0    0.00    0.00      56         getBalanceSortingParam(Balance) [68]
------------------------------------------------
-                0.00    0.00       9/54          main [1]
-                0.00    0.00      45/54          ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [89]
-[69]     0.0    0.00    0.00      54         ArrangementList<Balance>::getSize() [69]
------------------------------------------------
-                0.00    0.00       8/8           main [1]
-[70]     0.0    0.00    0.00       8         ArrangementList<Balance>::findByIndex(int) [70]
------------------------------------------------
-                0.00    0.00       8/8           PokerFace::readPlay(char*, int, Card*) [5]
-[71]     0.0    0.00    0.00       8         ArrangementList<Balance>::create(char*, Balance) [71]
+                0.00    0.00       3/10006       PokerFace::consolidateRoundResult(Round) [90]
+                0.00    0.00   10003/10006       Item<RoundResult>::Item() [9]
+[8]      0.0    0.00    0.00   10006         RoundResult::RoundResult() [8]
+-----------------------------------------------
+                0.00    0.00       3/10003       ArrangementList<RoundResult>::create(char*, RoundResult) [80]
+                0.00    0.00   10000/10003       ArrangementList<RoundResult>::ArrangementList() [106]
+[9]      0.0    0.00    0.00   10003         Item<RoundResult>::Item() [9]
+                0.00    0.00   10003/10006       RoundResult::RoundResult() [8]
+-----------------------------------------------
+                0.00    0.00    2331/2331        ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [33]
+[10]     0.0    0.00    0.00    2331         ArrangementList<CardCombo>::getSize() [10]
+-----------------------------------------------
+                0.00    0.00    2220/2220        ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [33]
+[11]     0.0    0.00    0.00    2220         getCardComboSortingParam(CardCombo) [11]
+-----------------------------------------------
+                0.00    0.00    1289/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+[12]     0.0    0.00    0.00    1289         bool __gnu_cxx::__is_null_pointer<char>(char*) [12]
+-----------------------------------------------
+                0.00    0.00       3/1289        main [6]
+                0.00    0.00       6/1289        ArrangementList<RoundResult>::castStringKey(int) [75]
+                0.00    0.00      15/1289        RoundResult::RoundResult(RoundResult const&) [58]
+                0.00    0.00      16/1289        ArrangementList<Round>::castStringKey(int) [57]
+                0.00    0.00      17/1289        ClassifiedHand::ClassifiedHand(ClassifiedHand const&) [55]
+                0.00    0.00      50/1289        ArrangementList<Card>::castStringKey(int) [38]
+                0.00    0.00     555/1289        ArrangementList<CardCombo>::castStringKey(int) [24]
+                0.00    0.00     627/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [20]
+[13]     0.0    0.00    0.00    1289         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+                0.00    0.00    1289/1289        bool __gnu_cxx::__is_null_pointer<char>(char*) [12]
+                0.00    0.00    1289/1289        std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [16]
+-----------------------------------------------
+                0.00    0.00    1289/1289        std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [16]
+[14]     0.0    0.00    0.00    1289         std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [14]
+-----------------------------------------------
+                0.00    0.00    1289/1289        std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [16]
+[15]     0.0    0.00    0.00    1289         std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [15]
+-----------------------------------------------
+                0.00    0.00    1289/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+[16]     0.0    0.00    0.00    1289         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [16]
+                0.00    0.00    1289/1289        std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [15]
+                0.00    0.00    1289/1289        std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [14]
+-----------------------------------------------
+                0.00    0.00       3/630         main [6]
+                0.00    0.00       6/630         ArrangementList<RoundResult>::castStringKey(int) [75]
+                0.00    0.00      16/630         ArrangementList<Round>::castStringKey(int) [57]
+                0.00    0.00      50/630         ArrangementList<Card>::castStringKey(int) [38]
+                0.00    0.00     555/630         ArrangementList<CardCombo>::castStringKey(int) [24]
+[17]     0.0    0.00    0.00     630         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+-----------------------------------------------
+                0.00    0.00     627/627         std::__cxx11::to_string(int) [22]
+[18]     0.0    0.00    0.00     627         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [18]
+                0.00    0.00     627/627         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [21]
+-----------------------------------------------
+                0.00    0.00     627/627         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [21]
+[19]     0.0    0.00    0.00     627         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [19]
+                0.00    0.00     627/627         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [20]
+-----------------------------------------------
+                0.00    0.00     627/627         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [19]
+[20]     0.0    0.00    0.00     627         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [20]
+                0.00    0.00     627/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+-----------------------------------------------
+                0.00    0.00     627/627         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [18]
+[21]     0.0    0.00    0.00     627         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [21]
+                0.00    0.00     627/627         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [19]
+-----------------------------------------------
+                0.00    0.00       6/627         ArrangementList<RoundResult>::castStringKey(int) [75]
+                0.00    0.00      16/627         ArrangementList<Round>::castStringKey(int) [57]
+                0.00    0.00      50/627         ArrangementList<Card>::castStringKey(int) [38]
+                0.00    0.00     555/627         ArrangementList<CardCombo>::castStringKey(int) [24]
+[22]     0.0    0.00    0.00     627         std::__cxx11::to_string(int) [22]
+                0.00    0.00     627/627         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [18]
+-----------------------------------------------
+                0.00    0.00     555/555         groupCardsWithEqualValues(Card*) [31]
+[23]     0.0    0.00    0.00     555         ArrangementList<CardCombo>::findByIndex(int) [23]
+-----------------------------------------------
+                0.00    0.00     555/555         ArrangementList<CardCombo>::create(int, CardCombo) [26]
+[24]     0.0    0.00    0.00     555         ArrangementList<CardCombo>::castStringKey(int) [24]
+                0.00    0.00     555/627         std::__cxx11::to_string(int) [22]
+                0.00    0.00     555/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+                0.00    0.00     555/630         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+-----------------------------------------------
+                0.00    0.00     555/555         ArrangementList<CardCombo>::create(int, CardCombo) [26]
+[25]     0.0    0.00    0.00     555         ArrangementList<CardCombo>::create(char*, CardCombo) [25]
+-----------------------------------------------
+                0.00    0.00     555/555         groupCardsWithEqualValues(Card*) [31]
+[26]     0.0    0.00    0.00     555         ArrangementList<CardCombo>::create(int, CardCombo) [26]
+                0.00    0.00     555/555         ArrangementList<CardCombo>::castStringKey(int) [24]
+                0.00    0.00     555/555         ArrangementList<CardCombo>::create(char*, CardCombo) [25]
+-----------------------------------------------
+                0.00    0.00     254/254         handHasClassificationType(Card*, ClassifiedHandType) [29]
+[27]     0.0    0.00    0.00     254         handHasSingleSuit(Card*) [27]
+-----------------------------------------------
+                0.00    0.00     210/210         ArrangementList<Card>::sort(SortingType, int (*)(Card)) [65]
+[28]     0.0    0.00    0.00     210         ArrangementList<Card>::getSize() [28]
+-----------------------------------------------
+                0.00    0.00     206/206         classifyHand(Card*) [48]
+[29]     0.0    0.00    0.00     206         handHasClassificationType(Card*, ClassifiedHandType) [29]
+                0.00    0.00     254/254         handHasSingleSuit(Card*) [27]
+                0.00    0.00     111/111         handHasCardsWithEqualValues(Card*, int, int, int, int, int) [32]
+                0.00    0.00      25/25          handHasSequentialCombination(Card*) [47]
+-----------------------------------------------
+                0.00    0.00     200/200         ArrangementList<Card>::sort(SortingType, int (*)(Card)) [65]
+[30]     0.0    0.00    0.00     200         getCardSortingParam(Card) [30]
+-----------------------------------------------
+                0.00    0.00     111/111         handHasCardsWithEqualValues(Card*, int, int, int, int, int) [32]
+[31]     0.0    0.00    0.00     111         groupCardsWithEqualValues(Card*) [31]
+                0.00    0.00     555/555         ArrangementList<CardCombo>::create(int, CardCombo) [26]
+                0.00    0.00     555/555         ArrangementList<CardCombo>::findByIndex(int) [23]
+                0.00    0.00     111/111         ArrangementList<CardCombo>::ArrangementList() [34]
+                0.00    0.00     111/111         ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [33]
+-----------------------------------------------
+                0.00    0.00     111/111         handHasClassificationType(Card*, ClassifiedHandType) [29]
+[32]     0.0    0.00    0.00     111         handHasCardsWithEqualValues(Card*, int, int, int, int, int) [32]
+                0.00    0.00     111/111         groupCardsWithEqualValues(Card*) [31]
+-----------------------------------------------
+                0.00    0.00     111/111         groupCardsWithEqualValues(Card*) [31]
+[33]     0.0    0.00    0.00     111         ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [33]
+                0.00    0.00    2331/2331        ArrangementList<CardCombo>::getSize() [10]
+                0.00    0.00    2220/2220        getCardComboSortingParam(CardCombo) [11]
+-----------------------------------------------
+                0.00    0.00     111/111         groupCardsWithEqualValues(Card*) [31]
+[34]     0.0    0.00    0.00     111         ArrangementList<CardCombo>::ArrangementList() [34]
+-----------------------------------------------
+                0.00    0.00      10/61          ArrangementList<Balance>::existsByKey(char*) [69]
+                0.00    0.00      23/61          ArrangementList<Balance>::findByKey(char*) [50]
+                0.00    0.00      28/61          ArrangementList<Balance>::update(char*, Balance) [45]
+[35]     0.0    0.00    0.00      61         ArrangementList<Balance>::findIndex(char*) [35]
+-----------------------------------------------
+                0.00    0.00       7/57          assertTie(RoundWinner, Play) [72]
+                0.00    0.00      17/57          PokerFace::consolidateRoundResult(Round) [90]
+                0.00    0.00      33/57          RoundWinner::~RoundWinner() [43]
+[36]     0.0    0.00    0.00      57         ClassifiedHand::~ClassifiedHand() [36]
+-----------------------------------------------
+                0.00    0.00      50/50          PokerFace::readPlay(char*, int, Card*) [70]
+[37]     0.0    0.00    0.00      50         ArrangementList<Card>::findByIndex(int) [37]
+-----------------------------------------------
+                0.00    0.00      50/50          ArrangementList<Card>::create(int, Card) [40]
+[38]     0.0    0.00    0.00      50         ArrangementList<Card>::castStringKey(int) [38]
+                0.00    0.00      50/627         std::__cxx11::to_string(int) [22]
+                0.00    0.00      50/630         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+                0.00    0.00      50/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+-----------------------------------------------
+                0.00    0.00      50/50          ArrangementList<Card>::create(int, Card) [40]
+[39]     0.0    0.00    0.00      50         ArrangementList<Card>::create(char*, Card) [39]
+-----------------------------------------------
+                0.00    0.00      50/50          PokerFace::readPlay(char*, int, Card*) [70]
+[40]     0.0    0.00    0.00      50         ArrangementList<Card>::create(int, Card) [40]
+                0.00    0.00      50/50          ArrangementList<Card>::castStringKey(int) [38]
+                0.00    0.00      50/50          ArrangementList<Card>::create(char*, Card) [39]
+-----------------------------------------------
+                0.00    0.00       6/45          main [6]
+                0.00    0.00      18/45          PokerFace::consolidateRoundResult(Round) [90]
+                0.00    0.00      21/45          ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [108]
+[41]     0.0    0.00    0.00      45         ArrangementList<Balance>::getSize() [41]
+-----------------------------------------------
+                0.00    0.00      16/40          RoundWinner::RoundWinner() [56]
+                0.00    0.00      24/40          classifyHand(Card*) [48]
+[42]     0.0    0.00    0.00      40         ClassifiedHand::ClassifiedHand() [42]
+-----------------------------------------------
+                0.00    0.00      33/33          PokerFace::consolidateRoundResult(Round) [90]
+[43]     0.0    0.00    0.00      33         RoundWinner::~RoundWinner() [43]
+                0.00    0.00      33/57          ClassifiedHand::~ClassifiedHand() [36]
+-----------------------------------------------
+                0.00    0.00      10/33          ArrangementList<Balance>::existsByKey(char*) [69]
+                0.00    0.00      23/33          ArrangementList<Balance>::findByKey(char*) [50]
+[44]     0.0    0.00    0.00      33         ArrangementList<Balance>::existsByIndex(int) [44]
+-----------------------------------------------
+                0.00    0.00      28/28          PokerFace::consolidateRoundResult(Round) [90]
+[45]     0.0    0.00    0.00      28         ArrangementList<Balance>::update(char*, Balance) [45]
+                0.00    0.00      28/61          ArrangementList<Balance>::findIndex(char*) [35]
+-----------------------------------------------
+                0.00    0.00      10/27          isInvalidPlay(Round, ArrangementList<Balance>*) [78]
+                0.00    0.00      17/27          PokerFace::consolidateRoundResult(Round) [90]
+[46]     0.0    0.00    0.00      27         ArrangementList<Play>::findByIndex(int) [46]
+-----------------------------------------------
+                0.00    0.00      25/25          handHasClassificationType(Card*, ClassifiedHandType) [29]
+[47]     0.0    0.00    0.00      25         handHasSequentialCombination(Card*) [47]
+-----------------------------------------------
+                0.00    0.00       7/24          assertTie(RoundWinner, Play) [72]
+                0.00    0.00      17/24          PokerFace::consolidateRoundResult(Round) [90]
+[48]     0.0    0.00    0.00      24         classifyHand(Card*) [48]
+                0.00    0.00     206/206         handHasClassificationType(Card*, ClassifiedHandType) [29]
+                0.00    0.00      24/40          ClassifiedHand::ClassifiedHand() [42]
+-----------------------------------------------
+                0.00    0.00      10/23          ArrangementList<Round>::update(char*, Round) [68]
+                0.00    0.00      13/23          ArrangementList<Round>::findByKey(char*) [61]
+[49]     0.0    0.00    0.00      23         ArrangementList<Round>::findIndex(char*) [49]
+-----------------------------------------------
+                0.00    0.00      10/23          isInvalidPlay(Round, ArrangementList<Balance>*) [78]
+                0.00    0.00      13/23          PokerFace::consolidateRoundResult(Round) [90]
+[50]     0.0    0.00    0.00      23         ArrangementList<Balance>::findByKey(char*) [50]
+                0.00    0.00      23/61          ArrangementList<Balance>::findIndex(char*) [35]
+                0.00    0.00      23/33          ArrangementList<Balance>::existsByIndex(int) [44]
+-----------------------------------------------
+                0.00    0.00       3/21          ArrangementList<RoundResult>::create(int, RoundResult) [81]
+                0.00    0.00       6/21          PokerFace::finish() [110]
+                0.00    0.00      12/21          Item<RoundResult>::~Item() [64]
+[51]     0.0    0.00    0.00      21         RoundResult::~RoundResult() [51]
+-----------------------------------------------
+                0.00    0.00      20/20          ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [108]
+[52]     0.0    0.00    0.00      20         getBalanceSortingParam(Balance) [52]
+-----------------------------------------------
+                0.00    0.00       5/20          main [6]
+                0.00    0.00      15/20          PokerFace::consolidateRoundResult(Round) [90]
+[53]     0.0    0.00    0.00      20         ArrangementList<Balance>::findByIndex(int) [53]
+-----------------------------------------------
+                0.00    0.00      17/17          PokerFace::consolidateRoundResult(Round) [90]
+[54]     0.0    0.00    0.00      17         RoundWinner::RoundWinner(RoundWinner const&) [54]
+                0.00    0.00      17/17          ClassifiedHand::ClassifiedHand(ClassifiedHand const&) [55]
+-----------------------------------------------
+                0.00    0.00      17/17          RoundWinner::RoundWinner(RoundWinner const&) [54]
+[55]     0.0    0.00    0.00      17         ClassifiedHand::ClassifiedHand(ClassifiedHand const&) [55]
+                0.00    0.00      17/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+-----------------------------------------------
+                0.00    0.00      16/16          PokerFace::consolidateRoundResult(Round) [90]
+[56]     0.0    0.00    0.00      16         RoundWinner::RoundWinner() [56]
+                0.00    0.00      16/40          ClassifiedHand::ClassifiedHand() [42]
+-----------------------------------------------
+                0.00    0.00       3/16          ArrangementList<Round>::create(int, Round) [87]
+                0.00    0.00      13/16          ArrangementList<Round>::findByKey(int) [62]
+[57]     0.0    0.00    0.00      16         ArrangementList<Round>::castStringKey(int) [57]
+                0.00    0.00      16/627         std::__cxx11::to_string(int) [22]
+                0.00    0.00      16/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+                0.00    0.00      16/630         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+-----------------------------------------------
+                0.00    0.00       3/15          ArrangementList<RoundResult>::create(int, RoundResult) [81]
+                0.00    0.00       3/15          PokerFace::finish() [110]
+                0.00    0.00       9/15          Item<RoundResult>::Item(Item<RoundResult> const&) [71]
+[58]     0.0    0.00    0.00      15         RoundResult::RoundResult(RoundResult const&) [58]
+                0.00    0.00      15/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+-----------------------------------------------
+                0.00    0.00      14/14          main [6]
+[59]     0.0    0.00    0.00      14         defineFaseMemLog(int) [59]
+-----------------------------------------------
+                0.00    0.00      13/13          ArrangementList<Round>::findByKey(char*) [61]
+[60]     0.0    0.00    0.00      13         ArrangementList<Round>::existsByIndex(int) [60]
+-----------------------------------------------
+                0.00    0.00      13/13          ArrangementList<Round>::findByKey(int) [62]
+[61]     0.0    0.00    0.00      13         ArrangementList<Round>::findByKey(char*) [61]
+                0.00    0.00      13/23          ArrangementList<Round>::findIndex(char*) [49]
+                0.00    0.00      13/13          ArrangementList<Round>::existsByIndex(int) [60]
+-----------------------------------------------
+                0.00    0.00       3/13          PokerFace::finish() [110]
+                0.00    0.00      10/13          PokerFace::readPlay(char*, int, Card*) [70]
+[62]     0.0    0.00    0.00      13         ArrangementList<Round>::findByKey(int) [62]
+                0.00    0.00      13/16          ArrangementList<Round>::castStringKey(int) [57]
+                0.00    0.00      13/13          ArrangementList<Round>::findByKey(char*) [61]
+-----------------------------------------------
+                0.00    0.00       6/12          PokerFace::consolidateRoundResult(Round) [90]
+                0.00    0.00       6/12          RoundWinner::operator=(RoundWinner const&) [74]
+[63]     0.0    0.00    0.00      12         ClassifiedHand::operator=(ClassifiedHand const&) [63]
+-----------------------------------------------
+                0.00    0.00       3/12          main [6]
+                0.00    0.00       3/12          ArrangementList<RoundResult>::create(char*, RoundResult) [80]
+                0.00    0.00       6/12          ArrangementList<RoundResult>::findIndex(char*) [84]
+[64]     0.0    0.00    0.00      12         Item<RoundResult>::~Item() [64]
+                0.00    0.00      12/21          RoundResult::~RoundResult() [51]
+-----------------------------------------------
+                0.00    0.00      10/10          PokerFace::readPlay(char*, int, Card*) [70]
+[65]     0.0    0.00    0.00      10         ArrangementList<Card>::sort(SortingType, int (*)(Card)) [65]
+                0.00    0.00     210/210         ArrangementList<Card>::getSize() [28]
+                0.00    0.00     200/200         getCardSortingParam(Card) [30]
+-----------------------------------------------
+                0.00    0.00      10/10          PokerFace::readPlay(char*, int, Card*) [70]
+[66]     0.0    0.00    0.00      10         ArrangementList<Card>::ArrangementList() [66]
+-----------------------------------------------
+                0.00    0.00      10/10          PokerFace::readPlay(char*, int, Card*) [70]
+[67]     0.0    0.00    0.00      10         ArrangementList<Play>::create(char*, Play) [67]
+-----------------------------------------------
+                0.00    0.00      10/10          PokerFace::readPlay(char*, int, Card*) [70]
+[68]     0.0    0.00    0.00      10         ArrangementList<Round>::update(char*, Round) [68]
+                0.00    0.00      10/23          ArrangementList<Round>::findIndex(char*) [49]
+-----------------------------------------------
+                0.00    0.00      10/10          PokerFace::readPlay(char*, int, Card*) [70]
+[69]     0.0    0.00    0.00      10         ArrangementList<Balance>::existsByKey(char*) [69]
+                0.00    0.00      10/61          ArrangementList<Balance>::findIndex(char*) [35]
+                0.00    0.00      10/33          ArrangementList<Balance>::existsByIndex(int) [44]
+-----------------------------------------------
+                0.00    0.00      10/10          main [6]
+[70]     0.0    0.00    0.00      10         PokerFace::readPlay(char*, int, Card*) [70]
+                0.00    0.00      50/50          ArrangementList<Card>::create(int, Card) [40]
+                0.00    0.00      50/50          ArrangementList<Card>::findByIndex(int) [37]
+                0.00    0.00      10/13          ArrangementList<Round>::findByKey(int) [62]
+                0.00    0.00      10/10          ArrangementList<Card>::ArrangementList() [66]
+                0.00    0.00      10/10          ArrangementList<Card>::sort(SortingType, int (*)(Card)) [65]
+                0.00    0.00      10/10          ArrangementList<Play>::create(char*, Play) [67]
+                0.00    0.00      10/10          ArrangementList<Balance>::existsByKey(char*) [69]
+                0.00    0.00      10/10          ArrangementList<Round>::update(char*, Round) [68]
+                0.00    0.00       5/5           ArrangementList<Balance>::create(char*, Balance) [76]
+-----------------------------------------------
+                0.00    0.00       3/9           ArrangementList<RoundResult>::findByKey(char*) [82]
+                0.00    0.00       6/9           ArrangementList<RoundResult>::findIndex(char*) [84]
+[71]     0.0    0.00    0.00       9         Item<RoundResult>::Item(Item<RoundResult> const&) [71]
+                0.00    0.00       9/15          RoundResult::RoundResult(RoundResult const&) [58]
+-----------------------------------------------
+                0.00    0.00       7/7           PokerFace::consolidateRoundResult(Round) [90]
+[72]     0.0    0.00    0.00       7         assertTie(RoundWinner, Play) [72]
+                0.00    0.00       7/24          classifyHand(Card*) [48]
+                0.00    0.00       7/57          ClassifiedHand::~ClassifiedHand() [36]
+-----------------------------------------------
+                0.00    0.00       3/6           ArrangementList<RoundResult>::create(char*, RoundResult) [80]
+                0.00    0.00       3/6           Item<RoundResult>::operator=(Item<RoundResult> const&) [88]
+[73]     0.0    0.00    0.00       6         RoundResult::operator=(RoundResult const&) [73]
+-----------------------------------------------
+                0.00    0.00       6/6           PokerFace::consolidateRoundResult(Round) [90]
+[74]     0.0    0.00    0.00       6         RoundWinner::operator=(RoundWinner const&) [74]
+                0.00    0.00       6/12          ClassifiedHand::operator=(ClassifiedHand const&) [63]
+-----------------------------------------------
+                0.00    0.00       3/6           ArrangementList<RoundResult>::create(int, RoundResult) [81]
+                0.00    0.00       3/6           ArrangementList<RoundResult>::findByKey(int) [83]
+[75]     0.0    0.00    0.00       6         ArrangementList<RoundResult>::castStringKey(int) [75]
+                0.00    0.00       6/627         std::__cxx11::to_string(int) [22]
+                0.00    0.00       6/1289        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [13]
+                0.00    0.00       6/630         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+-----------------------------------------------
+                0.00    0.00       5/5           PokerFace::readPlay(char*, int, Card*) [70]
+[76]     0.0    0.00    0.00       5         ArrangementList<Balance>::create(char*, Balance) [76]
+-----------------------------------------------
+                0.00    0.00       4/4           PokerFace::finish() [110]
+[77]     0.0    0.00    0.00       4         ArrangementList<Round>::getSize() [77]
+-----------------------------------------------
+                0.00    0.00       3/3           PokerFace::consolidateRoundResult(Round) [90]
+[78]     0.0    0.00    0.00       3         isInvalidPlay(Round, ArrangementList<Balance>*) [78]
+                0.00    0.00      10/27          ArrangementList<Play>::findByIndex(int) [46]
+                0.00    0.00      10/23          ArrangementList<Balance>::findByKey(char*) [50]
+-----------------------------------------------
+                0.00    0.00       3/3           ArrangementList<RoundResult>::findByKey(char*) [82]
+[79]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::existsByIndex(int) [79]
+-----------------------------------------------
+                0.00    0.00       3/3           ArrangementList<RoundResult>::create(int, RoundResult) [81]
+[80]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::create(char*, RoundResult) [80]
+                0.00    0.00       3/10003       Item<RoundResult>::Item() [9]
+                0.00    0.00       3/6           RoundResult::operator=(RoundResult const&) [73]
+                0.00    0.00       3/3           Item<RoundResult>::operator=(Item<RoundResult> const&) [88]
+                0.00    0.00       3/12          Item<RoundResult>::~Item() [64]
+-----------------------------------------------
+                0.00    0.00       3/3           PokerFace::finish() [110]
+[81]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::create(int, RoundResult) [81]
+                0.00    0.00       3/15          RoundResult::RoundResult(RoundResult const&) [58]
+                0.00    0.00       3/6           ArrangementList<RoundResult>::castStringKey(int) [75]
+                0.00    0.00       3/3           ArrangementList<RoundResult>::create(char*, RoundResult) [80]
+                0.00    0.00       3/21          RoundResult::~RoundResult() [51]
+-----------------------------------------------
+                0.00    0.00       3/3           ArrangementList<RoundResult>::findByKey(int) [83]
+[82]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::findByKey(char*) [82]
+                0.00    0.00       3/3           ArrangementList<RoundResult>::findIndex(char*) [84]
+                0.00    0.00       3/3           ArrangementList<RoundResult>::existsByIndex(int) [79]
+                0.00    0.00       3/9           Item<RoundResult>::Item(Item<RoundResult> const&) [71]
+-----------------------------------------------
+                0.00    0.00       3/3           main [6]
+[83]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::findByKey(int) [83]
+                0.00    0.00       3/6           ArrangementList<RoundResult>::castStringKey(int) [75]
+                0.00    0.00       3/3           ArrangementList<RoundResult>::findByKey(char*) [82]
+-----------------------------------------------
+                0.00    0.00       3/3           ArrangementList<RoundResult>::findByKey(char*) [82]
+[84]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::findIndex(char*) [84]
+                0.00    0.00       6/9           Item<RoundResult>::Item(Item<RoundResult> const&) [71]
+                0.00    0.00       6/12          Item<RoundResult>::~Item() [64]
+-----------------------------------------------
+                0.00    0.00       3/3           PokerFace::startRound(int, int) [89]
+[85]     0.0    0.00    0.00       3         ArrangementList<Play>::ArrangementList() [85]
+-----------------------------------------------
+                0.00    0.00       3/3           ArrangementList<Round>::create(int, Round) [87]
+[86]     0.0    0.00    0.00       3         ArrangementList<Round>::create(char*, Round) [86]
+-----------------------------------------------
+                0.00    0.00       3/3           PokerFace::startRound(int, int) [89]
+[87]     0.0    0.00    0.00       3         ArrangementList<Round>::create(int, Round) [87]
+                0.00    0.00       3/16          ArrangementList<Round>::castStringKey(int) [57]
+                0.00    0.00       3/3           ArrangementList<Round>::create(char*, Round) [86]
+-----------------------------------------------
+                0.00    0.00       3/3           ArrangementList<RoundResult>::create(char*, RoundResult) [80]
+[88]     0.0    0.00    0.00       3         Item<RoundResult>::operator=(Item<RoundResult> const&) [88]
+                0.00    0.00       3/6           RoundResult::operator=(RoundResult const&) [73]
+-----------------------------------------------
+                0.00    0.00       3/3           main [6]
+[89]     0.0    0.00    0.00       3         PokerFace::startRound(int, int) [89]
+                0.00    0.00       3/3           ArrangementList<Play>::ArrangementList() [85]
+                0.00    0.00       3/3           ArrangementList<Round>::create(int, Round) [87]
+-----------------------------------------------
+                0.00    0.00       3/3           PokerFace::finish() [110]
+[90]     0.0    0.00    0.00       3         PokerFace::consolidateRoundResult(Round) [90]
+                0.00    0.00      33/33          RoundWinner::~RoundWinner() [43]
+                0.00    0.00      28/28          ArrangementList<Balance>::update(char*, Balance) [45]
+                0.00    0.00      18/45          ArrangementList<Balance>::getSize() [41]
+                0.00    0.00      17/27          ArrangementList<Play>::findByIndex(int) [46]
+                0.00    0.00      17/24          classifyHand(Card*) [48]
+                0.00    0.00      17/57          ClassifiedHand::~ClassifiedHand() [36]
+                0.00    0.00      17/17          RoundWinner::RoundWinner(RoundWinner const&) [54]
+                0.00    0.00      16/16          RoundWinner::RoundWinner() [56]
+                0.00    0.00      15/20          ArrangementList<Balance>::findByIndex(int) [53]
+                0.00    0.00      13/23          ArrangementList<Balance>::findByKey(char*) [50]
+                0.00    0.00       7/7           assertTie(RoundWinner, Play) [72]
+                0.00    0.00       6/12          ClassifiedHand::operator=(ClassifiedHand const&) [63]
+                0.00    0.00       6/6           RoundWinner::operator=(RoundWinner const&) [74]
+                0.00    0.00       3/10006       RoundResult::RoundResult() [8]
+                0.00    0.00       3/3           isInvalidPlay(Round, ArrangementList<Balance>*) [78]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [174]
-[72]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance [72]
-                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [83]
+[91]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance [91]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [102]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [174]
-[73]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card [73]
-                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [84]
+[92]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card [92]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [103]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [174]
-[74]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [74]
-                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [86]
+[93]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [93]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [105]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [174]
-[75]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN9PokerFaceC2Eii [75]
-                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [85]
+[94]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN9PokerFaceC2Eii [94]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [104]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [174]
-[76]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [76]
-                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [81]
+[95]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [95]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [100]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[77]     0.0    0.00    0.00       1         ativaMemLog() [77]
+                0.00    0.00       1/1           main [6]
+[96]     0.0    0.00    0.00       1         ativaMemLog() [96]
 -----------------------------------------------
-                0.00    0.00       1/1           finalizaMemLog() [80]
-[78]     0.0    0.00    0.00       1         clkDifMemLog(timespec, timespec, timespec*) [78]
+                0.00    0.00       1/1           finalizaMemLog() [99]
+[97]     0.0    0.00    0.00       1         clkDifMemLog(timespec, timespec, timespec*) [97]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[79]     0.0    0.00    0.00       1         iniciaMemLog(char*) [79]
+                0.00    0.00       1/1           main [6]
+[98]     0.0    0.00    0.00       1         iniciaMemLog(char*) [98]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[80]     0.0    0.00    0.00       1         finalizaMemLog() [80]
-                0.00    0.00       1/1           clkDifMemLog(timespec, timespec, timespec*) [78]
+                0.00    0.00       1/1           main [6]
+[99]     0.0    0.00    0.00       1         finalizaMemLog() [99]
+                0.00    0.00       1/1           clkDifMemLog(timespec, timespec, timespec*) [97]
 -----------------------------------------------
-                0.00    0.00       1/1           _GLOBAL__sub_I_main [76]
-[81]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [81]
+                0.00    0.00       1/1           _GLOBAL__sub_I_main [95]
+[100]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [100]
 -----------------------------------------------
-                                   1             __static_initialization_and_destruction_0(int, int) [82]
+                                   1             __static_initialization_and_destruction_0(int, int) [101]
                 0.00    0.00       1/1           __libc_csu_init [174]
-[82]     0.0    0.00    0.00       1+1       __static_initialization_and_destruction_0(int, int) [82]
-                                   1             __static_initialization_and_destruction_0(int, int) [82]
+[101]    0.0    0.00    0.00       1+1       __static_initialization_and_destruction_0(int, int) [101]
+                                   1             __static_initialization_and_destruction_0(int, int) [101]
 -----------------------------------------------
-                0.00    0.00       1/1           _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance [72]
-[83]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [83]
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance [91]
+[102]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [102]
 -----------------------------------------------
-                0.00    0.00       1/1           _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card [73]
-[84]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [84]
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card [92]
+[103]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [103]
 -----------------------------------------------
-                0.00    0.00       1/1           _GLOBAL__sub_I__ZN9PokerFaceC2Eii [75]
-[85]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [85]
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN9PokerFaceC2Eii [94]
+[104]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [104]
 -----------------------------------------------
-                0.00    0.00       1/1           _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [74]
-[86]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [86]
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [93]
+[105]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [105]
 -----------------------------------------------
-                0.00    0.00       1/1           PokerFace::finish() [13]
-[87]     0.0    0.00    0.00       1         ArrangementList<RoundResult>::ArrangementList() [87]
-                0.00    0.00   10000/15000       Item<RoundResult>::Item() [58]
+                0.00    0.00       1/1           PokerFace::finish() [110]
+[106]    0.0    0.00    0.00       1         ArrangementList<RoundResult>::ArrangementList() [106]
+                0.00    0.00   10000/10003       Item<RoundResult>::Item() [9]
 -----------------------------------------------
-                0.00    0.00       1/1           PokerFace::PokerFace(int, int) [91]
-[88]     0.0    0.00    0.00       1         ArrangementList<Round>::ArrangementList() [88]
+                0.00    0.00       1/1           PokerFace::PokerFace(int, int) [111]
+[107]    0.0    0.00    0.00       1         ArrangementList<Round>::ArrangementList() [107]
 -----------------------------------------------
-                0.00    0.00       1/1           PokerFace::finish() [13]
-[89]     0.0    0.00    0.00       1         ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [89]
-                0.00    0.00      56/56          getBalanceSortingParam(Balance) [68]
-                0.00    0.00      45/54          ArrangementList<Balance>::getSize() [69]
+                0.00    0.00       1/1           PokerFace::finish() [110]
+[108]    0.0    0.00    0.00       1         ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [108]
+                0.00    0.00      21/45          ArrangementList<Balance>::getSize() [41]
+                0.00    0.00      20/20          getBalanceSortingParam(Balance) [52]
 -----------------------------------------------
-                0.00    0.00       1/1           PokerFace::PokerFace(int, int) [91]
-[90]     0.0    0.00    0.00       1         ArrangementList<Balance>::ArrangementList() [90]
+                0.00    0.00       1/1           PokerFace::PokerFace(int, int) [111]
+[109]    0.0    0.00    0.00       1         ArrangementList<Balance>::ArrangementList() [109]
 -----------------------------------------------
-                0.00    0.00       1/1           main [1]
-[91]     0.0    0.00    0.00       1         PokerFace::PokerFace(int, int) [91]
-                0.00    0.00       1/1           ArrangementList<Round>::ArrangementList() [88]
-                0.00    0.00       1/1           ArrangementList<Balance>::ArrangementList() [90]
+                0.00    0.00       1/1           main [6]
+[110]    0.0    0.00    0.00       1         PokerFace::finish() [110]
+                0.00    0.00       6/21          RoundResult::~RoundResult() [51]
+                0.00    0.00       4/4           ArrangementList<Round>::getSize() [77]
+                0.00    0.00       3/13          ArrangementList<Round>::findByKey(int) [62]
+                0.00    0.00       3/3           PokerFace::consolidateRoundResult(Round) [90]
+                0.00    0.00       3/15          RoundResult::RoundResult(RoundResult const&) [58]
+                0.00    0.00       3/3           ArrangementList<RoundResult>::create(int, RoundResult) [81]
+                0.00    0.00       1/1           ArrangementList<RoundResult>::ArrangementList() [106]
+                0.00    0.00       1/1           ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [108]
+-----------------------------------------------
+                0.00    0.00       1/1           main [6]
+[111]    0.0    0.00    0.00       1         PokerFace::PokerFace(int, int) [111]
+                0.00    0.00       1/1           ArrangementList<Round>::ArrangementList() [107]
+                0.00    0.00       1/1           ArrangementList<Balance>::ArrangementList() [109]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -607,31 +720,38 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [72] _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance (poker-face-util.cpp) [31] ArrangementList<RoundResult>::castStringKey(int) [56] ArrangementList<Balance>::existsByKey(char*)
-  [73] _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card (poker-face-validation.cpp) [64] ArrangementList<RoundResult>::existsByIndex(int) [70] ArrangementList<Balance>::findByIndex(int)
-  [74] _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (shared-util.cpp) [34] ArrangementList<RoundResult>::create(char*, RoundResult) [47] ArrangementList<Balance>::existsByIndex(int)
-  [75] _GLOBAL__sub_I__ZN9PokerFaceC2Eii (poker-face.cpp) [32] ArrangementList<RoundResult>::create(int, RoundResult) [89] ArrangementList<Balance>::sort(SortingType, int (*)(Balance))
-  [76] _GLOBAL__sub_I_main (app.cpp) [3] ArrangementList<RoundResult>::findByKey(char*) [71] ArrangementList<Balance>::create(char*, Balance)
-  [77] ativaMemLog()           [2] ArrangementList<RoundResult>::findByKey(int) [69] ArrangementList<Balance>::getSize()
-  [78] clkDifMemLog(timespec, timespec, timespec*) [4] ArrangementList<RoundResult>::findIndex(char*) [61] ArrangementList<Balance>::findByKey(char*)
-  [79] iniciaMemLog(char*)    [87] ArrangementList<RoundResult>::ArrangementList() [48] ArrangementList<Balance>::findIndex(char*)
-  [63] isInvalidPlay(Round, ArrangementList<Balance>*) [45] ArrangementList<Card>::findByIndex(int) [90] ArrangementList<Balance>::ArrangementList()
-  [80] finalizaMemLog()       [28] ArrangementList<Card>::castStringKey(int) [7] Item<RoundResult>::Item(Item<RoundResult> const&)
-  [49] defineFaseMemLog(int)  [16] ArrangementList<Card>::sort(SortingType, int (*)(Card)) [58] Item<RoundResult>::Item()
-  [25] getCardSortingParam(Card) [46] ArrangementList<Card>::create(char*, Card) [15] Item<RoundResult>::~Item()
-  [68] getBalanceSortingParam(Balance) [29] ArrangementList<Card>::create(int, Card) [66] Item<RoundResult>::operator=(Item<RoundResult> const&)
-  [81] __static_initialization_and_destruction_0(int, int) (app.cpp) [43] ArrangementList<Card>::getSize() [24] PokerFace::startRound(int, int)
-  [82] __static_initialization_and_destruction_0(int, int) (arrangement-list.cpp) [17] ArrangementList<Card>::ArrangementList() [67] PokerFace::consolidateRoundResult(Round)
-  [83] __static_initialization_and_destruction_0(int, int) (poker-face-util.cpp) [60] ArrangementList<Play>::findByIndex(int) [13] PokerFace::finish()
-  [84] __static_initialization_and_destruction_0(int, int) (poker-face-validation.cpp) [55] ArrangementList<Play>::create(char*, Play) [5] PokerFace::readPlay(char*, int, Card*)
-  [85] __static_initialization_and_destruction_0(int, int) (poker-face.cpp) [26] ArrangementList<Play>::ArrangementList() [91] PokerFace::PokerFace(int, int)
-  [86] __static_initialization_and_destruction_0(int, int) (shared-util.cpp) [30] ArrangementList<Round>::castStringKey(int) [19] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
-  [44] castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [50] ArrangementList<Round>::existsByIndex(int) [18] bool __gnu_cxx::__is_null_pointer<char>(char*)
-   [8] RoundResult::RoundResult(RoundResult const&) [65] ArrangementList<Round>::create(char*, Round) [20] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
-  [57] RoundResult::RoundResult() [33] ArrangementList<Round>::create(int, Round) [12] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
-  [14] RoundResult::~RoundResult() [11] ArrangementList<Round>::update(char*, Round) [21] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
-  [59] RoundResult::operator=(RoundResult const&) [62] ArrangementList<Round>::getSize() [22] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
-  [51] RoundWinner::RoundWinner() [10] ArrangementList<Round>::findByKey(char*) [23] std::__cxx11::to_string(int)
-  [52] RoundWinner::~RoundWinner() [9] ArrangementList<Round>::findByKey(int) [41] std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
-  [53] ClassifiedHand::ClassifiedHand() [6] ArrangementList<Round>::findIndex(char*) [42] std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
-  [54] ClassifiedHand::~ClassifiedHand() [88] ArrangementList<Round>::ArrangementList() [27] std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+  [91] _GLOBAL__sub_I__Z22getBalanceSortingParam7Balance (poker-face-util.cpp) [74] RoundWinner::operator=(RoundWinner const&) [44] ArrangementList<Balance>::existsByIndex(int)
+  [92] _GLOBAL__sub_I__Z28handHasSequentialCombinationP4Card (poker-face-validation.cpp) [42] ClassifiedHand::ClassifiedHand() [108] ArrangementList<Balance>::sort(SortingType, int (*)(Balance))
+  [93] _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (shared-util.cpp) [55] ClassifiedHand::ClassifiedHand(ClassifiedHand const&) [76] ArrangementList<Balance>::create(char*, Balance)
+  [94] _GLOBAL__sub_I__ZN9PokerFaceC2Eii (poker-face.cpp) [36] ClassifiedHand::~ClassifiedHand() [45] ArrangementList<Balance>::update(char*, Balance)
+  [95] _GLOBAL__sub_I_main (app.cpp) [63] ClassifiedHand::operator=(ClassifiedHand const&) [41] ArrangementList<Balance>::getSize()
+  [96] ativaMemLog()          [75] ArrangementList<RoundResult>::castStringKey(int) [50] ArrangementList<Balance>::findByKey(char*)
+  [48] classifyHand(Card*)    [79] ArrangementList<RoundResult>::existsByIndex(int) [35] ArrangementList<Balance>::findIndex(char*)
+  [97] clkDifMemLog(timespec, timespec, timespec*) [80] ArrangementList<RoundResult>::create(char*, RoundResult) [109] ArrangementList<Balance>::ArrangementList()
+  [98] iniciaMemLog(char*)    [81] ArrangementList<RoundResult>::create(int, RoundResult) [23] ArrangementList<CardCombo>::findByIndex(int)
+  [78] isInvalidPlay(Round, ArrangementList<Balance>*) [82] ArrangementList<RoundResult>::findByKey(char*) [24] ArrangementList<CardCombo>::castStringKey(int)
+  [99] finalizaMemLog()       [83] ArrangementList<RoundResult>::findByKey(int) [33] ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo))
+  [59] defineFaseMemLog(int)  [84] ArrangementList<RoundResult>::findIndex(char*) [25] ArrangementList<CardCombo>::create(char*, CardCombo)
+  [27] handHasSingleSuit(Card*) [106] ArrangementList<RoundResult>::ArrangementList() [26] ArrangementList<CardCombo>::create(int, CardCombo)
+  [30] getCardSortingParam(Card) [37] ArrangementList<Card>::findByIndex(int) [10] ArrangementList<CardCombo>::getSize()
+  [52] getBalanceSortingParam(Balance) [38] ArrangementList<Card>::castStringKey(int) [34] ArrangementList<CardCombo>::ArrangementList()
+  [11] getCardComboSortingParam(CardCombo) [65] ArrangementList<Card>::sort(SortingType, int (*)(Card)) [71] Item<RoundResult>::Item(Item<RoundResult> const&)
+  [31] groupCardsWithEqualValues(Card*) [39] ArrangementList<Card>::create(char*, Card) [9] Item<RoundResult>::Item()
+  [29] handHasClassificationType(Card*, ClassifiedHandType) [40] ArrangementList<Card>::create(int, Card) [64] Item<RoundResult>::~Item()
+  [32] handHasCardsWithEqualValues(Card*, int, int, int, int, int) [28] ArrangementList<Card>::getSize() [88] Item<RoundResult>::operator=(Item<RoundResult> const&)
+  [47] handHasSequentialCombination(Card*) [66] ArrangementList<Card>::ArrangementList() [89] PokerFace::startRound(int, int)
+ [100] __static_initialization_and_destruction_0(int, int) (app.cpp) [46] ArrangementList<Play>::findByIndex(int) [90] PokerFace::consolidateRoundResult(Round)
+ [101] __static_initialization_and_destruction_0(int, int) (arrangement-list.cpp) [67] ArrangementList<Play>::create(char*, Play) [110] PokerFace::finish()
+ [102] __static_initialization_and_destruction_0(int, int) (poker-face-util.cpp) [85] ArrangementList<Play>::ArrangementList() [70] PokerFace::readPlay(char*, int, Card*)
+ [103] __static_initialization_and_destruction_0(int, int) (poker-face-validation.cpp) [57] ArrangementList<Round>::castStringKey(int) [111] PokerFace::PokerFace(int, int)
+ [104] __static_initialization_and_destruction_0(int, int) (poker-face.cpp) [60] ArrangementList<Round>::existsByIndex(int) [18] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
+ [105] __static_initialization_and_destruction_0(int, int) (shared-util.cpp) [86] ArrangementList<Round>::create(char*, Round) [12] bool __gnu_cxx::__is_null_pointer<char>(char*)
+  [17] castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [87] ArrangementList<Round>::create(int, Round) [19] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
+  [72] assertTie(RoundWinner, Play) [68] ArrangementList<Round>::update(char*, Round) [13] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+  [58] RoundResult::RoundResult(RoundResult const&) [77] ArrangementList<Round>::getSize() [20] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
+   [8] RoundResult::RoundResult() [61] ArrangementList<Round>::findByKey(char*) [21] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+  [51] RoundResult::~RoundResult() [62] ArrangementList<Round>::findByKey(int) [22] std::__cxx11::to_string(int)
+  [73] RoundResult::operator=(RoundResult const&) [49] ArrangementList<Round>::findIndex(char*) [14] std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
+  [54] RoundWinner::RoundWinner(RoundWinner const&) [107] ArrangementList<Round>::ArrangementList() [15] std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
+  [56] RoundWinner::RoundWinner() [69] ArrangementList<Balance>::existsByKey(char*) [16] std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+  [43] RoundWinner::~RoundWinner() [53] ArrangementList<Balance>::findByIndex(int)
