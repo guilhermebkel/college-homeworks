@@ -63,6 +63,10 @@ int getCardComboScore (CardCombo cardCombo) {
 	return score;
 };
 
+/**
+ * Since the Hand is sorted in ascending ordering by default,
+ * in case we get the last card, it is the greater one.
+ */
 Card getGreaterCard (Hand hand) {
 	return hand[MAX_HAND_SIZE - 1];
 };
