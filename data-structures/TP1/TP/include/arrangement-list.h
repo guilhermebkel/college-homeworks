@@ -2,11 +2,11 @@
 #define ARRANGEMENT_LIST_H
 
 #ifndef MAX_ARRANGEMENT_LIST_SIZE 
-#define MAX_ARRANGEMENT_LIST_SIZE 1000
+#define MAX_ARRANGEMENT_LIST_SIZE 10000
 #endif
 
 #ifndef MAX_KEY_SIZE 
-#define MAX_KEY_SIZE 100
+#define MAX_KEY_SIZE 200
 #endif
 
 typedef char *StringKey;

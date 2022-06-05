@@ -71,8 +71,6 @@ int main() {
 	defineFaseMemLog(3);
 	Result result = pokerFace->finish();
 
-	finalizaMemLog();
-
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
 		Item<RoundResult> roundResult = result.roundResults->findByKey(roundIndex);
 
@@ -96,6 +94,8 @@ int main() {
 	}
 
 	fclose(outputFile);
+
+	finalizaMemLog();
 	
 	return 0;
 }

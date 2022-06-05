@@ -12,23 +12,26 @@ OBJ = obj
 INC = include
 BIN = bin
 CFLAGS = -g -std=c++11 -I $(INC)
+DATA_FOLDER_PATH = ../data
 
 EXE = $(BIN)/main
 
-all: main
+all: build gprof
 
-build:
-	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -o $(OBJ)/app.o
-	$(CC) $(CFLAGS) -c $(SRC)/poker-face.cpp -o $(OBJ)/poker-face.o
-	$(CC) $(CFLAGS) -c $(SRC)/poker-face-util.cpp -o $(OBJ)/poker-face-util.o
-	$(CC) $(CFLAGS) -c $(SRC)/poker-face-validation.cpp -o $(OBJ)/poker-face-validation.o
-	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -o $(OBJ)/arrangement-list.o
-	$(CC) $(CFLAGS) -c $(SRC)/shared-util.cpp -o $(OBJ)/shared-util.o
-	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -o $(OBJ)/memlog.o
-
-main: clean build
-	$(CC) $(CFLAGS) $(OBJ)/*.o -o $(BIN)/main
+build: clean
+	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
+	$(CC) $(CFLAGS) -c $(SRC)/poker-face.cpp -pg -o $(OBJ)/poker-face.o
+	$(CC) $(CFLAGS) -c $(SRC)/poker-face-util.cpp -pg -o $(OBJ)/poker-face-util.o
+	$(CC) $(CFLAGS) -c $(SRC)/poker-face-validation.cpp -pg -o $(OBJ)/poker-face-validation.o
+	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -pg -o $(OBJ)/arrangement-list.o
+	$(CC) $(CFLAGS) -c $(SRC)/shared-util.cpp -pg -o $(OBJ)/shared-util.o
+	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -pg -o $(OBJ)/memlog.o
+	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
 	$(EXE)
+
+gprof:
+	$(EXE)
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof.txt
 	
 clean:
-	rm -f $(EXE) $(OBJ)/*.o
+	rm -f $(EXE) $(OBJ)/*.o gmon.out

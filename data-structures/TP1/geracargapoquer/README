@@ -1,0 +1,40 @@
+//---------------------------------------------------------------------
+// Arquivo      : README
+// Conteudo     : documentacao sobre aplicacao geracarga 
+// Autor        : Wagner Meira Jr. (meira@dcc.ufmg.br)
+// Historico    : 2022-05-31 - arquivo criado
+//---------------------------------------------------------------------
+
+A aplicacao geracarga tem por objetivo gerar cargas de trabalho para o simulador de poquer.
+
+Instalacao
+
+Para instalar a aplicacao, basta descompactar o arquivo geracarga.tar.gz
+
+> cd <diretoriodestino>
+> gzip -d geracarga.tar.gz
+> tar xvf geracarga.tar
+
+Compilacao
+
+Para compilar basta:
+
+> cd <diretoriodestino>
+> make all 
+
+Teste
+
+Ao compilar, o comando make all gera um arquivo exemplo em /tmp/geracarga.out
+
+Utilizacao
+
+A aplicacao geracarga permite a definicao de parametros da carga de trabalho:
+
+geracarga
+	-o <arq>	(arquivo de saida) 
+	-r <num>	(numero de rodadas)
+	-j <num>	(numero de jogadores)
+	-v <num>	(variancia jogadores)
+	-h	(opcoes de uso)
+
+
