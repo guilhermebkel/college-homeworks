@@ -124,6 +124,8 @@ void ArrangementList<Model>::sort(SortingType type, int (*getSortingParam)(Model
 		for (int j = i + 1; j < this->getSize(); j++) {
 			int firstItemSortingParam = getSortingParam(this->itens[i].model);
 			int secondItemSortingParam = getSortingParam(this->itens[j].model);
+			LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
+			LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
 
 			bool canSortDesc = type == SortingType::DESC && firstItemSortingParam < secondItemSortingParam;
 			bool canSortAsc = type == SortingType::ASC && firstItemSortingParam > secondItemSortingParam;
@@ -135,8 +137,8 @@ void ArrangementList<Model>::sort(SortingType type, int (*getSortingParam)(Model
 				this->itens[i] = itens[j];
 				this->itens[j] = tempModel;
 
-				LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
-				LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
+				ESCREVEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
+				ESCREVEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
 			}
 		}
 	}
