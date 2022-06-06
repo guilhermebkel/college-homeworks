@@ -20,7 +20,7 @@ enum SortingType {
 enum MemoryLogType {
 	UPDATE = 0,
 	CREATE = 1,
-	FIND_INDEX = 2,
+	FIND = 2,
 	SORT = 3
 };
 
@@ -47,8 +47,8 @@ template <typename Model> class ArrangementList {
 	private:
 		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];
 		int size;
-		int findIndex(StringKey key);
-		int findIndex(NumberKey key);
+		int findIndex(StringKey key, MemoryLogType memoryLogType);
+		int findIndex(NumberKey key, MemoryLogType memoryLogType);
 		StringKey castStringKey (NumberKey numberKey);
 		bool existsByIndex (int index);
 };
