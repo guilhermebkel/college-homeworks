@@ -17,6 +17,13 @@ enum SortingType {
 	DESC = 2
 };
 
+enum MemoryLogType {
+	UPDATE = 0,
+	CREATE = 1,
+	FIND_INDEX = 2,
+	SORT = 3
+};
+
 template <typename Model> struct Item {
 	Model model;
 	StringKey key;

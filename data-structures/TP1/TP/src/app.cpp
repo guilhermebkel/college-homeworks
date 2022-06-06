@@ -38,7 +38,7 @@ int main() {
 		fscanf(inputFile, "%d ", &participantsCount);
   	fscanf(inputFile, "%d ", &dropValue);
 
-		defineFaseMemLog(1);
+		defineFaseMemLog(0);
 		pokerFace->startRound(participantsCount, dropValue);
 
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
@@ -57,7 +57,7 @@ int main() {
 				hand[playerHandIndex] = card;
 			}
 
-			defineFaseMemLog(2);
+			defineFaseMemLog(1);
 			pokerFace->readPlay(playerName, betAmount, hand);
 		}
 	}
@@ -68,7 +68,7 @@ int main() {
   outputFile = fopen(castChar(outputFilePath), "wt");
 	erroAssert(outputFile != NULL, "Failed to create output file.");
 
-	defineFaseMemLog(3);
+	defineFaseMemLog(2);
 	Result result = pokerFace->finish();
 
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {

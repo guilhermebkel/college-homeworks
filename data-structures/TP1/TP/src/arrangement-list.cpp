@@ -4,6 +4,7 @@
 #include "poker-face.h"
 #include "arrangement-list.h"
 #include "shared-util.h"
+#include "memlog.h"
 
 template <typename Model>
 ArrangementList<Model>::ArrangementList () {
@@ -20,6 +21,8 @@ void ArrangementList<Model>::update (StringKey key, Model model) {
 	int index = this->findIndex(key);
 
 	this->itens[index].model = model;
+
+	LEMEMLOG((long int)(&(this->itens[index])),sizeof(Model), MemoryLogType::UPDATE);
 };
 
 template <typename Model>
@@ -37,6 +40,8 @@ void ArrangementList<Model>::create (StringKey key, Model model) {
 	strcpy(item.key, key);
 
 	this->itens[size] = item;
+
+	LEMEMLOG((long int)(&(this->itens[size])),sizeof(Model), MemoryLogType::CREATE);
 
 	this->size++;
 };
@@ -71,6 +76,8 @@ template <typename Model>
 int ArrangementList<Model>::findIndex (StringKey key) {
 	for (int index = 0; index < this->size; index++) {
 		Item<Model> foundItem = this->itens[index];
+
+		LEMEMLOG((long int)(&(this->itens[index])),sizeof(Model), MemoryLogType::FIND_INDEX);
 
 		bool foundKey = strcmp(foundItem.key, key) == 0;
 
@@ -123,10 +130,13 @@ void ArrangementList<Model>::sort(SortingType type, int (*getSortingParam)(Model
 			bool canSort = canSortDesc || canSortAsc;
 
 			if (canSort) {
-				Item<Model> tempModel = itens[i];
+				Item<Model> tempModel = this->itens[i];
 
-				itens[i] = itens[j];
-				itens[j] = tempModel;
+				this->itens[i] = itens[j];
+				this->itens[j] = tempModel;
+
+				LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
+				LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
 			}
 		}
 	}
