@@ -69,6 +69,8 @@ Item<Model> ArrangementList<Model>::findByKey (NumberKey key) {
 
 template <typename Model>
 Item<Model> ArrangementList<Model>::findByIndex (int index) {
+	LEMEMLOG((long int)(&(this->itens[index])),sizeof(Model), MemoryLogType::FIND);
+
 	return this->itens[index];
 };
 

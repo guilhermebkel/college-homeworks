@@ -7,8 +7,8 @@ Each sample counts as 0.01 seconds.
  time   seconds   seconds    calls  Ts/call  Ts/call  name    
   0.00      0.00     0.00    10006     0.00     0.00  RoundResult::RoundResult()
   0.00      0.00     0.00    10003     0.00     0.00  Item<RoundResult>::Item()
-  0.00      0.00     0.00     3569     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
-  0.00      0.00     0.00     2682     0.00     0.00  leMemLog(long, long, int)
+  0.00      0.00     0.00     4221     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
+  0.00      0.00     0.00     3334     0.00     0.00  leMemLog(long, long, int)
   0.00      0.00     0.00     2331     0.00     0.00  ArrangementList<CardCombo>::getSize()
   0.00      0.00     0.00     2220     0.00     0.00  getCardComboSortingParam(CardCombo)
   0.00      0.00     0.00     1289     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char>(char*)
@@ -160,19 +160,23 @@ index % time    self  children    called     name
 [9]      0.0    0.00    0.00   10003         Item<RoundResult>::Item() [9]
                 0.00    0.00   10003/10006       RoundResult::RoundResult() [8]
 -----------------------------------------------
-                0.00    0.00       1/3569        finalizaMemLog() [101]
-                0.00    0.00     886/3569        escreveMemLog(long, long, int) [19]
-                0.00    0.00    2682/3569        leMemLog(long, long, int) [11]
-[10]     0.0    0.00    0.00    3569         clkDifMemLog(timespec, timespec, timespec*) [10]
+                0.00    0.00       1/4221        finalizaMemLog() [101]
+                0.00    0.00     886/4221        escreveMemLog(long, long, int) [19]
+                0.00    0.00    3334/4221        leMemLog(long, long, int) [11]
+[10]     0.0    0.00    0.00    4221         clkDifMemLog(timespec, timespec, timespec*) [10]
 -----------------------------------------------
-                0.00    0.00       6/2682        ArrangementList<RoundResult>::findIndex(char*, MemoryLogType) [87]
-                0.00    0.00      20/2682        ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [110]
-                0.00    0.00      42/2682        ArrangementList<Round>::findIndex(char*, MemoryLogType) [52]
-                0.00    0.00     194/2682        ArrangementList<Balance>::findIndex(char*, MemoryLogType) [38]
-                0.00    0.00     200/2682        ArrangementList<Card>::sort(SortingType, int (*)(Card)) [68]
-                0.00    0.00    2220/2682        ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [36]
-[11]     0.0    0.00    0.00    2682         leMemLog(long, long, int) [11]
-                0.00    0.00    2682/3569        clkDifMemLog(timespec, timespec, timespec*) [10]
+                0.00    0.00       6/3334        ArrangementList<RoundResult>::findIndex(char*, MemoryLogType) [87]
+                0.00    0.00      20/3334        ArrangementList<Balance>::findByIndex(int) [56]
+                0.00    0.00      20/3334        ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [110]
+                0.00    0.00      27/3334        ArrangementList<Play>::findByIndex(int) [49]
+                0.00    0.00      42/3334        ArrangementList<Round>::findIndex(char*, MemoryLogType) [52]
+                0.00    0.00      50/3334        ArrangementList<Card>::findByIndex(int) [40]
+                0.00    0.00     194/3334        ArrangementList<Balance>::findIndex(char*, MemoryLogType) [38]
+                0.00    0.00     200/3334        ArrangementList<Card>::sort(SortingType, int (*)(Card)) [68]
+                0.00    0.00     555/3334        ArrangementList<CardCombo>::findByIndex(int) [26]
+                0.00    0.00    2220/3334        ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [36]
+[11]     0.0    0.00    0.00    3334         leMemLog(long, long, int) [11]
+                0.00    0.00    3334/4221        clkDifMemLog(timespec, timespec, timespec*) [10]
 -----------------------------------------------
                 0.00    0.00    2331/2331        ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [36]
 [12]     0.0    0.00    0.00    2331         ArrangementList<CardCombo>::getSize() [12]
@@ -218,7 +222,7 @@ index % time    self  children    called     name
                 0.00    0.00     118/886         ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [36]
                 0.00    0.00     555/886         ArrangementList<CardCombo>::create(char*, CardCombo) [28]
 [19]     0.0    0.00    0.00     886         escreveMemLog(long, long, int) [19]
-                0.00    0.00     886/3569        clkDifMemLog(timespec, timespec, timespec*) [10]
+                0.00    0.00     886/4221        clkDifMemLog(timespec, timespec, timespec*) [10]
 -----------------------------------------------
                 0.00    0.00       3/630         main [6]
                 0.00    0.00       6/630         ArrangementList<RoundResult>::castStringKey(int) [78]
@@ -252,6 +256,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00     555/555         groupCardsWithEqualValues(Card*) [34]
 [26]     0.0    0.00    0.00     555         ArrangementList<CardCombo>::findByIndex(int) [26]
+                0.00    0.00     555/3334        leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00     555/555         ArrangementList<CardCombo>::create(int, CardCombo) [29]
 [27]     0.0    0.00    0.00     555         ArrangementList<CardCombo>::castStringKey(int) [27]
@@ -298,7 +303,7 @@ index % time    self  children    called     name
 [36]     0.0    0.00    0.00     111         ArrangementList<CardCombo>::sort(SortingType, int (*)(CardCombo)) [36]
                 0.00    0.00    2331/2331        ArrangementList<CardCombo>::getSize() [12]
                 0.00    0.00    2220/2220        getCardComboSortingParam(CardCombo) [13]
-                0.00    0.00    2220/2682        leMemLog(long, long, int) [11]
+                0.00    0.00    2220/3334        leMemLog(long, long, int) [11]
                 0.00    0.00     118/886         escreveMemLog(long, long, int) [19]
 -----------------------------------------------
                 0.00    0.00     111/111         groupCardsWithEqualValues(Card*) [34]
@@ -308,7 +313,7 @@ index % time    self  children    called     name
                 0.00    0.00      23/61          ArrangementList<Balance>::findByKey(char*) [53]
                 0.00    0.00      28/61          ArrangementList<Balance>::update(char*, Balance) [48]
 [38]     0.0    0.00    0.00      61         ArrangementList<Balance>::findIndex(char*, MemoryLogType) [38]
-                0.00    0.00     194/2682        leMemLog(long, long, int) [11]
+                0.00    0.00     194/3334        leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00       7/57          assertTie(RoundWinner, Play) [75]
                 0.00    0.00      17/57          PokerFace::consolidateRoundResult(Round) [93]
@@ -317,6 +322,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00      50/50          PokerFace::readPlay(char*, int, Card*) [73]
 [40]     0.0    0.00    0.00      50         ArrangementList<Card>::findByIndex(int) [40]
+                0.00    0.00      50/3334        leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00      50/50          ArrangementList<Card>::create(int, Card) [43]
 [41]     0.0    0.00    0.00      50         ArrangementList<Card>::castStringKey(int) [41]
@@ -358,6 +364,7 @@ index % time    self  children    called     name
                 0.00    0.00      10/27          isInvalidPlay(Round, ArrangementList<Balance>*) [81]
                 0.00    0.00      17/27          PokerFace::consolidateRoundResult(Round) [93]
 [49]     0.0    0.00    0.00      27         ArrangementList<Play>::findByIndex(int) [49]
+                0.00    0.00      27/3334        leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00      25/25          handHasClassificationType(Card*, ClassifiedHandType) [32]
 [50]     0.0    0.00    0.00      25         handHasSequentialCombination(Card*) [50]
@@ -371,7 +378,7 @@ index % time    self  children    called     name
                 0.00    0.00      10/23          ArrangementList<Round>::update(char*, Round) [71]
                 0.00    0.00      13/23          ArrangementList<Round>::findByKey(char*) [64]
 [52]     0.0    0.00    0.00      23         ArrangementList<Round>::findIndex(char*, MemoryLogType) [52]
-                0.00    0.00      42/2682        leMemLog(long, long, int) [11]
+                0.00    0.00      42/3334        leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00      10/23          isInvalidPlay(Round, ArrangementList<Balance>*) [81]
                 0.00    0.00      13/23          PokerFace::consolidateRoundResult(Round) [93]
@@ -390,6 +397,7 @@ index % time    self  children    called     name
                 0.00    0.00       5/20          main [6]
                 0.00    0.00      15/20          PokerFace::consolidateRoundResult(Round) [93]
 [56]     0.0    0.00    0.00      20         ArrangementList<Balance>::findByIndex(int) [56]
+                0.00    0.00      20/3334        leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00      17/17          PokerFace::consolidateRoundResult(Round) [93]
 [57]     0.0    0.00    0.00      17         RoundWinner::RoundWinner(RoundWinner const&) [57]
@@ -447,7 +455,7 @@ index % time    self  children    called     name
 [68]     0.0    0.00    0.00      10         ArrangementList<Card>::sort(SortingType, int (*)(Card)) [68]
                 0.00    0.00     210/210         ArrangementList<Card>::getSize() [31]
                 0.00    0.00     200/200         getCardSortingParam(Card) [33]
-                0.00    0.00     200/2682        leMemLog(long, long, int) [11]
+                0.00    0.00     200/3334        leMemLog(long, long, int) [11]
                 0.00    0.00      90/886         escreveMemLog(long, long, int) [19]
 -----------------------------------------------
                 0.00    0.00      10/10          PokerFace::readPlay(char*, int, Card*) [73]
@@ -548,7 +556,7 @@ index % time    self  children    called     name
                 0.00    0.00       3/3           ArrangementList<RoundResult>::findByKey(char*) [85]
 [87]     0.0    0.00    0.00       3         ArrangementList<RoundResult>::findIndex(char*, MemoryLogType) [87]
                 0.00    0.00       6/9           Item<RoundResult>::Item(Item<RoundResult> const&) [74]
-                0.00    0.00       6/2682        leMemLog(long, long, int) [11]
+                0.00    0.00       6/3334        leMemLog(long, long, int) [11]
                 0.00    0.00       6/12          Item<RoundResult>::~Item() [67]
 -----------------------------------------------
                 0.00    0.00       3/3           PokerFace::startRound(int, int) [92]
@@ -618,7 +626,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00       1/1           main [6]
 [101]    0.0    0.00    0.00       1         finalizaMemLog() [101]
-                0.00    0.00       1/3569        clkDifMemLog(timespec, timespec, timespec*) [10]
+                0.00    0.00       1/4221        clkDifMemLog(timespec, timespec, timespec*) [10]
 -----------------------------------------------
                 0.00    0.00       1/1           _GLOBAL__sub_I_main [98]
 [102]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [102]
@@ -651,7 +659,7 @@ index % time    self  children    called     name
 [110]    0.0    0.00    0.00       1         ArrangementList<Balance>::sort(SortingType, int (*)(Balance)) [110]
                 0.00    0.00      21/45          ArrangementList<Balance>::getSize() [44]
                 0.00    0.00      20/20          getBalanceSortingParam(Balance) [55]
-                0.00    0.00      20/2682        leMemLog(long, long, int) [11]
+                0.00    0.00      20/3334        leMemLog(long, long, int) [11]
                 0.00    0.00      14/886         escreveMemLog(long, long, int) [19]
 -----------------------------------------------
                 0.00    0.00       1/1           PokerFace::PokerFace(int, int) [113]
