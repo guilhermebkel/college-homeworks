@@ -8,6 +8,7 @@
 #include "msgassert.h"
 #include "memlog.h"
 #include "shared-util.h"
+#include "app.h"
 
 using namespace std;
  
@@ -38,7 +39,7 @@ int main() {
 		fscanf(inputFile, "%d ", &participantsCount);
   	fscanf(inputFile, "%d ", &dropValue);
 
-		defineFaseMemLog(0);
+		defineFaseMemLog(MemoryLogLevel::START_ROUND);
 		pokerFace->startRound(participantsCount, dropValue);
 
 		for (int playerIndex = 0; playerIndex < participantsCount; playerIndex++) {
@@ -57,7 +58,7 @@ int main() {
 				hand[playerHandIndex] = card;
 			}
 
-			defineFaseMemLog(1);
+			defineFaseMemLog(MemoryLogLevel::READ_PLAY);
 			pokerFace->readPlay(playerName, betAmount, hand);
 		}
 	}
@@ -68,7 +69,7 @@ int main() {
   outputFile = fopen(castChar(outputFilePath), "wt");
 	erroAssert(outputFile != NULL, "Failed to create output file.");
 
-	defineFaseMemLog(2);
+	defineFaseMemLog(MemoryLogLevel::FINISH);
 	Result result = pokerFace->finish();
 
 	for (int roundIndex = 0; roundIndex < result.totalRounds; roundIndex++) {
