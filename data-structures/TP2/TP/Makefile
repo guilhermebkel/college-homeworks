@@ -17,13 +17,16 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build gprof memlog
+all: build
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
+	$(CC) $(CFLAGS) -c $(SRC)/app-util.cpp -pg -o $(OBJ)/app-util.o
+	$(CC) $(CFLAGS) -c $(SRC)/shared-util.cpp -pg -o $(OBJ)/shared-util.o
+	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -pg -o $(OBJ)/arrangement-list.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -pg -o $(OBJ)/memlog.o
 	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
-	$(EXE)
+	$(EXE) -i ../data/input/1.tst.i
 
 gprof:
 	$(EXE)

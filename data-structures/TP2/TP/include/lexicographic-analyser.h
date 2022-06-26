@@ -4,13 +4,17 @@
 #include <iostream>
 #include <string>
 
+#include "arrangement-list.h"
+
 class LexicographicAnalyser {
   public:
     LexicographicAnalyser(std::string lexicographicalOrdering);
-		void readText(std::string text);
+		void readWord(std::string word);
+		ArrangementList<int> *getResult();
 
 	private:
-		std::string *words;
+		ArrangementList<int> *wordOcurrences;
+		std::string lexicographicalOrdering;
 };
 
 #endif
