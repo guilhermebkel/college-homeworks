@@ -9,7 +9,7 @@
 LexicographicAnalyser::LexicographicAnalyser(std::string lexicographicalOrdering) {
 	this->lexicographicalOrdering =  lexicographicalOrdering;
 
-	this->wordOcurrences = new ArrangementList<int>();
+	this->wordOccurences = new ArrangementList<int>();
 };
 
 void LexicographicAnalyser::readWord (std::string word) {
@@ -17,17 +17,29 @@ void LexicographicAnalyser::readWord (std::string word) {
 
 	char *normalizedWordInChar = castChar(normalizedWord);
 
-	bool isWordAlreadyComputed = this->wordOcurrences->existsByKey(normalizedWordInChar);
+	bool isWordAlreadyComputed = this->wordOccurences->existsByKey(normalizedWordInChar);
 
 	if (isWordAlreadyComputed) {
-		Item<int> computedWord = this->wordOcurrences->findByKey(normalizedWordInChar);
+		Item<int> computedWord = this->wordOccurences->findByKey(normalizedWordInChar);
 
-		this->wordOcurrences->update(computedWord.key, computedWord.model + 1);
+		this->wordOccurences->update(computedWord.key, computedWord.model + 1);
 	} else {
-		this->wordOcurrences->create(normalizedWordInChar, 1);
+		this->wordOccurences->create(normalizedWordInChar, 1);
 	}
 };
 
 ArrangementList<int> *LexicographicAnalyser::getResult () {
-	return this->wordOcurrences;
+	ArrangementList<std::string> *orderedWords = new ArrangementList<std::string>();
+
+	ArrangementList<int> *orderedWordOccurences = new ArrangementList<int>();
+
+	for (int i = 0; i < orderedWords->getSize(); i++) {
+		Item<std::string> orderedWord = orderedWords->findByIndex(i);
+
+		Item<int> wordOcurrence = this->wordOccurences->findByKey(orderedWord.key);
+
+		orderedWordOccurences->create(wordOcurrence.key, wordOcurrence.model);
+	}
+
+	return orderedWordOccurences;
 };

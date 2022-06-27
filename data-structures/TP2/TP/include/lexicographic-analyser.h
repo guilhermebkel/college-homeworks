@@ -13,7 +13,7 @@ class LexicographicAnalyser {
 		ArrangementList<int> *getResult();
 
 	private:
-		ArrangementList<int> *wordOcurrences;
+		ArrangementList<int> *wordOccurences;
 		std::string lexicographicalOrdering;
 };
 

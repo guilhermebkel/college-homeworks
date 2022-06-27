@@ -5,5 +5,6 @@
 #include "iostream"
 
 std::string normalizeWord (std::string word);
+std::string lexicographicalSortingParam (std::string word);
 
 #endif

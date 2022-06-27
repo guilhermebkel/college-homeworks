@@ -146,3 +146,4 @@ void ArrangementList<Model>::sort(SortingType type, int (*getSortingParam)(Model
 };
 
 template class ArrangementList<int>;
+template class ArrangementList<std::string>;
