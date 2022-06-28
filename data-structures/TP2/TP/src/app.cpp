@@ -46,6 +46,9 @@ int main(int argc, char ** argv) {
 		}
 	}
 
+	inputFile.close();
+	erroAssert(!inputFile.fail(), "Failed to close input file.");
+
 	ArrangementList<int> *result = lexicographicAnalyser->getResult();
 
 	for (int i = 0; i < result->getSize(); i++) {
