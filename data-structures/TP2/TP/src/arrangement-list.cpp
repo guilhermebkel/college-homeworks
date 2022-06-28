@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "arrangement-list.h"
+#include "lexicographic-analyser.h"
 #include "shared-util.h"
 #include "memlog.h"
 
@@ -120,13 +121,13 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 };
 
 template <typename Model>
-void ArrangementList<Model>::sort(bool (*compareKeys)(std::string, std::string)) {
+void ArrangementList<Model>::sort(CompareKeys<Model> compareKeys) {
 	for (int i = 0; i < this->getSize(); i++) {
 		for (int j = i + 1; j < this->getSize(); j++) {
 			LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
 			LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
 
-			bool canSort = compareKeys(this->itens[i].key, this->itens[j].key);
+			bool canSort = compareKeys(this->itens[i].model, this->itens[j].model);
 
 			if (canSort) {
 				Item<Model> tempModel = this->itens[i];
@@ -141,5 +142,5 @@ void ArrangementList<Model>::sort(bool (*compareKeys)(std::string, std::string))
 	}
 };
 
-template class ArrangementList<int>;
+template class ArrangementList<WordOccurence>;
 template class ArrangementList<std::string>;

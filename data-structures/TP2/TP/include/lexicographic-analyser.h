@@ -6,15 +6,21 @@
 
 #include "arrangement-list.h"
 
+typedef struct WordOccurence {
+	int count;
+	std::string rawWord;
+	std::string normalizedWord;
+} WordOccurence;
+
 class LexicographicAnalyser {
   public:
     LexicographicAnalyser();
 		void readWord(std::string word);
-		ArrangementList<int> *getResult();
+		ArrangementList<WordOccurence> *getResult();
 		void readOrdering (std::string letter);
 
 	private:
-		ArrangementList<int> *wordOccurences;
+		ArrangementList<WordOccurence> *wordOccurences;
 		ArrangementList<std::string> *ordering;
 };
 

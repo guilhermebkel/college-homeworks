@@ -49,12 +49,12 @@ int main(int argc, char ** argv) {
 	inputFile.close();
 	erroAssert(!inputFile.fail(), "Failed to close input file.");
 
-	ArrangementList<int> *result = lexicographicAnalyser->getResult();
+	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult();
 
 	for (int i = 0; i < result->getSize(); i++) {
-		Item<int> computedWord = result->findByIndex(i);
+		Item<WordOccurence> computedWord = result->findByIndex(i);
 
-		std::cout << computedWord.key << " " << computedWord.model << std::endl;
+		std::cout << computedWord.model.normalizedWord << " " << computedWord.model.count << std::endl;
 	}
 
 	std::cout << "#FIM" << std::endl;

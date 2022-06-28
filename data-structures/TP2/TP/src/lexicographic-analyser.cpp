@@ -7,7 +7,7 @@
 #include "shared-util.h"
 
 LexicographicAnalyser::LexicographicAnalyser() {
-	this->wordOccurences = new ArrangementList<int>();
+	this->wordOccurences = new ArrangementList<WordOccurence>();
 	this->ordering = new ArrangementList<std::string>();
 };
 
@@ -23,31 +23,39 @@ void LexicographicAnalyser::readWord (std::string word) {
 	bool isWordAlreadyComputed = this->wordOccurences->existsByKey(normalizedWordInChar);
 
 	if (isWordAlreadyComputed) {
-		Item<int> computedWord = this->wordOccurences->findByKey(normalizedWordInChar);
+		Item<WordOccurence> computedWord = this->wordOccurences->findByKey(normalizedWordInChar);
 
-		this->wordOccurences->update(computedWord.key, computedWord.model + 1);
+		computedWord.model.count++;
+
+		this->wordOccurences->update(computedWord.key, computedWord.model);
 	} else {
-		this->wordOccurences->create(normalizedWordInChar, 1);
+		WordOccurence wordOccurence;
+
+		wordOccurence.rawWord = word;
+		wordOccurence.count = 1;
+		wordOccurence.normalizedWord = normalizedWord;
+
+		this->wordOccurences->create(normalizedWordInChar, wordOccurence);
 	}
 };
 
-ArrangementList<int> *LexicographicAnalyser::getResult () {
-	ArrangementList<std::string> *orderedWords = new ArrangementList<std::string>();
+ArrangementList<WordOccurence> *LexicographicAnalyser::getResult () {
+	ArrangementList<WordOccurence> *orderedWords = new ArrangementList<WordOccurence>();
 
 	for (int i = 0; i < this->wordOccurences->getSize(); i++) {
-		Item<int> computedWord = this->wordOccurences->findByIndex(i);
+		Item<WordOccurence> computedWord = this->wordOccurences->findByIndex(i);
 
-		orderedWords->create(computedWord.key, computedWord.key);
+		orderedWords->create(computedWord.key, computedWord.model);
 	}
 	
 	orderedWords->sort(compareLexicographicalWords(this->ordering));
 
-	ArrangementList<int> *orderedWordOccurences = new ArrangementList<int>();
+	ArrangementList<WordOccurence> *orderedWordOccurences = new ArrangementList<WordOccurence>();
 
 	for (int i = 0; i < orderedWords->getSize(); i++) {
-		Item<std::string> orderedWord = orderedWords->findByIndex(i);
+		Item<WordOccurence> orderedWord = orderedWords->findByIndex(i);
 
-		Item<int> wordOcurrence = this->wordOccurences->findByKey(orderedWord.key);
+		Item<WordOccurence> wordOcurrence = this->wordOccurences->findByKey(orderedWord.key);
 
 		orderedWordOccurences->create(wordOcurrence.key, wordOcurrence.model);
 	}
