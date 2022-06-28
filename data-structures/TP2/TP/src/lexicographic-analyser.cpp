@@ -6,10 +6,13 @@
 #include "arrangement-list.h"
 #include "shared-util.h"
 
-LexicographicAnalyser::LexicographicAnalyser(std::string lexicographicalOrdering) {
-	this->lexicographicalOrdering =  lexicographicalOrdering;
-
+LexicographicAnalyser::LexicographicAnalyser() {
 	this->wordOccurences = new ArrangementList<int>();
+	this->ordering = new ArrangementList<std::string>();
+};
+
+void LexicographicAnalyser::readOrdering (std::string letter) {
+	this->ordering->create(castChar(letter), letter);
 };
 
 void LexicographicAnalyser::readWord (std::string word) {

@@ -8,13 +8,14 @@
 
 class LexicographicAnalyser {
   public:
-    LexicographicAnalyser(std::string lexicographicalOrdering);
+    LexicographicAnalyser();
 		void readWord(std::string word);
 		ArrangementList<int> *getResult();
+		void readOrdering (std::string letter);
 
 	private:
 		ArrangementList<int> *wordOccurences;
-		std::string lexicographicalOrdering;
+		ArrangementList<std::string> *ordering;
 };
 
 #endif
