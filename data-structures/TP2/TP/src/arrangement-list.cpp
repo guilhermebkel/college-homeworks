@@ -120,17 +120,13 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 };
 
 template <typename Model>
-void ArrangementList<Model>::sort(SortingType type, int (*getSortingParam)(Model)) {
+void ArrangementList<Model>::sort(bool (*compareKeys)(std::string, std::string)) {
 	for (int i = 0; i < this->getSize(); i++) {
 		for (int j = i + 1; j < this->getSize(); j++) {
-			int firstItemSortingParam = getSortingParam(this->itens[i].model);
-			int secondItemSortingParam = getSortingParam(this->itens[j].model);
 			LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
 			LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
 
-			bool canSortDesc = type == SortingType::DESC && firstItemSortingParam < secondItemSortingParam;
-			bool canSortAsc = type == SortingType::ASC && firstItemSortingParam > secondItemSortingParam;
-			bool canSort = canSortDesc || canSortAsc;
+			bool canSort = compareKeys(this->itens[i].key, this->itens[j].key);
 
 			if (canSort) {
 				Item<Model> tempModel = this->itens[i];

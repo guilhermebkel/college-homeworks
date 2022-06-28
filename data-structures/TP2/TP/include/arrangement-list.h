@@ -11,11 +11,7 @@
 
 typedef char *StringKey;
 typedef int NumberKey;
-
-enum SortingType {
-	ASC = 1,
-	DESC = 2
-};
+typedef bool (*CompareKeys)(std::string, std::string);
 
 enum MemoryLogType {
 	UPDATE = 0,
@@ -42,7 +38,7 @@ template <typename Model> class ArrangementList {
 		bool existsByKey(StringKey key);
 		bool existsByKey(NumberKey key);
 		Item<Model> findByIndex(int index);
-		void sort(SortingType type, int (*getSortingParam)(Model));
+		void sort(CompareKeys compareKeys);
 
 	private:
 		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];

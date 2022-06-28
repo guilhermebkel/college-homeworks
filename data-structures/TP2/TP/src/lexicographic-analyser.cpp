@@ -39,6 +39,8 @@ ArrangementList<int> *LexicographicAnalyser::getResult () {
 
 		orderedWords->create(computedWord.key, computedWord.key);
 	}
+	
+	orderedWords->sort(compareLexicographicalWords(this->ordering));
 
 	ArrangementList<int> *orderedWordOccurences = new ArrangementList<int>();
 

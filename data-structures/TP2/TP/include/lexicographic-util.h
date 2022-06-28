@@ -4,7 +4,11 @@
 #include "string.h"
 #include "iostream"
 
+#include "arrangement-list.h"
+
+typedef bool (*compareKeys)(std::string, std::string);
+
 std::string normalizeWord (std::string word);
-std::string lexicographicalSortingParam (std::string word);
+CompareKeys compareLexicographicalWords (ArrangementList<std::string> *ordering);
 
 #endif

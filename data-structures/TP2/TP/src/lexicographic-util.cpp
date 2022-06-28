@@ -1,4 +1,7 @@
+#include <string.h>
+
 #include "lexicographic-util.h"
+#include "arrangement-list.h"
 #include "shared-util.h"
 
 std::string normalizeWord (std::string word) {
@@ -9,6 +12,12 @@ std::string normalizeWord (std::string word) {
 	return wordWithoutSpecialCharacters;
 };
 
-std::string lexicographicalSortingParam (std::string word) {
-	return word;
+CompareKeys compareLexicographicalWords (ArrangementList<std::string> *ordering) {
+	struct Currying {
+    static bool compare (std::string firstWord, std::string secondWord) {
+			return true;
+    }
+  };
+
+	return Currying::compare;
 };
