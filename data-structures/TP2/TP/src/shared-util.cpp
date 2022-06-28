@@ -32,7 +32,7 @@ std::string removeSpecialCharacters (std::string value) {
 
 		bool isSpecialCharacter = (character < 'A' || character > 'Z') && (character < 'a' || character > 'z');
 
-		if (isSpecialCharacter) { 
+		if (isSpecialCharacter) {
 			valueWithoutSpecialCharacters.erase(i, 1);
 
 			i--;
