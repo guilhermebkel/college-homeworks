@@ -46,5 +46,15 @@ int main(int argc, char ** argv) {
 		}
 	}
 
+	ArrangementList<int> *result = lexicographicAnalyser->getResult();
+
+	for (int i = 0; i < result->getSize(); i++) {
+		Item<int> computedWord = result->findByIndex(i);
+
+		std::cout << computedWord.key << " " << computedWord.model << std::endl;
+	}
+
+	std::cout << "#FIM" << std::endl;
+
 	return 0;
 }

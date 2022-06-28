@@ -29,7 +29,7 @@ build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/lexicographic-util.cpp -pg -o $(OBJ)/lexicographic-util.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -pg -o $(OBJ)/memlog.o
 	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
-	$(EXE) -i ../data/input/1.tst.i
+	$(EXE) -i ../data/input.txt
 
 gprof:
 	$(EXE)

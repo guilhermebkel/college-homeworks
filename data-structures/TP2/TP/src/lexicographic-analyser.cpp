@@ -34,6 +34,12 @@ void LexicographicAnalyser::readWord (std::string word) {
 ArrangementList<int> *LexicographicAnalyser::getResult () {
 	ArrangementList<std::string> *orderedWords = new ArrangementList<std::string>();
 
+	for (int i = 0; i < this->wordOccurences->getSize(); i++) {
+		Item<int> computedWord = this->wordOccurences->findByIndex(i);
+
+		orderedWords->create(computedWord.key, computedWord.key);
+	}
+
 	ArrangementList<int> *orderedWordOccurences = new ArrangementList<int>();
 
 	for (int i = 0; i < orderedWords->getSize(); i++) {
