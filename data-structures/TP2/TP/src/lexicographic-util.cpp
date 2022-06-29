@@ -48,9 +48,9 @@ bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence seco
 	int comparison;
 
 	if (isSpecialCharacter(firstRawWordComparableLetter) || isSpecialCharacter(secondRawWordComparableLetter)) {
-		comparison = firstRawWordComparableLetter - secondRawWordComparableLetter;
+		comparison = secondRawWordComparableLetter - firstRawWordComparableLetter;
 	} else {
-		comparison = getLexicographicalValue(firstRawWordComparableLetter, lexicographicalOrdering) - getLexicographicalValue(secondRawWordComparableLetter, lexicographicalOrdering);
+		comparison = getLexicographicalValue(secondRawWordComparableLetter, lexicographicalOrdering) - getLexicographicalValue(firstRawWordComparableLetter, lexicographicalOrdering);
 	}
 
 	if (comparison > 0) {

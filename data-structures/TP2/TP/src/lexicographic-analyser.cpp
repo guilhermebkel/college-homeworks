@@ -12,7 +12,11 @@ LexicographicAnalyser::LexicographicAnalyser() {
 };
 
 void LexicographicAnalyser::readOrdering (std::string letter) {
-	this->ordering->create(castChar(letter), letter);
+	char letterInCharFormat = letter[0];
+
+	char lowerCasedLetter = lowerCaseLetter(letterInCharFormat);
+
+	this->ordering->create(lowerCasedLetter, letter);
 };
 
 void LexicographicAnalyser::readWord (std::string word) {
