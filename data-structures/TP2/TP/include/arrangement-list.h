@@ -9,9 +9,12 @@
 #define MAX_KEY_SIZE 200
 #endif
 
+#include <iostream>
+#include <functional>
+
 typedef char *StringKey;
 typedef int NumberKey;
-template <typename Model> using CompareKeys = bool (*CompareKeys)(Model, Model);
+template <typename Model> using CompareKeys = std::function<bool (Model, Model)>;
 
 enum MemoryLogType {
 	UPDATE = 0,

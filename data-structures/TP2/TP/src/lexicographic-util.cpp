@@ -3,6 +3,7 @@
 #include "lexicographic-util.h"
 #include "arrangement-list.h"
 #include "shared-util.h"
+#include "lexicographic-analyser.h"
 
 std::string normalizeWord (std::string word) {
 	std::string lowerCasedWord = toLowerCase(word);
@@ -12,9 +13,9 @@ std::string normalizeWord (std::string word) {
 	return wordWithoutSpecialCharacters;
 };
 
-CompareKeys compareLexicographicalWords (ArrangementList<std::string> *ordering) {
+CompareKeys<WordOccurence> compareLexicographicalWords (ArrangementList<std::string> *ordering) {
 	struct Currying {
-    static bool compare (std::string firstWord, std::string secondWord) {
+    static bool compare (WordOccurence firstModel, WordOccurence secondModel) {
 			return true;
     }
   };

@@ -5,10 +5,11 @@
 #include "iostream"
 
 #include "arrangement-list.h"
+#include "lexicographic-analyser.h"
 
 typedef bool (*compareKeys)(std::string, std::string);
 
 std::string normalizeWord (std::string word);
-CompareKeys compareLexicographicalWords (ArrangementList<std::string> *ordering);
+CompareKeys<WordOccurence> compareLexicographicalWords (ArrangementList<std::string> *ordering);
 
 #endif
