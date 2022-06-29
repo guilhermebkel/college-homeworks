@@ -36,6 +36,7 @@ void ArrangementList<Model>::create (StringKey key, Model model) {
 
 	item.model = model;
 	item.key = (char*)malloc(MAX_KEY_SIZE * sizeof(char));
+	item.index = size;
 
 	strcpy(item.key, key);
 
@@ -121,13 +122,13 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 };
 
 template <typename Model>
-void ArrangementList<Model>::sort(CompareKeys<Model> compareKeys) {
+void ArrangementList<Model>::sort(CompareKeys<Model> compareKeys, ArrangementList<std::string> *lexicographicalOrdering) {
 	for (int i = 0; i < this->getSize(); i++) {
 		for (int j = i + 1; j < this->getSize(); j++) {
 			LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
 			LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
 
-			bool canSort = compareKeys(this->itens[i].model, this->itens[j].model);
+			bool canSort = compareKeys(this->itens[i].model, this->itens[j].model, lexicographicalOrdering);
 
 			if (canSort) {
 				Item<Model> tempModel = this->itens[i];

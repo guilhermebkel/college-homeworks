@@ -7,9 +7,8 @@
 #include "arrangement-list.h"
 #include "lexicographic-analyser.h"
 
-typedef bool (*compareKeys)(std::string, std::string);
-
 std::string normalizeWord (std::string word);
-CompareKeys<WordOccurence> compareLexicographicalWords (ArrangementList<std::string> *ordering);
+bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence secondModel, ArrangementList<std::string> *lexicographicalOrdering);
+int getLexicographicalValue (char character, ArrangementList<std::string> *ordering);
 
 #endif

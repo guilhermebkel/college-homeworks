@@ -1,4 +1,5 @@
 #include <string.h>
+#include <iostream>
 
 #include "lexicographic-util.h"
 #include "arrangement-list.h"
@@ -6,19 +7,55 @@
 #include "lexicographic-analyser.h"
 
 std::string normalizeWord (std::string word) {
-	std::string lowerCasedWord = toLowerCase(word);
+	std::string lowerCasedWord = lowerCaseWord(word);
 
 	std::string wordWithoutSpecialCharacters = removeSpecialCharacters(lowerCasedWord);
 
 	return wordWithoutSpecialCharacters;
 };
 
-CompareKeys<WordOccurence> compareLexicographicalWords (ArrangementList<std::string> *ordering) {
-	struct Currying {
-    static bool compare (WordOccurence firstModel, WordOccurence secondModel) {
-			return true;
-    }
-  };
+int getLexicographicalValue (char character, ArrangementList<std::string> *ordering) {
+	char lowerCasedLetter = lowerCaseLetter(character);
 
-	return Currying::compare;
+	bool lexicographicalOrderingExists = ordering->existsByKey(lowerCasedLetter);
+
+	if (lexicographicalOrderingExists) {
+		Item<std::string> lexicographicalOrdering = ordering->findByKey(lowerCasedLetter);
+
+		int lexicographicalValue = ordering->getSize() - lexicographicalOrdering.index;
+
+		return lexicographicalValue;
+	} else {
+		return -1;
+	}
 };
+
+bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence secondModel, ArrangementList<std::string> *lexicographicalOrdering) {
+	int i;
+
+	std::string firstRawWord = firstModel.rawWord;
+	std::string secondRawWord = secondModel.rawWord;
+
+	for (i = 0; firstRawWord[i] == secondRawWord[i]; ++i) {
+		if (firstRawWord[i] == '\0') {
+			return 0;
+		}
+	}
+
+	unsigned char firstRawWordComparableLetter = firstRawWord[i];
+	unsigned char secondRawWordComparableLetter = secondRawWord[i];
+
+	int comparison;
+
+	if (isSpecialCharacter(firstRawWordComparableLetter) || isSpecialCharacter(secondRawWordComparableLetter)) {
+		comparison = firstRawWordComparableLetter - secondRawWordComparableLetter;
+	} else {
+		comparison = getLexicographicalValue(firstRawWordComparableLetter, lexicographicalOrdering) - getLexicographicalValue(secondRawWordComparableLetter, lexicographicalOrdering);
+	}
+
+	if (comparison > 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
