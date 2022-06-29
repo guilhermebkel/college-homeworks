@@ -16,8 +16,6 @@ typedef char *StringKey;
 typedef int NumberKey;
 typedef char LexicographicalOrdering[100];
 
-template <typename Model> using CompareKeys = std::function<bool (Model, Model)>;
-
 enum MemoryLogType {
 	UPDATE = 0,
 	CREATE = 1,
@@ -44,7 +42,7 @@ template <typename Model> class ArrangementList {
 		bool existsByKey(StringKey key);
 		bool existsByKey(NumberKey key);
 		Item<Model> findByIndex(int index);
-		void sort(CompareKeys<Model> compareKeys, ArrangementList<std::string> *lexicographicalOrdering);
+		void sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering);
 
 	private:
 		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];

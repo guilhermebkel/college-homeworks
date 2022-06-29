@@ -122,7 +122,7 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 };
 
 template <typename Model>
-void ArrangementList<Model>::sort(CompareKeys<Model> compareKeys, ArrangementList<std::string> *lexicographicalOrdering) {
+void ArrangementList<Model>::sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering) {
 	for (int i = 0; i < this->getSize(); i++) {
 		for (int j = i + 1; j < this->getSize(); j++) {
 			LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
