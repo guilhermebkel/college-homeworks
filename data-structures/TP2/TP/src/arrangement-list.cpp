@@ -124,9 +124,9 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 
 template <typename Model>
 void ArrangementList<Model>::sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering) {
-	ArrangementListSorting<Model> *arrangementListSorting = new ArrangementListSorting<Model>(this->getSize());
+	ArrangementListSorting<Model> *arrangementListSorting = new ArrangementListSorting<Model>(this->getSize(), lexicographicalOrdering);
 
-	return arrangementListSorting->selectionSort(this->itens, compareKeys, lexicographicalOrdering);
+	return arrangementListSorting->quickSort(this->itens, compareKeys);
 };
 
 template class ArrangementList<WordOccurence>;
