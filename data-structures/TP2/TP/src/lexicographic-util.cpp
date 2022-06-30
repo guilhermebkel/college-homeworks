@@ -36,8 +36,6 @@ bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence seco
 	std::string firstRawWord = firstModel.rawWord;
 	std::string secondRawWord = secondModel.rawWord;
 
-	std::cout << firstRawWord << " " << secondRawWord << std::endl;
-
 	for (i = 0; firstRawWord[i] == secondRawWord[i]; ++i) {
 		if (firstRawWord[i] == '\0') {
 			return 0;
@@ -54,6 +52,8 @@ bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence seco
 	} else {
 		comparison = getLexicographicalValue(secondRawWordComparableLetter, lexicographicalOrdering) - getLexicographicalValue(firstRawWordComparableLetter, lexicographicalOrdering);
 	}
+
+	std::cout << firstRawWord << " " << secondRawWord << " " << comparison << std::endl;
 
 	if (comparison > 0) {
 		return true;
