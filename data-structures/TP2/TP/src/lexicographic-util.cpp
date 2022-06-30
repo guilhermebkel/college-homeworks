@@ -36,6 +36,8 @@ bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence seco
 	std::string firstRawWord = firstModel.rawWord;
 	std::string secondRawWord = secondModel.rawWord;
 
+	std::cout << firstRawWord << " " << secondRawWord << std::endl;
+
 	for (i = 0; firstRawWord[i] == secondRawWord[i]; ++i) {
 		if (firstRawWord[i] == '\0') {
 			return 0;

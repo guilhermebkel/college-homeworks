@@ -21,6 +21,8 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 	x = itens[(*i + *j)/2];
 
 	do {
+		std::cout << compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering) << std::endl; 
+		std::cout << compareKeys(x.model, itens[*j].model, this->lexicographicalOrdering) << std::endl; 
 		while (compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering)) {
 			(*i)++;
 		}
@@ -38,7 +40,7 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 			(*j)--;
 		}
 	} while (*i <= *j);
-}
+};
 
 template <typename Model>
 void ArrangementListSorting<Model>::quickSortOrder(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
@@ -53,12 +55,12 @@ void ArrangementListSorting<Model>::quickSortOrder(int left, int right, Item<Mod
 	if (i < right) {
 		this->quickSortOrder(i, right, itens, compareKeys);
 	}
-}
+};
 
 template <typename Model>
 void ArrangementListSorting<Model>::quickSort(Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
 	this->quickSortOrder(0, this->size - 1, itens, compareKeys);
-}
+};
 
 template <typename Model>
 void ArrangementListSorting<Model>::selectionSort(Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
