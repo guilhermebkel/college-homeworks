@@ -25,6 +25,7 @@ build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app-validation.cpp -pg -o $(OBJ)/app-validation.o
 	$(CC) $(CFLAGS) -c $(SRC)/shared-util.cpp -pg -o $(OBJ)/shared-util.o
 	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -pg -o $(OBJ)/arrangement-list.o
+	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list-sorting.cpp -pg -o $(OBJ)/arrangement-list-sorting.o
 	$(CC) $(CFLAGS) -c $(SRC)/lexicographic-analyser.cpp -pg -o $(OBJ)/lexicographic-analyser.o
 	$(CC) $(CFLAGS) -c $(SRC)/lexicographic-util.cpp -pg -o $(OBJ)/lexicographic-util.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -pg -o $(OBJ)/memlog.o

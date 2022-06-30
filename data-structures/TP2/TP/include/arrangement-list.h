@@ -10,7 +10,6 @@
 #endif
 
 #include <iostream>
-#include <functional>
 
 typedef char *StringKey;
 typedef int NumberKey;

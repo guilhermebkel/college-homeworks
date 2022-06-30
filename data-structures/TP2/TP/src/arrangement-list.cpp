@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "arrangement-list.h"
+#include "arrangement-list-sorting.h"
 #include "lexicographic-analyser.h"
 #include "shared-util.h"
 #include "memlog.h"
@@ -123,24 +124,9 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 
 template <typename Model>
 void ArrangementList<Model>::sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering) {
-	for (int i = 0; i < this->getSize(); i++) {
-		for (int j = i + 1; j < this->getSize(); j++) {
-			LEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
-			LEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
+	ArrangementListSorting<Model> *arrangementListSorting = new ArrangementListSorting<Model>(this->getSize());
 
-			bool canSort = compareKeys(this->itens[i].model, this->itens[j].model, lexicographicalOrdering);
-
-			if (canSort) {
-				Item<Model> tempModel = this->itens[i];
-
-				this->itens[i] = itens[j];
-				this->itens[j] = tempModel;
-
-				ESCREVEMEMLOG((long int)(&(this->itens[i])),sizeof(Model), MemoryLogType::SORT);
-				ESCREVEMEMLOG((long int)(&(this->itens[j])),sizeof(Model), MemoryLogType::SORT);
-			}
-		}
-	}
+	return arrangementListSorting->selectionSort(this->itens, compareKeys, lexicographicalOrdering);
 };
 
 template class ArrangementList<WordOccurence>;
