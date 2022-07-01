@@ -21,13 +21,11 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 	x = itens[(*i + *j)/2];
 
 	do {
-		std::cout << compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering) << std::endl; 
-		std::cout << compareKeys(x.model, itens[*j].model, this->lexicographicalOrdering) << std::endl; 
 		while (compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering)) {
 			(*i)++;
 		}
 
-		while (compareKeys(x.model, itens[*j].model, this->lexicographicalOrdering)) {
+		while (compareKeys(itens[*j].model, x.model, this->lexicographicalOrdering)) {
 			(*j)--;
 		}
 

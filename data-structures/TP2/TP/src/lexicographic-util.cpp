@@ -53,8 +53,6 @@ bool makeLexicographicalComparison (WordOccurence firstModel, WordOccurence seco
 		comparison = getLexicographicalValue(secondRawWordComparableLetter, lexicographicalOrdering) - getLexicographicalValue(firstRawWordComparableLetter, lexicographicalOrdering);
 	}
 
-	std::cout << firstRawWord << " " << secondRawWord << " " << comparison << std::endl;
-
 	if (comparison > 0) {
 		return true;
 	} else {
