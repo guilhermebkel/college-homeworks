@@ -13,6 +13,9 @@ ParsedArgs parseArgs (int argc, char **argv) {
 
   ParsedArgs parsedArgs;
 
+  parsedArgs.quickSortPivot = -1;
+  parsedArgs.quickSortMaxPartitionSize = -1;
+
   while ((option = getopt(argc, argv, "i:I:o:O:m:M:s:S:")) != EOF) {
     switch(option) {
       case 'i':
@@ -28,16 +31,16 @@ ParsedArgs parseArgs (int argc, char **argv) {
         strcpy(parsedArgs.outputFilePath, optarg);
         break;
       case 'm':
-        strcpy(parsedArgs.median, optarg);
+        parsedArgs.quickSortPivot = atoi(optarg);
         break;
       case 'M':
-        strcpy(parsedArgs.median, optarg);
+        parsedArgs.quickSortPivot = atoi(optarg);
         break;
       case 's':
-        strcpy(parsedArgs.partitionSize, optarg);
+        parsedArgs.quickSortMaxPartitionSize = atoi(optarg);
         break;
       case 'S':
-        strcpy(parsedArgs.partitionSize, optarg);
+        parsedArgs.quickSortMaxPartitionSize = atoi(optarg);
         break;
       default:
         exit(1);

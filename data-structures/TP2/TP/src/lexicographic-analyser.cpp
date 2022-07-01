@@ -43,7 +43,7 @@ void LexicographicAnalyser::readWord (std::string word) {
 	}
 };
 
-ArrangementList<WordOccurence> *LexicographicAnalyser::getResult () {
+ArrangementList<WordOccurence> *LexicographicAnalyser::getResult (int quickSortPivot, int quickSortMaxPartitionSize) {
 	ArrangementList<WordOccurence> *orderedWords = new ArrangementList<WordOccurence>();
 
 	for (int i = 0; i < this->wordOccurences->getSize(); i++) {
@@ -52,7 +52,7 @@ ArrangementList<WordOccurence> *LexicographicAnalyser::getResult () {
 		orderedWords->create(computedWord.key, computedWord.model);
 	}
 	
-	orderedWords->sort(makeLexicographicalComparison, this->ordering);
+	orderedWords->sort(makeLexicographicalComparison, this->ordering, quickSortPivot, quickSortMaxPartitionSize);
 
 	ArrangementList<WordOccurence> *orderedWordOccurences = new ArrangementList<WordOccurence>();
 

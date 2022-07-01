@@ -123,8 +123,8 @@ bool ArrangementList<Model>::existsByIndex (int index) {
 };
 
 template <typename Model>
-void ArrangementList<Model>::sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering) {
-	ArrangementListSorting<Model> *arrangementListSorting = new ArrangementListSorting<Model>(this->getSize(), lexicographicalOrdering);
+void ArrangementList<Model>::sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering, int quickSortPivot, int quickSortMaxPartitionSize) {
+	ArrangementListSorting<Model> *arrangementListSorting = new ArrangementListSorting<Model>(this->getSize(), lexicographicalOrdering, quickSortPivot, quickSortMaxPartitionSize);
 
 	return arrangementListSorting->quickSort(this->itens, compareKeys);
 };

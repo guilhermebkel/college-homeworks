@@ -16,7 +16,7 @@ class LexicographicAnalyser {
   public:
     LexicographicAnalyser();
 		void readWord(std::string word);
-		ArrangementList<WordOccurence> *getResult();
+		ArrangementList<WordOccurence> *getResult(int quickSortPivot, int quickSortMaxPartitionSize);
 		void readOrdering (std::string letter);
 
 	private:

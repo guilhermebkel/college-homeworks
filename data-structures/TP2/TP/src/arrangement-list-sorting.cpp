@@ -6,9 +6,13 @@
 #include "memlog.h"
 
 template <typename Model>
-ArrangementListSorting<Model>::ArrangementListSorting (int size, ArrangementList<std::string> *lexicographicalOrdering) {
+ArrangementListSorting<Model>::ArrangementListSorting (int size, ArrangementList<std::string> *lexicographicalOrdering, int quickSortPivot, int quickSortMaxPartitionSize) {
 	this->lexicographicalOrdering = lexicographicalOrdering;
+
 	this->size = size;
+
+	this->quickSortPivot = quickSortPivot;
+	this->quickSortMaxPartitionSize = quickSortMaxPartitionSize;
 };
 
 template <typename Model>
@@ -17,8 +21,14 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 
 	*i = left;
 	*j = right;
+	
+	bool isFirstPartition = left == 0 || right == this->size - 1;
 
-	x = itens[(*i + *j)/2];
+	if (isFirstPartition && this->quickSortPivot != -1) {
+		x = itens[this->quickSortPivot];
+	} else {
+		x = itens[(*i + *j)/2];
+	}
 
 	do {
 		while (compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering)) {

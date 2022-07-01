@@ -49,7 +49,7 @@ int main(int argc, char ** argv) {
 	inputFile.close();
 	erroAssert(!inputFile.fail(), "Failed to close input file.");
 
-	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult();
+	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult(parsedArgs.quickSortPivot, parsedArgs.quickSortMaxPartitionSize);
 
 	for (int i = 0; i < result->getSize(); i++) {
 		Item<WordOccurence> computedWord = result->findByIndex(i);
