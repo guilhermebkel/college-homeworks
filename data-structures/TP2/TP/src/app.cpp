@@ -51,13 +51,17 @@ int main(int argc, char ** argv) {
 
 	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult(parsedArgs.quickSortPivot, parsedArgs.quickSortMaxPartitionSize);
 
+	FILE *outputFile;
+  outputFile = fopen(parsedArgs.outputFilePath, "wt");
+	erroAssert(outputFile != NULL, "Failed to create output file.");
+
 	for (int i = 0; i < result->getSize(); i++) {
 		Item<WordOccurence> computedWord = result->findByIndex(i);
 
-		std::cout << computedWord.model.normalizedWord << " " << computedWord.model.count << std::endl;
+		fprintf(outputFile, "%s %d\n", computedWord.model.normalizedWord.c_str(), computedWord.model.count);
 	}
 
-	std::cout << "#FIM" << std::endl;
+	fprintf(outputFile, "#FIM");
 
 	return 0;
 }
