@@ -13,6 +13,11 @@
 #include "lexicographic-analyser.h"
 
 int main(int argc, char ** argv) {
+	std::string memoryLogOutputFilePath = "../data/memory-log.out";
+
+	iniciaMemLog(castChar(memoryLogOutputFilePath));
+	ativaMemLog();
+
 	ParsedArgs parsedArgs = parseArgs(argc, argv);
 
 	NextReadType nextReadType = NextReadType::NOTHING;
@@ -32,8 +37,10 @@ int main(int argc, char ** argv) {
 		} else if (isOrderingConfig(word)) {
 			nextReadType = NextReadType::ORDERING;
 		} else if (nextReadType == NextReadType::ORDERING) {
+			defineFaseMemLog(MemoryLogLevel::READ_ORDERING);
 			lexicographicAnalyser->readOrdering(word);
 		} else if (nextReadType == NextReadType::TEXT) {
+			defineFaseMemLog(MemoryLogLevel::READ_WORD);
 			lexicographicAnalyser->readWord(word);
 		} else {
 			nextReadType = NextReadType::NOTHING;
@@ -49,6 +56,7 @@ int main(int argc, char ** argv) {
 	inputFile.close();
 	erroAssert(!inputFile.fail(), "Failed to close input file.");
 
+	defineFaseMemLog(MemoryLogLevel::GET_RESULT);
 	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult(parsedArgs.quickSortPivot, parsedArgs.quickSortMaxPartitionSize);
 
 	FILE *outputFile;
@@ -62,6 +70,8 @@ int main(int argc, char ** argv) {
 	}
 
 	fprintf(outputFile, "#FIM");
+
+	finalizaMemLog();
 
 	return 0;
 }

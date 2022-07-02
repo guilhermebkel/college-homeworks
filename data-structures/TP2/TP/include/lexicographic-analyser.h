@@ -4,6 +4,12 @@
 #include <iostream>
 #include <string>
 
+enum MemoryLogLevel {
+	READ_WORD = 0,
+	READ_ORDERING = 1,
+	GET_RESULT = 2
+};
+
 #include "arrangement-list.h"
 
 typedef struct WordOccurence {
