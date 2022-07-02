@@ -22,7 +22,7 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 	*i = left;
 	*j = right;
 	
-	bool isFirstPartition = left == 0 || right == this->size - 1;
+	bool isFirstPartition = left == 0 && right == this->size - 1;
 	bool customPivotExists = this->quickSortPivot != -1;
 	bool canUseCustomPivot = isFirstPartition && customPivotExists;
 

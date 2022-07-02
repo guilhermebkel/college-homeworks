@@ -3,43 +3,43 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 40.01      0.02     0.02  2024326     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
- 20.00      0.03     0.01  2024326     0.00     0.00  std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
- 20.00      0.04     0.01  1026270     0.00     0.00  leMemLog(long, long, int)
+ 30.01      0.02     0.02  2011292     0.00     0.00  std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+ 20.00      0.03     0.01  2011292     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+ 20.00      0.04     0.01  1015302     0.00     0.00  leMemLog(long, long, int)
  20.00      0.05     0.01    11810     0.00     0.00  ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType)
-  0.00      0.05     0.00  2024326     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char>(char*)
-  0.00      0.05     0.00  2024326     0.00     0.00  std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
-  0.00      0.05     0.00  2024326     0.00     0.00  std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
-  0.00      0.05     0.00  1031474     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
-  0.00      0.05     0.00   935759     0.00     0.00  WordOccurence::~WordOccurence()
-  0.00      0.05     0.00   934699     0.00     0.00  WordOccurence::WordOccurence(WordOccurence const&)
-  0.00      0.05     0.00   927457     0.00     0.00  Item<WordOccurence>::~Item()
+ 10.00      0.05     0.01  2011292     0.00     0.00  std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
+  0.00      0.05     0.00  2011292     0.00     0.00  bool __gnu_cxx::__is_null_pointer<char>(char*)
+  0.00      0.05     0.00  2011292     0.00     0.00  std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
+  0.00      0.05     0.00  1020514     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
+  0.00      0.05     0.00   935467     0.00     0.00  WordOccurence::~WordOccurence()
+  0.00      0.05     0.00   934403     0.00     0.00  WordOccurence::WordOccurence(WordOccurence const&)
+  0.00      0.05     0.00   927461     0.00     0.00  Item<WordOccurence>::~Item()
   0.00      0.05     0.00   926584     0.00     0.00  Item<WordOccurence>::Item(Item<WordOccurence> const&)
-  0.00      0.05     0.00   105986     0.00     0.00  Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item()
-  0.00      0.05     0.00   105960     0.00     0.00  Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
+  0.00      0.05     0.00    94896     0.00     0.00  Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item()
+  0.00      0.05     0.00    94870     0.00     0.00  Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
   0.00      0.05     0.00    54636     0.00     0.00  __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::base() const
-  0.00      0.05     0.00    31060     0.00     0.00  WordOccurence::WordOccurence()
-  0.00      0.05     0.00    30873     0.00     0.00  Item<WordOccurence>::Item()
+  0.00      0.05     0.00    31064     0.00     0.00  WordOccurence::WordOccurence()
+  0.00      0.05     0.00    30877     0.00     0.00  Item<WordOccurence>::Item()
   0.00      0.05     0.00    27318     0.00     0.00  bool __gnu_cxx::operator!=<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
-  0.00      0.05     0.00    26607     0.00     0.00  lowerCaseLetter(char)
-  0.00      0.05     0.00    26607     0.00     0.00  std::ctype<char>::tolower(char) const
-  0.00      0.05     0.00    26607     0.00     0.00  char std::tolower<char>(char, std::locale const&)
-  0.00      0.05     0.00    26605     0.00     0.00  isSpecialCharacter(char)
+  0.00      0.05     0.00    26343     0.00     0.00  lowerCaseLetter(char)
+  0.00      0.05     0.00    26343     0.00     0.00  std::ctype<char>::tolower(char) const
+  0.00      0.05     0.00    26343     0.00     0.00  char std::tolower<char>(char, std::locale const&)
+  0.00      0.05     0.00    26339     0.00     0.00  isSpecialCharacter(char)
   0.00      0.05     0.00    23319     0.00     0.00  __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator++()
   0.00      0.05     0.00    23319     0.00     0.00  __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator*() const
-  0.00      0.05     0.00    18603     0.00     0.00  castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.05     0.00    18075     0.00     0.00  castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
   0.00      0.05     0.00    10026     0.00     0.00  Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item()
   0.00      0.05     0.00     7998     0.00     0.00  ArrangementList<WordOccurence>::existsByIndex(int)
-  0.00      0.05     0.00     6550     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int)
-  0.00      0.05     0.00     6550     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
-  0.00      0.05     0.00     6550     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
-  0.00      0.05     0.00     6550     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
-  0.00      0.05     0.00     6550     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
-  0.00      0.05     0.00     6550     0.00     0.00  std::__cxx11::to_string(int)
-  0.00      0.05     0.00     6524     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int)
-  0.00      0.05     0.00     6524     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType)
-  0.00      0.05     0.00     6296     0.00     0.00  WordOccurence::operator=(WordOccurence const&)
-  0.00      0.05     0.00     5203     0.00     0.00  escreveMemLog(long, long, int)
+  0.00      0.05     0.00     6310     0.00     0.00  WordOccurence::operator=(WordOccurence const&)
+  0.00      0.05     0.00     6022     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int)
+  0.00      0.05     0.00     6022     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
+  0.00      0.05     0.00     6022     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
+  0.00      0.05     0.00     6022     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
+  0.00      0.05     0.00     6022     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+  0.00      0.05     0.00     6022     0.00     0.00  std::__cxx11::to_string(int)
+  0.00      0.05     0.00     5996     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int)
+  0.00      0.05     0.00     5996     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType)
+  0.00      0.05     0.00     5211     0.00     0.00  escreveMemLog(long, long, int)
   0.00      0.05     0.00     4027     0.00     0.00  isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
   0.00      0.05     0.00     4026     0.00     0.00  defineFaseMemLog(int)
   0.00      0.05     0.00     4026     0.00     0.00  isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
@@ -50,18 +50,18 @@ Each sample counts as 0.01 seconds.
   0.00      0.05     0.00     3999     0.00     0.00  ArrangementList<WordOccurence>::findByKey(char*)
   0.00      0.05     0.00     3999     0.00     0.01  LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
   0.00      0.05     0.00     3812     0.00     0.00  ArrangementList<WordOccurence>::update(char*, WordOccurence)
-  0.00      0.05     0.00     3262     0.00     0.00  getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)
-  0.00      0.05     0.00     3262     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*)
-  0.00      0.05     0.00     3262     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int)
-  0.00      0.05     0.00     3262     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize()
-  0.00      0.05     0.00     3262     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*)
-  0.00      0.05     0.00     3262     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int)
-  0.00      0.05     0.00     1923     0.00     0.00  Item<WordOccurence>::operator=(Item<WordOccurence> const&)
-  0.00      0.05     0.00     1871     0.00     0.00  makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)
+  0.00      0.05     0.00     2998     0.00     0.00  getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)
+  0.00      0.05     0.00     2998     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*)
+  0.00      0.05     0.00     2998     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int)
+  0.00      0.05     0.00     2998     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize()
+  0.00      0.05     0.00     2998     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*)
+  0.00      0.05     0.00     2998     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int)
+  0.00      0.05     0.00     1937     0.00     0.00  Item<WordOccurence>::operator=(Item<WordOccurence> const&)
+  0.00      0.05     0.00     1723     0.00     0.00  makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)
   0.00      0.05     0.00      565     0.00     0.00  ArrangementList<WordOccurence>::getSize()
   0.00      0.05     0.00      561     0.00     0.00  ArrangementList<WordOccurence>::findByIndex(int)
   0.00      0.05     0.00      561     0.00     0.00  ArrangementList<WordOccurence>::create(char*, WordOccurence)
-  0.00      0.05     0.00      156     0.00     0.02  ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
+  0.00      0.05     0.00      158     0.00     0.02  ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
   0.00      0.05     0.00       26     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
   0.00      0.05     0.00       26     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
   0.00      0.05     0.00       26     0.00     0.00  LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
@@ -85,12 +85,12 @@ Each sample counts as 0.01 seconds.
   0.00      0.05     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
   0.00      0.05     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
   0.00      0.05     0.00        1     0.00     0.00  parseArgs(int, char**)
-  0.00      0.05     0.00        1     0.00     2.94  ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int)
+  0.00      0.05     0.00        1     0.00     2.66  ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int)
   0.00      0.05     0.00        1     0.00     0.00  ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::ArrangementList()
-  0.00      0.05     0.00        1     0.00     3.71  LexicographicAnalyser::getResult(int, int)
+  0.00      0.05     0.00        1     0.00     3.43  LexicographicAnalyser::getResult(int, int)
   0.00      0.05     0.00        1     0.00     0.00  LexicographicAnalyser::LexicographicAnalyser()
-  0.00      0.05     0.00        1     0.00     2.94  ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
-  0.00      0.05     0.00        1     0.00     2.94  ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
+  0.00      0.05     0.00        1     0.00     2.66  ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
+  0.00      0.05     0.00        1     0.00     2.66  ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
   0.00      0.05     0.00        1     0.00     0.00  ArrangementListSorting<WordOccurence>::ArrangementListSorting(int, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int)
 
  %         the percentage of the total running time of the
@@ -135,312 +135,312 @@ index % time    self  children    called     name
                                                  <spontaneous>
 [1]    100.0    0.00    0.05                 main [1]
                 0.00    0.05    3999/3999        LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00       1/1           LexicographicAnalyser::getResult(int, int) [12]
-                0.00    0.00   12079/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00     187/561         ArrangementList<WordOccurence>::findByIndex(int) [33]
-                0.00    0.00      26/26          LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [34]
+                0.00    0.00       1/1           LexicographicAnalyser::getResult(int, int) [13]
+                0.00    0.00   12079/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00     187/561         ArrangementList<WordOccurence>::findByIndex(int) [34]
+                0.00    0.00      26/26          LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
                 0.00    0.00    4027/4027        isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [65]
                 0.00    0.00    4026/4026        isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [67]
                 0.00    0.00    4026/4026        defineFaseMemLog(int) [66]
                 0.00    0.00     188/565         ArrangementList<WordOccurence>::getSize() [71]
-                0.00    0.00     187/927457      Item<WordOccurence>::~Item() [47]
+                0.00    0.00     187/927461      Item<WordOccurence>::~Item() [47]
                 0.00    0.00       1/1           iniciaMemLog(char*) [83]
-                0.00    0.00       1/18603       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
+                0.00    0.00       1/18075       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
                 0.00    0.00       1/1           ativaMemLog() [82]
                 0.00    0.00       1/1           parseArgs(int, char**) [93]
                 0.00    0.00       1/1           LexicographicAnalyser::LexicographicAnalyser() [95]
                 0.00    0.00       1/1           finalizaMemLog() [84]
 -----------------------------------------------
-                0.00    0.01    3812/11810       ArrangementList<WordOccurence>::update(char*, WordOccurence) [9]
-                0.00    0.01    3999/11810       ArrangementList<WordOccurence>::findByKey(char*) [7]
-                0.00    0.01    3999/11810       ArrangementList<WordOccurence>::existsByKey(char*) [8]
-[2]     92.6    0.01    0.04   11810         ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
+                0.00    0.01    3812/11810       ArrangementList<WordOccurence>::update(char*, WordOccurence) [10]
+                0.00    0.01    3999/11810       ArrangementList<WordOccurence>::findByKey(char*) [8]
+                0.00    0.01    3999/11810       ArrangementList<WordOccurence>::existsByKey(char*) [9]
+[2]     93.2    0.01    0.04   11810         ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
                 0.00    0.03  922024/926584      Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
-                0.01    0.00  922024/1026270     leMemLog(long, long, int) [11]
-                0.00    0.00  922024/927457      Item<WordOccurence>::~Item() [47]
+                0.01    0.00  922024/1015302     leMemLog(long, long, int) [11]
+                0.00    0.00  922024/927461      Item<WordOccurence>::~Item() [47]
 -----------------------------------------------
                 0.00    0.05    3999/3999        main [1]
-[3]     92.2    0.00    0.05    3999         LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.02    3999/3999        ArrangementList<WordOccurence>::existsByKey(char*) [8]
-                0.00    0.02    3812/3999        ArrangementList<WordOccurence>::findByKey(char*) [7]
-                0.00    0.01    3812/3812        ArrangementList<WordOccurence>::update(char*, WordOccurence) [9]
-                0.00    0.00    3999/3999        normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [26]
-                0.00    0.00    7998/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00    3999/934699      WordOccurence::WordOccurence(WordOccurence const&) [5]
-                0.00    0.00    4186/935759      WordOccurence::~WordOccurence() [46]
-                0.00    0.00    3999/18603       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
-                0.00    0.00    3812/927457      Item<WordOccurence>::~Item() [47]
-                0.00    0.00     187/31060       WordOccurence::WordOccurence() [50]
+[3]     92.8    0.00    0.05    3999         LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.02    3999/3999        ArrangementList<WordOccurence>::existsByKey(char*) [9]
+                0.00    0.02    3812/3999        ArrangementList<WordOccurence>::findByKey(char*) [8]
+                0.00    0.02    3812/3812        ArrangementList<WordOccurence>::update(char*, WordOccurence) [10]
+                0.00    0.00    3999/3999        normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [27]
+                0.00    0.00    3999/934403      WordOccurence::WordOccurence(WordOccurence const&) [5]
+                0.00    0.00    7998/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00    4186/935467      WordOccurence::~WordOccurence() [46]
+                0.00    0.00    3999/18075       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
+                0.00    0.00    3812/927461      Item<WordOccurence>::~Item() [47]
+                0.00    0.00     187/31064       WordOccurence::WordOccurence() [50]
                 0.00    0.00     187/561         ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
 -----------------------------------------------
-                0.00    0.00      26/2024326     ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
-                0.00    0.00      26/2024326     LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [34]
-                0.00    0.00    3742/2024326     makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [17]
-                0.00    0.00    3999/2024326     removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [32]
-                0.00    0.00    6550/2024326     ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
-                0.00    0.00    6550/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [29]
-                0.00    0.00    7998/2024326     LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00    7998/2024326     normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [26]
-                0.00    0.00   12079/2024326     main [1]
-                0.00    0.00  105960/2024326     Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [20]
-                0.02    0.01 1869398/2024326     WordOccurence::WordOccurence(WordOccurence const&) [5]
-[4]     60.0    0.02    0.01 2024326         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.01    0.00 2024326/2024326     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [10]
-                0.00    0.00 2024326/2024326     bool __gnu_cxx::__is_null_pointer<char>(char*) [42]
+                0.00    0.00      26/2011292     ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [36]
+                0.00    0.00      26/2011292     LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
+                0.00    0.00    3446/2011292     makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
+                0.00    0.00    3999/2011292     removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [33]
+                0.00    0.00    6022/2011292     ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
+                0.00    0.00    6022/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [30]
+                0.00    0.00    7998/2011292     LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.00    7998/2011292     normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [27]
+                0.00    0.00   12079/2011292     main [1]
+                0.00    0.00   94870/2011292     Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [21]
+                0.01    0.02 1868806/2011292     WordOccurence::WordOccurence(WordOccurence const&) [5]
+[4]     60.0    0.01    0.02 2011292         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.02    0.01 2011292/2011292     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [7]
+                0.00    0.00 2011292/2011292     bool __gnu_cxx::__is_null_pointer<char>(char*) [43]
 -----------------------------------------------
-                0.00    0.00     374/934699      LexicographicAnalyser::getResult(int, int) [12]
-                0.00    0.00    3742/934699      ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00    3999/934699      LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.03  926584/934699      Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
-[5]     55.4    0.00    0.03  934699         WordOccurence::WordOccurence(WordOccurence const&) [5]
-                0.02    0.01 1869398/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00     374/934403      LexicographicAnalyser::getResult(int, int) [13]
+                0.00    0.00    3446/934403      ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00    3999/934403      LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.03  926584/934403      Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
+[5]     55.7    0.00    0.03  934403         WordOccurence::WordOccurence(WordOccurence const&) [5]
+                0.01    0.02 1868806/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
 -----------------------------------------------
-                0.00    0.00     561/926584      ArrangementList<WordOccurence>::findByIndex(int) [33]
-                0.00    0.00    3999/926584      ArrangementList<WordOccurence>::findByKey(char*) [7]
+                0.00    0.00     561/926584      ArrangementList<WordOccurence>::findByIndex(int) [34]
+                0.00    0.00    3999/926584      ArrangementList<WordOccurence>::findByKey(char*) [8]
                 0.00    0.03  922024/926584      ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
-[6]     54.9    0.00    0.03  926584         Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
-                0.00    0.03  926584/934699      WordOccurence::WordOccurence(WordOccurence const&) [5]
+[6]     55.3    0.00    0.03  926584         Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
+                0.00    0.03  926584/934403      WordOccurence::WordOccurence(WordOccurence const&) [5]
 -----------------------------------------------
-                0.00    0.00     187/3999        LexicographicAnalyser::getResult(int, int) [12]
+                0.02    0.01 2011292/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+[7]     40.0    0.02    0.01 2011292         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [7]
+                0.01    0.00 2011292/2011292     std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [12]
+                0.00    0.00 2011292/2011292     std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [44]
+-----------------------------------------------
+                0.00    0.00     187/3999        LexicographicAnalyser::getResult(int, int) [13]
                 0.00    0.02    3812/3999        LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-[7]     31.6    0.00    0.02    3999         ArrangementList<WordOccurence>::findByKey(char*) [7]
+[8]     31.8    0.00    0.02    3999         ArrangementList<WordOccurence>::findByKey(char*) [8]
                 0.00    0.01    3999/11810       ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
                 0.00    0.00    3999/926584      Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
                 0.00    0.00    3999/7998        ArrangementList<WordOccurence>::existsByIndex(int) [61]
 -----------------------------------------------
                 0.00    0.02    3999/3999        LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-[8]     31.4    0.00    0.02    3999         ArrangementList<WordOccurence>::existsByKey(char*) [8]
+[9]     31.5    0.00    0.02    3999         ArrangementList<WordOccurence>::existsByKey(char*) [9]
                 0.00    0.01    3999/11810       ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
                 0.00    0.00    3999/7998        ArrangementList<WordOccurence>::existsByIndex(int) [61]
 -----------------------------------------------
-                0.00    0.01    3812/3812        LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-[9]     29.9    0.00    0.01    3812         ArrangementList<WordOccurence>::update(char*, WordOccurence) [9]
+                0.00    0.02    3812/3812        LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+[10]    30.1    0.00    0.02    3812         ArrangementList<WordOccurence>::update(char*, WordOccurence) [10]
                 0.00    0.01    3812/11810       ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
-                0.00    0.00    3812/6296        WordOccurence::operator=(WordOccurence const&) [63]
-                0.00    0.00    3812/5203        escreveMemLog(long, long, int) [64]
+                0.00    0.00    3812/6310        WordOccurence::operator=(WordOccurence const&) [62]
+                0.00    0.00    3812/5211        escreveMemLog(long, long, int) [64]
 -----------------------------------------------
-                0.01    0.00 2024326/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-[10]    20.0    0.01    0.00 2024326         std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [10]
-                0.00    0.00 2024326/2024326     std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [44]
-                0.00    0.00 2024326/2024326     std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [43]
+                0.00    0.00     561/1015302     ArrangementList<WordOccurence>::findByIndex(int) [34]
+                0.00    0.00     845/1015302     ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00   91872/1015302     ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [20]
+                0.01    0.00  922024/1015302     ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
+[11]    20.0    0.01    0.00 1015302         leMemLog(long, long, int) [11]
+                0.00    0.00 1015302/1020514     clkDifMemLog(timespec, timespec, timespec*) [45]
 -----------------------------------------------
-                0.00    0.00     561/1026270     ArrangementList<WordOccurence>::findByIndex(int) [33]
-                0.00    0.00     987/1026270     ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00  102698/1026270     ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [19]
-                0.01    0.00  922024/1026270     ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
-[11]    20.0    0.01    0.00 1026270         leMemLog(long, long, int) [11]
-                0.00    0.00 1026270/1031474     clkDifMemLog(timespec, timespec, timespec*) [45]
+                0.01    0.00 2011292/2011292     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [7]
+[12]    10.0    0.01    0.00 2011292         std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [12]
 -----------------------------------------------
                 0.00    0.00       1/1           main [1]
-[12]     7.4    0.00    0.00       1         LexicographicAnalyser::getResult(int, int) [12]
-                0.00    0.00       1/1           ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [14]
-                0.00    0.00     187/3999        ArrangementList<WordOccurence>::findByKey(char*) [7]
-                0.00    0.00     374/561         ArrangementList<WordOccurence>::findByIndex(int) [33]
-                0.00    0.00     374/934699      WordOccurence::WordOccurence(WordOccurence const&) [5]
-                0.00    0.00     561/927457      Item<WordOccurence>::~Item() [47]
+[13]     6.9    0.00    0.00       1         LexicographicAnalyser::getResult(int, int) [13]
+                0.00    0.00       1/1           ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [15]
+                0.00    0.00     187/3999        ArrangementList<WordOccurence>::findByKey(char*) [8]
+                0.00    0.00     374/561         ArrangementList<WordOccurence>::findByIndex(int) [34]
+                0.00    0.00     374/934403      WordOccurence::WordOccurence(WordOccurence const&) [5]
+                0.00    0.00     561/927461      Item<WordOccurence>::~Item() [47]
                 0.00    0.00     376/565         ArrangementList<WordOccurence>::getSize() [71]
                 0.00    0.00     374/561         ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00     374/935759      WordOccurence::~WordOccurence() [46]
+                0.00    0.00     374/935467      WordOccurence::~WordOccurence() [46]
                 0.00    0.00       2/3           ArrangementList<WordOccurence>::ArrangementList() [75]
 -----------------------------------------------
-                0.00    0.00     156/156         ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [15]
-[13]     5.9    0.00    0.00     156         ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00    1871/1871        makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [17]
-                0.00    0.00    3742/934699      WordOccurence::WordOccurence(WordOccurence const&) [5]
-                0.00    0.00     987/1026270     leMemLog(long, long, int) [11]
-                0.00    0.00    3742/935759      WordOccurence::~WordOccurence() [46]
-                0.00    0.00    1362/1923        Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
-                0.00    0.00     804/5203        escreveMemLog(long, long, int) [64]
-                0.00    0.00     312/30873       Item<WordOccurence>::Item() [51]
-                0.00    0.00     312/927457      Item<WordOccurence>::~Item() [47]
+                0.00    0.00     158/158         ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
+[14]     5.3    0.00    0.00     158         ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00    1723/1723        makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
+                0.00    0.00    3446/934403      WordOccurence::WordOccurence(WordOccurence const&) [5]
+                0.00    0.00     845/1015302     leMemLog(long, long, int) [11]
+                0.00    0.00    3446/935467      WordOccurence::~WordOccurence() [46]
+                0.00    0.00    1376/1937        Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
+                0.00    0.00     812/5211        escreveMemLog(long, long, int) [64]
+                0.00    0.00     316/30877       Item<WordOccurence>::Item() [51]
+                0.00    0.00     316/927461      Item<WordOccurence>::~Item() [47]
 -----------------------------------------------
-                0.00    0.00       1/1           LexicographicAnalyser::getResult(int, int) [12]
-[14]     5.9    0.00    0.00       1         ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [14]
-                0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
+                0.00    0.00       1/1           LexicographicAnalyser::getResult(int, int) [13]
+[15]     5.3    0.00    0.00       1         ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [15]
+                0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [17]
                 0.00    0.00       1/565         ArrangementList<WordOccurence>::getSize() [71]
                 0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::ArrangementListSorting(int, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [96]
 -----------------------------------------------
-                                 155             ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [15]
-                0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
-[15]     5.9    0.00    0.00       1+155     ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [15]
-                0.00    0.00     156/156         ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                                 155             ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [15]
+                                 157             ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
+                0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [17]
+[16]     5.3    0.00    0.00       1+157     ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
+                0.00    0.00     158/158         ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                                 157             ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
 -----------------------------------------------
-                0.00    0.00       1/1           ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [14]
-[16]     5.9    0.00    0.00       1         ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
-                0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [15]
+                0.00    0.00       1/1           ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [15]
+[17]     5.3    0.00    0.00       1         ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [17]
+                0.00    0.00       1/1           ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [16]
 -----------------------------------------------
-                0.00    0.00    1871/1871        ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-[17]     5.6    0.00    0.00    1871         makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [17]
-                0.00    0.00    3262/3262        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-                0.00    0.00    3742/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00    3286/26605       isSpecialCharacter(char) [56]
+                0.00    0.00    1723/1723        ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+[18]     5.1    0.00    0.00    1723         makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
+                0.00    0.00    2998/2998        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+                0.00    0.00    3446/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00    3020/26339       isSpecialCharacter(char) [56]
 -----------------------------------------------
-                0.00    0.00    3262/3262        makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [17]
-[18]     5.5    0.00    0.00    3262         getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [21]
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [22]
-                0.00    0.00    3262/26607       lowerCaseLetter(char) [53]
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize() [69]
-                0.00    0.00    3262/105986      Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
+                0.00    0.00    2998/2998        makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
+[19]     5.0    0.00    0.00    2998         getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [22]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [23]
+                0.00    0.00    2998/26343       lowerCaseLetter(char) [53]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize() [69]
+                0.00    0.00    2998/94896       Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
 -----------------------------------------------
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [23]
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [24]
-[19]     5.0    0.00    0.00    6524         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [19]
-                0.00    0.00  102698/105960      Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [20]
-                0.00    0.00  102698/1026270     leMemLog(long, long, int) [11]
-                0.00    0.00  102698/105986      Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [24]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [25]
+[20]     4.6    0.00    0.00    5996         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [20]
+                0.00    0.00   91872/94870       Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [21]
+                0.00    0.00   91872/1015302     leMemLog(long, long, int) [11]
+                0.00    0.00   91872/94896       Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
 -----------------------------------------------
-                0.00    0.00    3262/105960      ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [23]
-                0.00    0.00  102698/105960      ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [19]
-[20]     3.1    0.00    0.00  105960         Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [20]
-                0.00    0.00  105960/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00    2998/94870       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [24]
+                0.00    0.00   91872/94870       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [20]
+[21]     2.8    0.00    0.00   94870         Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [21]
+                0.00    0.00   94870/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
 -----------------------------------------------
-                0.00    0.00    3262/3262        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-[21]     2.8    0.00    0.00    3262         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [21]
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [23]
-                0.00    0.00    3262/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
+                0.00    0.00    2998/2998        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+[22]     2.5    0.00    0.00    2998         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [22]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [24]
+                0.00    0.00    2998/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
 -----------------------------------------------
-                0.00    0.00    3262/3262        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-[22]     2.7    0.00    0.00    3262         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [22]
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [24]
-                0.00    0.00    3262/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
+                0.00    0.00    2998/2998        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+[23]     2.5    0.00    0.00    2998         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [23]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [25]
+                0.00    0.00    2998/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
 -----------------------------------------------
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [21]
-[23]     2.6    0.00    0.00    3262         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [23]
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [19]
-                0.00    0.00    3262/105960      Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [20]
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [62]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [22]
+[24]     2.4    0.00    0.00    2998         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [24]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [20]
+                0.00    0.00    2998/94870       Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [21]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [63]
 -----------------------------------------------
-                0.00    0.00    3262/3262        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [22]
-[24]     2.5    0.00    0.00    3262         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [24]
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [19]
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [62]
+                0.00    0.00    2998/2998        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [23]
+[25]     2.3    0.00    0.00    2998         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [25]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [20]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [63]
 -----------------------------------------------
-                0.00    0.00      26/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
-                0.00    0.00    3262/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [21]
-                0.00    0.00    3262/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [22]
-[25]     0.4    0.00    0.00    6550         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
-                0.00    0.00    6550/6550        std::__cxx11::to_string(int) [31]
-                0.00    0.00    6550/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00    6550/18603       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
+                0.00    0.00      26/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [36]
+                0.00    0.00    2998/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [22]
+                0.00    0.00    2998/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [23]
+[26]     0.4    0.00    0.00    6022         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
+                0.00    0.00    6022/6022        std::__cxx11::to_string(int) [32]
+                0.00    0.00    6022/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00    6022/18075       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
 -----------------------------------------------
                 0.00    0.00    3999/3999        LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-[26]     0.4    0.00    0.00    3999         normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [26]
-                0.00    0.00    7998/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00    3999/3999        removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [32]
+[27]     0.4    0.00    0.00    3999         normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [27]
+                0.00    0.00    7998/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00    3999/3999        removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [33]
                 0.00    0.00    3999/3999        lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
 -----------------------------------------------
-                0.00    0.00    6550/6550        std::__cxx11::to_string(int) [31]
-[27]     0.2    0.00    0.00    6550         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [27]
-                0.00    0.00    6550/6550        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [30]
+                0.00    0.00    6022/6022        std::__cxx11::to_string(int) [32]
+[28]     0.2    0.00    0.00    6022         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [28]
+                0.00    0.00    6022/6022        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [31]
 -----------------------------------------------
-                0.00    0.00    6550/6550        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [30]
-[28]     0.2    0.00    0.00    6550         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [28]
-                0.00    0.00    6550/6550        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [29]
+                0.00    0.00    6022/6022        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [31]
+[29]     0.2    0.00    0.00    6022         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [29]
+                0.00    0.00    6022/6022        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [30]
 -----------------------------------------------
-                0.00    0.00    6550/6550        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [28]
-[29]     0.2    0.00    0.00    6550         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [29]
-                0.00    0.00    6550/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00    6022/6022        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [29]
+[30]     0.2    0.00    0.00    6022         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type) [30]
+                0.00    0.00    6022/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
 -----------------------------------------------
-                0.00    0.00    6550/6550        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [27]
-[30]     0.2    0.00    0.00    6550         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [30]
-                0.00    0.00    6550/6550        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [28]
+                0.00    0.00    6022/6022        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [28]
+[31]     0.2    0.00    0.00    6022         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&) [31]
+                0.00    0.00    6022/6022        void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*) [29]
 -----------------------------------------------
-                0.00    0.00    6550/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
-[31]     0.2    0.00    0.00    6550         std::__cxx11::to_string(int) [31]
-                0.00    0.00    6550/6550        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [27]
+                0.00    0.00    6022/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
+[32]     0.2    0.00    0.00    6022         std::__cxx11::to_string(int) [32]
+                0.00    0.00    6022/6022        std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...) [28]
 -----------------------------------------------
-                0.00    0.00    3999/3999        normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [26]
-[32]     0.1    0.00    0.00    3999         removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [32]
-                0.00    0.00    3999/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00   23319/26605       isSpecialCharacter(char) [56]
+                0.00    0.00    3999/3999        normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [27]
+[33]     0.1    0.00    0.00    3999         removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [33]
+                0.00    0.00    3999/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00   23319/26339       isSpecialCharacter(char) [56]
 -----------------------------------------------
                 0.00    0.00     187/561         main [1]
-                0.00    0.00     374/561         LexicographicAnalyser::getResult(int, int) [12]
-[33]     0.0    0.00    0.00     561         ArrangementList<WordOccurence>::findByIndex(int) [33]
+                0.00    0.00     374/561         LexicographicAnalyser::getResult(int, int) [13]
+[34]     0.0    0.00    0.00     561         ArrangementList<WordOccurence>::findByIndex(int) [34]
                 0.00    0.00     561/926584      Item<WordOccurence>::Item(Item<WordOccurence> const&) [6]
-                0.00    0.00     561/1026270     leMemLog(long, long, int) [11]
+                0.00    0.00     561/1015302     leMemLog(long, long, int) [11]
 -----------------------------------------------
                 0.00    0.00      26/26          main [1]
-[34]     0.0    0.00    0.00      26         LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [34]
-                0.00    0.00      26/26          ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
-                0.00    0.00      26/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-                0.00    0.00      26/26607       lowerCaseLetter(char) [53]
+[35]     0.0    0.00    0.00      26         LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
+                0.00    0.00      26/26          ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [36]
+                0.00    0.00      26/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00      26/26343       lowerCaseLetter(char) [53]
 -----------------------------------------------
-                0.00    0.00      26/26          LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [34]
-[35]     0.0    0.00    0.00      26         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
-                0.00    0.00      26/6550        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
-                0.00    0.00      26/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+                0.00    0.00      26/26          LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
+[36]     0.0    0.00    0.00      26         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [36]
+                0.00    0.00      26/6022        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
+                0.00    0.00      26/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
                 0.00    0.00      26/26          ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
 -----------------------------------------------
-                0.00    0.00 2024326/2024326     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
-[42]     0.0    0.00    0.00 2024326         bool __gnu_cxx::__is_null_pointer<char>(char*) [42]
+                0.00    0.00 2011292/2011292     void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [4]
+[43]     0.0    0.00    0.00 2011292         bool __gnu_cxx::__is_null_pointer<char>(char*) [43]
 -----------------------------------------------
-                0.00    0.00 2024326/2024326     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [10]
-[43]     0.0    0.00    0.00 2024326         std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [43]
+                0.00    0.00 2011292/2011292     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [7]
+[44]     0.0    0.00    0.00 2011292         std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag) [44]
 -----------------------------------------------
-                0.00    0.00 2024326/2024326     std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*) [10]
-[44]     0.0    0.00    0.00 2024326         std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&) [44]
+                0.00    0.00       1/1020514     finalizaMemLog() [84]
+                0.00    0.00    5211/1020514     escreveMemLog(long, long, int) [64]
+                0.00    0.00 1015302/1020514     leMemLog(long, long, int) [11]
+[45]     0.0    0.00    0.00 1020514         clkDifMemLog(timespec, timespec, timespec*) [45]
 -----------------------------------------------
-                0.00    0.00       1/1031474     finalizaMemLog() [84]
-                0.00    0.00    5203/1031474     escreveMemLog(long, long, int) [64]
-                0.00    0.00 1026270/1031474     leMemLog(long, long, int) [11]
-[45]     0.0    0.00    0.00 1031474         clkDifMemLog(timespec, timespec, timespec*) [45]
+                0.00    0.00     374/935467      LexicographicAnalyser::getResult(int, int) [13]
+                0.00    0.00    3446/935467      ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00    4186/935467      LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.00  927461/935467      Item<WordOccurence>::~Item() [47]
+[46]     0.0    0.00    0.00  935467         WordOccurence::~WordOccurence() [46]
 -----------------------------------------------
-                0.00    0.00     374/935759      LexicographicAnalyser::getResult(int, int) [12]
-                0.00    0.00    3742/935759      ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00    4186/935759      LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00  927457/935759      Item<WordOccurence>::~Item() [47]
-[46]     0.0    0.00    0.00  935759         WordOccurence::~WordOccurence() [46]
+                0.00    0.00     187/927461      main [1]
+                0.00    0.00     316/927461      ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00     561/927461      ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
+                0.00    0.00     561/927461      LexicographicAnalyser::getResult(int, int) [13]
+                0.00    0.00    3812/927461      LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.00  922024/927461      ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
+[47]     0.0    0.00    0.00  927461         Item<WordOccurence>::~Item() [47]
+                0.00    0.00  927461/935467      WordOccurence::~WordOccurence() [46]
 -----------------------------------------------
-                0.00    0.00     187/927457      main [1]
-                0.00    0.00     312/927457      ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00     561/927457      ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00     561/927457      LexicographicAnalyser::getResult(int, int) [12]
-                0.00    0.00    3812/927457      LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00  922024/927457      ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [2]
-[47]     0.0    0.00    0.00  927457         Item<WordOccurence>::~Item() [47]
-                0.00    0.00  927457/935759      WordOccurence::~WordOccurence() [46]
------------------------------------------------
-                0.00    0.00      26/105986      ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
-                0.00    0.00    3262/105986      getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-                0.00    0.00  102698/105986      ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [19]
-[48]     0.0    0.00    0.00  105986         Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
+                0.00    0.00      26/94896       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
+                0.00    0.00    2998/94896       getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+                0.00    0.00   91872/94896       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [20]
+[48]     0.0    0.00    0.00   94896         Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
 -----------------------------------------------
                 0.00    0.00   54636/54636       bool __gnu_cxx::operator!=<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [52]
 [49]     0.0    0.00    0.00   54636         __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::base() const [49]
 -----------------------------------------------
-                0.00    0.00     187/31060       LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00   30873/31060       Item<WordOccurence>::Item() [51]
-[50]     0.0    0.00    0.00   31060         WordOccurence::WordOccurence() [50]
+                0.00    0.00     187/31064       LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.00   30877/31064       Item<WordOccurence>::Item() [51]
+[50]     0.0    0.00    0.00   31064         WordOccurence::WordOccurence() [50]
 -----------------------------------------------
-                0.00    0.00     312/30873       ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00     561/30873       ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00   30000/30873       ArrangementList<WordOccurence>::ArrangementList() [75]
-[51]     0.0    0.00    0.00   30873         Item<WordOccurence>::Item() [51]
-                0.00    0.00   30873/31060       WordOccurence::WordOccurence() [50]
+                0.00    0.00     316/30877       ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00     561/30877       ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
+                0.00    0.00   30000/30877       ArrangementList<WordOccurence>::ArrangementList() [75]
+[51]     0.0    0.00    0.00   30877         Item<WordOccurence>::Item() [51]
+                0.00    0.00   30877/31064       WordOccurence::WordOccurence() [50]
 -----------------------------------------------
                 0.00    0.00   27318/27318       lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
 [52]     0.0    0.00    0.00   27318         bool __gnu_cxx::operator!=<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [52]
                 0.00    0.00   54636/54636       __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::base() const [49]
 -----------------------------------------------
-                0.00    0.00      26/26607       LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [34]
-                0.00    0.00    3262/26607       getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-                0.00    0.00   23319/26607       lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
-[53]     0.0    0.00    0.00   26607         lowerCaseLetter(char) [53]
-                0.00    0.00   26607/26607       char std::tolower<char>(char, std::locale const&) [55]
+                0.00    0.00      26/26343       LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
+                0.00    0.00    2998/26343       getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+                0.00    0.00   23319/26343       lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
+[53]     0.0    0.00    0.00   26343         lowerCaseLetter(char) [53]
+                0.00    0.00   26343/26343       char std::tolower<char>(char, std::locale const&) [55]
 -----------------------------------------------
-                0.00    0.00   26607/26607       char std::tolower<char>(char, std::locale const&) [55]
-[54]     0.0    0.00    0.00   26607         std::ctype<char>::tolower(char) const [54]
+                0.00    0.00   26343/26343       char std::tolower<char>(char, std::locale const&) [55]
+[54]     0.0    0.00    0.00   26343         std::ctype<char>::tolower(char) const [54]
 -----------------------------------------------
-                0.00    0.00   26607/26607       lowerCaseLetter(char) [53]
-[55]     0.0    0.00    0.00   26607         char std::tolower<char>(char, std::locale const&) [55]
-                0.00    0.00   26607/26607       std::ctype<char>::tolower(char) const [54]
+                0.00    0.00   26343/26343       lowerCaseLetter(char) [53]
+[55]     0.0    0.00    0.00   26343         char std::tolower<char>(char, std::locale const&) [55]
+                0.00    0.00   26343/26343       std::ctype<char>::tolower(char) const [54]
 -----------------------------------------------
-                0.00    0.00    3286/26605       makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [17]
-                0.00    0.00   23319/26605       removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [32]
-[56]     0.0    0.00    0.00   26605         isSpecialCharacter(char) [56]
+                0.00    0.00    3020/26339       makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
+                0.00    0.00   23319/26339       removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [33]
+[56]     0.0    0.00    0.00   26339         isSpecialCharacter(char) [56]
 -----------------------------------------------
                 0.00    0.00   23319/23319       lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
 [57]     0.0    0.00    0.00   23319         __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator++() [57]
@@ -448,91 +448,91 @@ index % time    self  children    called     name
                 0.00    0.00   23319/23319       lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
 [58]     0.0    0.00    0.00   23319         __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator*() const [58]
 -----------------------------------------------
-                0.00    0.00       1/18603       main [1]
-                0.00    0.00    3999/18603       LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00    4026/18603       isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [67]
-                0.00    0.00    4027/18603       isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [65]
-                0.00    0.00    6550/18603       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [25]
-[59]     0.0    0.00    0.00   18603         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
+                0.00    0.00       1/18075       main [1]
+                0.00    0.00    3999/18075       LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
+                0.00    0.00    4026/18075       isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [67]
+                0.00    0.00    4027/18075       isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [65]
+                0.00    0.00    6022/18075       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [26]
+[59]     0.0    0.00    0.00   18075         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
 -----------------------------------------------
                 0.00    0.00      26/10026       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
                 0.00    0.00   10000/10026       ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::ArrangementList() [94]
 [60]     0.0    0.00    0.00   10026         Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item() [60]
 -----------------------------------------------
-                0.00    0.00    3999/7998        ArrangementList<WordOccurence>::findByKey(char*) [7]
-                0.00    0.00    3999/7998        ArrangementList<WordOccurence>::existsByKey(char*) [8]
+                0.00    0.00    3999/7998        ArrangementList<WordOccurence>::findByKey(char*) [8]
+                0.00    0.00    3999/7998        ArrangementList<WordOccurence>::existsByKey(char*) [9]
 [61]     0.0    0.00    0.00    7998         ArrangementList<WordOccurence>::existsByIndex(int) [61]
 -----------------------------------------------
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [23]
-                0.00    0.00    3262/6524        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [24]
-[62]     0.0    0.00    0.00    6524         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [62]
+                0.00    0.00     561/6310        ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
+                0.00    0.00    1937/6310        Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
+                0.00    0.00    3812/6310        ArrangementList<WordOccurence>::update(char*, WordOccurence) [10]
+[62]     0.0    0.00    0.00    6310         WordOccurence::operator=(WordOccurence const&) [62]
 -----------------------------------------------
-                0.00    0.00     561/6296        ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00    1923/6296        Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
-                0.00    0.00    3812/6296        ArrangementList<WordOccurence>::update(char*, WordOccurence) [9]
-[63]     0.0    0.00    0.00    6296         WordOccurence::operator=(WordOccurence const&) [63]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [24]
+                0.00    0.00    2998/5996        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [25]
+[63]     0.0    0.00    0.00    5996         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [63]
 -----------------------------------------------
-                0.00    0.00      26/5203        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
-                0.00    0.00     561/5203        ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00     804/5203        ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-                0.00    0.00    3812/5203        ArrangementList<WordOccurence>::update(char*, WordOccurence) [9]
-[64]     0.0    0.00    0.00    5203         escreveMemLog(long, long, int) [64]
-                0.00    0.00    5203/1031474     clkDifMemLog(timespec, timespec, timespec*) [45]
+                0.00    0.00      26/5211        ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
+                0.00    0.00     561/5211        ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
+                0.00    0.00     812/5211        ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+                0.00    0.00    3812/5211        ArrangementList<WordOccurence>::update(char*, WordOccurence) [10]
+[64]     0.0    0.00    0.00    5211         escreveMemLog(long, long, int) [64]
+                0.00    0.00    5211/1020514     clkDifMemLog(timespec, timespec, timespec*) [45]
 -----------------------------------------------
                 0.00    0.00    4027/4027        main [1]
 [65]     0.0    0.00    0.00    4027         isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [65]
-                0.00    0.00    4027/18603       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
+                0.00    0.00    4027/18075       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
 -----------------------------------------------
                 0.00    0.00    4026/4026        main [1]
 [66]     0.0    0.00    0.00    4026         defineFaseMemLog(int) [66]
 -----------------------------------------------
                 0.00    0.00    4026/4026        main [1]
 [67]     0.0    0.00    0.00    4026         isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [67]
-                0.00    0.00    4026/18603       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
+                0.00    0.00    4026/18075       castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [59]
 -----------------------------------------------
-                0.00    0.00    3999/3999        normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [26]
+                0.00    0.00    3999/3999        normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [27]
 [68]     0.0    0.00    0.00    3999         lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [68]
                 0.00    0.00   27318/27318       bool __gnu_cxx::operator!=<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [52]
                 0.00    0.00   23319/23319       __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator*() const [58]
-                0.00    0.00   23319/26607       lowerCaseLetter(char) [53]
+                0.00    0.00   23319/26343       lowerCaseLetter(char) [53]
                 0.00    0.00   23319/23319       __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator++() [57]
 -----------------------------------------------
-                0.00    0.00    3262/3262        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [18]
-[69]     0.0    0.00    0.00    3262         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize() [69]
+                0.00    0.00    2998/2998        getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [19]
+[69]     0.0    0.00    0.00    2998         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize() [69]
 -----------------------------------------------
-                0.00    0.00     561/1923        ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00    1362/1923        ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [13]
-[70]     0.0    0.00    0.00    1923         Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
-                0.00    0.00    1923/6296        WordOccurence::operator=(WordOccurence const&) [63]
+                0.00    0.00     561/1937        ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
+                0.00    0.00    1376/1937        ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*)) [14]
+[70]     0.0    0.00    0.00    1937         Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
+                0.00    0.00    1937/6310        WordOccurence::operator=(WordOccurence const&) [62]
 -----------------------------------------------
-                0.00    0.00       1/565         ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [14]
+                0.00    0.00       1/565         ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [15]
                 0.00    0.00     188/565         main [1]
-                0.00    0.00     376/565         LexicographicAnalyser::getResult(int, int) [12]
+                0.00    0.00     376/565         LexicographicAnalyser::getResult(int, int) [13]
 [71]     0.0    0.00    0.00     565         ArrangementList<WordOccurence>::getSize() [71]
 -----------------------------------------------
                 0.00    0.00     187/561         LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [3]
-                0.00    0.00     374/561         LexicographicAnalyser::getResult(int, int) [12]
+                0.00    0.00     374/561         LexicographicAnalyser::getResult(int, int) [13]
 [72]     0.0    0.00    0.00     561         ArrangementList<WordOccurence>::create(char*, WordOccurence) [72]
-                0.00    0.00     561/30873       Item<WordOccurence>::Item() [51]
-                0.00    0.00     561/6296        WordOccurence::operator=(WordOccurence const&) [63]
-                0.00    0.00     561/1923        Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
-                0.00    0.00     561/5203        escreveMemLog(long, long, int) [64]
-                0.00    0.00     561/927457      Item<WordOccurence>::~Item() [47]
+                0.00    0.00     561/30877       Item<WordOccurence>::Item() [51]
+                0.00    0.00     561/6310        WordOccurence::operator=(WordOccurence const&) [62]
+                0.00    0.00     561/1937        Item<WordOccurence>::operator=(Item<WordOccurence> const&) [70]
+                0.00    0.00     561/5211        escreveMemLog(long, long, int) [64]
+                0.00    0.00     561/927461      Item<WordOccurence>::~Item() [47]
 -----------------------------------------------
-                0.00    0.00      26/26          ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [35]
+                0.00    0.00      26/26          ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [36]
 [73]     0.0    0.00    0.00      26         ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
                 0.00    0.00      26/10026       Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item() [60]
                 0.00    0.00      26/26          Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator=(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [74]
-                0.00    0.00      26/5203        escreveMemLog(long, long, int) [64]
-                0.00    0.00      26/105986      Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
+                0.00    0.00      26/5211        escreveMemLog(long, long, int) [64]
+                0.00    0.00      26/94896       Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item() [48]
 -----------------------------------------------
                 0.00    0.00      26/26          ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [73]
 [74]     0.0    0.00    0.00      26         Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator=(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&) [74]
 -----------------------------------------------
                 0.00    0.00       1/3           LexicographicAnalyser::LexicographicAnalyser() [95]
-                0.00    0.00       2/3           LexicographicAnalyser::getResult(int, int) [12]
+                0.00    0.00       2/3           LexicographicAnalyser::getResult(int, int) [13]
 [75]     0.0    0.00    0.00       3         ArrangementList<WordOccurence>::ArrangementList() [75]
-                0.00    0.00   30000/30873       Item<WordOccurence>::Item() [51]
+                0.00    0.00   30000/30877       Item<WordOccurence>::Item() [51]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [121]
 [76]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z13normalizeWordNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [76]
@@ -566,7 +566,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00       1/1           main [1]
 [84]     0.0    0.00    0.00       1         finalizaMemLog() [84]
-                0.00    0.00       1/1031474     clkDifMemLog(timespec, timespec, timespec*) [45]
+                0.00    0.00       1/1020514     clkDifMemLog(timespec, timespec, timespec*) [45]
 -----------------------------------------------
                 0.00    0.00       1/1           _GLOBAL__sub_I__Z9parseArgsiPPc [79]
 [85]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [85]
@@ -608,7 +608,7 @@ index % time    self  children    called     name
                 0.00    0.00       1/3           ArrangementList<WordOccurence>::ArrangementList() [75]
                 0.00    0.00       1/1           ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::ArrangementList() [94]
 -----------------------------------------------
-                0.00    0.00       1/1           ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [14]
+                0.00    0.00       1/1           ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [15]
 [96]     0.0    0.00    0.00       1         ArrangementListSorting<WordOccurence>::ArrangementListSorting(int, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [96]
 -----------------------------------------------
 
@@ -703,32 +703,32 @@ notice and this notice are preserved.
 Index by function name
 
   [76] _GLOBAL__sub_I__Z13normalizeWordNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (lexicographic-util.cpp) [11] leMemLog(long, long, int) [95] LexicographicAnalyser::LexicographicAnalyser()
-  [77] _GLOBAL__sub_I__Z16isOrderingConfigNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (app-validation.cpp) [93] parseArgs(int, char**) [15] ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
-  [78] _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (shared-util.cpp) [50] WordOccurence::WordOccurence() [13] ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
-  [79] _GLOBAL__sub_I__Z9parseArgsiPPc (app-util.cpp) [5] WordOccurence::WordOccurence(WordOccurence const&) [16] ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
+  [77] _GLOBAL__sub_I__Z16isOrderingConfigNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (app-validation.cpp) [93] parseArgs(int, char**) [16] ArrangementListSorting<WordOccurence>::quickSortOrder(int, int, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
+  [78] _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (shared-util.cpp) [50] WordOccurence::WordOccurence() [14] ArrangementListSorting<WordOccurence>::quickSortPartition(int, int, int*, int*, Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
+  [79] _GLOBAL__sub_I__Z9parseArgsiPPc (app-util.cpp) [5] WordOccurence::WordOccurence(WordOccurence const&) [17] ArrangementListSorting<WordOccurence>::quickSort(Item<WordOccurence>*, bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*))
   [80] _GLOBAL__sub_I__ZN21LexicographicAnalyserC2Ev (lexicographic-analyser.cpp) [46] WordOccurence::~WordOccurence() [96] ArrangementListSorting<WordOccurence>::ArrangementListSorting(int, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int)
-  [81] _GLOBAL__sub_I_main (app.cpp) [63] WordOccurence::operator=(WordOccurence const&) [6] Item<WordOccurence>::Item(Item<WordOccurence> const&)
-  [82] ativaMemLog()           [8] ArrangementList<WordOccurence>::existsByKey(char*) [51] Item<WordOccurence>::Item()
-  [45] clkDifMemLog(timespec, timespec, timespec*) [33] ArrangementList<WordOccurence>::findByIndex(int) [47] Item<WordOccurence>::~Item()
+  [81] _GLOBAL__sub_I_main (app.cpp) [62] WordOccurence::operator=(WordOccurence const&) [6] Item<WordOccurence>::Item(Item<WordOccurence> const&)
+  [82] ativaMemLog()           [9] ArrangementList<WordOccurence>::existsByKey(char*) [51] Item<WordOccurence>::Item()
+  [45] clkDifMemLog(timespec, timespec, timespec*) [34] ArrangementList<WordOccurence>::findByIndex(int) [47] Item<WordOccurence>::~Item()
   [83] iniciaMemLog(char*)    [61] ArrangementList<WordOccurence>::existsByIndex(int) [70] Item<WordOccurence>::operator=(Item<WordOccurence> const&)
-  [65] isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [14] ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [60] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item()
-  [64] escreveMemLog(long, long, int) [72] ArrangementList<WordOccurence>::create(char*, WordOccurence) [20] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
-  [68] lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [9] ArrangementList<WordOccurence>::update(char*, WordOccurence) [48] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item()
-  [26] normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [71] ArrangementList<WordOccurence>::getSize() [74] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator=(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
-  [84] finalizaMemLog()        [7] ArrangementList<WordOccurence>::findByKey(char*) [27] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
-  [53] lowerCaseLetter(char)   [2] ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [42] bool __gnu_cxx::__is_null_pointer<char>(char*)
+  [65] isTextConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [15] ArrangementList<WordOccurence>::sort(bool (*)(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*), ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*, int, int) [60] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item()
+  [64] escreveMemLog(long, long, int) [72] ArrangementList<WordOccurence>::create(char*, WordOccurence) [21] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::Item(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
+  [68] lowerCaseWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [10] ArrangementList<WordOccurence>::update(char*, WordOccurence) [48] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::~Item()
+  [27] normalizeWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [71] ArrangementList<WordOccurence>::getSize() [74] Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator=(Item<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
+  [84] finalizaMemLog()        [8] ArrangementList<WordOccurence>::findByKey(char*) [28] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > __gnu_cxx::__to_xstring<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char>(int (*)(char*, unsigned long, char const*, __va_list_tag*), unsigned long, char const*, ...)
+  [53] lowerCaseLetter(char)   [2] ArrangementList<WordOccurence>::findIndex(char*, MemoryLogType) [43] bool __gnu_cxx::__is_null_pointer<char>(char*)
   [66] defineFaseMemLog(int)  [75] ArrangementList<WordOccurence>::ArrangementList() [57] __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator++()
-  [67] isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [24] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [52] bool __gnu_cxx::operator!=<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
-  [56] isSpecialCharacter(char) [22] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [49] __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::base() const
-  [18] getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [25] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [58] __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator*() const
-  [32] removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [62] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [54] std::ctype<char>::tolower(char) const
-  [17] makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [73] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [28] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
-  [85] __static_initialization_and_destruction_0(int, int) (app-util.cpp) [35] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [4] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
-  [86] __static_initialization_and_destruction_0(int, int) (app-validation.cpp) [69] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize() [29] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
-  [87] __static_initialization_and_destruction_0(int, int) (app.cpp) [23] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [30] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
-  [88] __static_initialization_and_destruction_0(int, int) (arrangement-list-sorting.cpp) [21] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [31] std::__cxx11::to_string(int)
-  [89] __static_initialization_and_destruction_0(int, int) (arrangement-list.cpp) [19] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [43] std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
-  [90] __static_initialization_and_destruction_0(int, int) (lexicographic-analyser.cpp) [94] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::ArrangementList() [44] std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
-  [91] __static_initialization_and_destruction_0(int, int) (lexicographic-util.cpp) [34] LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [55] char std::tolower<char>(char, std::locale const&)
-  [92] __static_initialization_and_destruction_0(int, int) (shared-util.cpp) [3] LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [10] std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
-  [59] castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [12] LexicographicAnalyser::getResult(int, int)
+  [67] isOrderingConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [25] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(char*) [52] bool __gnu_cxx::operator!=<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
+  [56] isSpecialCharacter(char) [23] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByKey(int) [49] __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::base() const
+  [19] getLexicographicalValue(char, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [26] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::castStringKey(int) [58] __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::operator*() const
+  [33] removeSpecialCharacters(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [63] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::existsByIndex(int) [54] std::ctype<char>::tolower(char) const
+  [18] makeLexicographicalComparison(WordOccurence, WordOccurence, ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*) [73] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [29] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*)
+  [85] __static_initialization_and_destruction_0(int, int) (app-util.cpp) [36] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::create(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [4] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+  [86] __static_initialization_and_destruction_0(int, int) (app-validation.cpp) [69] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::getSize() [30] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux<char*>(char*, char*, std::__false_type)
+  [87] __static_initialization_and_destruction_0(int, int) (app.cpp) [24] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(char*) [31] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+  [88] __static_initialization_and_destruction_0(int, int) (arrangement-list-sorting.cpp) [22] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findByKey(int) [32] std::__cxx11::to_string(int)
+  [89] __static_initialization_and_destruction_0(int, int) (arrangement-list.cpp) [20] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::findIndex(char*, MemoryLogType) [44] std::iterator_traits<char*>::difference_type std::__distance<char*>(char*, char*, std::random_access_iterator_tag)
+  [90] __static_initialization_and_destruction_0(int, int) (lexicographic-analyser.cpp) [94] ArrangementList<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::ArrangementList() [12] std::iterator_traits<char*>::iterator_category std::__iterator_category<char*>(char* const&)
+  [91] __static_initialization_and_destruction_0(int, int) (lexicographic-util.cpp) [35] LexicographicAnalyser::readOrdering(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [55] char std::tolower<char>(char, std::locale const&)
+  [92] __static_initialization_and_destruction_0(int, int) (shared-util.cpp) [3] LexicographicAnalyser::readWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [7] std::iterator_traits<char*>::difference_type std::distance<char*>(char*, char*)
+  [59] castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [13] LexicographicAnalyser::getResult(int, int)
