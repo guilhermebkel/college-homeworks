@@ -24,7 +24,8 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 	
 	bool isFirstPartition = left == 0 && right == this->size - 1;
 	bool customPivotExists = this->quickSortPivot != -1;
-	bool canUseCustomPivot = isFirstPartition && customPivotExists;
+	bool customPivotIsBetweenPartition = this->quickSortPivot >= left && this->quickSortPivot <= right;
+	bool canUseCustomPivot = isFirstPartition && customPivotExists && customPivotIsBetweenPartition;
 
 	if (canUseCustomPivot) {
 		x = itens[this->quickSortPivot];
