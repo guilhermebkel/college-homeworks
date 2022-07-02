@@ -19,7 +19,8 @@ enum MemoryLogType {
 	UPDATE = 0,
 	CREATE = 1,
 	FIND = 2,
-	SORT = 3
+	QUICK_SORT = 3,
+	SELECTION_SORT = 3
 };
 
 template <typename Model> struct Item {

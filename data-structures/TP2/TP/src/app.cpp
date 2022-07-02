@@ -11,6 +11,7 @@
 #include "app-validation.h"
 #include "shared-util.h"
 #include "lexicographic-analyser.h"
+#include "lexicographic-memlog.h"
 
 int main(int argc, char ** argv) {
 	std::string memoryLogOutputFilePath = "../data/memory-log.out";

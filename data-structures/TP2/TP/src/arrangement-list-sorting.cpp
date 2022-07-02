@@ -32,12 +32,18 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 		x = itens[(*i + *j)/2];
 	}
 
+	LEMEMLOG((long int)(&(x.model)),sizeof(Model), MemoryLogType::QUICK_SORT);
+
 	do {
 		while (compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering)) {
+			LEMEMLOG((long int)(&(itens[*i].model)),sizeof(Model), MemoryLogType::QUICK_SORT);
+
 			(*i)++;
 		}
 
 		while (compareKeys(itens[*j].model, x.model, this->lexicographicalOrdering)) {
+			LEMEMLOG((long int)(&(itens[*j].model)),sizeof(Model), MemoryLogType::QUICK_SORT);
+
 			(*j)--;
 		}
 
@@ -45,6 +51,9 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 			w = itens[*i];
 			itens[*i] = itens[*j];
 			itens[*j] = w;
+
+			ESCREVEMEMLOG((long int)(&(itens[*i])),sizeof(Model), MemoryLogType::QUICK_SORT);
+			ESCREVEMEMLOG((long int)(&(itens[*j])),sizeof(Model), MemoryLogType::QUICK_SORT);
 
 			(*i)++;
 			(*j)--;
@@ -86,8 +95,8 @@ template <typename Model>
 void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
 	for (int i = left; i < right; i++) {
 		for (int j = i + 1; j < right; j++) {
-			LEMEMLOG((long int)(&(itens[i])),sizeof(Model), MemoryLogType::SORT);
-			LEMEMLOG((long int)(&(itens[j])),sizeof(Model), MemoryLogType::SORT);
+			LEMEMLOG((long int)(&(itens[i])),sizeof(Model), MemoryLogType::SELECTION_SORT);
+			LEMEMLOG((long int)(&(itens[j])),sizeof(Model), MemoryLogType::SELECTION_SORT);
 
 			bool canSort = compareKeys(itens[i].model, itens[j].model, this->lexicographicalOrdering);
 
@@ -97,8 +106,8 @@ void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Mode
 				itens[i] = itens[j];
 				itens[j] = tempModel;
 
-				ESCREVEMEMLOG((long int)(&(itens[i])),sizeof(Model), MemoryLogType::SORT);
-				ESCREVEMEMLOG((long int)(&(itens[j])),sizeof(Model), MemoryLogType::SORT);
+				ESCREVEMEMLOG((long int)(&(itens[i])),sizeof(Model), MemoryLogType::SELECTION_SORT);
+				ESCREVEMEMLOG((long int)(&(itens[j])),sizeof(Model), MemoryLogType::SELECTION_SORT);
 			}
 		}
 	}

@@ -17,7 +17,7 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build
+all: build gprof memlog
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
@@ -33,11 +33,11 @@ build: clean
 	$(EXE) -i ../data/input.txt -o ../data/output.txt -s 2 -m 4
 
 gprof:
-	$(EXE)
+	$(EXE) -i ../data/input.txt -o ../data/output.txt -s 2 -m 4
 	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof.txt
 
 memlog:
-	$(EXE)
+	$(EXE) -i ../data/input.txt -o ../data/output.txt -s 2 -m 4
 	$(ANALISAMEM_LIB_FOLDER_PATH) -f eps -i $(DATA_FOLDER_PATH)/memory-log.out -p $(DATA_FOLDER_PATH)/memory-log
 	
 clean:
