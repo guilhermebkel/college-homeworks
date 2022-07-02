@@ -54,9 +54,6 @@ int main(int argc, char ** argv) {
 		}
 	}
 
-	inputFile.close();
-	erroAssert(!inputFile.fail(), "Failed to close input file.");
-
 	defineFaseMemLog(MemoryLogLevel::LEXICOGRAPHIC_ANALYSER_GET_RESULT);
 	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult(parsedArgs.quickSortPivot, parsedArgs.quickSortMaxPartitionSize);
 
