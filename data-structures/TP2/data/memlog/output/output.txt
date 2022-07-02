@@ -1,0 +1,6 @@
+xadrez 31
+vez 31
+uma 62
+gata 31
+era 31
+#FIM

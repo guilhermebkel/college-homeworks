@@ -17,7 +17,7 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build test
+all: build gprof memlog
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
@@ -32,15 +32,24 @@ build: clean
 	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
 
 test:
-	$(EXE) -i ../data/input.txt -o ../data/output.txt -s 2 -m 4
+	$(EXE) -i $(DATA_FOLDER_PATH)/input.txt -o $(DATA_FOLDER_PATH)/output.txt
 
 gprof:
-	$(EXE) -i ../data/input.txt -o ../data/output.txt -s 2 -m 4
-	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-1000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-1000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-2000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-2000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-2000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-3000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-3000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-3000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-4000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-4000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-4000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-5000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-5000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-5000.out
 
 memlog:
-	$(EXE) -i ../data/input.txt -o ../data/output.txt -s 2 -m 4
-	$(ANALISAMEM_LIB_FOLDER_PATH) -f eps -i $(DATA_FOLDER_PATH)/memory-log.out -p $(DATA_FOLDER_PATH)/memory-log
+	$(EXE) -i $(DATA_FOLDER_PATH)/memlog/input/input.txt -o $(DATA_FOLDER_PATH)/memlog/output/output.txt
+	$(ANALISAMEM_LIB_FOLDER_PATH) -f eps -i $(DATA_FOLDER_PATH)/memlog/output/log.out -p $(DATA_FOLDER_PATH)/memlog/output
+	gnuplot $(DATA_FOLDER_PATH)/memlog/*.gp
 	
 clean:
 	rm -f $(EXE) $(OBJ)/*.o gmon.out

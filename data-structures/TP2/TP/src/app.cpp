@@ -14,7 +14,7 @@
 #include "app-memlog.h"
 
 int main(int argc, char ** argv) {
-	std::string memoryLogOutputFilePath = "../data/memory-log.out";
+	std::string memoryLogOutputFilePath = "../data/memlog/output/log.out";
 
 	iniciaMemLog(castChar(memoryLogOutputFilePath));
 	ativaMemLog();

@@ -32,8 +32,6 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 		x = itens[(*i + *j)/2];
 	}
 
-	LEMEMLOG((long int)(&(x)),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
-
 	do {
 		while (makeComparison(x.model, itens[*i].model, this->lexicographicalOrdering)) {
 			LEMEMLOG((long int)(&(itens[*i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
