@@ -23,7 +23,7 @@ void ArrangementList<Model>::update (StringKey key, Model model) {
 
 	this->itens[index].model = model;
 
-	ESCREVEMEMLOG((long int)(&(this->itens[index])),sizeof(Model), MemoryLogType::UPDATE);
+	ESCREVEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), MemoryLogType::UPDATE);
 };
 
 template <typename Model>
@@ -43,7 +43,7 @@ void ArrangementList<Model>::create (StringKey key, Model model) {
 
 	this->itens[size] = item;
 
-	ESCREVEMEMLOG((long int)(&(this->itens[size])),sizeof(Model), MemoryLogType::CREATE);
+	ESCREVEMEMLOG((long int)(&(this->itens[size])),sizeof(Item<Model>), MemoryLogType::CREATE);
 
 	this->size++;
 };
@@ -71,7 +71,7 @@ Item<Model> ArrangementList<Model>::findByKey (NumberKey key) {
 
 template <typename Model>
 Item<Model> ArrangementList<Model>::findByIndex (int index) {
-	LEMEMLOG((long int)(&(this->itens[index])),sizeof(Model), MemoryLogType::FIND);
+	LEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), MemoryLogType::FIND);
 
 	return this->itens[index];
 };
@@ -81,7 +81,7 @@ int ArrangementList<Model>::findIndex (StringKey key, MemoryLogType memoryLogTyp
 	for (int index = 0; index < this->size; index++) {
 		Item<Model> foundItem = this->itens[index];
 
-		LEMEMLOG((long int)(&(this->itens[index])),sizeof(Model), memoryLogType);
+		LEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), memoryLogType);
 
 		bool foundKey = strcmp(foundItem.key, key) == 0;
 
