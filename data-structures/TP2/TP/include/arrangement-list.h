@@ -36,7 +36,7 @@ template <typename Model> class ArrangementList {
 		bool existsByKey(StringKey key);
 		bool existsByKey(NumberKey key);
 		Item<Model> findByIndex(int index);
-		void sort(bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering, int quickSortPivot, int quickSortMaxPartitionSize);
+		void sort(bool (*makeComparison)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering), ArrangementList<std::string> *lexicographicalOrdering, int quickSortPivot, int quickSortMaxPartitionSize);
 
 	private:
 		Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE];

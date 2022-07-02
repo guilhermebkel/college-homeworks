@@ -16,7 +16,7 @@ ArrangementListSorting<Model>::ArrangementListSorting (int size, ArrangementList
 };
 
 template <typename Model>
-void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int *i, int *j, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
+void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int *i, int *j, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*makeComparison)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
 	Item<Model> x, w;
 
 	*i = left;
@@ -35,13 +35,13 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 	LEMEMLOG((long int)(&(x)),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 	do {
-		while (compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering)) {
+		while (makeComparison(x.model, itens[*i].model, this->lexicographicalOrdering)) {
 			LEMEMLOG((long int)(&(itens[*i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 			(*i)++;
 		}
 
-		while (compareKeys(itens[*j].model, x.model, this->lexicographicalOrdering)) {
+		while (makeComparison(itens[*j].model, x.model, this->lexicographicalOrdering)) {
 			LEMEMLOG((long int)(&(itens[*j])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 			(*j)--;
@@ -62,7 +62,7 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 };
 
 template <typename Model>
-void ArrangementListSorting<Model>::quickSortOrder(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
+void ArrangementListSorting<Model>::quickSortOrder(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*makeComparison)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
 	int i, j;
 
 	int currentPartitionSize = right - left;
@@ -72,33 +72,33 @@ void ArrangementListSorting<Model>::quickSortOrder(int left, int right, Item<Mod
 	bool mustUseSimpleSortingAlgorithm = maxPartitionSizeExists && isCurrentPartitionSizeOverMaxValue;
 
 	if (mustUseSimpleSortingAlgorithm) {
-		this->selectionSort(left, right + 1, itens, compareKeys);
+		this->selectionSort(left, right + 1, itens, makeComparison);
 	} else {
-		this->quickSortPartition(left, right, &i, &j, itens, compareKeys);
+		this->quickSortPartition(left, right, &i, &j, itens, makeComparison);
 
 		if (left < j) {
-			this->quickSortOrder(left, j, itens, compareKeys);
+			this->quickSortOrder(left, j, itens, makeComparison);
 		}
 
 		if (i < right) {
-			this->quickSortOrder(i, right, itens, compareKeys);
+			this->quickSortOrder(i, right, itens, makeComparison);
 		}
 	}
 };
 
 template <typename Model>
-void ArrangementListSorting<Model>::quickSort(Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
-	this->quickSortOrder(0, this->size - 1, itens, compareKeys);
+void ArrangementListSorting<Model>::quickSort(Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*makeComparison)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
+	this->quickSortOrder(0, this->size - 1, itens, makeComparison);
 };
 
 template <typename Model>
-void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
+void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*makeComparison)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
 	for (int i = left; i < right; i++) {
 		for (int j = i + 1; j < right; j++) {
 			LEMEMLOG((long int)(&(itens[i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_SELECTION_SORT);
 			LEMEMLOG((long int)(&(itens[j])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_SELECTION_SORT);
 
-			bool canSort = compareKeys(itens[i].model, itens[j].model, this->lexicographicalOrdering);
+			bool canSort = makeComparison(itens[i].model, itens[j].model, this->lexicographicalOrdering);
 
 			if (canSort) {
 				Item<Model> tempModel = itens[i];
