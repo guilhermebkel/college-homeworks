@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------
 # File: Makefile
-# Content: Compiles the Poker Face application.
+# Content: Compiles the Lexicographic application.
 # Author: Guilherme Mota Bromonschenkel Lima (guilhermebromonschenkel@gmail.com)
 #---------------------------------------------------------------------
 # Options: make all - compile everything
