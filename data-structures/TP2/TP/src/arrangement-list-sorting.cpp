@@ -32,17 +32,17 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 		x = itens[(*i + *j)/2];
 	}
 
-	LEMEMLOG((long int)(&(x)),sizeof(Item<Model>), MemoryLogType::QUICK_SORT);
+	LEMEMLOG((long int)(&(x)),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 	do {
 		while (compareKeys(x.model, itens[*i].model, this->lexicographicalOrdering)) {
-			LEMEMLOG((long int)(&(itens[*i])),sizeof(Item<Model>), MemoryLogType::QUICK_SORT);
+			LEMEMLOG((long int)(&(itens[*i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 			(*i)++;
 		}
 
 		while (compareKeys(itens[*j].model, x.model, this->lexicographicalOrdering)) {
-			LEMEMLOG((long int)(&(itens[*j])),sizeof(Item<Model>), MemoryLogType::QUICK_SORT);
+			LEMEMLOG((long int)(&(itens[*j])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 			(*j)--;
 		}
@@ -52,8 +52,8 @@ void ArrangementListSorting<Model>::quickSortPartition(int left, int right, int 
 			itens[*i] = itens[*j];
 			itens[*j] = w;
 
-			ESCREVEMEMLOG((long int)(&(itens[*i])),sizeof(Item<Model>), MemoryLogType::QUICK_SORT);
-			ESCREVEMEMLOG((long int)(&(itens[*j])),sizeof(Item<Model>), MemoryLogType::QUICK_SORT);
+			ESCREVEMEMLOG((long int)(&(itens[*i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
+			ESCREVEMEMLOG((long int)(&(itens[*j])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_QUICK_SORT);
 
 			(*i)++;
 			(*j)--;
@@ -95,8 +95,8 @@ template <typename Model>
 void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
 	for (int i = left; i < right; i++) {
 		for (int j = i + 1; j < right; j++) {
-			LEMEMLOG((long int)(&(itens[i])),sizeof(Item<Model>), MemoryLogType::SELECTION_SORT);
-			LEMEMLOG((long int)(&(itens[j])),sizeof(Item<Model>), MemoryLogType::SELECTION_SORT);
+			LEMEMLOG((long int)(&(itens[i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_SELECTION_SORT);
+			LEMEMLOG((long int)(&(itens[j])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_SELECTION_SORT);
 
 			bool canSort = compareKeys(itens[i].model, itens[j].model, this->lexicographicalOrdering);
 
@@ -106,8 +106,8 @@ void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Mode
 				itens[i] = itens[j];
 				itens[j] = tempModel;
 
-				ESCREVEMEMLOG((long int)(&(itens[i])),sizeof(Item<Model>), MemoryLogType::SELECTION_SORT);
-				ESCREVEMEMLOG((long int)(&(itens[j])),sizeof(Item<Model>), MemoryLogType::SELECTION_SORT);
+				ESCREVEMEMLOG((long int)(&(itens[i])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_SELECTION_SORT);
+				ESCREVEMEMLOG((long int)(&(itens[j])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_SELECTION_SORT);
 			}
 		}
 	}

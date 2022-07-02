@@ -6,6 +6,7 @@
 #include "lexicographic-analyser.h"
 #include "shared-util.h"
 #include "memlog.h"
+#include "app-memlog.h"
 
 template <typename Model>
 ArrangementList<Model>::ArrangementList () {
@@ -19,11 +20,11 @@ int ArrangementList<Model>::getSize () {
 
 template <typename Model>
 void ArrangementList<Model>::update (StringKey key, Model model) {
-	int index = this->findIndex(key, MemoryLogType::UPDATE);
+	int index = this->findIndex(key, MemoryLogType::ARRANGEMENT_LIST_UPDATE);
 
 	this->itens[index].model = model;
 
-	ESCREVEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), MemoryLogType::UPDATE);
+	ESCREVEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_UPDATE);
 };
 
 template <typename Model>
@@ -43,7 +44,7 @@ void ArrangementList<Model>::create (StringKey key, Model model) {
 
 	this->itens[size] = item;
 
-	ESCREVEMEMLOG((long int)(&(this->itens[size])),sizeof(Item<Model>), MemoryLogType::CREATE);
+	ESCREVEMEMLOG((long int)(&(this->itens[size])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_CREATE);
 
 	this->size++;
 };
@@ -55,7 +56,7 @@ void ArrangementList<Model>::create (NumberKey key, Model model) {
 
 template <typename Model>
 Item<Model> ArrangementList<Model>::findByKey (StringKey key) {
-	int modelIndex = this->findIndex(key, MemoryLogType::FIND);
+	int modelIndex = this->findIndex(key, MemoryLogType::ARRANGEMENT_LIST_FIND);
 
 	if (!this->existsByIndex(modelIndex)) {
 		throw "Model not found";
@@ -71,7 +72,7 @@ Item<Model> ArrangementList<Model>::findByKey (NumberKey key) {
 
 template <typename Model>
 Item<Model> ArrangementList<Model>::findByIndex (int index) {
-	LEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), MemoryLogType::FIND);
+	LEMEMLOG((long int)(&(this->itens[index])),sizeof(Item<Model>), MemoryLogType::ARRANGEMENT_LIST_FIND);
 
 	return this->itens[index];
 };
@@ -100,7 +101,7 @@ int ArrangementList<Model>::findIndex (NumberKey key, MemoryLogType memoryLogTyp
 
 template <typename Model>
 bool ArrangementList<Model>::existsByKey (StringKey key) {
-	int modelIndex = this->findIndex(key, MemoryLogType::FIND);
+	int modelIndex = this->findIndex(key, MemoryLogType::ARRANGEMENT_LIST_FIND);
 
 	return this->existsByIndex(modelIndex);
 };

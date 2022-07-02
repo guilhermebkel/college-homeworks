@@ -11,7 +11,7 @@
 #include "app-validation.h"
 #include "shared-util.h"
 #include "lexicographic-analyser.h"
-#include "lexicographic-memlog.h"
+#include "app-memlog.h"
 
 int main(int argc, char ** argv) {
 	std::string memoryLogOutputFilePath = "../data/memory-log.out";
@@ -38,10 +38,10 @@ int main(int argc, char ** argv) {
 		} else if (isOrderingConfig(word)) {
 			nextReadType = NextReadType::ORDERING;
 		} else if (nextReadType == NextReadType::ORDERING) {
-			defineFaseMemLog(MemoryLogLevel::READ_ORDERING);
+			defineFaseMemLog(MemoryLogLevel::LEXICOGRAPHIC_ANALYSER_READ_ORDERING);
 			lexicographicAnalyser->readOrdering(word);
 		} else if (nextReadType == NextReadType::TEXT) {
-			defineFaseMemLog(MemoryLogLevel::READ_WORD);
+			defineFaseMemLog(MemoryLogLevel::LEXICOGRAPHIC_ANALYSER_READ_WORD);
 			lexicographicAnalyser->readWord(word);
 		} else {
 			nextReadType = NextReadType::NOTHING;
@@ -57,7 +57,7 @@ int main(int argc, char ** argv) {
 	inputFile.close();
 	erroAssert(!inputFile.fail(), "Failed to close input file.");
 
-	defineFaseMemLog(MemoryLogLevel::GET_RESULT);
+	defineFaseMemLog(MemoryLogLevel::LEXICOGRAPHIC_ANALYSER_GET_RESULT);
 	ArrangementList<WordOccurence> *result = lexicographicAnalyser->getResult(parsedArgs.quickSortPivot, parsedArgs.quickSortMaxPartitionSize);
 
 	FILE *outputFile;

@@ -11,17 +11,11 @@
 
 #include <iostream>
 
+#include "app-memlog.h"
+
 typedef char *StringKey;
 typedef int NumberKey;
 typedef char LexicographicalOrdering[100];
-
-enum MemoryLogType {
-	UPDATE = 0,
-	CREATE = 1,
-	FIND = 2,
-	QUICK_SORT = 3,
-	SELECTION_SORT = 3
-};
 
 template <typename Model> struct Item {
 	Model model;
