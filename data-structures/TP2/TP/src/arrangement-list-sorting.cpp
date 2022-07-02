@@ -63,7 +63,7 @@ void ArrangementListSorting<Model>::quickSortOrder(int left, int right, Item<Mod
 	bool mustUseSimpleSortingAlgorithm = maxPartitionSizeExists && isCurrentPartitionSizeOverMaxValue;
 
 	if (mustUseSimpleSortingAlgorithm) {
-		this->selectionSort(left, right, itens, compareKeys);
+		this->selectionSort(left, right + 1, itens, compareKeys);
 	} else {
 		this->quickSortPartition(left, right, &i, &j, itens, compareKeys);
 
@@ -84,15 +84,12 @@ void ArrangementListSorting<Model>::quickSort(Item<Model> itens[MAX_ARRANGEMENT_
 
 template <typename Model>
 void ArrangementListSorting<Model>::selectionSort(int left, int right, Item<Model> itens[MAX_ARRANGEMENT_LIST_SIZE], bool (*compareKeys)(Model, Model, ArrangementList<std::string> *lexicographicalOrdering)) {
-	int i = left;
-	int j;
-
-	for (; i < right; i++) {
-		for (j = i + 1; j < right; j++) {
+	for (int i = left; i < right; i++) {
+		for (int j = i + 1; j < right; j++) {
 			LEMEMLOG((long int)(&(itens[i])),sizeof(Model), MemoryLogType::SORT);
 			LEMEMLOG((long int)(&(itens[j])),sizeof(Model), MemoryLogType::SORT);
 
-			bool canSort = compareKeys(itens[j].model, itens[i].model, this->lexicographicalOrdering);
+			bool canSort = compareKeys(itens[i].model, itens[j].model, this->lexicographicalOrdering);
 
 			if (canSort) {
 				Item<Model> tempModel = itens[i];
