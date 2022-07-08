@@ -8,9 +8,14 @@
 template <typename Model> class HashTable {
   public:
     HashTable(int size);
+		Item<Model> search(int primaryKey, int foreignKey);
+		int insert(int primaryKey, Item<Model> item);
+		Item<Model> remove(int primaryKey, int foreignKey);
 
 	private:
-		BinaryTree<Model> hashTable[1000];
+		BinaryTree<Model> table[1000];
+		int hash(int primaryKey);
+		int size;
 };
 
 #endif

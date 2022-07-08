@@ -7,8 +7,6 @@
 typedef struct ParsedArgs {
 	char inputFilePath[100];
   char outputFilePath[100];
-  int quickSortPivot;
-  int quickSortMaxPartitionSize;
 } ParsedArgs;
 
 ParsedArgs parseArgs (int argc, char **argv);

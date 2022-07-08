@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include "hash-table.h"
+
 typedef struct Message {
 	int id;
 	std::string content;
@@ -17,7 +19,7 @@ class Mailer {
     void remove(int userId, int messageId);
 
 	private:
-		
+		HashTable<Message> *storage;
 };
 
 #endif
