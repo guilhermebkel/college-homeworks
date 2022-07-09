@@ -6,7 +6,6 @@
 
 #include "msgassert.h"
 #include "memlog.h"
-#include "app.h"
 #include "app-util.h"
 #include "shared-util.h"
 #include "app-memlog.h"
