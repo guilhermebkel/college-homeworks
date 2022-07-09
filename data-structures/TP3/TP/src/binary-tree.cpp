@@ -58,11 +58,6 @@ Item<Model> BinaryTree<Model>::remove(int key) {
 };
 
 template <typename Model>
-Node<Model> *BinaryTree<Model>::getRoot() {
-	return this->root;
-};
-
-template <typename Model>
 void BinaryTree<Model>::recursiveInsert(Node<Model>* &node, Item<Model> item) {
 	if(node == NULL) {
 		node = new Node<Model>(item);
