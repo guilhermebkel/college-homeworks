@@ -8,21 +8,9 @@
 template <typename Model>
 Node<Model>::Node(Item<Model> item) {
 	this->item = item;
-};
 
-template <typename Model>
-Item<Model> Node<Model>::getItem() {
-	return this->item;
-};
-
-template <typename Model>
-Node<Model> *Node<Model>::getLeft() {
-	return this->left;
-};
-
-template <typename Model>
-Node<Model> *Node<Model>::getRight() {
-	return this->right;
+	this->left = NULL;
+	this->right = NULL;
 };
 
 template <typename Model>
@@ -37,19 +25,19 @@ BinaryTree<Model>::~BinaryTree() {
 
 template <typename Model>
 void BinaryTree<Model>::insert(Item<Model> item) {
-	this->recursiveInsert(root, item);
+	this->recursiveInsert(this->root, item);
 };
 
 template <typename Model>
 void BinaryTree<Model>::clear() {
-	this->recursiveDelete(root);
+	this->recursiveDelete(this->root);
 
 	this->root = NULL;
 };
 
 template <typename Model>
 Item<Model> BinaryTree<Model>::search(int key) {
-	return this->recursiveSearch(root, key);
+	return this->recursiveSearch(this->root, key);
 };
 
 template <typename Model>
@@ -58,8 +46,8 @@ Item<Model> BinaryTree<Model>::remove(int key) {
 
 	Item<Model> item;
 
-	if (isValidNodeItem(node.getItem())) {
-		item = node.getItem();
+	if (isValidNodeItem(node.item)) {
+		item = node.item;
 
 		// delete node;
 	} else {
@@ -75,14 +63,14 @@ Node<Model> *BinaryTree<Model>::getRoot() {
 };
 
 template <typename Model>
-void BinaryTree<Model>::recursiveInsert(Node<Model>* node, Item<Model> item) {
+void BinaryTree<Model>::recursiveInsert(Node<Model>* &node, Item<Model> item) {
 	if(node == NULL) {
 		node = new Node<Model>(item);
 	} else {
-		if (item.key < node->getItem().key) {
-			this->recursiveInsert(node->getLeft(), item);
+		if (item.key < node->item.key) {
+			this->recursiveInsert(node->left, item);
 		} else {
-			this->recursiveInsert(node->getRight(), item);
+			this->recursiveInsert(node->right, item);
 		}
 	}
 };
@@ -90,8 +78,8 @@ void BinaryTree<Model>::recursiveInsert(Node<Model>* node, Item<Model> item) {
 template <typename Model>
 void BinaryTree<Model>::recursiveDelete(Node<Model>* node) {
 	if(node != NULL){
-		this->recursiveDelete(node->getLeft());
-		this->recursiveDelete(node->getRight());
+		this->recursiveDelete(node->left);
+		this->recursiveDelete(node->right);
 
 		delete node;
 	}
@@ -107,12 +95,12 @@ Item<Model> BinaryTree<Model>::recursiveSearch(Node<Model> *node, int key) {
 		return aux;
 	}
 
-	if (key < node->getItem().key) {
-		return this->recursiveSearch(node->getLeft(), key);
-	} else if (key > node->getItem().key) {
-		return this->recursiveSearch(node->getRight(), key);
+	if (key < node->item.key) {
+		return this->recursiveSearch(node->left, key);
+	} else if (key > node->item.key) {
+		return this->recursiveSearch(node->right, key);
 	} else {
-		return node->getItem();
+		return node->item;
 	}
 };
 

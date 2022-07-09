@@ -13,7 +13,7 @@ ParsedArgs parseArgs (int argc, char **argv) {
 
   ParsedArgs parsedArgs;
 
-  while ((option = getopt(argc, argv, "i:I:o:O:m:M:s:S:")) != EOF) {
+  while ((option = getopt(argc, argv, "i:o:")) != EOF) {
     switch(option) {
       case 'i':
         strcpy(parsedArgs.inputFilePath, optarg);

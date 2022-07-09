@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <sstream>
 
 #include "mailer.h"
 #include "hash-table.h"
@@ -9,7 +10,7 @@ Mailer::Mailer(int size) {
 	this->storage = new HashTable<Message>(size);
 };
 
-void Mailer::send(int userId, Message message) {
+std::string Mailer::send(int userId, Message message) {
 	Item<Message> item;
 
 	item.model = message;
@@ -17,10 +18,13 @@ void Mailer::send(int userId, Message message) {
 
 	int index = this->storage->insert(userId, item);
 
-	std::cout << "OK: MENSAGEM " << message.id << " PARA " << userId << " ARMAZENADA EM " << index << std::endl;
+	std::ostringstream response;
+	response << "OK: MENSAGEM " << message.id << " PARA " << userId << " ARMAZENADA EM " << index;
+	
+	return response.str();
 };
 
-void Mailer::read(int userId, int messageId) {
+std::string Mailer::read(int userId, int messageId) {
 	Item<Message> item = this->storage->search(userId, messageId);
 
 	bool itemExists = isValidNodeItem(item);
@@ -33,17 +37,24 @@ void Mailer::read(int userId, int messageId) {
 		result = "MENSAGEM INEXISTENTE";
 	}
 
-	std::cout << "CONSULTA " << userId << " " << messageId << " " << result << std::endl;
+	std::ostringstream response;
+	response << "CONSULTA " << userId << " " << messageId << " " << result;
+
+	return response.str();
 };
 
-void Mailer::remove(int userId, int messageId) {
+std::string Mailer::remove(int userId, int messageId) {
 	Item<Message> item = this->storage->remove(userId, messageId);
 
 	bool deleted = isValidNodeItem(item);
 
+	std::ostringstream response;
+
 	if (deleted) {
-		std::cout << "OK: MENSAGEM APAGADA" << std::endl;
+		response << "OK: MENSAGEM APAGADA";
 	} else {
-		std::cout << "ERRO: MENSAGEM INEXISTENTE" << std::endl;
+		response << "ERRO: MENSAGEM INEXISTENTE";
 	}
+
+	return response.str();
 };

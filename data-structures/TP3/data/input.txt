@@ -1,4 +1,4 @@
-#TEXTO
-Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. Era uma vez UMA gata xadrez. 
-#ORDEM
-Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+10
+ENTREGA 5 103 6 Bom dia, meu amigo! Tudo bom?
+CONSULTA 5 103
+APAGA 5 103

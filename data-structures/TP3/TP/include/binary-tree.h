@@ -11,11 +11,6 @@ template <typename Model> struct Item {
 template <typename Model> class Node {
 	public:
 		Node(Item<Model> item);
-		Item<Model> getItem();
-		Node<Model> *getLeft();
-		Node<Model> *getRight();
-
-	private:
 		Item<Model> item;
 		Node<Model> *left;
 		Node<Model> *right;
@@ -32,7 +27,7 @@ template <typename Model> class BinaryTree {
 		Node<Model> *getRoot();
 
 	private:
-		void recursiveInsert(Node<Model>* node, Item<Model> item);
+		void recursiveInsert(Node<Model>* &node, Item<Model> item);
 		void recursiveDelete(Node<Model>* node);
 		Item<Model> recursiveSearch(Node<Model> *node, int key);
 		Node<Model> *root;

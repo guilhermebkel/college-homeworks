@@ -14,9 +14,9 @@ typedef struct Message {
 class Mailer {
   public:
     Mailer(int size);
-		void send(int userId, Message message);
-    void read(int userId, int messageId);
-    void remove(int userId, int messageId);
+		std::string send(int userId, Message message);
+    std::string read(int userId, int messageId);
+    std::string remove(int userId, int messageId);
 
 	private:
 		HashTable<Message> *storage;

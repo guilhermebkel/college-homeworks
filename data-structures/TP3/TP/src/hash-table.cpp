@@ -20,7 +20,7 @@ Item<Model> HashTable<Model>::search(int primaryKey, int foreignKey) {
 
 template <typename Model>
 int HashTable<Model>::insert(int primaryKey, Item<Model> item) {
-	int index = this->hash(item.key);
+	int index = this->hash(primaryKey);
 
 	this->table[index].insert(item);
 

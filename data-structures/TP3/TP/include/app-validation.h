@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string.h>
 
-bool isOrderingConfig (std::string word);
-bool isTextConfig (std::string word);
+bool isSendCommand (std::string word);
+bool isReadCommand (std::string word);
+bool isRemoveCommand (std::string word);
 
 #endif

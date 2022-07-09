@@ -17,7 +17,7 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build
+all: build test
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o

@@ -1,6 +1,3 @@
-xadrez 31
-vez 31
-uma 62
-gata 31
-era 31
-#FIM
+OK: MENSAGEM 103 PARA 5 ARMAZENADA EM 5
+CONSULTA 5 103 Bom dia, meu amigo! Tudo bom?
+OK: MENSAGEM APAGADA
