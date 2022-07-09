@@ -3,6 +3,7 @@
 
 #include "mailer.h"
 #include "hash-table.h"
+#include "binary-tree-validation.h"
 
 Mailer::Mailer(int size) {
 	this->storage = new HashTable<Message>(size);
@@ -22,7 +23,7 @@ void Mailer::send(int userId, Message message) {
 void Mailer::read(int userId, int messageId) {
 	Item<Message> item = this->storage->search(userId, messageId);
 
-	bool itemExists = item.key != -1;
+	bool itemExists = isValidNodeItem(item);
 
 	std::string result;
 
@@ -38,7 +39,7 @@ void Mailer::read(int userId, int messageId) {
 void Mailer::remove(int userId, int messageId) {
 	Item<Message> item = this->storage->remove(userId, messageId);
 
-	bool deleted = item.key != -1;
+	bool deleted = isValidNodeItem(item);
 
 	if (deleted) {
 		std::cout << "OK: MENSAGEM APAGADA" << std::endl;

@@ -17,17 +17,17 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build gprof memlog
+all: build
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
 	$(CC) $(CFLAGS) -c $(SRC)/app-util.cpp -pg -o $(OBJ)/app-util.o
 	$(CC) $(CFLAGS) -c $(SRC)/app-validation.cpp -pg -o $(OBJ)/app-validation.o
 	$(CC) $(CFLAGS) -c $(SRC)/shared-util.cpp -pg -o $(OBJ)/shared-util.o
-	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list.cpp -pg -o $(OBJ)/arrangement-list.o
-	$(CC) $(CFLAGS) -c $(SRC)/arrangement-list-sorting.cpp -pg -o $(OBJ)/arrangement-list-sorting.o
-	$(CC) $(CFLAGS) -c $(SRC)/lexicographic-analyser.cpp -pg -o $(OBJ)/lexicographic-analyser.o
-	$(CC) $(CFLAGS) -c $(SRC)/lexicographic-util.cpp -pg -o $(OBJ)/lexicographic-util.o
+	$(CC) $(CFLAGS) -c $(SRC)/binary-tree.cpp -pg -o $(OBJ)/binary-tree.o
+	$(CC) $(CFLAGS) -c $(SRC)/binary-tree-validation.cpp -pg -o $(OBJ)/binary-tree-validation.o
+	$(CC) $(CFLAGS) -c $(SRC)/hash-table.cpp -pg -o $(OBJ)/hash-table.o
+	$(CC) $(CFLAGS) -c $(SRC)/mailer.cpp -pg -o $(OBJ)/mailer.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -pg -o $(OBJ)/memlog.o
 	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
 

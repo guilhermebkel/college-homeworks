@@ -3,6 +3,7 @@
 
 #include "binary-tree.h"
 #include "mailer.h"
+#include "binary-tree-validation.h"
 
 template <typename Model>
 Node<Model>::Node(Item<Model> item) {
@@ -57,10 +58,10 @@ Item<Model> BinaryTree<Model>::remove(int key) {
 
 	Item<Model> item;
 
-	if (node != NULL) {
-		item = node->getItem();
+	if (isValidNodeItem(node.getItem())) {
+		item = node.getItem();
 
-		delete node;
+		// delete node;
 	} else {
 		item.key = -1;
 	}
@@ -74,11 +75,11 @@ Node<Model> *BinaryTree<Model>::getRoot() {
 };
 
 template <typename Model>
-void BinaryTree<Model>::recursiveInsert(Node<Model>* &node, Item<Model> item) {
+void BinaryTree<Model>::recursiveInsert(Node<Model>* node, Item<Model> item) {
 	if(node == NULL) {
-		node = new Node(item);
+		node = new Node<Model>(item);
 	} else {
-		if (item < node->getItem()) {
+		if (item.key < node->getItem().key) {
 			this->recursiveInsert(node->getLeft(), item);
 		} else {
 			this->recursiveInsert(node->getRight(), item);
@@ -106,12 +107,12 @@ Item<Model> BinaryTree<Model>::recursiveSearch(Node<Model> *node, int key) {
 		return aux;
 	}
 
-	if (key < node->item->key) {
-		return this->recursiveSearch(node->getLeft(), item);
-	} else if (key > node->item->key) {
-		return this->recursiveSearch(node->getRight(), item);
+	if (key < node->getItem().key) {
+		return this->recursiveSearch(node->getLeft(), key);
+	} else if (key > node->getItem().key) {
+		return this->recursiveSearch(node->getRight(), key);
 	} else {
-		return node->item;
+		return node->getItem();
 	}
 };
 
