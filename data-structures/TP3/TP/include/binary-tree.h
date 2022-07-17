@@ -21,7 +21,6 @@ template <typename Model> class BinaryTree {
 		BinaryTree();
 		~BinaryTree();
 		void insert(Item<Model> item);
-		void clear();
 		Item<Model> search(int key);
 		void remove(int key);
 

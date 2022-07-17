@@ -29,13 +29,6 @@ void BinaryTree<Model>::insert(Item<Model> item) {
 };
 
 template <typename Model>
-void BinaryTree<Model>::clear() {
-	this->recursiveDelete(this->root, this->root->item.key);
-
-	this->root = NULL;
-};
-
-template <typename Model>
 Item<Model> BinaryTree<Model>::search(int key) {
 	Node<Model> *node = this->recursiveSearch(this->root, key);
 
