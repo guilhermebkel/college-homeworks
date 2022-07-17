@@ -5,16 +5,12 @@
 #include <string>
 
 #include "hash-table.h"
-
-typedef struct Message {
-	int id;
-	std::string content;
-} Message;
+#include "message.h"
 
 class Mailer {
   public:
     Mailer(int size);
-		std::string send(int userId, Message message);
+		std::string send(int userId, Message *message);
     std::string read(int userId, int messageId);
     std::string remove(int userId, int messageId);
 

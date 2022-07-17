@@ -4,7 +4,7 @@
 #include <iostream>
 
 template <typename Model> struct Item {
-	Model model;
+	Model *model;
 	int key;
 };
 

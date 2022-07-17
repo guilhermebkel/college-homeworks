@@ -63,9 +63,7 @@ int main(int argc, char ** argv) {
 				}
 			}
 
-			Message message;
-			message.id = messageId;
-			message.content = messageContent;
+			Message *message = new Message(messageId, userId, messageContent);
 
 			std::string response = mailer->send(userId, message);
 			fprintf(outputFile, "%s\n", response.c_str());

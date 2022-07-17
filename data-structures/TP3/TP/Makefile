@@ -27,6 +27,7 @@ build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/binary-tree.cpp -pg -o $(OBJ)/binary-tree.o
 	$(CC) $(CFLAGS) -c $(SRC)/binary-tree-validation.cpp -pg -o $(OBJ)/binary-tree-validation.o
 	$(CC) $(CFLAGS) -c $(SRC)/hash-table.cpp -pg -o $(OBJ)/hash-table.o
+	$(CC) $(CFLAGS) -c $(SRC)/message.cpp -pg -o $(OBJ)/message.o
 	$(CC) $(CFLAGS) -c $(SRC)/mailer.cpp -pg -o $(OBJ)/mailer.o
 	$(CC) $(CFLAGS) -c $(SRC)/memlog.cpp -pg -o $(OBJ)/memlog.o
 	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
