@@ -23,6 +23,7 @@ template <typename Model> class BinaryTree {
 		void insert(Item<Model> item);
 		Item<Model> search(int key);
 		void remove(int key);
+		void clear();
 
 	private:
 		void recursiveInsert(Node<Model>* &node, Item<Model> item);

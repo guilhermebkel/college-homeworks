@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------
 # File: Makefile
-# Content: Compiles the Lexicographic application.
+# Content: Compiles the Mailer application.
 # Author: Guilherme Mota Bromonschenkel Lima (guilhermebromonschenkel@gmail.com)
 #---------------------------------------------------------------------
 # Options: make all - compile everything
@@ -17,7 +17,7 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build test
+all: build memlog
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
@@ -36,15 +36,15 @@ test:
 	$(EXE) -i $(DATA_FOLDER_PATH)/tests/input/entrada_1.txt -o $(DATA_FOLDER_PATH)/output.txt
 
 gprof:
-	$(EXE) -m 1 -s 950 -i $(DATA_FOLDER_PATH)/gprof/input/input-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-1000.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-1000.txt
 	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-1000.out
-	$(EXE) -m 1 -s 1950 -i $(DATA_FOLDER_PATH)/gprof/input/input-2000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-2000.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-2000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-2000.txt
 	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-2000.out
-	$(EXE) -m 1 -s 2950 -i $(DATA_FOLDER_PATH)/gprof/input/input-3000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-3000.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-3000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-3000.txt
 	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-3000.out
-	$(EXE) -m 1 -s 3950 -i $(DATA_FOLDER_PATH)/gprof/input/input-4000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-4000.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-4000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-4000.txt
 	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-4000.out
-	$(EXE) -m 1 -s 4950 -i $(DATA_FOLDER_PATH)/gprof/input/input-5000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-5000.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-5000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-5000.txt
 	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-5000.out
 
 memlog:
