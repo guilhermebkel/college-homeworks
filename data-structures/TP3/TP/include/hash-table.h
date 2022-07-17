@@ -10,7 +10,7 @@ template <typename Model> class HashTable {
     HashTable(int size);
 		Item<Model> search(int primaryKey, int foreignKey);
 		int insert(int primaryKey, Item<Model> item);
-		Item<Model> remove(int primaryKey, int foreignKey);
+		void remove(int primaryKey, int foreignKey);
 
 	private:
 		BinaryTree<Model> table[1000];

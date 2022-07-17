@@ -28,10 +28,10 @@ int HashTable<Model>::insert(int primaryKey, Item<Model> item) {
 };
 
 template <typename Model>
-Item<Model> HashTable<Model>::remove(int primaryKey, int foreignKey) {
+void HashTable<Model>::remove(int primaryKey, int foreignKey) {
 	int index = this->hash(primaryKey);
 
-	return this->table[index].remove(foreignKey);
+	this->table[index].remove(foreignKey);
 };
 
 template <typename Model>

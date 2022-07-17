@@ -38,19 +38,21 @@ std::string Mailer::read(int userId, int messageId) {
 	}
 
 	std::ostringstream response;
-	response << "CONSULTA " << userId << " " << messageId << " " << result;
+	response << "CONSULTA " << userId << " " << messageId << ": " << result;
 
 	return response.str();
 };
 
 std::string Mailer::remove(int userId, int messageId) {
-	Item<Message> item = this->storage->remove(userId, messageId);
-
-	bool deleted = isValidNodeItem(item);
+	Item<Message> item = this->storage->search(userId, messageId);
+	
+	bool itemExists = isValidNodeItem(item);
 
 	std::ostringstream response;
 
-	if (deleted) {
+	if (itemExists) {
+		this->storage->remove(userId, messageId);
+
 		response << "OK: MENSAGEM APAGADA";
 	} else {
 		response << "ERRO: MENSAGEM INEXISTENTE";

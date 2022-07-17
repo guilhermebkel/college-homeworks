@@ -30,31 +30,26 @@ void BinaryTree<Model>::insert(Item<Model> item) {
 
 template <typename Model>
 void BinaryTree<Model>::clear() {
-	this->recursiveDelete(this->root);
+	this->recursiveDelete(this->root, this->root->item.key);
 
 	this->root = NULL;
 };
 
 template <typename Model>
 Item<Model> BinaryTree<Model>::search(int key) {
+	Node<Model> *node = this->recursiveSearch(this->root, key);
+
+	return node->item;
+};
+
+template <typename Model>
+Node<Model> *BinaryTree<Model>::findNode(int key) {
 	return this->recursiveSearch(this->root, key);
 };
 
 template <typename Model>
-Item<Model> BinaryTree<Model>::remove(int key) {
-	Node<Model> node = this->search(key);
-
-	Item<Model> item;
-
-	if (isValidNodeItem(node.item)) {
-		item = node.item;
-
-		// delete node;
-	} else {
-		item.key = -1;
-	}
-
-	return item;
+void BinaryTree<Model>::remove(int key) {
+	this->recursiveDelete(this->root, key);
 };
 
 template <typename Model>
@@ -71,23 +66,56 @@ void BinaryTree<Model>::recursiveInsert(Node<Model>* &node, Item<Model> item) {
 };
 
 template <typename Model>
-void BinaryTree<Model>::recursiveDelete(Node<Model>* node) {
-	if(node != NULL){
-		this->recursiveDelete(node->left);
-		this->recursiveDelete(node->right);
+void BinaryTree<Model>::deleteNode(Node<Model>* node, Node<Model>* &antecessor) {
+	if(antecessor->right != NULL) {
+		this->deleteNode(node, antecessor->right);
 
-		delete node;
+		return;
+	}
+
+	node->item = antecessor->item;
+	node = antecessor;
+	antecessor = antecessor->left;
+
+	free(node);
+};
+
+template <typename Model>
+void BinaryTree<Model>::recursiveDelete(Node<Model>* &node, int key) {
+	if (node == NULL) {
+		return;
+	}
+
+	if (key < node->item.key) {
+		return recursiveDelete(node->left, key);
+	} else if (key > node->item.key) {
+		return recursiveDelete(node->right, key);
+	} else {
+		Node<Model> *aux;
+
+		if (node->right == NULL) {
+			aux = node;
+			node = node->left;
+			free(aux);
+		} else if(node->left == NULL) {
+			aux = node;
+			node = node->right;
+			free(aux);
+		} else {
+			this->deleteNode(node, node->left);
+		}
 	}
 };
 
 template <typename Model>
-Item<Model> BinaryTree<Model>::recursiveSearch(Node<Model> *node, int key) {
-	Item<Model> aux;
-
+Node<Model> *BinaryTree<Model>::recursiveSearch(Node<Model> *node, int key) {
 	if (node == NULL) {
-		aux.key = -1;
+		Item<Model> mockedItem;
+		mockedItem.key = -1;
 
-		return aux;
+		Node<Model> *mockedNode = new Node<Model>(mockedItem);
+
+		return mockedNode;
 	}
 
 	if (key < node->item.key) {
@@ -95,7 +123,7 @@ Item<Model> BinaryTree<Model>::recursiveSearch(Node<Model> *node, int key) {
 	} else if (key > node->item.key) {
 		return this->recursiveSearch(node->right, key);
 	} else {
-		return node->item;
+		return node;
 	}
 };
 

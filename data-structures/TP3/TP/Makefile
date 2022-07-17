@@ -32,7 +32,7 @@ build: clean
 	$(CC) $(CFLAGS) $(OBJ)/*.o -pg -o $(BIN)/main
 
 test:
-	$(EXE) -i $(DATA_FOLDER_PATH)/input.txt -o $(DATA_FOLDER_PATH)/output.txt
+	$(EXE) -i $(DATA_FOLDER_PATH)/tests/input/entrada_1.txt -o $(DATA_FOLDER_PATH)/output.txt
 
 gprof:
 	$(EXE) -m 1 -s 950 -i $(DATA_FOLDER_PATH)/gprof/input/input-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-1000.txt
