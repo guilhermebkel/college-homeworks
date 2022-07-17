@@ -17,7 +17,7 @@ ANALISAMEM_LIB_FOLDER_PATH = ../analisamem/bin/analisamem
 
 EXE = $(BIN)/main
 
-all: build memlog
+all: build gprof memlog
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
