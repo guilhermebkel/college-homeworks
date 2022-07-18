@@ -17,8 +17,8 @@ Each sample counts as 0.01 seconds.
   0.00      0.05     0.00     3008     0.00     0.00  Message::Message(int, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
   0.00      0.05     0.00     3008     0.00    16.63  HashTable<Message>::insert(int, Item<Message>)
   0.00      0.05     0.00     1000     0.00     0.00  BinaryTree<Message>::BinaryTree()
-  0.00      0.05     0.00       18     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
-  0.00      0.05     0.00       15     0.00     0.00  leMemLog(long, long, int)
+  0.00      0.05     0.00       19     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
+  0.00      0.05     0.00       16     0.00     0.00  leMemLog(long, long, int)
   0.00      0.05     0.00        6     0.00     0.00  bool isValidNodeItem<Message>(Item<Message>)
   0.00      0.05     0.00        6     0.00     0.00  BinaryTree<Message>::recursiveSearch(Node<Message>*, int)
   0.00      0.05     0.00        6     0.00     0.00  BinaryTree<Message>::search(int)
@@ -168,14 +168,15 @@ index % time    self  children    called     name
                 0.00    0.00    1000/1000        HashTable<Message>::HashTable(int) [57]
 [21]     0.0    0.00    0.00    1000         BinaryTree<Message>::BinaryTree() [21]
 -----------------------------------------------
-                0.00    0.00       1/18          finalizaMemLog() [40]
-                0.00    0.00       2/18          escreveMemLog(long, long, int) [31]
-                0.00    0.00      15/18          leMemLog(long, long, int) [23]
-[22]     0.0    0.00    0.00      18         clkDifMemLog(timespec, timespec, timespec*) [22]
+                0.00    0.00       1/19          finalizaMemLog() [40]
+                0.00    0.00       2/19          escreveMemLog(long, long, int) [31]
+                0.00    0.00      16/19          leMemLog(long, long, int) [23]
+[22]     0.0    0.00    0.00      19         clkDifMemLog(timespec, timespec, timespec*) [22]
 -----------------------------------------------
-                0.00    0.00      15/15          BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [25]
-[23]     0.0    0.00    0.00      15         leMemLog(long, long, int) [23]
-                0.00    0.00      15/18          clkDifMemLog(timespec, timespec, timespec*) [22]
+                0.00    0.00       1/16          BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [52]
+                0.00    0.00      15/16          BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [25]
+[23]     0.0    0.00    0.00      16         leMemLog(long, long, int) [23]
+                0.00    0.00      16/19          clkDifMemLog(timespec, timespec, timespec*) [22]
 -----------------------------------------------
                 0.00    0.00       1/6           Mailer::remove[abi:cxx11](int, int) [54]
                 0.00    0.00       5/6           Mailer::read[abi:cxx11](int, int) [28]
@@ -184,7 +185,7 @@ index % time    self  children    called     name
                                    9             BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [25]
                 0.00    0.00       6/6           BinaryTree<Message>::search(int) [26]
 [25]     0.0    0.00    0.00       6+9       BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [25]
-                0.00    0.00      15/15          leMemLog(long, long, int) [23]
+                0.00    0.00      15/16          leMemLog(long, long, int) [23]
                                    9             BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [25]
 -----------------------------------------------
                 0.00    0.00       6/6           HashTable<Message>::search(int, int) [27]
@@ -212,7 +213,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00       2/2           BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
 [31]     0.0    0.00    0.00       2         escreveMemLog(long, long, int) [31]
-                0.00    0.00       2/18          clkDifMemLog(timespec, timespec, timespec*) [22]
+                0.00    0.00       2/19          clkDifMemLog(timespec, timespec, timespec*) [22]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_csu_init [67]
 [32]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z13isSendCommandNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [32]
@@ -246,7 +247,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00       1/1           main [1]
 [40]     0.0    0.00    0.00       1         finalizaMemLog() [40]
-                0.00    0.00       1/18          clkDifMemLog(timespec, timespec, timespec*) [22]
+                0.00    0.00       1/19          clkDifMemLog(timespec, timespec, timespec*) [22]
 -----------------------------------------------
                 0.00    0.00       1/1           _GLOBAL__sub_I__Z9parseArgsiPPc [34]
 [41]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [41]
@@ -292,6 +293,7 @@ index % time    self  children    called     name
 -----------------------------------------------
                 0.00    0.00       1/1           BinaryTree<Message>::remove(int) [53]
 [52]     0.0    0.00    0.00       1         BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [52]
+                0.00    0.00       1/16          leMemLog(long, long, int) [23]
                 0.00    0.00       1/1           BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
 -----------------------------------------------
                 0.00    0.00       1/1           HashTable<Message>::remove(int, int) [56]

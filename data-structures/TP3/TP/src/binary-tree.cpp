@@ -59,9 +59,9 @@ void BinaryTree<Model>::recursiveInsert(Node<Model>* &node, Item<Model> item) {
 	if(node == NULL) {
 		node = new Node<Model>(item);
 
-		// ESCREVEMEMLOG((long int)(&(node)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_INSERT);
+		ESCREVEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_INSERT);
 	} else {
-		// LEMEMLOG((long int)(&(node)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_INSERT);
+		LEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_INSERT);
 
 		if (item.key < node->item.key) {
 			this->recursiveInsert(node->left, item);
@@ -83,8 +83,8 @@ void BinaryTree<Model>::deleteNode(Node<Model>* node, Node<Model>* &antecessor) 
 	node = antecessor;
 	antecessor = antecessor->left;
 
-	ESCREVEMEMLOG((long int)(&(node)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
-	ESCREVEMEMLOG((long int)(&(antecessor)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
+	ESCREVEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
+	ESCREVEMEMLOG((long int)(&(antecessor->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
 
 	free(node);
 };
@@ -95,7 +95,7 @@ void BinaryTree<Model>::recursiveDelete(Node<Model>* &node, int key) {
 		return;
 	}
 
-	// LEMEMLOG((long int)(&(node)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
+	LEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
 
 	if (key < node->item.key) {
 		return recursiveDelete(node->left, key);
@@ -108,16 +108,16 @@ void BinaryTree<Model>::recursiveDelete(Node<Model>* &node, int key) {
 			aux = node;
 			node = node->left;
 
-			// ESCREVEMEMLOG((long int)(&(aux)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
-			// ESCREVEMEMLOG((long int)(&(node)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
+			ESCREVEMEMLOG((long int)(&(aux->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
+			ESCREVEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
 
 			free(aux);
 		} else if(node->left == NULL) {
 			aux = node;
 			node = node->right;
 
-			// ESCREVEMEMLOG((long int)(&(aux)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
-			// ESCREVEMEMLOG((long int)(&(node)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_DELETE);
+			ESCREVEMEMLOG((long int)(&(aux->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
+			ESCREVEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_DELETE);
 
 			free(aux);
 		} else {
@@ -134,12 +134,12 @@ Node<Model> *BinaryTree<Model>::recursiveSearch(Node<Model> *node, int key) {
 
 		Node<Model> *mockedNode = new Node<Model>(mockedItem);
 
-		ESCREVEMEMLOG((long int)(&(mockedNode)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_SEARCH);
+		ESCREVEMEMLOG((long int)(&(mockedNode->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_SEARCH);
 
 		return mockedNode;
 	}
 
-	LEMEMLOG((long int)(&(node)), sizeof(Node<Model>), MemoryLogType::BINARY_TREE_SEARCH);
+	LEMEMLOG((long int)(&(node->item)), sizeof(Item<Model>), MemoryLogType::BINARY_TREE_SEARCH);
 
 	if (key < node->item.key) {
 		return this->recursiveSearch(node->left, key);
