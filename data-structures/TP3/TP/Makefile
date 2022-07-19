@@ -36,16 +36,26 @@ test:
 	$(EXE) -i $(DATA_FOLDER_PATH)/tests/input/entrada_1.txt -o $(DATA_FOLDER_PATH)/output.txt
 
 gprof:
-	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-1000.txt
-	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-1000.out
-	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-2000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-2000.txt
-	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-2000.out
-	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-3000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-3000.txt
-	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-3000.out
-	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-4000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-4000.txt
-	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-4000.out
-	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-5000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-5000.txt
-	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-5000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-msg-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-msg-1000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-msg-1000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-msg-2000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-msg-2000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-msg-2000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-msg-3000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-msg-3000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-msg-3000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-msg-4000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-msg-4000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-msg-4000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-msg-5000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-msg-5000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-msg-5000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-user-1000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-user-1000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-user-1000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-user-2000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-user-2000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-user-2000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-user-3000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-user-3000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-user-3000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-user-4000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-user-4000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-user-4000.out
+	$(EXE) -i $(DATA_FOLDER_PATH)/gprof/input/input-user-5000.txt -o $(DATA_FOLDER_PATH)/gprof/output/output-user-5000.txt
+	gprof $(EXE) gmon.out > $(DATA_FOLDER_PATH)/gprof/output/gprof-user-5000.out
 
 memlog:
 	$(EXE) -i $(DATA_FOLDER_PATH)/memlog/input/input.txt -o $(DATA_FOLDER_PATH)/memlog/output/output.txt

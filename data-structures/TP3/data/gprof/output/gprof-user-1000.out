@@ -1,0 +1,437 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+100.04      0.01     0.01     1008     9.92     9.92  BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>)
+  0.00      0.01     0.00    22327     0.00     0.00  clkDifMemLog(timespec, timespec, timespec*)
+  0.00      0.01     0.00    21315     0.00     0.00  leMemLog(long, long, int)
+  0.00      0.01     0.00     3046     0.00     0.00  castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.01     0.00     2016     0.00     0.00  Message::getId()
+  0.00      0.01     0.00     1015     0.00     0.00  isReadCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.01     0.00     1015     0.00     0.00  isSendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.01     0.00     1015     0.00     0.00  isRemoveCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.01     0.00     1015     0.00     0.00  HashTable<Message>::hash(int)
+  0.00      0.01     0.00     1014     0.00     0.00  defineFaseMemLog(int)
+  0.00      0.01     0.00     1011     0.00     0.00  escreveMemLog(long, long, int)
+  0.00      0.01     0.00     1009     0.00     0.00  Node<Message>::Node(Item<Message>)
+  0.00      0.01     0.00     1008     0.00     9.92  BinaryTree<Message>::insert(Item<Message>)
+  0.00      0.01     0.00     1008     0.00     9.92  Mailer::send[abi:cxx11](int, Message*)
+  0.00      0.01     0.00     1008     0.00     0.00  Message::Message(int, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  0.00      0.01     0.00     1008     0.00     9.92  HashTable<Message>::insert(int, Item<Message>)
+  0.00      0.01     0.00     1000     0.00     0.00  BinaryTree<Message>::BinaryTree()
+  0.00      0.01     0.00        6     0.00     0.00  bool isValidNodeItem<Message>(Item<Message>)
+  0.00      0.01     0.00        6     0.00     0.00  BinaryTree<Message>::recursiveSearch(Node<Message>*, int)
+  0.00      0.01     0.00        6     0.00     0.00  BinaryTree<Message>::search(int)
+  0.00      0.01     0.00        6     0.00     0.00  HashTable<Message>::search(int, int)
+  0.00      0.01     0.00        5     0.00     0.00  Mailer::read[abi:cxx11](int, int)
+  0.00      0.01     0.00        5     0.00     0.00  Message::getUserId()
+  0.00      0.01     0.00        4     0.00     0.00  Message::getContent[abi:cxx11]()
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z13isSendCommandNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9parseArgsiPPc
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN6MailerC2Ei
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN7MessageC2EiiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
+  0.00      0.01     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
+  0.00      0.01     0.00        1     0.00     0.00  ativaMemLog()
+  0.00      0.01     0.00        1     0.00     0.00  iniciaMemLog(char*)
+  0.00      0.01     0.00        1     0.00     0.00  finalizaMemLog()
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  parseArgs(int, char**)
+  0.00      0.01     0.00        1     0.00     0.00  BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&)
+  0.00      0.01     0.00        1     0.00     0.00  BinaryTree<Message>::recursiveDelete(Node<Message>*&, int)
+  0.00      0.01     0.00        1     0.00     0.00  BinaryTree<Message>::remove(int)
+  0.00      0.01     0.00        1     0.00     0.00  Mailer::remove[abi:cxx11](int, int)
+  0.00      0.01     0.00        1     0.00     0.00  Mailer::Mailer(int)
+  0.00      0.01     0.00        1     0.00     0.00  HashTable<Message>::remove(int, int)
+  0.00      0.01     0.00        1     0.00     0.00  HashTable<Message>::HashTable(int)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 99.96% of 0.01 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.01                 main [1]
+                0.00    0.01    1008/1008        Mailer::send[abi:cxx11](int, Message*) [4]
+                0.00    0.00    1015/1015        isSendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+                0.00    0.00    1015/1015        isReadCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [16]
+                0.00    0.00    1015/1015        isRemoveCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+                0.00    0.00    1014/1014        defineFaseMemLog(int) [20]
+                0.00    0.00    1008/1008        Message::Message(int, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [23]
+                0.00    0.00       5/5           Mailer::read[abi:cxx11](int, int) [29]
+                0.00    0.00       1/3046        castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [14]
+                0.00    0.00       1/1           iniciaMemLog(char*) [39]
+                0.00    0.00       1/1           ativaMemLog() [38]
+                0.00    0.00       1/1           parseArgs(int, char**) [50]
+                0.00    0.00       1/1           Mailer::Mailer(int) [55]
+                0.00    0.00       1/1           Mailer::remove[abi:cxx11](int, int) [54]
+                0.00    0.00       1/1           finalizaMemLog() [40]
+-----------------------------------------------
+                               21301             BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+                0.01    0.00    1008/1008        BinaryTree<Message>::insert(Item<Message>) [3]
+[2]    100.0    0.01    0.00    1008+21301   BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+                0.00    0.00   21301/21315       leMemLog(long, long, int) [13]
+                0.00    0.00    1008/1009        Node<Message>::Node(Item<Message>) [22]
+                0.00    0.00    1008/1011        escreveMemLog(long, long, int) [21]
+                               21301             BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+-----------------------------------------------
+                0.00    0.01    1008/1008        HashTable<Message>::insert(int, Item<Message>) [5]
+[3]    100.0    0.00    0.01    1008         BinaryTree<Message>::insert(Item<Message>) [3]
+                0.01    0.00    1008/1008        BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+-----------------------------------------------
+                0.00    0.01    1008/1008        main [1]
+[4]    100.0    0.00    0.01    1008         Mailer::send[abi:cxx11](int, Message*) [4]
+                0.00    0.01    1008/1008        HashTable<Message>::insert(int, Item<Message>) [5]
+                0.00    0.00    2016/2016        Message::getId() [15]
+-----------------------------------------------
+                0.00    0.01    1008/1008        Mailer::send[abi:cxx11](int, Message*) [4]
+[5]    100.0    0.00    0.01    1008         HashTable<Message>::insert(int, Item<Message>) [5]
+                0.00    0.01    1008/1008        BinaryTree<Message>::insert(Item<Message>) [3]
+                0.00    0.00    1008/1015        HashTable<Message>::hash(int) [19]
+-----------------------------------------------
+                0.00    0.00       1/22327       finalizaMemLog() [40]
+                0.00    0.00    1011/22327       escreveMemLog(long, long, int) [21]
+                0.00    0.00   21315/22327       leMemLog(long, long, int) [13]
+[12]     0.0    0.00    0.00   22327         clkDifMemLog(timespec, timespec, timespec*) [12]
+-----------------------------------------------
+                0.00    0.00       1/21315       BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [52]
+                0.00    0.00      13/21315       BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+                0.00    0.00   21301/21315       BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+[13]     0.0    0.00    0.00   21315         leMemLog(long, long, int) [13]
+                0.00    0.00   21315/22327       clkDifMemLog(timespec, timespec, timespec*) [12]
+-----------------------------------------------
+                0.00    0.00       1/3046        main [1]
+                0.00    0.00    1015/3046        isSendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+                0.00    0.00    1015/3046        isReadCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [16]
+                0.00    0.00    1015/3046        isRemoveCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+[14]     0.0    0.00    0.00    3046         castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [14]
+-----------------------------------------------
+                0.00    0.00    2016/2016        Mailer::send[abi:cxx11](int, Message*) [4]
+[15]     0.0    0.00    0.00    2016         Message::getId() [15]
+-----------------------------------------------
+                0.00    0.00    1015/1015        main [1]
+[16]     0.0    0.00    0.00    1015         isReadCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [16]
+                0.00    0.00    1015/3046        castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [14]
+-----------------------------------------------
+                0.00    0.00    1015/1015        main [1]
+[17]     0.0    0.00    0.00    1015         isSendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [17]
+                0.00    0.00    1015/3046        castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [14]
+-----------------------------------------------
+                0.00    0.00    1015/1015        main [1]
+[18]     0.0    0.00    0.00    1015         isRemoveCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [18]
+                0.00    0.00    1015/3046        castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [14]
+-----------------------------------------------
+                0.00    0.00       1/1015        HashTable<Message>::remove(int, int) [56]
+                0.00    0.00       6/1015        HashTable<Message>::search(int, int) [28]
+                0.00    0.00    1008/1015        HashTable<Message>::insert(int, Item<Message>) [5]
+[19]     0.0    0.00    0.00    1015         HashTable<Message>::hash(int) [19]
+-----------------------------------------------
+                0.00    0.00    1014/1014        main [1]
+[20]     0.0    0.00    0.00    1014         defineFaseMemLog(int) [20]
+-----------------------------------------------
+                0.00    0.00       1/1011        BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+                0.00    0.00       2/1011        BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
+                0.00    0.00    1008/1011        BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+[21]     0.0    0.00    0.00    1011         escreveMemLog(long, long, int) [21]
+                0.00    0.00    1011/22327       clkDifMemLog(timespec, timespec, timespec*) [12]
+-----------------------------------------------
+                0.00    0.00       1/1009        BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+                0.00    0.00    1008/1009        BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [2]
+[22]     0.0    0.00    0.00    1009         Node<Message>::Node(Item<Message>) [22]
+-----------------------------------------------
+                0.00    0.00    1008/1008        main [1]
+[23]     0.0    0.00    0.00    1008         Message::Message(int, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [23]
+-----------------------------------------------
+                0.00    0.00    1000/1000        HashTable<Message>::HashTable(int) [57]
+[24]     0.0    0.00    0.00    1000         BinaryTree<Message>::BinaryTree() [24]
+-----------------------------------------------
+                0.00    0.00       1/6           Mailer::remove[abi:cxx11](int, int) [54]
+                0.00    0.00       5/6           Mailer::read[abi:cxx11](int, int) [29]
+[25]     0.0    0.00    0.00       6         bool isValidNodeItem<Message>(Item<Message>) [25]
+-----------------------------------------------
+                                   8             BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+                0.00    0.00       6/6           BinaryTree<Message>::search(int) [27]
+[26]     0.0    0.00    0.00       6+8       BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+                0.00    0.00      13/21315       leMemLog(long, long, int) [13]
+                0.00    0.00       1/1009        Node<Message>::Node(Item<Message>) [22]
+                0.00    0.00       1/1011        escreveMemLog(long, long, int) [21]
+                                   8             BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+-----------------------------------------------
+                0.00    0.00       6/6           HashTable<Message>::search(int, int) [28]
+[27]     0.0    0.00    0.00       6         BinaryTree<Message>::search(int) [27]
+                0.00    0.00       6/6           BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [26]
+-----------------------------------------------
+                0.00    0.00       1/6           Mailer::remove[abi:cxx11](int, int) [54]
+                0.00    0.00       5/6           Mailer::read[abi:cxx11](int, int) [29]
+[28]     0.0    0.00    0.00       6         HashTable<Message>::search(int, int) [28]
+                0.00    0.00       6/1015        HashTable<Message>::hash(int) [19]
+                0.00    0.00       6/6           BinaryTree<Message>::search(int) [27]
+-----------------------------------------------
+                0.00    0.00       5/5           main [1]
+[29]     0.0    0.00    0.00       5         Mailer::read[abi:cxx11](int, int) [29]
+                0.00    0.00       5/6           HashTable<Message>::search(int, int) [28]
+                0.00    0.00       5/5           Message::getUserId() [30]
+                0.00    0.00       5/6           bool isValidNodeItem<Message>(Item<Message>) [25]
+                0.00    0.00       4/4           Message::getContent[abi:cxx11]() [31]
+-----------------------------------------------
+                0.00    0.00       5/5           Mailer::read[abi:cxx11](int, int) [29]
+[30]     0.0    0.00    0.00       5         Message::getUserId() [30]
+-----------------------------------------------
+                0.00    0.00       4/4           Mailer::read[abi:cxx11](int, int) [29]
+[31]     0.0    0.00    0.00       4         Message::getContent[abi:cxx11]() [31]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [67]
+[32]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z13isSendCommandNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [32]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [42]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [67]
+[33]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [33]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [49]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [67]
+[34]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9parseArgsiPPc [34]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [41]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [67]
+[35]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN6MailerC2Ei [35]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [47]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [67]
+[36]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN7MessageC2EiiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [36]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [48]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [67]
+[37]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [37]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [43]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[38]     0.0    0.00    0.00       1         ativaMemLog() [38]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[39]     0.0    0.00    0.00       1         iniciaMemLog(char*) [39]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[40]     0.0    0.00    0.00       1         finalizaMemLog() [40]
+                0.00    0.00       1/22327       clkDifMemLog(timespec, timespec, timespec*) [12]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z9parseArgsiPPc [34]
+[41]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [41]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z13isSendCommandNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [32]
+[42]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [42]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_main [37]
+[43]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [43]
+-----------------------------------------------
+                                   1             __static_initialization_and_destruction_0(int, int) [44]
+                0.00    0.00       1/1           __libc_csu_init [67]
+[44]     0.0    0.00    0.00       1+1       __static_initialization_and_destruction_0(int, int) [44]
+                                   1             __static_initialization_and_destruction_0(int, int) [44]
+-----------------------------------------------
+                                   1             __static_initialization_and_destruction_0(int, int) [45]
+                0.00    0.00       1/1           __libc_csu_init [67]
+[45]     0.0    0.00    0.00       1+1       __static_initialization_and_destruction_0(int, int) [45]
+                                   1             __static_initialization_and_destruction_0(int, int) [45]
+-----------------------------------------------
+                                   1             __static_initialization_and_destruction_0(int, int) [46]
+                0.00    0.00       1/1           __libc_csu_init [67]
+[46]     0.0    0.00    0.00       1+1       __static_initialization_and_destruction_0(int, int) [46]
+                                   1             __static_initialization_and_destruction_0(int, int) [46]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN6MailerC2Ei [35]
+[47]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [47]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN7MessageC2EiiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [36]
+[48]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [48]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE [33]
+[49]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [49]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[50]     0.0    0.00    0.00       1         parseArgs(int, char**) [50]
+-----------------------------------------------
+                                   2             BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
+                0.00    0.00       1/1           BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [52]
+[51]     0.0    0.00    0.00       1+2       BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
+                0.00    0.00       2/1011        escreveMemLog(long, long, int) [21]
+                                   2             BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
+-----------------------------------------------
+                0.00    0.00       1/1           BinaryTree<Message>::remove(int) [53]
+[52]     0.0    0.00    0.00       1         BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [52]
+                0.00    0.00       1/21315       leMemLog(long, long, int) [13]
+                0.00    0.00       1/1           BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [51]
+-----------------------------------------------
+                0.00    0.00       1/1           HashTable<Message>::remove(int, int) [56]
+[53]     0.0    0.00    0.00       1         BinaryTree<Message>::remove(int) [53]
+                0.00    0.00       1/1           BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [52]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[54]     0.0    0.00    0.00       1         Mailer::remove[abi:cxx11](int, int) [54]
+                0.00    0.00       1/6           HashTable<Message>::search(int, int) [28]
+                0.00    0.00       1/6           bool isValidNodeItem<Message>(Item<Message>) [25]
+                0.00    0.00       1/1           HashTable<Message>::remove(int, int) [56]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[55]     0.0    0.00    0.00       1         Mailer::Mailer(int) [55]
+                0.00    0.00       1/1           HashTable<Message>::HashTable(int) [57]
+-----------------------------------------------
+                0.00    0.00       1/1           Mailer::remove[abi:cxx11](int, int) [54]
+[56]     0.0    0.00    0.00       1         HashTable<Message>::remove(int, int) [56]
+                0.00    0.00       1/1015        HashTable<Message>::hash(int) [19]
+                0.00    0.00       1/1           BinaryTree<Message>::remove(int) [53]
+-----------------------------------------------
+                0.00    0.00       1/1           Mailer::Mailer(int) [55]
+[57]     0.0    0.00    0.00       1         HashTable<Message>::HashTable(int) [57]
+                0.00    0.00    1000/1000        BinaryTree<Message>::BinaryTree() [24]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [32] _GLOBAL__sub_I__Z13isSendCommandNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (app-validation.cpp) [42] __static_initialization_and_destruction_0(int, int) (app-validation.cpp) [27] BinaryTree<Message>::search(int)
+  [33] _GLOBAL__sub_I__Z8castCharNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (shared-util.cpp) [43] __static_initialization_and_destruction_0(int, int) (app.cpp) [24] BinaryTree<Message>::BinaryTree()
+  [34] _GLOBAL__sub_I__Z9parseArgsiPPc (app-util.cpp) [44] __static_initialization_and_destruction_0(int, int) (binary-tree-validation.cpp) [22] Node<Message>::Node(Item<Message>)
+  [35] _GLOBAL__sub_I__ZN6MailerC2Ei (mailer.cpp) [45] __static_initialization_and_destruction_0(int, int) (binary-tree.cpp) [29] Mailer::read[abi:cxx11](int, int)
+  [36] _GLOBAL__sub_I__ZN7MessageC2EiiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE (message.cpp) [46] __static_initialization_and_destruction_0(int, int) (hash-table.cpp) [4] Mailer::send[abi:cxx11](int, Message*)
+  [37] _GLOBAL__sub_I_main (app.cpp) [47] __static_initialization_and_destruction_0(int, int) (mailer.cpp) [54] Mailer::remove[abi:cxx11](int, int)
+  [38] ativaMemLog()          [48] __static_initialization_and_destruction_0(int, int) (message.cpp) [55] Mailer::Mailer(int)
+  [12] clkDifMemLog(timespec, timespec, timespec*) [49] __static_initialization_and_destruction_0(int, int) (shared-util.cpp) [31] Message::getContent[abi:cxx11]()
+  [39] iniciaMemLog(char*)    [14] castChar(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [15] Message::getId()
+  [21] escreveMemLog(long, long, int) [13] leMemLog(long, long, int) [30] Message::getUserId()
+  [16] isReadCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [50] parseArgs(int, char**) [23] Message::Message(int, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)
+  [17] isSendCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [51] BinaryTree<Message>::deleteNode(Node<Message>*, Node<Message>*&) [19] HashTable<Message>::hash(int)
+  [40] finalizaMemLog()       [52] BinaryTree<Message>::recursiveDelete(Node<Message>*&, int) [5] HashTable<Message>::insert(int, Item<Message>)
+  [18] isRemoveCommand(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [2] BinaryTree<Message>::recursiveInsert(Node<Message>*&, Item<Message>) [56] HashTable<Message>::remove(int, int)
+  [25] bool isValidNodeItem<Message>(Item<Message>) [26] BinaryTree<Message>::recursiveSearch(Node<Message>*, int) [28] HashTable<Message>::search(int, int)
+  [20] defineFaseMemLog(int)   [3] BinaryTree<Message>::insert(Item<Message>) [57] HashTable<Message>::HashTable(int)
+  [41] __static_initialization_and_destruction_0(int, int) (app-util.cpp) [53] BinaryTree<Message>::remove(int)
