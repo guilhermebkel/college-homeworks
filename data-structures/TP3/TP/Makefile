@@ -50,6 +50,8 @@ gprof:
 memlog:
 	$(EXE) -i $(DATA_FOLDER_PATH)/memlog/input/input.txt -o $(DATA_FOLDER_PATH)/memlog/output/output.txt
 	$(ANALISAMEM_LIB_FOLDER_PATH) -f eps -i $(DATA_FOLDER_PATH)/memlog/output/log.out -p $(DATA_FOLDER_PATH)/memlog/output
+
+memlog-gnuplot:
 	gnuplot $(DATA_FOLDER_PATH)/memlog/*.gp
 	
 clean:
