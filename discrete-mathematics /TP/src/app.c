@@ -2,7 +2,7 @@
 #include "fractal.h"
 
 int main () {
-	int stages = 1;
+	FractalStage stages = 1;
 	FractalAxiom axiom = "X";
 	FractalRule rules[] = {
 		{'X', "-YF+XFX+FY"},

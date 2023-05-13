@@ -15,7 +15,9 @@ typedef struct {
 
 typedef char *FractalAxiom;
 
-char* expandFractal(FractalAxiom axiom, FractalRule rules[], int stages);
+typedef int FractalStage;
+
+char* expandFractal(FractalAxiom axiom, FractalRule rules[], FractalStage stages);
 char* getRuleByCharacter (char character, FractalRule rules[]);
 
 #endif

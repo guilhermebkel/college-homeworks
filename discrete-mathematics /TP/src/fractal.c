@@ -3,7 +3,7 @@
 #include <string.h>
 #include "fractal.h"
 
-char* expandFractal(FractalAxiom axiom, FractalRule rules[], int stages) {
+char* expandFractal(FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
 	int axiomLength = strlen(axiom);
 
 	char* finalExpandedFractal = (char*) malloc((axiomLength + 1) * sizeof(char));
