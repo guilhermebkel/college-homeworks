@@ -3,15 +3,16 @@
 
 int main () {
 	FractalStage stages = 1;
-	FractalAxiom axiom = "X";
+	FractalAxiom axiom = "F";
 	FractalRule rules[] = {
-		{'X', "-YF+XFX+FY"},
-		{'Y', "+XF-YFY-FX+"}
+		{'F', "F-F++F-F"}
 	};
 
-	char* expandedFractal = expandFractal(axiom, rules, stages);
+	char* expandedFractalAxiom = expandFractalAxiom(axiom, rules, stages);
 
-	printf("EXPANDED FRACTAL:: %s", expandedFractal);
+	printf("EXPANDED FRACTAL:: %s", expandedFractalAxiom);
+
+	generateFractalAxiomPlotDescription(expandedFractalAxiom, "./output/fractal_axiom_plot_description.gp");
 
 	return 0;
 }

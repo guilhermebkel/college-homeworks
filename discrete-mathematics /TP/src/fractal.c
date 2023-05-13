@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <string.h>
 #include "fractal.h"
 
-char* expandFractal(FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
+char* expandFractalAxiom(FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
 	int axiomLength = strlen(axiom);
 
 	char* finalExpandedFractal = (char*) malloc((axiomLength + 1) * sizeof(char));
@@ -50,4 +51,38 @@ char* getRuleByCharacter (char character, FractalRule rules[]) {
 	}
 
 	return "";
+};
+
+void generateFractalAxiomPlotDescription(FractalAxiom axiom, char filePath[]) {
+	FILE* file = fopen(filePath, "w");
+
+	fprintf(file, "set terminal png\n");
+	fprintf(file, "set output 'fractal.png'\n");
+	fprintf(file, "set xrange [-10:10]\n");
+	fprintf(file, "set yrange [-10:10]\n");
+
+	double x = 0.0;
+	double y = 0.0;
+	double angle = 0.0;
+	double stepSize = 1.0;
+
+	for (int i = 0; axiom[i] != '\0'; i++) {
+		char character = axiom[i];
+
+		if (character == 'F') {
+			double xDest = x + stepSize * cos(angle);
+			double yDest = y + stepSize * sin(angle);
+
+			fprintf(file, "plot [%lf:%lf] [%lf:%lf] %lf*x + %lf\n", x, xDest, y, yDest, y / x, y - (y / x) * x);
+
+			x = xDest;
+			y = yDest;
+		} else if (character == '+') {
+			angle += M_PI / 3.0;
+		} else if (character == '-') {
+			angle -= M_PI / 3.0;
+		}
+	}
+
+	fclose(file);
 };
