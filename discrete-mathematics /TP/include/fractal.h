@@ -4,8 +4,18 @@
 #include <stdio.h>
 #include <time.h>
 
-#define MAX_EXPANDED_FRACTAL_SIZE 1000;
+#ifndef MAX_RULE_SIZE 
+#define MAX_RULE_SIZE 500
+#endif
 
-char* expandFractal(char axiom[], char rule[], int stages);
+typedef struct {
+	char key;
+	char value[MAX_RULE_SIZE];
+} FractalRule;
+
+typedef char *FractalAxiom;
+
+char* expandFractal(FractalAxiom axiom, FractalRule rules[], int stages);
+char* getRuleByCharacter (char character, FractalRule rules[]);
 
 #endif

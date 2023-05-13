@@ -2,7 +2,13 @@
 #include "fractal.h"
 
 int main () {
-	char* expandedFractal = expandFractal("F", "F-F++F-F", 3);
+	FractalAxiom axiom = "X";
+	FractalRule rules[] = {
+		{'X', "-YF+XFX+FY"},
+		{'Y', "+XF-YFY-FX+"}
+	};
+
+	char* expandedFractal = expandFractal(axiom, rules, 1);
 
 	printf("EXPANDED FRACTAL:: %s", expandedFractal);
 
