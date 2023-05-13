@@ -10,8 +10,6 @@ int main () {
 
 	char* expandedFractalAxiom = expandFractalAxiom(axiom, rules, stages);
 
-	printf("EXPANDED FRACTAL:: %s", expandedFractalAxiom);
-
 	generateFractalAxiomPlotDescription(expandedFractalAxiom, "./output/fractal_axiom_plot_description.gp");
 
 	return 0;

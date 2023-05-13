@@ -58,11 +58,11 @@ void generateFractalAxiomPlotDescription(FractalAxiom axiom, char filePath[]) {
 
 	fprintf(file, "set terminal png\n");
 	fprintf(file, "set output 'fractal.png'\n");
-	fprintf(file, "set xrange [-10:10]\n");
-	fprintf(file, "set yrange [-10:10]\n");
+	fprintf(file, "set xrange [-100:100]\n");
+	fprintf(file, "set yrange [-100:100]\n");
 
-	double x = 0.0;
-	double y = 0.0;
+	double x = 1.0;
+	double y = 1.0;
 	double angle = 0.0;
 	double stepSize = 1.0;
 
