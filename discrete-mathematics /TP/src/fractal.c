@@ -53,16 +53,17 @@ char* getRuleByCharacter (char character, FractalRule rules[]) {
 	return "";
 };
 
-void generateFractalAxiomPlotDescription(FractalAxiom axiom, char filePath[]) {
-	FILE* file = fopen(filePath, "w");
+void generateFractalAxiomPlotDescription(FractalAxiom axiom) {
+	FILE* outputFile = fopen("./output/fractal_axiom_plot_description.gp", "w");
 
-	fprintf(file, "set terminal png\n");
-	fprintf(file, "set output 'fractal.png'\n");
-	fprintf(file, "set xrange [-100:100]\n");
-	fprintf(file, "set yrange [-100:100]\n");
+	fprintf(outputFile, "set terminal png\n");
+	fprintf(outputFile, "set output './output/fractal.png'\n");
+	fprintf(outputFile, "set xrange [-10:10]\n");
+	fprintf(outputFile, "set yrange [-10:10]\n");
+	fprintf(outputFile, "unset key\n");
 
-	double x = 1.0;
-	double y = 1.0;
+	double x = 0.0;
+	double y = 0.0;
 	double angle = 0.0;
 	double stepSize = 1.0;
 
@@ -73,7 +74,10 @@ void generateFractalAxiomPlotDescription(FractalAxiom axiom, char filePath[]) {
 			double xDest = x + stepSize * cos(angle);
 			double yDest = y + stepSize * sin(angle);
 
-			fprintf(file, "plot [%lf:%lf] [%lf:%lf] %lf*x + %lf\n", x, xDest, y, yDest, y / x, y - (y / x) * x);
+			double a = (y / x) || 0;
+			double b = y - (a * x);
+
+			fprintf(outputFile, "plot [%lf:%lf] [%lf:%lf] %lf*x + %lf\n", x, xDest, y, yDest, a, b);
 
 			x = xDest;
 			y = yDest;
@@ -84,5 +88,5 @@ void generateFractalAxiomPlotDescription(FractalAxiom axiom, char filePath[]) {
 		}
 	}
 
-	fclose(file);
+	fclose(outputFile);
 };

@@ -1,8 +1,22 @@
 set terminal png
-set output 'fractal.png'
-set xrange [-5000:5000]
-set yrange [-5000:5000]
-plot [1.000000:2.000000] [1.000000:1.000000] 1.000000*x + 0.000000
-plot [2.000000:2.500000] [1.000000:0.133975] 0.500000*x + 0.000000
-plot [2.500000:3.000000] [0.133975:1.000000] 0.053590*x + 0.000000
-plot [3.000000:4.000000] [1.000000:1.000000] 0.333333*x + 0.000000
+set output './output/fractal.png'
+set xrange [-10:10]
+set yrange [-10:10]
+set yzeroaxis
+set xzeroaxis
+unset key
+
+
+# Coordenadas da linha 1
+x1 = -10
+y1 = -10
+x2 = -10
+y2 = 0
+
+# Coordenadas da linha 2
+x3 = 0
+y3 = 0
+x4 = 5
+y4 = -5
+
+plot x, x1 + (x2 - x1)/(y2 - y1)*(x - y1)

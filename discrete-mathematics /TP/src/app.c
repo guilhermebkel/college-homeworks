@@ -10,7 +10,7 @@ int main () {
 
 	char* expandedFractalAxiom = expandFractalAxiom(axiom, rules, stages);
 
-	generateFractalAxiomPlotDescription(expandedFractalAxiom, "./output/fractal_axiom_plot_description.gp");
+	generateFractalAxiomPlotDescription(expandedFractalAxiom);
 
 	return 0;
 }
