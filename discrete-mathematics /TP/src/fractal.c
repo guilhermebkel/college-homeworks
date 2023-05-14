@@ -46,7 +46,7 @@ char* getCharacterRule (char character, FractalRule rules[]) {
 	}
 
 	return "";
-};
+}
 
 FILE* mountFractalStageFile (int stage, char* fileMode) {
 	FILE *fractalStageFile;
