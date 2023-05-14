@@ -2,7 +2,7 @@
 #include "fractal.h"
 
 int main () {
-	FractalStage stages = 1;
+	FractalStage stages = 2;
 	FractalAxiom axiom = "F";
 	FractalRule rules[] = {
 		{'F', "F-F++F-F"}
@@ -10,7 +10,7 @@ int main () {
 
 	char* expandedFractalAxiom = expandFractalAxiom(axiom, rules, stages);
 
-	generateFractalAxiomPlotDescription(expandedFractalAxiom);
+	printf("%s", expandedFractalAxiom);
 
 	return 0;
 }

@@ -18,7 +18,6 @@ typedef char *FractalAxiom;
 typedef int FractalStage;
 
 char* expandFractalAxiom(FractalAxiom axiom, FractalRule rules[], FractalStage stages);
-char* getRuleByCharacter (char character, FractalRule rules[]);
-void generateFractalAxiomPlotDescription(FractalAxiom axiom);
+char* getCharacterRule (char character, FractalRule rules[]);
 
 #endif
