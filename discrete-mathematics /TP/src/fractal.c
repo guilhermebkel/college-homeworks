@@ -5,33 +5,30 @@
 #include "fractal.h"
 #include "shared-utils.h"
 
-char* expandFractalAxiom (FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
-	int axiomLength = strlen(axiom);
-	char* finalExpandedFractalAxiom = createEmptyString(axiomLength + 1);
-	strcpy(finalExpandedFractalAxiom, axiom);
+void expandFractal (FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
+	FILE* initialFractalStageFile = mountFractalStageFile(0, "r");
+	fprintf(initialFractalStageFile, "%s", axiom);
+	fclose(initialFractalStageFile);
 
 	for (int stage = 0; stage < stages; stage++) {
-		int finalExpandedFractalAxiomLength = strlen(finalExpandedFractalAxiom);
-		int stageExpandedFractalAxiomLength = finalExpandedFractalAxiomLength * MAX_RULE_SIZE;
-		char* stageExpandedFractalAxiom = createEmptyString(stageExpandedFractalAxiomLength + 1);
+		FILE* lastFractalStageFile = mountFractalStageFile(stage, "r");
+		FILE* currentFractalStageFile = mountFractalStageFile(stage + 1, "w");
 
-		for (int characterIndex = 0; characterIndex < finalExpandedFractalAxiomLength; characterIndex++) {
-			char axiomCharacter = finalExpandedFractalAxiom[characterIndex];
+		char axiomCharacter;
 
+		while ((axiomCharacter = fgetc(lastFractalStageFile)) != EOF) {
 			char* rule = getCharacterRule(axiomCharacter, rules);
 
 			if (isValidString(rule)) {
-				strcat(stageExpandedFractalAxiom, rule);
+				fprintf(currentFractalStageFile, "%s", rule);
 			} else {
-				strncat(stageExpandedFractalAxiom, &axiomCharacter, 1);
+				fprintf(currentFractalStageFile, "%c", axiomCharacter);
 			}
 		}
 
-		free(finalExpandedFractalAxiom);
-		finalExpandedFractalAxiom = stageExpandedFractalAxiom;
+		fclose(lastFractalStageFile);
+		fclose(currentFractalStageFile);
 	}
-
-	return finalExpandedFractalAxiom;
 }
 
 char* getCharacterRule (char character, FractalRule rules[]) {
@@ -50,3 +47,15 @@ char* getCharacterRule (char character, FractalRule rules[]) {
 
 	return "";
 };
+
+FILE* mountFractalStageFile (int stage, char* fileMode) {
+	FILE *fractalStageFile;
+
+	char* fractalStageFileName = createEmptyString(100);
+	sprintf(fractalStageFileName, "%d-fractal.txt", stage);
+
+	char* fractalStageOutputFilePath = generateOutputFilePath(fractalStageFileName);
+  fractalStageFile = fopen(fractalStageOutputFilePath, fileMode);
+
+	return fractalStageFile;
+}

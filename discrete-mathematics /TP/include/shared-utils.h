@@ -11,5 +11,6 @@
 int isValidCharacter (char character);
 int isValidString (char* string);
 char* createEmptyString (int size);
+char* generateOutputFilePath (char* fileName);
 
 #endif

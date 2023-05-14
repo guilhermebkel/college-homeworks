@@ -42,6 +42,8 @@
 		"streambuf": "cpp",
 		"typeinfo": "cpp",
 		"functional": "cpp",
-		"iterator": "cpp"
+		"iterator": "cpp",
+		"shared-utils.h": "c",
+		"stdlib.h": "c"
 	}
 }

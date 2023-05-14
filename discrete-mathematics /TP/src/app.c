@@ -8,9 +8,7 @@ int main () {
 		{'F', "F-F++F-F"}
 	};
 
-	char* expandedFractalAxiom = expandFractalAxiom(axiom, rules, stages);
-
-	printf("%s", expandedFractalAxiom);
+	expandFractal(axiom, rules, stages);
 
 	return 0;
 }

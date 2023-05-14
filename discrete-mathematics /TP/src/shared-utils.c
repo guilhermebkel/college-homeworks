@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "shared-utils.h"
 
 int isValidCharacter (char character) {
@@ -19,4 +20,12 @@ char* createEmptyString (int size) {
 	emptyString[0] = EMPTY_CHAR;
 
 	return emptyString;
+}
+
+char* generateOutputFilePath (char* fileName) {
+	char* outputFilePath = createEmptyString(100 + strlen(fileName));
+
+	sprintf(outputFilePath, "./output/%s", fileName);
+
+	return outputFilePath;
 }
