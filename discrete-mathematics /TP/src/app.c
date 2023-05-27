@@ -23,7 +23,7 @@ int main () {
 	 */
 	FractalStage ThirdFractalStages = 4;
 	FractalAxiom ThirdFractalAxiom = "X";
-	FractalRule ThirdFractalRules[] = {{'X', "+FXFX-YF"}, {'Y', "-FYFY+XF++"}};
+	FractalRule ThirdFractalRules[] = {{'X', "F+FY+X"}, {'Y', "-F+FY"}};
 	expandFractal("fractal-3", ThirdFractalAxiom, ThirdFractalRules, ThirdFractalStages);
 
 	return 0;
