@@ -9,16 +9,22 @@
 // #include <SDL2/SDL.h>
 
 void expandFractal (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
-	char* initialFractalStageFilePath = mountFractalStageFilePath(name, 0);
-	FILE* initialFractalStageFile = mountFile(initialFractalStageFilePath, "w");
-	fprintf(initialFractalStageFile, "%s", axiom);
-	fclose(initialFractalStageFile);
+	generateInitialFractalStageFile(name, axiom);
 
 	char* finalFractalStageFilePath = processFractalStagesOnDemand(name, axiom, rules, stages);
 
-	processFinalFractal(name, finalFractalStageFilePath);
+	char* finalFractalFilePath = processFinalFractal(name, finalFractalStageFilePath);
 
-	// showFractal(name, axiom, stages);
+	// showFractal(name, finalFractalFilePath);
+}
+
+void generateInitialFractalStageFile (char* name, FractalAxiom axiom) {
+	char* initialFractalStageFilePath = mountFractalStageFilePath(name, 0);
+	FILE* initialFractalStageFile = mountFile(initialFractalStageFilePath, "w");
+
+	fprintf(initialFractalStageFile, "%s", axiom);
+
+	fclose(initialFractalStageFile);
 }
 
 char* processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
