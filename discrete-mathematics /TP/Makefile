@@ -4,7 +4,7 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-CFLAGS = -pg -Wall -c -I $(INC) -lSDL2
+CFLAGS = -lSDL2 -pg -Wall -c -I $(INC)
 
 EXE = $(BIN)/main
 
