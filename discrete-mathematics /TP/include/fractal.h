@@ -18,7 +18,10 @@ typedef char *FractalAxiom;
 typedef int FractalStage;
 
 void expandFractal(char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages);
+void processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages);
+void processFinalFractal (char* name, FractalAxiom axiom, FractalStage stages);
 char* getCharacterRule (char character, FractalRule rules[]);
 FILE* mountFractalStageFile (char* name, int stage, char* fileMode);
+FILE* mountFinalFractalFile (char* name, char* fileMode);
 
 #endif

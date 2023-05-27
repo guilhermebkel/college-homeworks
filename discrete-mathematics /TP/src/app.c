@@ -2,13 +2,30 @@
 #include "fractal.h"
 
 int main () {
-	FractalStage stages = 2;
-	FractalAxiom axiom = "F";
-	FractalRule rules[] = {
-		{'F', "F-F++F-F"}
-	};
+	/**
+	 * (I) Floco de neve onda senoidal 2 de von Koch
+	 */
+	FractalStage firstFractalStages = 4;
+	FractalAxiom firstFractalAxiom = "F";
+	FractalRule firstFractalRules[] = {{'F', "F-F+F+FF-F-F+F"}};
+	expandFractal("fractal-1", firstFractalAxiom, firstFractalRules, firstFractalStages);
 
-	expandFractal("hahahah", axiom, rules, stages);
+	/**
+	 * (II) Preenchimento de espaço de Peano
+	 */
+	FractalStage secondFractalStages = 4;
+	FractalAxiom secondFractalAxiom = "X";
+	FractalRule secondFractalRules[] = {{'X', "XFYFX+F+YFXFY-F-XFYFX"}, {'Y', "YFXFY-F-XFYFX+F+YFXFY"}};
+	expandFractal("fractal-2", secondFractalAxiom, secondFractalRules, secondFractalStages);
+
+	/**
+	 * (III) Um fractal que gere uma cadeia de polígonos simples que tenhapelo menos
+	 * duas regras como as curvas de preenchimento de espaço de Peano e Hilbert.
+	 */
+	FractalStage ThirdFractalStages = 4;
+	FractalAxiom ThirdFractalAxiom = "X";
+	FractalRule ThirdFractalRules[] = {{'X', "-YF+XFX+FY++FXFY"}, {'Y', "+XF-YFY-FX+-FXFY"}};
+	expandFractal("fractal-3", ThirdFractalAxiom, ThirdFractalRules, ThirdFractalStages);
 
 	return 0;
 }

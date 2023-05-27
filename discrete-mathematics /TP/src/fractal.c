@@ -10,6 +10,12 @@ void expandFractal (char* name, FractalAxiom axiom, FractalRule rules[], Fractal
 	fprintf(initialFractalStageFile, "%s", axiom);
 	fclose(initialFractalStageFile);
 
+	processFractalStagesOnDemand(name, axiom, rules, stages);
+
+	processFinalFractal(name, axiom, stages);
+}
+
+void processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
 	for (int stage = 0; stage < stages; stage++) {
 		FILE* lastFractalStageFile = mountFractalStageFile(name, stage, "r");
 		FILE* currentFractalStageFile = mountFractalStageFile(name, stage + 1, "w");
@@ -31,6 +37,22 @@ void expandFractal (char* name, FractalAxiom axiom, FractalRule rules[], Fractal
 	}
 }
 
+void processFinalFractal (char* name, FractalAxiom axiom, FractalStage stages) {
+	FILE* finalFractalStageFile = mountFractalStageFile(name, stages - 1, "r");
+	FILE* finalFractalFile = mountFinalFractalFile(name, "w");
+
+	char axiomCharacter;
+
+	while ((axiomCharacter = fgetc(finalFractalStageFile)) != EOF) {
+		if (axiomCharacter == 'F' || axiomCharacter == '+' || axiomCharacter == '-') {
+			fprintf(finalFractalFile, "%c", axiomCharacter);
+		}
+	}
+
+	fclose(finalFractalStageFile);
+	fclose(finalFractalFile);
+}
+
 char* getCharacterRule (char character, FractalRule rules[]) {
 	int i = 0;
 
@@ -49,15 +71,25 @@ char* getCharacterRule (char character, FractalRule rules[]) {
 }
 
 FILE* mountFractalStageFile (char* name, int stage, char* fileMode) {
-	FILE *fractalStageFile;
+	FILE *file;
 
-	char* fractalStageFileName = createEmptyString(120 + strlen(name));
-	sprintf(fractalStageFileName, "%d-%s-fractal.txt", stage, name);
+	char* fileName = createEmptyString(120 + strlen(name));
+	sprintf(fileName, "%d-%s-fractal.txt", stage, name);
 
-	printf("\nALOCOU: %s\n", name);
+	char* filePath = generateFolderFilePath("tmp", fileName);
+  file = fopen(filePath, fileMode);
 
-	char* fractalStageOutputFilePath = generateOutputFilePath(fractalStageFileName);
-  fractalStageFile = fopen(fractalStageOutputFilePath, fileMode);
+	return file;
+}
 
-	return fractalStageFile;
+FILE* mountFinalFractalFile (char* name, char* fileMode) {
+	FILE *file;
+
+	char* fileName = createEmptyString(120 + strlen(name));
+	sprintf(fileName, "%s.txt", name);
+
+	char* filePath = generateFolderFilePath("output", fileName);
+  file = fopen(filePath, fileMode);
+
+	return file;
 }

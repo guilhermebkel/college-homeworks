@@ -22,10 +22,10 @@ char* createEmptyString (int size) {
 	return emptyString;
 }
 
-char* generateOutputFilePath (char* fileName) {
-	char* outputFilePath = createEmptyString(100 + strlen(fileName));
+char* generateFolderFilePath (char* folderName, char* fileName) {
+	char* outputFilePath = createEmptyString(100 + strlen(folderName) + strlen(fileName));
 
-	sprintf(outputFilePath, "./output/%s", fileName);
+	sprintf(outputFilePath, "./%s/%s", folderName, fileName);
 
 	return outputFilePath;
 }
