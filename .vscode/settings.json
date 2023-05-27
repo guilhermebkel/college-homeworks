@@ -46,6 +46,7 @@
 		"shared-utils.h": "c",
 		"stdlib.h": "c",
 		"stdio.h": "c",
-		"fractal.h": "c"
+		"fractal.h": "c",
+		"sdl.h": "c"
 	}
 }

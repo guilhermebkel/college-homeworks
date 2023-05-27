@@ -7,7 +7,7 @@
 
 char* mountFractalStageFilePath (char* name, int stage) {
 	char* fileName = createEmptyString(120 + strlen(name));
-	sprintf(fileName, "%d-%s-fractal.txt", stage, name);
+	sprintf(fileName, "%s-fractal-stage-%d.txt", name, stage);
 
 	char* filePath = generateFolderFilePath("tmp", fileName);
 
