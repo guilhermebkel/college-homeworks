@@ -16,7 +16,7 @@ int isValidString (char* string) {
 }
 
 char* createEmptyString (int size) {
-	char* emptyString = (char*) malloc(size * sizeof(char));
+	char* emptyString = (char*) malloc((size + 1) * sizeof(char));
 	emptyString[0] = EMPTY_CHAR;
 
 	return emptyString;

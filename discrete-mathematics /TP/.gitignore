@@ -3,3 +3,6 @@ obj/*
 
 bin/*
 !bin/.gitkeep 
+
+output/*
+!output/.gitkeep 

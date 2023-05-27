@@ -8,7 +8,7 @@ int main () {
 		{'F', "F-F++F-F"}
 	};
 
-	expandFractal(axiom, rules, stages);
+	expandFractal("hahahah", axiom, rules, stages);
 
 	return 0;
 }

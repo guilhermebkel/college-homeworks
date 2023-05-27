@@ -5,14 +5,14 @@
 #include "fractal.h"
 #include "shared-utils.h"
 
-void expandFractal (FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
-	FILE* initialFractalStageFile = mountFractalStageFile(0, "r");
+void expandFractal (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
+	FILE* initialFractalStageFile = mountFractalStageFile(name, 0, "w");
 	fprintf(initialFractalStageFile, "%s", axiom);
 	fclose(initialFractalStageFile);
 
 	for (int stage = 0; stage < stages; stage++) {
-		FILE* lastFractalStageFile = mountFractalStageFile(stage, "r");
-		FILE* currentFractalStageFile = mountFractalStageFile(stage + 1, "w");
+		FILE* lastFractalStageFile = mountFractalStageFile(name, stage, "r");
+		FILE* currentFractalStageFile = mountFractalStageFile(name, stage + 1, "w");
 
 		char axiomCharacter;
 
@@ -48,11 +48,13 @@ char* getCharacterRule (char character, FractalRule rules[]) {
 	return "";
 }
 
-FILE* mountFractalStageFile (int stage, char* fileMode) {
+FILE* mountFractalStageFile (char* name, int stage, char* fileMode) {
 	FILE *fractalStageFile;
 
-	char* fractalStageFileName = createEmptyString(100);
-	sprintf(fractalStageFileName, "%d-fractal.txt", stage);
+	char* fractalStageFileName = createEmptyString(120 + strlen(name));
+	sprintf(fractalStageFileName, "%d-%s-fractal.txt", stage, name);
+
+	printf("\nALOCOU: %s\n", name);
 
 	char* fractalStageOutputFilePath = generateOutputFilePath(fractalStageFileName);
   fractalStageFile = fopen(fractalStageOutputFilePath, fileMode);
