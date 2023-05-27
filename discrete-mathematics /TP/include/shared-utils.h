@@ -12,5 +12,6 @@ int isValidCharacter (char character);
 int isValidString (char* string);
 char* createEmptyString (int size);
 char* generateFolderFilePath (char* folderName, char* fileName);
+FILE* mountFile (char* filePath, char* fileMode);
 
 #endif

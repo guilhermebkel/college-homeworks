@@ -44,6 +44,8 @@
 		"functional": "cpp",
 		"iterator": "cpp",
 		"shared-utils.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"stdio.h": "c",
+		"fractal.h": "c"
 	}
 }

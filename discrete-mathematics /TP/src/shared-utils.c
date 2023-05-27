@@ -29,3 +29,11 @@ char* generateFolderFilePath (char* folderName, char* fileName) {
 
 	return outputFilePath;
 }
+
+FILE* mountFile (char* filePath, char* fileMode) {
+	FILE *file;
+
+  file = fopen(filePath, fileMode);
+
+	return file;
+}

@@ -2,23 +2,32 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <stdio.h>
 #include "fractal.h"
+#include "fractal-file.h"
 #include "shared-utils.h"
+// #include <SDL2/SDL.h>
 
 void expandFractal (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
-	FILE* initialFractalStageFile = mountFractalStageFile(name, 0, "w");
+	char* initialFractalStageFilePath = mountFractalStageFilePath(name, 0);
+	FILE* initialFractalStageFile = mountFile(initialFractalStageFilePath, "w");
 	fprintf(initialFractalStageFile, "%s", axiom);
 	fclose(initialFractalStageFile);
 
-	processFractalStagesOnDemand(name, axiom, rules, stages);
+	char* finalFractalStageFilePath = processFractalStagesOnDemand(name, axiom, rules, stages);
 
-	processFinalFractal(name, axiom, stages);
+	processFinalFractal(name, finalFractalStageFilePath);
+
+	// showFractal(name, axiom, stages);
 }
 
-void processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
+char* processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages) {
 	for (int stage = 0; stage < stages; stage++) {
-		FILE* lastFractalStageFile = mountFractalStageFile(name, stage, "r");
-		FILE* currentFractalStageFile = mountFractalStageFile(name, stage + 1, "w");
+		char* lastFractalStageFilePath = mountFractalStageFilePath(name, stage);
+		FILE* lastFractalStageFile = mountFile(lastFractalStageFilePath, "r");
+
+		char* currentFractalStageFilePath = mountFractalStageFilePath(name, stage);
+		FILE* currentFractalStageFile = mountFile(currentFractalStageFilePath, "w");
 
 		char axiomCharacter;
 
@@ -35,11 +44,17 @@ void processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule r
 		fclose(lastFractalStageFile);
 		fclose(currentFractalStageFile);
 	}
+	
+	char* finalFractalStageFilePath = mountFractalStageFilePath(name, stages - 1);
+
+	return finalFractalStageFilePath;
 }
 
-void processFinalFractal (char* name, FractalAxiom axiom, FractalStage stages) {
-	FILE* finalFractalStageFile = mountFractalStageFile(name, stages - 1, "r");
-	FILE* finalFractalFile = mountFinalFractalFile(name, "w");
+char* processFinalFractal (char* name, char* finalFractalStageFilePath) {
+	FILE* finalFractalStageFile = mountFile(finalFractalStageFilePath, "r");
+
+	char* finalFractalFilePath = mountFinalFractalFilePath(name);
+	FILE* finalFractalFile = mountFile(finalFractalFilePath, "w");
 
 	char axiomCharacter;
 
@@ -51,6 +66,8 @@ void processFinalFractal (char* name, FractalAxiom axiom, FractalStage stages) {
 
 	fclose(finalFractalStageFile);
 	fclose(finalFractalFile);
+
+	return finalFractalFilePath;
 }
 
 char* getCharacterRule (char character, FractalRule rules[]) {
@@ -70,26 +87,37 @@ char* getCharacterRule (char character, FractalRule rules[]) {
 	return "";
 }
 
-FILE* mountFractalStageFile (char* name, int stage, char* fileMode) {
-	FILE *file;
+// void showFractal (char* name) {
+// 	SDL_Init(SDL_INIT_VIDEO);
+// 	SDL_Window* window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+// 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+// 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+// 	SDL_RenderClear(renderer);
 
-	char* fileName = createEmptyString(120 + strlen(name));
-	sprintf(fileName, "%d-%s-fractal.txt", stage, name);
+// 	float currentX = 800 / 2.0f;
+// 	float currentY = 600 / 2.0f;
+// 	float startAngle = 0.0f;
+// 	float lineLength = 10.0f;
 
-	char* filePath = generateFolderFilePath("tmp", fileName);
-  file = fopen(filePath, fileMode);
+// 	FILE* finalFractalFile = mountFinalFractalFile(name, "w");
+// 	char axiomCharacter;
 
-	return file;
-}
+// 	while ((axiomCharacter = fgetc(finalFractalStageFile)) != EOF) {
+// 		if (axiomCharacter == 'F') {
+// 			float nextX = currentX + length * cos(angle);
+// 			float nextY = currentY - length * sin(angle);
 
-FILE* mountFinalFractalFile (char* name, char* fileMode) {
-	FILE *file;
+// 			SDL_RenderDrawLineF(renderer, currentX, currentY, nextX, nextY);
 
-	char* fileName = createEmptyString(120 + strlen(name));
-	sprintf(fileName, "%s.txt", name);
+// 			currentX = nextX;
+// 			currentY = nextY;
+// 		} else if (axiomCharacter == '+') {
+// 				angle -= 45.0f;
+// 		} else if (axiomCharacter == '-') {
+// 			angle += 45.0f;
+// 		}
+// 	}
 
-	char* filePath = generateFolderFilePath("output", fileName);
-  file = fopen(filePath, fileMode);
-
-	return file;
-}
+// 	SDL_RenderPresent(renderer);
+// 	fclose(finalFractalFile);
+// }
