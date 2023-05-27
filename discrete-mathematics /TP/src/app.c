@@ -19,12 +19,11 @@ int main () {
 	expandFractal("fractal-2", secondFractalAxiom, secondFractalRules, secondFractalStages);
 
 	/**
-	 * (III) Um fractal que gere uma cadeia de polígonos simples que tenhapelo menos
-	 * duas regras como as curvas de preenchimento de espaço de Peano e Hilbert.
+	 * (III) Fractal de criação própria
 	 */
 	FractalStage ThirdFractalStages = 4;
 	FractalAxiom ThirdFractalAxiom = "X";
-	FractalRule ThirdFractalRules[] = {{'X', "-YF+XFX+FY++FXFY"}, {'Y', "+XF-YFY-FX+-FXFY"}};
+	FractalRule ThirdFractalRules[] = {{'X', "+FXFX-YF"}, {'Y', "-FYFY+XF++"}};
 	expandFractal("fractal-3", ThirdFractalAxiom, ThirdFractalRules, ThirdFractalStages);
 
 	return 0;
