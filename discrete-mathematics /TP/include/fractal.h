@@ -15,13 +15,15 @@ typedef struct {
 
 typedef char *FractalAxiom;
 
+typedef float FractalAngle;
+
 typedef int FractalStage;
 
-void expandFractal(char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages);
+void expandFractal(char* name, FractalAngle angle, FractalAxiom axiom, FractalRule rules[], FractalStage stages);
 void generateInitialFractalStageFile (char* name, FractalAxiom axiom);
 char* processFractalStagesOnDemand (char* name, FractalAxiom axiom, FractalRule rules[], FractalStage stages);
 char* processFinalFractal (char* name, char* finalFractalStageFilePath);
-void showFractal (char* name, char* fractalFilePath);
+void renderFractal (char* name, FractalAngle angle, char* fractalFilePath);
 char* getCharacterRule (char character, FractalRule rules[]);
 
 #endif
