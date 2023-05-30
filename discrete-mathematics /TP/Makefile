@@ -1,10 +1,10 @@
 CC = gcc
-LIBS = -lm
+LIBS = -lm -lSDL2
 SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-CFLAGS = -lSDL2 -pg -Wall -c -I $(INC)
+CFLAGS = -pg -Wall -c -I $(INC)
 
 EXE = $(BIN)/main
 
