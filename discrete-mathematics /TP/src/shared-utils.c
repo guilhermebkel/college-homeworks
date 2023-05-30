@@ -33,7 +33,7 @@ char* generateFolderFilePath (char* folderName, char* fileName) {
 FILE* mountFile (char* filePath, char* fileMode) {
 	FILE *file;
 
-  file = fopen(filePath, fileMode);
+	file = fopen(filePath, fileMode);
 
 	return file;
 }
