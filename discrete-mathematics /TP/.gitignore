@@ -1,11 +1,5 @@
 obj/*
 !obj/.gitkeep 
 
-bin/*
-!bin/.gitkeep 
-
-output/*
-!output/.gitkeep
-
 tmp/*
 !tmp/.gitkeep
