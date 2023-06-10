@@ -94,8 +94,8 @@ char* getCharacterRule (char character, FractalRule rules[]) {
 }
 
 void renderFractal (char* name, FractalAngle angle, char* fractalFilePath) {
-	int SCREEN_WIDTH = 800;
-	int SCREEN_HEIGHT = 600;
+	int SCREEN_WIDTH = 1000;
+	int SCREEN_HEIGHT = 400;
 
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -104,10 +104,10 @@ void renderFractal (char* name, FractalAngle angle, char* fractalFilePath) {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 
-	float currentX = SCREEN_WIDTH / 2.0f;
+	float currentX = 5.0f;
 	float currentY = SCREEN_HEIGHT / 2.0f;
 	float currentAngle = 0.0f;
-	float lineLength = 20.0f;
+	float lineLength = 4.0f;
 
 	FILE* finalFractalFile = mountFile(fractalFilePath, "r");
 	char axiomCharacter;

@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <math.h>
 #include "fractal.h"
 
 int main () {
 	/**
 	 * (I) Floco de neve onda senoidal 2 de von Koch
 	 */
-	FractalAngle firstFractalAngle = 60.0f;
+	FractalAngle firstFractalAngle = M_PI / 3;
 	FractalStage firstFractalStages = 4;
 	FractalAxiom firstFractalAxiom = "F";
 	FractalRule firstFractalRules[] = {{'F', "F-F+F+FF-F-F+F"}};
@@ -14,7 +15,7 @@ int main () {
 	/**
 	 * (II) Preenchimento de espaço de Peano
 	 */
-	FractalAngle secondFractalAngle = 90.0f;
+	FractalAngle secondFractalAngle = M_PI / 2;
 	FractalStage secondFractalStages = 4;
 	FractalAxiom secondFractalAxiom = "X";
 	FractalRule secondFractalRules[] = {{'X', "XFYFX+F+YFXFY-F-XFYFX"}, {'Y', "YFXFY-F-XFYFX+F+YFXFY"}};
@@ -23,7 +24,7 @@ int main () {
 	/**
 	 * (III) Fractal de criação própria
 	 */
-	FractalAngle thirdFractalAngle = 90.0f;
+	FractalAngle thirdFractalAngle = M_PI / 2;
 	FractalStage thirdFractalStages = 4;
 	FractalAxiom thirdFractalAxiom = "X";
 	FractalRule thirdFractalRules[] = {{'X', "F+FY+X"}, {'Y', "-F+FY"}};
