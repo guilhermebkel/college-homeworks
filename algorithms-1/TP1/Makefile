@@ -1,5 +1,5 @@
 CC = gcc
-LIBS = -lm -lSDL2 -lSDL2_image
+LIBS = -lm
 SRC = src
 OBJ = obj
 INC = include
