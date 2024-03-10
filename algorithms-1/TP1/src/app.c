@@ -14,7 +14,6 @@ int main () {
 	};
 
 	Graph graph = {
-		.verticesCount = 8,
 		.edgesCount = 11,
 		.vertices = vertices
 	};

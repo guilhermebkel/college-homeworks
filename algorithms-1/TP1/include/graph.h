@@ -12,9 +12,12 @@ typedef struct {
 } Vertice;
 
 typedef struct {
-	int verticesCount;
 	int edgesCount;
     Vertice vertices[10];
 } Graph;
+
+typedef struct {
+    Vertice vertices[10];
+} Face;
 
 #endif
