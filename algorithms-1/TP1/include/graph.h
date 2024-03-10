@@ -8,13 +8,13 @@ typedef struct {
     int x;
     int y;
     int degree;
-    int neighborVerticesIds[];
+    int neighborVerticesIds[10];
 } VerticeDefinition;
 
 typedef struct {
 	int verticesCount;
 	int edgesCount;
-    VerticeDefinition vertices[];
+    VerticeDefinition vertices[10];
 } GraphDefinition;
 
 #endif
