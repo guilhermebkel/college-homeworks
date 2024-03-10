@@ -9,12 +9,12 @@ typedef struct {
     int y;
     int degree;
     int neighborVerticesIds[10];
-} VerticeDefinition;
+} Vertice;
 
 typedef struct {
 	int verticesCount;
 	int edgesCount;
-    VerticeDefinition vertices[10];
-} GraphDefinition;
+    Vertice vertices[10];
+} Graph;
 
 #endif
