@@ -2,16 +2,13 @@
 #include "quick-sort-recursive.h"
 #include "quick-sort-non-recursive.h"
 
-using ComparisonFunction = bool (*)(int, int);
-
 int main () {
 	int size = 8;
 	int maxPartitionSize = 4;
 	int items[size] = {5, 1, 4, 8, 7, 2, 3, 6};
 
-	ComparisonFunction comparisonFunction = [](int a, int b) { return a > b; };
-	quickSortRecursive(items, size, maxPartitionSize, comparisonFunction);
-	// quickSortNonRecursive(items, size, maxPartitionSize, comparisonFunction);
+	quickSortRecursive(items, size, maxPartitionSize, [](int a, int b) -> bool { return a > b; });
+	// quickSortNonRecursive(items, size, maxPartitionSize, [](int a, int b) -> bool { return a > b; });
 
 	std::cout << "Array ordenado: ";
     for (int i = 0; i < size; ++i) {
