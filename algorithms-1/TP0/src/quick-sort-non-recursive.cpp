@@ -1,7 +1,7 @@
 #include <iostream>
 #include "quick-sort-utils.h"
 
-void quickSortNonRecursive(int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortNonRecursive (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     int stack[size];
     int top = -1;
     int left, right;
@@ -13,10 +13,7 @@ void quickSortNonRecursive(int itens[MAX_ARRAY_SIZE], int size, int quickSortMax
         right = stack[top--];
         left = stack[top--];
 
-        int currentPartitionSize = right - left;
-        bool isCurrentPartitionSizeOverMaxValue = currentPartitionSize > quickSortMaxPartitionSize;
-
-        if (isCurrentPartitionSizeOverMaxValue) {
+        if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
             insertionSort(left, right + 1, itens, makeComparison);
         } else {
             int i = left;
@@ -28,6 +25,7 @@ void quickSortNonRecursive(int itens[MAX_ARRAY_SIZE], int size, int quickSortMax
                 stack[++top] = left;
                 stack[++top] = j;
             }
+
             if (i < right) {
                 stack[++top] = i;
                 stack[++top] = right;

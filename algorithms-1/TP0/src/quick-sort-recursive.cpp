@@ -1,11 +1,8 @@
 #include <iostream>
 #include "quick-sort-utils.h"
 
-void quickSortRecursiveOrder(int left, int right, int itens[MAX_ARRAY_SIZE], int quickSortMaxPartitionSize, int size, bool (*makeComparison)(int, int)) {
-    int currentPartitionSize = right - left;
-    bool isCurrentPartitionSizeOverMaxValue = currentPartitionSize > quickSortMaxPartitionSize;
-
-    if (isCurrentPartitionSizeOverMaxValue) {
+void quickSortRecursiveOrder (int left, int right, int itens[MAX_ARRAY_SIZE], int quickSortMaxPartitionSize, int size, bool (*makeComparison)(int, int)) {
+    if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
         insertionSort(left, right + 1, itens, makeComparison);
     } else {
         int i, j;
@@ -22,6 +19,6 @@ void quickSortRecursiveOrder(int left, int right, int itens[MAX_ARRAY_SIZE], int
     }
 }
 
-void quickSortRecursive(int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortRecursive (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     quickSortRecursiveOrder(0, size - 1, itens, quickSortMaxPartitionSize, size, makeComparison);
 }

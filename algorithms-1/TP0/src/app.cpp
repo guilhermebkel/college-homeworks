@@ -6,7 +6,7 @@ using ComparisonFunction = bool (*)(int, int);
 
 int main () {
 	int size = 8;
-	int maxPartitionSize = 50;
+	int maxPartitionSize = 4;
 	int items[size] = {5, 1, 4, 8, 7, 2, 3, 6};
 
 	ComparisonFunction comparisonFunction = [](int a, int b) { return a > b; };

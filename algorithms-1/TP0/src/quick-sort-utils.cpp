@@ -1,7 +1,16 @@
 #include <iostream>
 #include "quick-sort-utils.h"
 
-void insertionSort(int left, int right, int itens[MAX_ARRAY_SIZE], bool (*makeComparison)(int, int)) {
+bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize) {
+    int currentPartitionSize = right - left;
+    bool maxPartitionSizeExists = quickSortMaxPartitionSize != -1;
+    bool isCurrentPartitionSizeOverMaxValue = currentPartitionSize > quickSortMaxPartitionSize;
+    bool mustUseInsertionSortAlgorithm = maxPartitionSizeExists && isCurrentPartitionSizeOverMaxValue;
+
+    return mustUseInsertionSortAlgorithm;
+}
+
+void insertionSort (int left, int right, int itens[MAX_ARRAY_SIZE], bool (*makeComparison)(int, int)) {
     for (int i = left + 1; i < right; i++) {
         int value = itens[i];
         int j = i - 1;
@@ -15,7 +24,7 @@ void insertionSort(int left, int right, int itens[MAX_ARRAY_SIZE], bool (*makeCo
     }
 }
 
-void quickSortPartition(int left, int right, int *i, int *j, int itens[MAX_ARRAY_SIZE], int quickSortPivot, int size, bool (*makeComparison)(int, int)) {
+void quickSortPartition (int left, int right, int *i, int *j, int itens[MAX_ARRAY_SIZE], int quickSortPivot, int size, bool (*makeComparison)(int, int)) {
     int x, w;
 
     *i = left;
