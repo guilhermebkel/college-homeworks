@@ -6,6 +6,6 @@
 #endif
 
 template <typename Model>
-void quickSort(Model itens[], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(Model, Model));
+void quickSortPartition(int left, int right, int *i, int *j, Model itens[], int quickSortPivot, int size, bool (*makeComparison)(Model, Model));
 
 #endif

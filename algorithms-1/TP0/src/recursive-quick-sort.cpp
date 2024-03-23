@@ -1,47 +1,9 @@
 #include <iostream>
-
 #include "recursive-quick-sort.h"
+#include "quick-sort-utils.h"
 
 template <typename Model>
-void quickSortPartition(int left, int right, int *i, int *j, Item<Model> itens[MAX_ARRAY_SIZE], int quickSortPivot, int size, bool (*makeComparison)(Model, Model)) {
-    Item<Model> x, w;
-
-    *i = left;
-    *j = right;
-
-    bool isFirstPartition = left == 0 && right == size - 1;
-    bool customPivotExists = quickSortPivot != -1;
-    bool customPivotIsBetweenPartition = quickSortPivot >= left && quickSortPivot <= right;
-    bool canUseCustomPivot = isFirstPartition && customPivotExists && customPivotIsBetweenPartition;
-
-    if (canUseCustomPivot) {
-        x = itens[quickSortPivot];
-    } else {
-        x = itens[(*i + *j) / 2];
-    }
-
-    do {
-        while (makeComparison(x.model, itens[*i].model)) {
-            (*i)++;
-        }
-
-        while (makeComparison(itens[*j].model, x.model)) {
-            (*j)--;
-        }
-
-        if (*i <= *j) {
-            w = itens[*i];
-            itens[*i] = itens[*j];
-            itens[*j] = w;
-
-            (*i)++;
-            (*j)--;
-        }
-    } while (*i <= *j);
-}
-
-template <typename Model>
-void recursiveQuickSortOrder(int left, int right, Item<Model> itens[MAX_ARRAY_SIZE], int quickSortMaxPartitionSize, int size, bool (*makeComparison)(Model, Model)) {
+void recursiveQuickSortOrder(int left, int right, Model itens[MAX_ARRAY_SIZE], int quickSortMaxPartitionSize, int size, bool (*makeComparison)(Model, Model)) {
     int i, j;
 
     int currentPartitionSize = right - left;
@@ -71,16 +33,16 @@ void recursiveQuickSort(Model itens[MAX_ARRAY_SIZE], int size, int quickSortMaxP
 }
 
 template <typename Model>
-void insertionSort(int left, int right, Item<Model> itens[MAX_ARRAY_SIZE], bool (*makeComparison)(Model, Model)) {
+void insertionSort(int left, int right, Model itens[MAX_ARRAY_SIZE], bool (*makeComparison)(Model, Model)) {
     for (int i = left + 1; i < right; i++) {
-        Item<Model> key = itens[i];
+        Model model = itens[i];
         int j = i - 1;
 
-        while (j >= left && makeComparison(key.model, itens[j].model)) {
+        while (j >= left && makeComparison(model, itens[j])) {
             itens[j + 1] = itens[j];
             j--;
         }
 
-        itens[j + 1] = key;
+        itens[j + 1] = model;
     }
 }
