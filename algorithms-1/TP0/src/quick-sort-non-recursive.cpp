@@ -19,7 +19,7 @@ void quickSortNonRecursive (int itens[MAX_ARRAY_SIZE], int size, int quickSortMa
             int i = left;
             int j = right;
 
-            quickSortPartition(left, right, &i, &j, itens, -1, size, makeComparison);
+            quickSortPartition(left, right, &i, &j, itens, makeComparison);
 
             if (left < j) {
                 stack[++top] = left;

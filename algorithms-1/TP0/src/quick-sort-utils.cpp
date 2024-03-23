@@ -24,22 +24,13 @@ void insertionSort (int left, int right, int itens[MAX_ARRAY_SIZE], bool (*makeC
     }
 }
 
-void quickSortPartition (int left, int right, int *i, int *j, int itens[MAX_ARRAY_SIZE], int quickSortPivot, int size, bool (*makeComparison)(int, int)) {
+void quickSortPartition (int left, int right, int *i, int *j, int itens[MAX_ARRAY_SIZE], bool (*makeComparison)(int, int)) {
     int x, w;
 
     *i = left;
     *j = right;
 
-    bool isFirstPartition = left == 0 && right == size - 1;
-    bool customPivotExists = quickSortPivot != -1;
-    bool customPivotIsBetweenPartition = quickSortPivot >= left && quickSortPivot <= right;
-    bool canUseCustomPivot = isFirstPartition && customPivotExists && customPivotIsBetweenPartition;
-
-    if (canUseCustomPivot) {
-        x = itens[quickSortPivot];
-    } else {
-        x = itens[(*i + *j) / 2];
-    }
+    x = itens[(*i + *j) / 2];
 
     do {
         while (makeComparison(x, itens[*i])) {

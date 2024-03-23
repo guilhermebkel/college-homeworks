@@ -10,8 +10,8 @@ int main () {
 	int items[size] = {5, 1, 4, 8, 7, 2, 3, 6};
 
 	ComparisonFunction comparisonFunction = [](int a, int b) { return a > b; };
-	// quickSortRecursive(items, size, maxPartitionSize, comparisonFunction);
-	quickSortNonRecursive(items, size, maxPartitionSize, comparisonFunction);
+	quickSortRecursive(items, size, maxPartitionSize, comparisonFunction);
+	// quickSortNonRecursive(items, size, maxPartitionSize, comparisonFunction);
 
 	std::cout << "Array ordenado: ";
     for (int i = 0; i < size; ++i) {

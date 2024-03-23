@@ -6,7 +6,7 @@
 #endif
 
 void insertionSort (int left, int right, int itens[], bool (*makeComparison)(int, int));
-void quickSortPartition (int left, int right, int *i, int *j, int itens[], int quickSortPivot, int size, bool (*makeComparison)(int, int));
+void quickSortPartition (int left, int right, int *i, int *j, int itens[], bool (*makeComparison)(int, int));
 bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize);
 
 #endif
