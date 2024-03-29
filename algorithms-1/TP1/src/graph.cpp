@@ -56,7 +56,6 @@ void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int c
     Vertice initialVertice = face->at(0);
     Vertice previousVertice = face->at(face->size() - 1);
     Vertice currentVertice = vertices[currentVerticeId];
-    int nextVerticeId;
 
     std::vector<int> currentNeighborVerticesIds = currentVertice.neighborVerticesIds;
 
@@ -67,7 +66,9 @@ void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int c
         Vertice secondVertice = vertices[secondVerticeId];
         float secondVerticeEuclideanDistance = getEuclideanDistance(initialVertice, secondVertice);
 
-        if (firstVerticeEuclideanDistance < secondVerticeEuclideanDistance) {
+        if (previousVertice.id == initialVertice.id) {
+            return false;
+        } else if (firstVerticeEuclideanDistance < secondVerticeEuclideanDistance) {
             return true;
         } else if (firstVerticeEuclideanDistance > secondVerticeEuclideanDistance) {
             return false;
@@ -79,7 +80,7 @@ void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int c
         }
     });
 
-    nextVerticeId = currentNeighborVerticesIds[0];
+    int nextVerticeId = currentNeighborVerticesIds[0];
     face->push_back(vertices[nextVerticeId]);
 
     if (nextVerticeId != initialVertice.id) {
