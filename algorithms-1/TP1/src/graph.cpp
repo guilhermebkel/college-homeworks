@@ -1,7 +1,7 @@
 #include <math.h>
+#include <algorithm>
+#include <iostream>
 #include "graph.h"
-
-
 
 // Distância euclidiana de a para b.
 double getEuclideanDistance (Vertice a, Vertice b) {
@@ -53,9 +53,38 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
 }
 
 void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int currentVerticeId) {
-    Vertice nextVertice;
+    Vertice initialVertice = face->at(0);
+    Vertice previousVertice = face->at(face->size() - 1);
+    Vertice currentVertice = vertices[currentVerticeId];
+    int nextVerticeId;
 
+    std::vector<int> currentNeighborVerticesIds = currentVertice.neighborVerticesIds;
 
+    std::sort(currentNeighborVerticesIds.begin(), currentNeighborVerticesIds.end(), [&](int firstVerticeId, int secondVerticeId) {
+        Vertice firstVertice = vertices[firstVerticeId];
+        float firstVerticeEuclideanDistance = getEuclideanDistance(initialVertice, firstVertice);
+
+        Vertice secondVertice = vertices[secondVerticeId];
+        float secondVerticeEuclideanDistance = getEuclideanDistance(initialVertice, secondVertice);
+
+        if (firstVerticeEuclideanDistance < secondVerticeEuclideanDistance) {
+            return true;
+        } else if (firstVerticeEuclideanDistance > secondVerticeEuclideanDistance) {
+            return false;
+        } else {
+            float firstVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, firstVertice);
+            float secondVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, secondVertice);
+
+            return firstVerticeCurveAngle < secondVerticeCurveAngle;
+        }
+    });
+
+    nextVerticeId = currentNeighborVerticesIds[0];
+    face->push_back(vertices[nextVerticeId]);
+
+    if (nextVerticeId != initialVertice.id) {
+        buildFace(vertices, face, nextVerticeId);
+    }
 }
 
 int getExpectedFaceCount (Graph graph) {

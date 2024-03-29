@@ -26,28 +26,28 @@ int main () {
 
 	std::vector<std::vector<Vertice>> faces;
 
-	for (size_t verticeIndex = 0; verticeIndex < adjacencyList.size(); verticeIndex++) {
-		int initialVerticeId = verticeIndex;
-		std::vector<int> neighborVerticeIds = adjacencyList[verticeIndex];
+	for (size_t i = 0; i < vertices.size(); i++) {
+		int initialVerticeId = vertices[i].id;
+		std::vector<int> neighborVerticesIds = vertices[i].neighborVerticesIds;
 
-		for (size_t neighborVerticeIndex = 0; neighborVerticeIndex < neighborVerticeIds.size(); neighborVerticeIndex++) {
-			int neighborVerticeId = neighborVerticeIds[neighborVerticeIndex];
+		for (size_t neighborVerticeIndex = 0; neighborVerticeIndex < neighborVerticesIds.size(); neighborVerticeIndex++) {
+			int neighborVerticeId = neighborVerticesIds[neighborVerticeIndex];
 
 			std::vector<Vertice> face;
 			face.push_back(vertices[initialVerticeId]);
 			buildFace(vertices, &face, neighborVerticeId);
+			faces.push_back(face);
 		}
 	}
 
-	std::vector<int> cNeighborVerticeIds = adjacencyList[2];
-	for (size_t i = 0; i < cNeighborVerticeIds.size(); ++i) {
-		int neighborVerticeId = cNeighborVerticeIds[i];
-		Vertice neighbor = vertices[neighborVerticeId];
-		Vertice init = vertices[5];
-		Vertice prev = vertices[5];
-		Vertice curr = vertices[2];
-
-		std::cout << neighborVerticeId << " ---- [distancia]: " << getEuclideanDistance(init, neighbor) <<  " ---- [curva]: " << getCurveAngle(prev, curr, neighbor) << std::endl;
+	for (size_t i = 0; i < faces.size(); ++i) {
+        std::cout << "Face " << i + 1 << ": ";
+        
+		for (size_t j = 0; j < faces[i].size(); ++j) {
+            std::cout << faces[i][j].id << " ";
+        }
+        
+		std::cout << std::endl;
     }
 
 	return 0;
