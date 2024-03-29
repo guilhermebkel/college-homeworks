@@ -21,6 +21,9 @@ typedef struct {
     std::vector<Vertice> vertices;
 } Face;
 
+double getEuclideanDistance (Vertice a, Vertice b);
 double getRelativeInclination (Vertice p, Vertice q);
+float getCurveAngle (Vertice a, Vertice b, Vertice c);
+void buildFace (std::vector<Vertice> face, Vertice currentVertice);
 
 #endif

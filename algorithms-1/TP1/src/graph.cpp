@@ -36,6 +36,28 @@ int getCurveType (Vertice a, Vertice b, Vertice c) {
     return 0; // straight
 }
 
+float getCurveAngle (Vertice a, Vertice b, Vertice c) {
+    float ABx = b.x - a.x;
+    float ABy = b.y - a.y;
+    float BCx = c.x - b.x;
+    float BCy = c.y - b.y;
+
+    float dotProduct = ABx * BCx + ABy * BCy;
+    float magnitudeAB = sqrt(ABx * ABx + ABy * ABy);
+    float magnitudeBC = sqrt(BCx * BCx + BCy * BCy);
+
+    float angleRad = acos(dotProduct / (magnitudeAB * magnitudeBC));
+    float angleDeg = angleRad * 180.0 / M_PI;
+
+    return 180 - angleDeg;
+}
+
+void buildFace (std::vector<Vertice> *face, Vertice currentVertice) {
+    Vertice nextVertice;
+
+
+}
+
 int getExpectedFaceCount (Graph graph) {
     return graph.edgesCount - sizeof(graph.vertices) + 2;
 }
