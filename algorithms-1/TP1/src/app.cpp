@@ -3,6 +3,8 @@
 
 #include "graph.h"
 
+
+
 int main () {
 	std::vector<Vertice> vertices = {
 		{ .id = 0, .x = 0, .y = 0, .degree = 2, .neighborVerticesIds = {1, 2}},				// a
@@ -32,13 +34,13 @@ int main () {
 	}
 
 	for (size_t i = 0; i < faces.size(); ++i) {
-        std::cout << "Face " << i + 1 << ": ";
+        // std::cout << "Face " << i + 1 << ": ";
         
 		for (size_t j = 0; j < faces[i].size(); ++j) {
-            std::cout << faces[i][j].id << " ";
+            // std::cout << faces[i][j].id << " ";
         }
         
-		std::cout << std::endl;
+		// std::cout << std::endl;
     }
 
 	return 0;
