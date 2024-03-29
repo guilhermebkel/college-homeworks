@@ -18,9 +18,5 @@ int main () {
 		.vertices = vertices
 	};
 
-	Face faces = {
-
-	}
-
 	return 0;
 }
