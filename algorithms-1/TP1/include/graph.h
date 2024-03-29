@@ -18,6 +18,7 @@ typedef struct {
     int uniqueId;
 } Face;
 
-void lookupInnerFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
+void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
+bool canComputeGraphFace (std::vector<Face> faces, Face face);
 
 #endif

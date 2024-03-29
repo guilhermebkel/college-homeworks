@@ -28,12 +28,9 @@ int main () {
 			Face face;
 			face.vertices.push_back(vertices[initialVerticeId]);
 
-			lookupInnerFace(vertices, &face, neighborVerticeId);
+			lookupInnerGraphFace(vertices, &face, neighborVerticeId);
 
-			auto faceIterator = std::find_if(faces.begin(), faces.end(), [&](const Face& existingFace) { return existingFace.uniqueId == face.uniqueId; });
-			bool faceAlreadyExists = faceIterator != faces.end();
-
-			if (!faceAlreadyExists) {
+			if (canComputeGraphFace(faces, face)) {
 				faces.push_back(face);
 			}
 		}

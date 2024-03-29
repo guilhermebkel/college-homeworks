@@ -14,22 +14,6 @@ double getEuclideanDistance (Vertice a, Vertice b) {
     return sqrt(x*x + y*y);
 }
 
-int generateFaceUniqueId (Face *face) {
-    float uniqueId = 0;
-
-    uniqueId += face->vertices.size();
-
-    for (size_t i = 0; i < face->vertices.size() - 1; i++) {
-        Vertice currentVertice = face->vertices[i];
-        Vertice nextVertice = face->vertices[i + 1];
-
-        uniqueId += getEuclideanDistance(currentVertice, nextVertice);
-        uniqueId += getRelativeInclination(currentVertice, nextVertice);
-    }
-
-    return static_cast<int>(uniqueId);
-}
-
 float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     float ABx = b.x - a.x;
     float ABy = b.y - a.y;
@@ -46,11 +30,23 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     return 180 - angleDeg;
 }
 
-void lookupInnerFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId) {
-    Vertice initialVertice = face->vertices.at(0);
-    Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
-    Vertice currentVertice = vertices[currentVerticeId];
+int generateFaceUniqueId (Face *face) {
+    float uniqueId = 0;
 
+    uniqueId += face->vertices.size();
+
+    for (size_t i = 0; i < face->vertices.size() - 1; i++) {
+        Vertice currentVertice = face->vertices[i];
+        Vertice nextVertice = face->vertices[i + 1];
+
+        uniqueId += getEuclideanDistance(currentVertice, nextVertice);
+        uniqueId += getRelativeInclination(currentVertice, nextVertice);
+    }
+
+    return static_cast<int>(uniqueId);
+}
+
+int getNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
     int nextVerticeId = -1;
 
     for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
@@ -83,6 +79,16 @@ void lookupInnerFace (std::vector<Vertice> vertices, Face *face, int currentVert
         }
     }
 
+    return nextVerticeId;
+}
+
+void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId) {
+    Vertice initialVertice = face->vertices.at(0);
+    Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
+    Vertice currentVertice = vertices[currentVerticeId];
+
+    int nextVerticeId = getNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
+
     face->vertices.push_back(currentVertice);
 
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
@@ -91,6 +97,14 @@ void lookupInnerFace (std::vector<Vertice> vertices, Face *face, int currentVert
         face->vertices.push_back(vertices[nextVerticeId]);
         face->uniqueId = generateFaceUniqueId(face);
     } else {
-        lookupInnerFace(vertices, face, nextVerticeId);
+        lookupInnerGraphFace(vertices, face, nextVerticeId);
     }
+}
+
+bool canComputeGraphFace (std::vector<Face> faces, Face face) {
+    auto faceIterator = std::find_if(faces.begin(), faces.end(), [&](const Face& existingFace) { return existingFace.uniqueId == face.uniqueId; });
+    bool faceAlreadyExists = faceIterator != faces.end();
+    bool canComputeGraphFace = !faceAlreadyExists;
+
+    return canComputeGraphFace;
 }
