@@ -26,7 +26,12 @@ int main () {
 
 	std::vector<std::vector<Vertice>> faces;
 
-	
+	std::vector<int> c = adjacencyList[2];
+	for (size_t i = 0; i < c.size(); ++i) {
+		int neighborVerticeId = c[i];
+		
+		std::cout << neighborVerticeId << ": " << getRelativeInclination(vertices[2], vertices[neighborVerticeId]) << std::endl;
+    }
 
 	return 0;
 }

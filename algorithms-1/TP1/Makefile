@@ -12,6 +12,7 @@ all: build test
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
+	$(CC) $(CFLAGS) -c $(SRC)/graph.cpp -pg -o $(OBJ)/graph.o
 	$(CC) $(OBJ)/*.o -pg -o $(EXE) $(LIBS)
 
 test:

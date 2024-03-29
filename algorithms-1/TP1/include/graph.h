@@ -21,5 +21,6 @@ typedef struct {
     std::vector<Vertice> vertices;
 } Face;
 
-#endif
+double getRelativeInclination (Vertice p, Vertice q);
 
+#endif
