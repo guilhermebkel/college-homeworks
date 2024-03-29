@@ -1,23 +1,24 @@
-#ifndef GRAPHH
-#define GRAPHH
+#ifndef GRAPH_H
+#define GRAPH_H
 
-#include <stdio.h>
+#include <vector>
+#include <iostream>
 
 typedef struct {
 	int id;
-    int x;
-    int y;
+    float x;
+    float y;
     int degree;
-    int neighborVerticesIds[10];
+    std::vector<int> neighborVerticesIds;
 } Vertice;
 
 typedef struct {
 	int edgesCount;
-    Vertice vertices[10];
+    std::vector<Vertice> vertices;
 } Graph;
 
 typedef struct {
-    Vertice vertices[10];
+    std::vector<Vertice> vertices;
 } Face;
 
 #endif

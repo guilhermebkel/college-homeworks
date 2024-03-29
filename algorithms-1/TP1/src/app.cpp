@@ -1,4 +1,6 @@
-#include <stdio.h>
+#include <iostream>
+#include <vector>
+
 #include "graph.h"
 
 int main () {
@@ -15,7 +17,7 @@ int main () {
 
 	Graph graph = {
 		.edgesCount = 11,
-		.vertices = vertices
+		.vertices = std::vector<Vertice>(std::begin(vertices), std::end(vertices))
 	};
 
 	return 0;
