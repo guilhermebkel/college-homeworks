@@ -15,15 +15,6 @@ int main () {
 		{ .id = 7, .x = -2, .y = 0, .degree = 1, .neighborVerticesIds = {6}}				// h
 	};
 
-	std::vector<std::vector<int>> adjacencyList(vertices.size());
-
-	for (size_t i = 0; i < vertices.size(); ++i) {
-		int verticeId = vertices[i].id;
-		std::vector<int> neighborVerticesIds = vertices[i].neighborVerticesIds;
-
-		adjacencyList[verticeId] = neighborVerticesIds;
-    }
-
 	std::vector<std::vector<Vertice>> faces;
 
 	for (size_t i = 0; i < vertices.size(); i++) {
