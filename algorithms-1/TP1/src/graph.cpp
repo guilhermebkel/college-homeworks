@@ -46,7 +46,7 @@ int generateFaceUniqueId (Face *face) {
     return static_cast<int>(uniqueId);
 }
 
-int getNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
+int calculateNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
     int nextVerticeId = -1;
 
     for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
@@ -89,7 +89,7 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
 
     face->vertices.push_back(currentVertice);
 
-    int nextVerticeId = getNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
+    int nextVerticeId = calculateNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
     if (isFaceCompleted) {
