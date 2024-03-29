@@ -1,13 +1,33 @@
-#include <math.h>
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
+#include <math.h>
 #include "graph.h"
+
+double getRelativeInclination (Vertice p, Vertice q) {
+    return atan2(q.y - p.y, q.x - p.x);
+}
 
 double getEuclideanDistance (Vertice a, Vertice b) {
     double x = (a.x - b.x);
     double y = (a.y - b.y);
 
     return sqrt(x*x + y*y);
+}
+
+int generateFaceUniqueId (Face *face) {
+    float uniqueId = 0;
+
+    uniqueId += face->vertices.size();
+
+    for (size_t i = 0; i < face->vertices.size() - 1; i++) {
+        Vertice currentVertice = face->vertices[i];
+        Vertice nextVertice = face->vertices[i + 1];
+
+        uniqueId += getEuclideanDistance(currentVertice, nextVertice);
+        uniqueId += getRelativeInclination(currentVertice, nextVertice);
+    }
+
+    return static_cast<int>(uniqueId);
 }
 
 float getCurveAngle (Vertice a, Vertice b, Vertice c) {
@@ -26,9 +46,9 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     return 180 - angleDeg;
 }
 
-void lookupInnerFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int currentVerticeId) {
-    Vertice initialVertice = face->at(0);
-    Vertice previousVertice = face->at(face->size() - 1);
+void lookupInnerFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId) {
+    Vertice initialVertice = face->vertices.at(0);
+    Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
     Vertice currentVertice = vertices[currentVerticeId];
 
     int nextVerticeId = -1;
@@ -63,14 +83,13 @@ void lookupInnerFace (std::vector<Vertice> vertices, std::vector<Vertice> *face,
         }
     }
 
-    // std::cout << nextVerticeId << initialVertice.label << " - " << previousVertice.label << " " << currentVertice.label << " " << vertices[nextVerticeId].label << std::endl;
+    face->vertices.push_back(currentVertice);
 
-    face->push_back(currentVertice);
+    bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
-    bool reachedEndOfFace = nextVerticeId == initialVertice.id;
-
-    if (reachedEndOfFace) {
-        face->push_back(vertices[nextVerticeId]);
+    if (isFaceCompleted) {
+        face->vertices.push_back(vertices[nextVerticeId]);
+        face->uniqueId = generateFaceUniqueId(face);
     } else {
         lookupInnerFace(vertices, face, nextVerticeId);
     }

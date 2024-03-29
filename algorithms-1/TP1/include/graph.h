@@ -14,14 +14,10 @@ typedef struct {
 } Vertice;
 
 typedef struct {
-	int edgesCount;
     std::vector<Vertice> vertices;
-} Graph;
-
-typedef struct {
-    std::vector<Vertice> vertices;
+    int uniqueId;
 } Face;
 
-void lookupInnerFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int currentVerticeId);
+void lookupInnerFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
 
 #endif
