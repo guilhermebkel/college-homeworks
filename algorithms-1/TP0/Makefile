@@ -14,7 +14,7 @@ build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
 	$(CC) $(CFLAGS) -c $(SRC)/quick-sort-utils.cpp -pg -o $(OBJ)/quick-sort-utils.o
 	$(CC) $(CFLAGS) -c $(SRC)/quick-sort-recursive.cpp -pg -o $(OBJ)/quick-sort-recursive.o
-	$(CC) $(CFLAGS) -c $(SRC)/quick-sort-non-recursive.cpp -pg -o $(OBJ)/quick-sort-non-recursive.o
+	$(CC) $(CFLAGS) -c $(SRC)/quick-sort-iterative.cpp -pg -o $(OBJ)/quick-sort-iterative.o
 	$(CC) $(CFLAGS) -c $(SRC)/fibonacci-recursive.cpp -pg -o $(OBJ)/fibonacci-recursive.o
 	$(CC) $(CFLAGS) -c $(SRC)/fibonacci-iterative.cpp -pg -o $(OBJ)/fibonacci-iterative.o
 	$(CC) $(OBJ)/*.o -pg -o $(EXE) $(LIBS)

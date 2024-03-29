@@ -1,7 +1,7 @@
 #include <iostream>
 #include "quick-sort-utils.h"
 
-void quickSortNonRecursive (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortIterative (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     int stack[size];
     int top = -1;
     int left, right;
