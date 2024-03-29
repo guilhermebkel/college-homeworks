@@ -3,37 +3,11 @@
 #include <iostream>
 #include "graph.h"
 
-// Distância euclidiana de a para b.
 double getEuclideanDistance (Vertice a, Vertice b) {
     double x = (a.x - b.x);
     double y = (a.y - b.y);
 
     return sqrt(x*x + y*y);
-}
-
-// Coeficiente da reta que passa na origem e p.
-double getInclination (Vertice p) {
-    return atan2(p.y, p.x);
-}
-
-// Coeficiente da reta orientada de p para q.
-double getRelativeInclination (Vertice p, Vertice q) {
-    return atan2(q.y - p.y, q.x - p.x);
-}
-
-// Determina se ao caminhar de a para b e depois de b para c estamos fazendo uma curva à esquerda, à direita, ou seguindo em frente.
-int getCurveType (Vertice a, Vertice b, Vertice c) {
-    double v = a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y);
-
-    if (v < 0) {
-        return -1; // left
-    }
-
-    if (v > 0) {
-        return +1; // right
-    }
-    
-    return 0; // straight
 }
 
 float getCurveAngle (Vertice a, Vertice b, Vertice c) {
@@ -52,49 +26,52 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     return 180 - angleDeg;
 }
 
-void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int currentVerticeId) {
+void lookupInnerFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int currentVerticeId) {
     Vertice initialVertice = face->at(0);
     Vertice previousVertice = face->at(face->size() - 1);
     Vertice currentVertice = vertices[currentVerticeId];
 
-    std::vector<int> currentNeighborVerticesIds = currentVertice.neighborVerticesIds;
+    int nextVerticeId = -1;
 
-    std::sort(currentNeighborVerticesIds.begin(), currentNeighborVerticesIds.end(), [&](int firstVerticeId, int secondVerticeId) {
-        Vertice firstVertice = vertices[firstVerticeId];
-        float firstVerticeEuclideanDistance = getEuclideanDistance(initialVertice, firstVertice);
+    for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
+        int neighborVerticeId = currentVertice.neighborVerticesIds[i];
 
-        Vertice secondVertice = vertices[secondVerticeId];
-        float secondVerticeEuclideanDistance = getEuclideanDistance(initialVertice, secondVertice);
+        bool isDuplicatedCheck = neighborVerticeId == previousVertice.id && currentVertice.neighborVerticesIds.size() > 1;
+        bool nextVerticeIdNeedSetup = nextVerticeId == -1;
 
-        if (previousVertice.id == initialVertice.id) {
-            return true;
-        } else if (firstVerticeEuclideanDistance < secondVerticeEuclideanDistance) {
-            return true;
-        } else if (firstVerticeEuclideanDistance > secondVerticeEuclideanDistance) {
-            return false;
-        } else {
-            float firstVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, firstVertice);
-            float secondVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, secondVertice);
+        if (!isDuplicatedCheck) {
+            if (nextVerticeIdNeedSetup) {
+                nextVerticeId = neighborVerticeId;
+            } else {
+                Vertice nextVertice = vertices[nextVerticeId];
+                float nextVerticeEuclideanDistance = getEuclideanDistance(initialVertice, nextVertice);
+                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
 
-            return firstVerticeCurveAngle < secondVerticeCurveAngle;
+                Vertice neighborVertice = vertices[neighborVerticeId];
+                float neighborVerticeEuclideanDistance = getEuclideanDistance(initialVertice, neighborVertice);
+                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
+
+                bool isNeighborVerticeCloserToInitialVertice = neighborVerticeEuclideanDistance < nextVerticeEuclideanDistance;
+                bool areAllVerticesEquallyCloseToInitialVertice = neighborVerticeEuclideanDistance == nextVerticeEuclideanDistance;
+                bool isNeighborVerticeDirectedToInitialVertice = neighborVerticeCurveAngle < nextVerticeCurveAngle;
+                bool neighborVerticeMustBeNextVertice = isNeighborVerticeCloserToInitialVertice || (areAllVerticesEquallyCloseToInitialVertice && isNeighborVerticeDirectedToInitialVertice);
+
+                if (neighborVerticeMustBeNextVertice) {
+                    nextVerticeId = neighborVerticeId;
+                }
+            }
         }
-    });
-
-    if (initialVertice.id == 0) {
-        std::cout << initialVertice.label << " - " << previousVertice.label << " " << currentVertice.label << " " << vertices[currentNeighborVerticesIds[0]].label << std::endl;
     }
 
-    int nextVerticeId = currentNeighborVerticesIds[0];
+    // std::cout << nextVerticeId << initialVertice.label << " - " << previousVertice.label << " " << currentVertice.label << " " << vertices[nextVerticeId].label << std::endl;
 
-    if (nextVerticeId == initialVertice.id) {
+    face->push_back(currentVertice);
+
+    bool reachedEndOfFace = nextVerticeId == initialVertice.id;
+
+    if (reachedEndOfFace) {
         face->push_back(vertices[nextVerticeId]);
     } else {
-        face->push_back(currentVertice);
-        buildFace(vertices, face, nextVerticeId);
+        lookupInnerFace(vertices, face, nextVerticeId);
     }
 }
-
-int getExpectedFaceCount (Graph graph) {
-    return graph.edgesCount - sizeof(graph.vertices) + 2;
-}
-

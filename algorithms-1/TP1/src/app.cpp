@@ -28,19 +28,19 @@ int main () {
 
 			std::vector<Vertice> face;
 			face.push_back(vertices[initialVerticeId]);
-			buildFace(vertices, &face, neighborVerticeId);
+			lookupInnerFace(vertices, &face, neighborVerticeId);
 			faces.push_back(face);
 		}
 	}
 
 	for (size_t i = 0; i < faces.size(); ++i) {
-        // std::cout << "Face " << i + 1 << ": ";
+        std::cout << "Face " << i + 1 << ": ";
         
 		for (size_t j = 0; j < faces[i].size(); ++j) {
-            // std::cout << faces[i][j].id << " ";
+            std::cout << faces[i][j].label << " ";
         }
         
-		// std::cout << std::endl;
+		std::cout << std::endl;
     }
 
 	return 0;
