@@ -87,10 +87,9 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
     Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
     Vertice currentVertice = vertices[currentVerticeId];
 
-    int nextVerticeId = getNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
-
     face->vertices.push_back(currentVertice);
 
+    int nextVerticeId = getNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
     if (isFaceCompleted) {
