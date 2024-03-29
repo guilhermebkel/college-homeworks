@@ -35,7 +35,7 @@ int main () {
 
 			std::vector<Vertice> face;
 			face.push_back(vertices[initialVerticeId]);
-			buildFace(face, vertices[neighborVerticeId]);
+			buildFace(vertices, &face, neighborVerticeId);
 		}
 	}
 

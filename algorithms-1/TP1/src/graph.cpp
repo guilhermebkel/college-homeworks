@@ -52,7 +52,7 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     return 180 - angleDeg;
 }
 
-void buildFace (std::vector<Vertice> *face, Vertice currentVertice) {
+void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int currentVerticeId) {
     Vertice nextVertice;
 
 
