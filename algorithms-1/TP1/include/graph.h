@@ -5,6 +5,7 @@
 #include <iostream>
 
 typedef struct {
+    char label;
 	int id;
     float x;
     float y;

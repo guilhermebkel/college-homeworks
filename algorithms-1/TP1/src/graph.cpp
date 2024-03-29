@@ -81,7 +81,7 @@ void buildFace (std::vector<Vertice> vertices, std::vector<Vertice> *face, int c
     });
 
     if (initialVertice.id == 0) {
-        std::cout << previousVertice.id << " " << currentVertice.id << " " << currentNeighborVerticesIds[0] << std::endl;
+        std::cout << initialVertice.label << " - " << previousVertice.label << " " << currentVertice.label << " " << vertices[currentNeighborVerticesIds[0]].label << std::endl;
     }
 
     int nextVerticeId = currentNeighborVerticesIds[0];
