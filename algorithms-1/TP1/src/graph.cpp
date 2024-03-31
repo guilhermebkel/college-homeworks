@@ -58,7 +58,7 @@ std::string generateFacePath (Face *face) {
     return path;
 }
 
-int calculateNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
+int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
     int nextVerticeId = -1;
 
     for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
@@ -86,10 +86,10 @@ int calculateNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertic
 
                 if (neighborVerticeMustBeNextVertice) {
                     nextVerticeId = neighborVerticeId;
+                }
 
-                    if (neighborHasSingleVerticeInside) {
-                        break;
-                    }
+                if (neighborHasSingleVerticeInside) {
+                    break;
                 }
             }
         }
@@ -105,7 +105,7 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
 
     face->vertices.push_back(currentVertice);
 
-    int nextVerticeId = calculateNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
+    int nextVerticeId = calculateInnerNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
     
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
@@ -118,13 +118,17 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
     }
 }
 
-bool canComputeGraphFace (std::vector<Face> faces, Face face) {
+bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face) {
     auto faceIterator = std::find_if(faces.begin(), faces.end(), [&](const Face& existingFace) { return existingFace.uniqueId == face.uniqueId; });
-    bool faceWasAlreadyComputed = faceIterator != faces.end();
+    bool wasFaceAlreadyComputed = faceIterator != faces.end();
     
     std::string invertedFacePath = face.path;
     std::reverse(invertedFacePath.begin(), invertedFacePath.end());
-    bool facePathWasRecursive = invertedFacePath == face.path;
+    bool isFacePathRecursive = invertedFacePath == face.path;
 
-    return !faceWasAlreadyComputed && !facePathWasRecursive;
+    std::vector<int> initialFaceVerticeNeighborVerticesIds = face.vertices[0].neighborVerticesIds;
+    auto initialFaceVerticeNeihborVerticesIdsIterator = std::find_if(initialFaceVerticeNeighborVerticesIds.begin(), initialFaceVerticeNeighborVerticesIds.end(), [&](int verticeId) { return vertices[verticeId].degree == 1; });
+    bool isInitialFaceVerticeConnectedToSingleDegreeVertice = initialFaceVerticeNeihborVerticesIdsIterator != initialFaceVerticeNeighborVerticesIds.end();
+
+    return !wasFaceAlreadyComputed && !isFacePathRecursive && !isInitialFaceVerticeConnectedToSingleDegreeVertice;
 }

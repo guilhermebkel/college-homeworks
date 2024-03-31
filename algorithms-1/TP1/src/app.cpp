@@ -30,7 +30,7 @@ int main () {
 
 			lookupInnerGraphFace(vertices, &face, neighborVerticeId);
 
-			if (canComputeGraphFace(faces, face)) {
+			if (canComputeGraphFace(vertices, faces, face)) {
 				faces.push_back(face);
 			}
 		}

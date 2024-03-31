@@ -20,6 +20,6 @@ typedef struct {
 } Face;
 
 void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
-bool canComputeGraphFace (std::vector<Face> faces, Face face);
+bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face);
 
 #endif
