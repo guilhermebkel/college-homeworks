@@ -3,13 +3,9 @@
 #include <math.h>
 #include "graph.h"
 
-double getRelativeInclination (Vertice p, Vertice q) {
-    return atan2(q.y - p.y, q.x - p.x);
-}
-
-double getEuclideanDistance (Vertice a, Vertice b) {
-    double x = (a.x - b.x);
-    double y = (a.y - b.y);
+float getEuclideanDistance (Vertice a, Vertice b) {
+    float x = (a.x - b.x);
+    float y = (a.y - b.y);
 
     return sqrt(x*x + y*y);
 }
@@ -40,10 +36,9 @@ int generateFaceUniqueId (Face *face) {
         Vertice nextVertice = face->vertices[i + 1];
 
         uniqueId += getEuclideanDistance(currentVertice, nextVertice);
-        uniqueId += getRelativeInclination(currentVertice, nextVertice);
     }
 
-    return static_cast<int>(uniqueId);
+    return static_cast<int>(uniqueId * 10000);
 }
 
 std::string generateFacePath (Face *face) {
