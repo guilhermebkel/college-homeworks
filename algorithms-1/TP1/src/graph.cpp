@@ -46,6 +46,18 @@ int generateFaceUniqueId (Face *face) {
     return static_cast<int>(uniqueId);
 }
 
+std::string generateFacePath (Face *face) {
+    std::string path;
+
+    for (size_t i = 0; i < face->vertices.size(); i++) {
+        Vertice currentVertice = face->vertices[i];
+        
+        path += std::to_string(currentVertice.id);
+    }
+
+    return path;
+}
+
 int calculateNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
     int nextVerticeId = -1;
 
@@ -68,12 +80,16 @@ int calculateNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertic
                 float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
 
                 bool isNeighborVerticeCloserToInitialVertice = neighborVerticeEuclideanDistance < nextVerticeEuclideanDistance;
-                bool areAllVerticesEquallyCloseToInitialVertice = neighborVerticeEuclideanDistance == nextVerticeEuclideanDistance;
-                bool isNeighborVerticeDirectedToInitialVertice = neighborVerticeCurveAngle < nextVerticeCurveAngle;
-                bool neighborVerticeMustBeNextVertice = isNeighborVerticeCloserToInitialVertice || (areAllVerticesEquallyCloseToInitialVertice && isNeighborVerticeDirectedToInitialVertice);
+                bool isNeighborVerticeDirectedToInitialVertice = (neighborVerticeEuclideanDistance == nextVerticeEuclideanDistance) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
+                bool neighborHasSingleVerticeInside = neighborVertice.neighborVerticesIds.size() == 1;
+                bool neighborVerticeMustBeNextVertice = isNeighborVerticeCloserToInitialVertice || isNeighborVerticeDirectedToInitialVertice || neighborHasSingleVerticeInside;
 
                 if (neighborVerticeMustBeNextVertice) {
                     nextVerticeId = neighborVerticeId;
+
+                    if (neighborHasSingleVerticeInside) {
+                        break;
+                    }
                 }
             }
         }
@@ -90,11 +106,13 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
     face->vertices.push_back(currentVertice);
 
     int nextVerticeId = calculateNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
+    
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
     if (isFaceCompleted) {
         face->vertices.push_back(vertices[nextVerticeId]);
         face->uniqueId = generateFaceUniqueId(face);
+        face->path = generateFacePath(face);
     } else {
         lookupInnerGraphFace(vertices, face, nextVerticeId);
     }
@@ -102,8 +120,11 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
 
 bool canComputeGraphFace (std::vector<Face> faces, Face face) {
     auto faceIterator = std::find_if(faces.begin(), faces.end(), [&](const Face& existingFace) { return existingFace.uniqueId == face.uniqueId; });
-    bool faceAlreadyExists = faceIterator != faces.end();
-    bool canComputeGraphFace = !faceAlreadyExists;
+    bool faceWasAlreadyComputed = faceIterator != faces.end();
+    
+    std::string invertedFacePath = face.path;
+    std::reverse(invertedFacePath.begin(), invertedFacePath.end());
+    bool facePathWasRecursive = invertedFacePath == face.path;
 
-    return canComputeGraphFace;
+    return !faceWasAlreadyComputed && !facePathWasRecursive;
 }

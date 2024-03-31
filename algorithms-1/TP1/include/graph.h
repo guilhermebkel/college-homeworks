@@ -16,6 +16,7 @@ typedef struct {
 typedef struct {
     std::vector<Vertice> vertices;
     int uniqueId;
+    std::string path;
 } Face;
 
 void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
