@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <math.h>
-#include "graph.h"
+#include "graph.hpp"
 
 float getEuclideanDistance (Vertice a, Vertice b) {
     float x = (a.x - b.x);

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "quick-sort-utils.h"
+#include "quick-sort-utils.hpp"
 
 void quickSortRecursiveOrder (int left, int right, int itens[MAX_ARRAY_SIZE], int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "quick-sort-utils.h"
+#include "quick-sort-utils.hpp"
 
 void quickSortIterative (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     int stack[size];

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "quick-sort-utils.h"
+#include "quick-sort-utils.hpp"
 
 bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize) {
     int currentPartitionSize = right - left;

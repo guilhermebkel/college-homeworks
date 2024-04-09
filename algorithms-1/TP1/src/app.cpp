@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "graph.h"
+#include "graph.hpp"
 
 int main () {
 	std::vector<Vertice> vertices = {

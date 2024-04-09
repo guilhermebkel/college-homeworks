@@ -1,6 +1,6 @@
 #include <iostream>
-#include "quick-sort-recursive.h"
-#include "quick-sort-iterative.h"
+#include "quick-sort-recursive.hpp"
+#include "quick-sort-iterative.hpp"
 
 int main () {
 	int size = 8;
