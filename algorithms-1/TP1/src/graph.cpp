@@ -135,7 +135,13 @@ int calculateInnerNextVerticeId2 (std::vector<Vertice> vertices, Face *face, Ver
                 float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
                 float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
 
-                bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType >= lastCurveType && nextVerticeCurveType != lastCurveType;
+                if (face->vertices.at(0).label == 'i') {
+                    std::cout << previousVertice.label << " " << currentVertice.label;
+                    std::cout << " [" << neighborVertice.label << ": " << neighborVerticeCurveType << "|";
+                    std::cout << nextVertice.label << ": " << nextVerticeCurveType << "] " << lastCurveType << std::endl;
+                }
+
+                bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType == lastCurveType && nextVerticeCurveType != lastCurveType;
                 bool isNeighborVerticeMoreDirected = (neighborVerticeCurveType == nextVerticeCurveType) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
                 bool neighborVerticeMustBeNextVertice = isNeighborVerticeCorrectlyCurved || isNeighborVerticeMoreDirected;
 
