@@ -29,7 +29,15 @@ teste2: la a0, vetor
         beq zero,zero,FIM
 
 ##### R2 START MODIFIQUE AQUI START #####
-multiplos: jalr zero, 0(ra)
+multiplos:  addi a3, zero, zero             # quantidade de items checados no vetor
+            addi r0, zero, zero             # quantidade de múltiplos
+calcula:    ld a5, 0(a0)                    # elemento atual do vetor que será checado
+            rem a4, a5, a2                  # resto da divisao do elemento pelo verificador
+            add r0, r0, a4                  # incrementa resultado do mod na quantidade de múltiplos
+            addi a0, a0, 8                  # avança uma posição do vetor
+            addi a3, a3, 1                  # incrementa a quantidade de items checados
+            blt a3, a1, calcula             # caso não tiver checado todos os items do vetor, continua checagem
+            jalr zero, 0(ra)
 
 ##### R2 END MODIFIQUE AQUI END #####
 
