@@ -26,6 +26,19 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     return 180 - angleDeg;
 }
 
+int getCurveType (Vertice a, Vertice b, Vertice c) {
+    double v = a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y);
+
+    if (v < 0) {
+        return -1; // left
+    }
+    if (v > 0) {
+        return +1; // right
+    }
+    
+    return 0; // straight
+}
+
 int generateFaceUniqueId (Face *face) {
     float uniqueId = 0;
 
@@ -93,6 +106,49 @@ int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Vertice initialV
     return nextVerticeId;
 }
 
+int calculateInnerNextVerticeId2 (std::vector<Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
+    int lastCurveType;
+
+    if (face->vertices.size() < 3) {
+        lastCurveType = 1;
+    } else {
+        lastCurveType = getCurveType(face->vertices.at(0), previousVertice, currentVertice);
+    }
+
+    int nextVerticeId = -1;
+
+    for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
+        int neighborVerticeId = currentVertice.neighborVerticesIds[i];
+
+        bool isDuplicatedCheck = neighborVerticeId == previousVertice.id && currentVertice.neighborVerticesIds.size() > 1;
+        bool nextVerticeIdNeedSetup = nextVerticeId == -1;
+
+        if (!isDuplicatedCheck) {
+            if (nextVerticeIdNeedSetup) {
+                nextVerticeId = neighborVerticeId;
+            } else {
+                Vertice nextVertice = vertices[nextVerticeId];
+                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
+                float nextVerticeCurveType = getCurveType(previousVertice, currentVertice, nextVertice);
+
+                Vertice neighborVertice = vertices[neighborVerticeId];
+                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
+                float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
+
+                bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType >= lastCurveType && nextVerticeCurveType != lastCurveType;
+                bool isNeighborVerticeMoreDirected = (neighborVerticeCurveType == nextVerticeCurveType) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
+                bool neighborVerticeMustBeNextVertice = isNeighborVerticeCorrectlyCurved || isNeighborVerticeMoreDirected;
+
+                if (neighborVerticeMustBeNextVertice) {
+                    nextVerticeId = neighborVerticeId;
+                }
+            }
+        }
+    }
+
+    return nextVerticeId;
+}
+
 void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId) {
     Vertice initialVertice = face->vertices.at(0);
     Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
@@ -100,7 +156,7 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
 
     face->vertices.push_back(currentVertice);
 
-    int nextVerticeId = calculateInnerNextVerticeId(vertices, initialVertice, previousVertice, currentVertice);
+    int nextVerticeId = calculateInnerNextVerticeId2(vertices, face, previousVertice, currentVertice);
     
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
