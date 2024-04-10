@@ -19,6 +19,12 @@ typedef struct {
     std::string path;
 } Face;
 
+enum CurveType {
+    straight = 1,
+    left = 2,
+    right = 3
+};
+
 void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
 bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face);
 

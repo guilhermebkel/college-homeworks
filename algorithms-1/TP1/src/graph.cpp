@@ -26,17 +26,17 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     return 180 - angleDeg;
 }
 
-int getCurveType (Vertice a, Vertice b, Vertice c) {
+CurveType getCurveType (Vertice a, Vertice b, Vertice c) {
     double v = a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y);
 
     if (v < 0) {
-        return -1; // left
+        return CurveType::left;
     }
     if (v > 0) {
-        return +1; // right
+        return CurveType::right;
     }
     
-    return 0; // straight
+    return CurveType::straight;
 }
 
 int generateFaceUniqueId (Face *face) {
@@ -107,11 +107,11 @@ int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Vertice initialV
 }
 
 int calculateInnerNextVerticeId2 (std::vector<Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
-    int lastCurveType;
+    int lastCurveType = -1;
 
-    if (face->vertices.size() < 3) {
-        lastCurveType = 1;
-    } else {
+    bool faceHasMinCurveTypeCalculationSize = face->vertices.size() >= 3;
+
+    if (faceHasMinCurveTypeCalculationSize) {
         lastCurveType = getCurveType(face->vertices.at(0), previousVertice, currentVertice);
     }
 
@@ -142,7 +142,7 @@ int calculateInnerNextVerticeId2 (std::vector<Vertice> vertices, Face *face, Ver
                 }
 
                 bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType == lastCurveType && nextVerticeCurveType != lastCurveType;
-                bool isNeighborVerticeMoreDirected = (neighborVerticeCurveType == nextVerticeCurveType) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
+                bool isNeighborVerticeMoreDirected = ((neighborVerticeCurveType == nextVerticeCurveType) || (!faceHasMinCurveTypeCalculationSize)) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
                 bool neighborVerticeMustBeNextVertice = isNeighborVerticeCorrectlyCurved || isNeighborVerticeMoreDirected;
 
                 if (neighborVerticeMustBeNextVertice) {
