@@ -20,18 +20,22 @@ void quickSortRecursiveOrder(int left, int right, std::vector<int> &items, int q
     }
 }
 
-void quickSortRecursive(std::vector<int> items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortRecursive(std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     quickSortRecursiveOrder(0, items.size() - 1, items, quickSortMaxPartitionSize, makeComparison);
 }
 
 std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
-    quickSortRecursive(arr, -1, [](int a, int b) -> bool { return a > b; });
+    std::vector<int> items = arr;
 
-    return arr;
+    quickSortRecursive(items, -1, makeDefaultSortingComparison);
+
+    return items;
 }
 
 std::vector<int> QuicksortRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
-    quickSortRecursive(arr, 50, [](int a, int b) -> bool { return a > b; });
+    std::vector<int> items = arr;
 
-    return arr;
+    quickSortRecursive(items, 50, makeDefaultSortingComparison);
+
+    return items;
 }

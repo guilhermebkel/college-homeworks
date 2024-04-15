@@ -37,13 +37,17 @@ void quickSortIterative (std::vector<int> &items, int quickSortMaxPartitionSize,
 }
 
 std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
-    quickSortIterative(arr, -1, [](int a, int b) -> bool { return a > b; });
+    std::vector<int> items = arr;
+
+    quickSortIterative(items, -1, makeDefaultSortingComparison);
     
-    return arr;
+    return items;
 }
 
 std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
-    quickSortIterative(arr, 50, [](int a, int b) -> bool { return a > b; });
+    std::vector<int> items = arr;
     
-    return arr;
+    quickSortIterative(items, 50, makeDefaultSortingComparison);
+    
+    return items;
 }

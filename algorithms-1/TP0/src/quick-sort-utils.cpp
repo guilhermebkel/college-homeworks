@@ -52,3 +52,7 @@ void quickSortPartition (int left, int right, int *i, int *j, std::vector<int> &
         }
     } while (*i <= *j);
 }
+
+bool makeDefaultSortingComparison (int a, int b) {
+    return a > b;
+}
