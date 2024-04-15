@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "quick-sort-utils.hpp"
 
 bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize) {
@@ -10,41 +11,41 @@ bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartiti
     return mustUseInsertionSortAlgorithm;
 }
 
-void insertionSort (int left, int right, int itens[MAX_ARRAY_SIZE], bool (*makeComparison)(int, int)) {
+void insertionSort (int left, int right, std::vector<int> &items, bool (*makeComparison)(int, int)) {
     for (int i = left + 1; i < right; i++) {
-        int value = itens[i];
+        int value = items[i];
         int j = i - 1;
 
-        while (j >= left && makeComparison(itens[j], value)) {
-            itens[j + 1] = itens[j];
+        while (j >= left && makeComparison(items[j], value)) {
+            items[j + 1] = items[j];
             j--;
         }
 
-        itens[j + 1] = value;
+        items[j + 1] = value;
     }
 }
 
-void quickSortPartition (int left, int right, int *i, int *j, int itens[MAX_ARRAY_SIZE], bool (*makeComparison)(int, int)) {
+void quickSortPartition (int left, int right, int *i, int *j, std::vector<int> &items, bool (*makeComparison)(int, int)) {
     int x, w;
 
     *i = left;
     *j = right;
 
-    x = itens[(*i + *j) / 2];
+    x = items[(*i + *j) / 2];
 
     do {
-        while (makeComparison(x, itens[*i])) {
+        while (makeComparison(x, items[*i])) {
             (*i)++;
         }
 
-        while (makeComparison(itens[*j], x)) {
+        while (makeComparison(items[*j], x)) {
             (*j)--;
         }
 
         if (*i <= *j) {
-            w = itens[*i];
-            itens[*i] = itens[*j];
-            itens[*j] = w;
+            w = items[*i];
+            items[*i] = items[*j];
+            items[*j] = w;
 
             (*i)++;
             (*j)--;

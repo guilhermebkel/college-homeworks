@@ -1,8 +1,10 @@
 #include <iostream>
+#include <vector>
 #include "quick-sort-utils.hpp"
 
-void quickSortIterative (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
-    int stack[size];
+void quickSortIterative (std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+    int size = items.size();
+    std::vector<int> stack(size);
     int top = -1;
     int left, right;
 
@@ -14,12 +16,12 @@ void quickSortIterative (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPa
         left = stack[top--];
 
         if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
-            insertionSort(left, right + 1, itens, makeComparison);
+            insertionSort(left, right + 1, items, makeComparison);
         } else {
             int i = left;
             int j = right;
 
-            quickSortPartition(left, right, &i, &j, itens, makeComparison);
+            quickSortPartition(left, right, &i, &j, items, makeComparison);
 
             if (left < j) {
                 stack[++top] = left;
@@ -32,4 +34,16 @@ void quickSortIterative (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPa
             }
         }
     }
+}
+
+std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
+    quickSortIterative(arr, -1, [](int a, int b) -> bool { return a > b; });
+    
+    return arr;
+}
+
+std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
+    quickSortIterative(arr, 50, [](int a, int b) -> bool { return a > b; });
+    
+    return arr;
 }

@@ -1,24 +1,37 @@
 #include <iostream>
+#include <vector>
 #include "quick-sort-utils.hpp"
 
-void quickSortRecursiveOrder (int left, int right, int itens[MAX_ARRAY_SIZE], int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortRecursiveOrder(int left, int right, std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
-        insertionSort(left, right + 1, itens, makeComparison);
+        insertionSort(left, right + 1, items, makeComparison);
     } else {
         int i, j;
 
-        quickSortPartition(left, right, &i, &j, itens, makeComparison);
+        quickSortPartition(left, right, &i, &j, items, makeComparison);
 
         if (left < j) {
-            quickSortRecursiveOrder(left, j, itens, quickSortMaxPartitionSize, makeComparison);
+            quickSortRecursiveOrder(left, j, items, quickSortMaxPartitionSize, makeComparison);
         }
 
         if (i < right) {
-            quickSortRecursiveOrder(i, right, itens, quickSortMaxPartitionSize, makeComparison);
+            quickSortRecursiveOrder(i, right, items, quickSortMaxPartitionSize, makeComparison);
         }
     }
 }
 
-void quickSortRecursive (int itens[MAX_ARRAY_SIZE], int size, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
-    quickSortRecursiveOrder(0, size - 1, itens, quickSortMaxPartitionSize, makeComparison);
+void quickSortRecursive(std::vector<int> items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+    quickSortRecursiveOrder(0, items.size() - 1, items, quickSortMaxPartitionSize, makeComparison);
+}
+
+std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
+    quickSortRecursive(arr, -1, [](int a, int b) -> bool { return a > b; });
+
+    return arr;
+}
+
+std::vector<int> QuicksortRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
+    quickSortRecursive(arr, 50, [](int a, int b) -> bool { return a > b; });
+
+    return arr;
 }
