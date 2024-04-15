@@ -47,7 +47,7 @@ std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
 std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
     std::vector<int> items = arr;
     
-    quickSortIterative(items, 50, makeDefaultSortingComparison);
+    quickSortIterative(items, INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
     
     return items;
 }

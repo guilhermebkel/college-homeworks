@@ -1,8 +1,8 @@
 #ifndef QUICK_SORT_UTILS_H
 #define QUICK_SORT_UTILS_H
 
-#ifndef MAX_ARRAY_SIZE 
-#define MAX_ARRAY_SIZE 10000
+#ifndef INSERTION_SORT_PARTITION_SIZE 
+#define INSERTION_SORT_PARTITION_SIZE 30
 #endif
 
 void insertionSort(int left, int right, std::vector<int>&items, bool (*makeComparison)(int, int));

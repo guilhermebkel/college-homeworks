@@ -35,7 +35,7 @@ std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
 std::vector<int> QuicksortRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortRecursive(items, 50, makeDefaultSortingComparison);
+    quickSortRecursive(items, INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
 
     return items;
 }
