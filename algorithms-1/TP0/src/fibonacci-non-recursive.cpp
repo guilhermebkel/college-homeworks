@@ -1,6 +1,6 @@
 #include <iostream>
 
-int fibonacciIterative (int n) {
+int fibonacciNonRecursive (int n) {
     int a = 0;
     int b = 1;
     int temp;

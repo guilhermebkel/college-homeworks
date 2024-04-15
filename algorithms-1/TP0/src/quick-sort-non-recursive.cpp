@@ -2,7 +2,7 @@
 #include <vector>
 #include "quick-sort-utils.hpp"
 
-void quickSortIterative (std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortNonRecursive (std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     int size = items.size();
     std::vector<int> stack(size);
     int top = -1;
@@ -39,7 +39,7 @@ void quickSortIterative (std::vector<int> &items, int quickSortMaxPartitionSize,
 std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortIterative(items, -1, makeDefaultSortingComparison);
+    quickSortNonRecursive(items, -1, makeDefaultSortingComparison);
     
     return items;
 }
@@ -47,7 +47,7 @@ std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
 std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
     std::vector<int> items = arr;
     
-    quickSortIterative(items, INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    quickSortNonRecursive(items, INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
     
     return items;
 }

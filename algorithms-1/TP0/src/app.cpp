@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
+#include "quick-sort-non-recursive.hpp"
 #include "quick-sort-recursive.hpp"
-#include "quick-sort-iterative.hpp"
+#include "fibonacci-non-recursive.hpp"
 #include "fibonacci-recursive.hpp"
-#include "fibonacci-iterative.hpp"
 
 void testQuicksortAlgorithms () {
     std::vector<int> items = {5, 1, 4, 8, 7, 2, 3, 6};
@@ -21,7 +21,7 @@ void testQuicksortAlgorithms () {
 }
 
 void testFibonacciAlgorithms () {
-    fibonacciIterative(10);
+    fibonacciNonRecursive(10);
     fibonacciRecursive(10);
 }
 
