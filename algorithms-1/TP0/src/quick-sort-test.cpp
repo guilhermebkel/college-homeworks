@@ -21,9 +21,9 @@ std::vector<int> generateRandomItems (int size) {
     return items;
 }
 
-double calculateSortingDuration (std::vector<int> (*sortingFunction)(std::vector<int>), const std::vector<int> &items) {
+double calculateQuicksortDuration (std::vector<int> (*quicksortFunction)(std::vector<int>), const std::vector<int> &items) {
     auto start = std::chrono::steady_clock::now();
-    sortingFunction(items);
+    quicksortFunction(items);
     auto end = std::chrono::steady_clock::now();
 
     std::chrono::duration<double> duration = end - start;

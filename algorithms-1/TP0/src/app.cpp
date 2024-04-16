@@ -1,50 +1,59 @@
 #include <iostream>
 #include <vector>
+#include "quick-sort-test.hpp"
 #include "quick-sort-non-recursive.hpp"
 #include "quick-sort-recursive.hpp"
-#include "quick-sort-test.hpp"
+#include "fibonacci-test.hpp"
 #include "fibonacci-non-recursive.hpp"
 #include "fibonacci-recursive.hpp"
 
 void testQuicksortAlgorithms () {
     int testSetSize = 50;
+    int testItemsCount = 100;
 
-    std::vector<double> quicksortRecursivoPuroDurations;
-    std::vector<double> quicksortRecursivoOrdenacaoInsercaoDurations;
-    std::vector<double> quicksortNaoRecursivoPuroDurations;
-    std::vector<double> quicksortNaoRecursivoOrdenacaoInsercaoDurations;
+    std::vector<double> quicksortRecursivePureDurations;
+    std::vector<double> quicksortRecursiveInsertionSortDurations;
+    std::vector<double> quicksortNonRecursivePureDurations;
+    std::vector<double> quicksortNonRecursiveInsertionSortDurations;
 
     for (int i = 0; i < testSetSize; ++i) {
-        std::vector<int> items = generateRandomItems(100);
+        std::vector<int> items = generateRandomItems(testItemsCount);
 
-        quicksortRecursivoPuroDurations.push_back(calculateSortingDuration(QuicksortRecursivoPuro, items));
-        quicksortRecursivoOrdenacaoInsercaoDurations.push_back(calculateSortingDuration(QuicksortRecursivoOrdenacaoInsercao, items));
-        quicksortNaoRecursivoPuroDurations.push_back(calculateSortingDuration(QuicksortNaoRecursivoPuro, items));
-        quicksortNaoRecursivoOrdenacaoInsercaoDurations.push_back(calculateSortingDuration(QuicksortNaoRecursivoOrdenacaoInsercao, items));
+        quicksortRecursivePureDurations.push_back(calculateQuicksortDuration(QuicksortRecursivoPuro, items));
+        quicksortRecursiveInsertionSortDurations.push_back(calculateQuicksortDuration(QuicksortRecursivoOrdenacaoInsercao, items));
+        quicksortNonRecursivePureDurations.push_back(calculateQuicksortDuration(QuicksortNaoRecursivoPuro, items));
+        quicksortNonRecursiveInsertionSortDurations.push_back(calculateQuicksortDuration(QuicksortNaoRecursivoOrdenacaoInsercao, items));
     }
 
     double average, standardDeviation;
 
-    calculateAverageAndStandardDeviation(quicksortRecursivoPuroDurations, average, standardDeviation);
-    std::cout << "QuicksortRecursivoPuro: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
+    calculateAverageAndStandardDeviation(quicksortRecursivePureDurations, average, standardDeviation);
+    std::cout << "Quicksort Recursivo [Puro]: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
 
-    calculateAverageAndStandardDeviation(quicksortRecursivoOrdenacaoInsercaoDurations, average, standardDeviation);
-    std::cout << "QuicksortRecursivoOrdenacaoInsercao: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
+    calculateAverageAndStandardDeviation(quicksortRecursiveInsertionSortDurations, average, standardDeviation);
+    std::cout << "Quicksort Recursivo [Ordenação Inserção]: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
 
-    calculateAverageAndStandardDeviation(quicksortNaoRecursivoPuroDurations, average, standardDeviation);
-    std::cout << "QuicksortNaoRecursivoPuro: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
+    calculateAverageAndStandardDeviation(quicksortNonRecursivePureDurations, average, standardDeviation);
+    std::cout << "Quicksort Não Recursivo [Puro]: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
 
-    calculateAverageAndStandardDeviation(quicksortNaoRecursivoOrdenacaoInsercaoDurations, average, standardDeviation);
-    std::cout << "QuicksortNaoRecursivoOrdenacaoInsercao: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
+    calculateAverageAndStandardDeviation(quicksortNonRecursiveInsertionSortDurations, average, standardDeviation);
+    std::cout << "Quicksort Não Recursivo [Ordenação Inserção]: Média = " << average << ", Desvio Padrão = " << standardDeviation << std::endl;
 }
 
 void testFibonacciAlgorithms () {
-    fibonacciNonRecursive(10);
-    fibonacciRecursive(10);
+    int testSize = 44;
+
+    double fibonacciRecursiveDuration = calculateFibonacciDuration(fibonacciRecursive, testSize);
+    std::cout << "Fibonacci Recursivo: Duração = " << fibonacciRecursiveDuration << std::endl;
+
+    double fibonacciNonRecursiveDuration = calculateFibonacciDuration(fibonacciNonRecursive, testSize);
+    std::cout << "Fibonacci Não Recursivo: Duração = " << fibonacciNonRecursiveDuration << std::endl;
 }
 
 int main() {
+    std::cout << std::endl;
     testQuicksortAlgorithms();
+    std::cout << std::endl;
     testFibonacciAlgorithms();
 
     return 0;
