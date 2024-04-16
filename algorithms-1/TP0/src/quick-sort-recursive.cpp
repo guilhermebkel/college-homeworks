@@ -2,7 +2,7 @@
 #include <vector>
 #include "quick-sort-utils.hpp"
 
-void quickSortRecursiveOrder(int left, int right, std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortRecursive(int left, int right, std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
     if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
         insertionSort(left, right + 1, items, makeComparison);
     } else {
@@ -11,23 +11,19 @@ void quickSortRecursiveOrder(int left, int right, std::vector<int> &items, int q
         quickSortPartition(left, right, &i, &j, items, makeComparison);
 
         if (left < j) {
-            quickSortRecursiveOrder(left, j, items, quickSortMaxPartitionSize, makeComparison);
+            quickSortRecursive(left, j, items, quickSortMaxPartitionSize, makeComparison);
         }
 
         if (i < right) {
-            quickSortRecursiveOrder(i, right, items, quickSortMaxPartitionSize, makeComparison);
+            quickSortRecursive(i, right, items, quickSortMaxPartitionSize, makeComparison);
         }
     }
-}
-
-void quickSortRecursive(std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
-    quickSortRecursiveOrder(0, items.size() - 1, items, quickSortMaxPartitionSize, makeComparison);
 }
 
 std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortRecursive(items, DISABLED_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    quickSortRecursive(0, items.size() - 1, items, DISABLED_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
 
     return items;
 }
@@ -35,7 +31,7 @@ std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
 std::vector<int> QuicksortRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortRecursive(items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    quickSortRecursive(0, items.size() - 1, items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
 
     return items;
 }
