@@ -9,7 +9,7 @@
 
 void testQuicksortAlgorithms () {
     int testSetSize = 50;
-    int testItemsCount = 100;
+    int testItemsCount = 10000;
 
     std::vector<double> quicksortRecursivePureDurations;
     std::vector<double> quicksortRecursiveInsertionSortDurations;
