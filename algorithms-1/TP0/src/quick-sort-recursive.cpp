@@ -27,7 +27,7 @@ void quickSortRecursive(std::vector<int> &items, int quickSortMaxPartitionSize, 
 std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortRecursive(items, -1, makeDefaultSortingComparison);
+    quickSortRecursive(items, DISABLED_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
 
     return items;
 }
@@ -35,7 +35,7 @@ std::vector<int> QuicksortRecursivoPuro(const std::vector<int> arr) {
 std::vector<int> QuicksortRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortRecursive(items, INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    quickSortRecursive(items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
 
     return items;
 }

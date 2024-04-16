@@ -1,8 +1,12 @@
 #ifndef QUICK_SORT_UTILS_H
 #define QUICK_SORT_UTILS_H
 
-#ifndef INSERTION_SORT_PARTITION_SIZE 
-#define INSERTION_SORT_PARTITION_SIZE 30
+#ifndef DEFAULT_INSERTION_SORT_PARTITION_SIZE 
+#define DEFAULT_INSERTION_SORT_PARTITION_SIZE 30
+#endif
+
+#ifndef DISABLED_INSERTION_SORT_PARTITION_SIZE 
+#define DISABLED_INSERTION_SORT_PARTITION_SIZE -1
 #endif
 
 void insertionSort(int left, int right, std::vector<int>&items, bool (*makeComparison)(int, int));

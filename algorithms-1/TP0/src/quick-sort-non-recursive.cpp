@@ -39,7 +39,7 @@ void quickSortNonRecursive (std::vector<int> &items, int quickSortMaxPartitionSi
 std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
     std::vector<int> items = arr;
 
-    quickSortNonRecursive(items, -1, makeDefaultSortingComparison);
+    quickSortNonRecursive(items, DISABLED_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
     
     return items;
 }
@@ -47,7 +47,7 @@ std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
 std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
     std::vector<int> items = arr;
     
-    quickSortNonRecursive(items, INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    quickSortNonRecursive(items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
     
     return items;
 }

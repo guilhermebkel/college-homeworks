@@ -4,9 +4,9 @@
 
 bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize) {
     int currentPartitionSize = right - left;
-    bool maxPartitionSizeExists = quickSortMaxPartitionSize != -1;
+    bool maxPartitionSizeEnabled = quickSortMaxPartitionSize != DISABLED_INSERTION_SORT_PARTITION_SIZE;
     bool isCurrentPartitionSizeOverMaxValue = currentPartitionSize > quickSortMaxPartitionSize;
-    bool mustUseInsertionSortAlgorithm = maxPartitionSizeExists && isCurrentPartitionSizeOverMaxValue;
+    bool mustUseInsertionSortAlgorithm = maxPartitionSizeEnabled && isCurrentPartitionSizeOverMaxValue;
 
     return mustUseInsertionSortAlgorithm;
 }
