@@ -55,6 +55,7 @@ int main() {
     testQuicksortAlgorithms();
     std::cout << std::endl;
     testFibonacciAlgorithms();
+    std::cout << std::endl;
 
     return 0;
 }
