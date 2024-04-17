@@ -2,8 +2,8 @@
 #include <vector>
 #include "quick-sort-utils.hpp"
 
-void quickSortRecursive(int left, int right, std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
-    if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
+void quickSortRecursive(int left, int right, std::vector<int> &items, int insertionSortPartitionSize, bool (*makeComparison)(int, int)) {
+    if (mustUseInsertionSortAlgorithm(left, right, insertionSortPartitionSize)) {
         insertionSort(left, right + 1, items, makeComparison);
     } else {
         int i, j;
@@ -11,11 +11,11 @@ void quickSortRecursive(int left, int right, std::vector<int> &items, int quickS
         quickSortPartition(left, right, &i, &j, items, makeComparison);
 
         if (left < j) {
-            quickSortRecursive(left, j, items, quickSortMaxPartitionSize, makeComparison);
+            quickSortRecursive(left, j, items, insertionSortPartitionSize, makeComparison);
         }
 
         if (i < right) {
-            quickSortRecursive(i, right, items, quickSortMaxPartitionSize, makeComparison);
+            quickSortRecursive(i, right, items, insertionSortPartitionSize, makeComparison);
         }
     }
 }

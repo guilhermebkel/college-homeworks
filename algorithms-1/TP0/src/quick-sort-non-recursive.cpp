@@ -2,7 +2,7 @@
 #include <vector>
 #include "quick-sort-utils.hpp"
 
-void quickSortNonRecursive (std::vector<int> &items, int quickSortMaxPartitionSize, bool (*makeComparison)(int, int)) {
+void quickSortNonRecursive (std::vector<int> &items, int insertionSortPartitionSize, bool (*makeComparison)(int, int)) {
     int size = items.size();
     std::vector<int> stack(size);
     int top = -1;
@@ -15,7 +15,7 @@ void quickSortNonRecursive (std::vector<int> &items, int quickSortMaxPartitionSi
         right = stack[top--];
         left = stack[top--];
 
-        if (mustUseInsertionSortAlgorithm(left, right, quickSortMaxPartitionSize)) {
+        if (mustUseInsertionSortAlgorithm(left, right, insertionSortPartitionSize)) {
             insertionSort(left, right + 1, items, makeComparison);
         } else {
             int i = left;

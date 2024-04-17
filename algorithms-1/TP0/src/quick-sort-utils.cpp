@@ -2,11 +2,11 @@
 #include <vector>
 #include "quick-sort-utils.hpp"
 
-bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize) {
+bool mustUseInsertionSortAlgorithm (int left, int right, int insertionSortPartitionSize) {
     int currentPartitionSize = right - left;
-    bool maxPartitionSizeEnabled = quickSortMaxPartitionSize != DISABLED_INSERTION_SORT_PARTITION_SIZE;
-    bool isCurrentPartitionSizeOverMaxValue = currentPartitionSize > quickSortMaxPartitionSize;
-    bool mustUseInsertionSortAlgorithm = maxPartitionSizeEnabled && isCurrentPartitionSizeOverMaxValue;
+    bool isInsertionSortPartitionSizeEnabled = insertionSortPartitionSize != DISABLED_INSERTION_SORT_PARTITION_SIZE;
+    bool isCurrentPartitionSizeBelowInsertionSortPartitionSize = currentPartitionSize <= insertionSortPartitionSize;
+    bool mustUseInsertionSortAlgorithm = isInsertionSortPartitionSizeEnabled && isCurrentPartitionSizeBelowInsertionSortPartitionSize;
 
     return mustUseInsertionSortAlgorithm;
 }

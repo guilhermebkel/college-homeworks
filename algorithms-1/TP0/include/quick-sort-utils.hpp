@@ -11,7 +11,7 @@
 
 void insertionSort(int left, int right, std::vector<int>&items, bool (*makeComparison)(int, int));
 void quickSortPartition(int left, int right, int *i, int *j, std::vector<int> &items, bool (*makeComparison)(int, int));
-bool mustUseInsertionSortAlgorithm (int left, int right, int quickSortMaxPartitionSize);
+bool mustUseInsertionSortAlgorithm (int left, int right, int insertionSortPartitionSize);
 bool makeDefaultSortingComparison (int a, int b);
 
 #endif
