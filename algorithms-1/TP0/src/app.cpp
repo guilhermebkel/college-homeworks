@@ -73,9 +73,6 @@ void testFibonacciAlgorithms () {
         if (!fibonacciNonRecursiveTestFinished) {
             fibonacciNonRecursiveTestDurationInSeconds = calculateFibonacciDuration(fibonacciNonRecursive, currentTestSize);
 
-            std::cout << currentTestSize << std::endl;
-
-
             FibonacciTest currentFibonacciNonRecursiveTest = fibonacciNonRecursiveTests.at(currentFibonacciNonRecursiveTestIndex);
 
             if (fibonacciNonRecursiveTestDurationInSeconds > currentFibonacciNonRecursiveTest.seconds) {
