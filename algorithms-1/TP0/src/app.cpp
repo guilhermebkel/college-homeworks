@@ -41,18 +41,74 @@ void testQuicksortAlgorithms () {
 }
 
 void testFibonacciAlgorithms () {
-    int testSize = 44;
+    int currentTestSize = 0;
 
-    double fibonacciRecursiveDuration = calculateFibonacciDuration(fibonacciRecursive, testSize);
-    std::cout << "Fibonacci Recursivo: Duração = " << fibonacciRecursiveDuration << std::endl;
+    double fibonacciRecursiveTestDurationInSeconds = 0;
+    std::vector<FibonacciTest> fibonacciRecursiveTests = generateFibonacciTests();
+    size_t currentFibonacciRecursiveTestIndex = 0;
 
-    double fibonacciNonRecursiveDuration = calculateFibonacciDuration(fibonacciNonRecursive, testSize);
-    std::cout << "Fibonacci Não Recursivo: Duração = " << fibonacciNonRecursiveDuration << std::endl;
+    double fibonacciNonRecursiveTestDurationInSeconds = 0;
+    std::vector<FibonacciTest> fibonacciNonRecursiveTests = generateFibonacciTests();
+    size_t currentFibonacciNonRecursiveTestIndex = 0;
+
+    while (true) {
+        bool fibonacciRecursiveTestFinished = currentFibonacciRecursiveTestIndex >= fibonacciRecursiveTests.size();
+
+        if (!fibonacciRecursiveTestFinished) {
+            fibonacciRecursiveTestDurationInSeconds = calculateFibonacciDuration(fibonacciRecursive, currentTestSize);
+
+            FibonacciTest currentFibonacciRecursiveTest = fibonacciRecursiveTests.at(currentFibonacciRecursiveTestIndex);
+
+            if (fibonacciRecursiveTestDurationInSeconds > currentFibonacciRecursiveTest.seconds) {
+                currentFibonacciRecursiveTest.value = currentTestSize - 1;
+                fibonacciRecursiveTests[currentFibonacciRecursiveTestIndex] = currentFibonacciRecursiveTest;
+
+                currentFibonacciRecursiveTestIndex++;
+            }
+        }
+
+        bool fibonacciNonRecursiveTestFinished = currentFibonacciNonRecursiveTestIndex >= fibonacciNonRecursiveTests.size();
+
+
+        if (!fibonacciNonRecursiveTestFinished) {
+            fibonacciNonRecursiveTestDurationInSeconds = calculateFibonacciDuration(fibonacciNonRecursive, currentTestSize);
+
+            std::cout << currentTestSize << std::endl;
+
+
+            FibonacciTest currentFibonacciNonRecursiveTest = fibonacciNonRecursiveTests.at(currentFibonacciNonRecursiveTestIndex);
+
+            if (fibonacciNonRecursiveTestDurationInSeconds > currentFibonacciNonRecursiveTest.seconds) {
+                currentFibonacciNonRecursiveTest.value = currentTestSize - 1;
+                fibonacciNonRecursiveTests[currentFibonacciNonRecursiveTestIndex] = currentFibonacciNonRecursiveTest;
+
+                currentFibonacciNonRecursiveTestIndex++;
+            }
+        }
+
+        if (fibonacciRecursiveTestFinished && fibonacciNonRecursiveTestFinished) {
+            break;
+        }
+
+        currentTestSize++;
+    }
+
+    std::cout << "Fibonacci Recursivo: ";
+    for (const auto& test : fibonacciRecursiveTests) {
+        std::cout << test.seconds << "s" << " -> n = " << test.value << "; ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "Fibonacci Não Recursivo: ";
+    for (const auto& test : fibonacciNonRecursiveTests) {
+        std::cout << test.seconds << "s" << " -> n = " << test.value << "; ";
+    }
+    std::cout << std::endl;
 }
 
 int main() {
     std::cout << std::endl;
-    testQuicksortAlgorithms();
+    // testQuicksortAlgorithms();
     std::cout << std::endl;
     testFibonacciAlgorithms();
     std::cout << std::endl;
