@@ -1,12 +1,8 @@
 .data
 
 ##### R1 START MODIFIQUE AQUI START #####
-#
-# Este espaço é para você definir as suas constantes e vetores auxiliares.
-#
 
 vetor: .word 1 2 3 4 5 6 7 8 9 10
-
 
 ##### R1 END MODIFIQUE AQUI END #####
 
@@ -29,6 +25,7 @@ teste2: la a0, vetor
         beq zero,zero,FIM
 
 ##### R2 START MODIFIQUE AQUI START #####
+
 multiplos:  add a3, zero, zero              # quantidade de items checados
             add a6, zero, zero              # quantidade de múltiplos
 check:      lw a5, 0(a0)                    # busca elemento atual que será checado
@@ -40,6 +37,7 @@ next:       addi a0, a0, 4                  # avança uma posição do vetor (32
             bne a3, a1, check               # caso não tiver checado todos os items do vetor, continua para a checagem do proximo item
             add a0, a6, zero                # salva quantidade de múltiplos no retorno
             jalr zero, 0(ra)                # retorna do procedimento
+
 ##### R2 END MODIFIQUE AQUI END #####
 
 FIM: addi t0, s0, 0

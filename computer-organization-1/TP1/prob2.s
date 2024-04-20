@@ -2,10 +2,6 @@
 
 ##### R1 START MODIFIQUE AQUI START #####
 
-#
-# Este espaço é para você definir as suas constantes e vetores auxiliares.
-#
-
 vetor1: .word 1 2 3 4 #Primeiro vetor
 vetor2: .word 1 1 1 1 #Segundo vetor
 
@@ -30,12 +26,8 @@ teste2: la a0, vetor2
 
 ##### R2 START MODIFIQUE AQUI START #####
 
-# Esse espaço é para você escrever o código dos procedimentos. 
-# Por enquanto eles estão vazios
-
 media: jalr zero, 0(ra)
 variancia: jalr zero, 0(ra)
-
 
 ##### R2 END MODIFIQUE AQUI END #####
 
