@@ -29,15 +29,38 @@ teste2: la a0, vetor2
 media:          add a5, zero, zero              # a5: soma dos elementos do vetor
                 add a3, a0, zero                # a3: vetor
                 add a4, a1, zero                # a4: quantidade de elementos do vetor
-                add a6, zero, zero              # a6: quantidade de elementos somados
-sum:            lw  a7, 0(a3)                   # busca o elemento atual que será somado na soma total
+                add a6, zero, zero              # a6: quantidade de elementos processados
+sum:            lw  a7, 0(a3)                   # a7: elemento atual
                 add, a5, a5, a7                 # soma elemento atual na soma total
-                addi a6, a6, 1                  # incrementa quantidade de elementos somados
+                addi a6, a6, 1                  # incrementa quantidade de elementos processados
                 addi a3, a3, 4                  # avança uma posição do vetor (32 bits / 8 = 4, entao incrementa de 4 em 4) 
-                bne a4, a6, sum                 # caso não tiver somado todos os elementos, prossegue para próxima soma
-                div a0, a5, a4                  # faz a divisao da soma de elementos pela quantidade de elementos
+                bne a4, a6, sum                 # caso não tiver processado todos os elementos, prossegue para próxima soma
+                div a0, a5, a4                  # calcula a média
                 jalr zero, 0(ra)                # retorna do procedimento
-covariancia:    jalr zero, 0(ra)                # retorna do procedimento
+covariancia:    add a8, zero, zero              # a8: soma dos produtos da diferença
+                add a9, a0, zero                # a9: vetor 1
+                add a10, a2, zero               # a10: vetor 2
+                add a11, a1, zero               # a11: tamanho dos vetores
+                add a12, zero, zero             # a12: quantidade de elementos processados
+mult:           lw a13, 0(a9)                   # a13: elemento do vetor 1
+                lw a14, 0(a10)                  # a14: elemento do vetor 2
+                add a0, a9, zero                # adiciona vetor 1 como argumento do procedimento de media
+                jal ra, media                   # calcula media dos valores do vetor 1
+                add a15, a0, zero               # a15: media dos valores do vetor 1
+                add a0, a10, zero               # adiciona vetor 2 como argumento do procedimento de media
+                jal ra, media                   # calcula media dos valores do vetor 2
+                add a16, a0, zero               # a16: media dos valores do vetor 2
+                sub a17, a13, a15               # a17: Xi - media(X)
+                sub a18, a14, a16               # a18: Yi - media(Y)
+                mul a19, a17, a18               # a19: (Xi - media(X)) * (Yi - media(Y))
+                add a8, a8, a19                 # soma produto da diferença atual na soma total
+                addi a12, a12, 1                # incrementa quantidade de elementos processados
+                addi a9, a9, 4                  # avança uma posição do vetor 1 (32 bits / 8 = 4, entao incrementa de 4 em 4) 
+                addi a10, a10, 4                # avança uma posição do vetor 2 (32 bits / 8 = 4, entao incrementa de 4 em 4) 
+                bne a11, a12, mult              # caso não tiver processado todos os elementos, prossegue para próxima multiplicação
+                addi a20, a11, -1               # a20: N - 1
+                div a0, a19, a20                # calcula a covariância
+                jalr zero, 0(ra)                # retorna do procedimento
 
 ##### R2 END MODIFIQUE AQUI END #####
 
