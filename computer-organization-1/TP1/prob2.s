@@ -29,14 +29,13 @@ teste2: la a0, vetor2
 media:          add a5, zero, zero              # a5: soma dos elementos do vetor
                 add a3, a0, zero                # a3: vetor
                 add a4, a1, zero                # a4: quantidade de elementos do vetor
-                add a6, zero, zero              # a6: índice do elemento atual
-sum:            beq a4, a6, divide              # caso tiver somado todos os elementos, finaliza o calculo da média
-                lw  a7, 0(a3)                   # busca o elemento atual que será somado na soma total
+                add a6, zero, zero              # a6: quantidade de elementos somados
+sum:            lw  a7, 0(a3)                   # busca o elemento atual que será somado na soma total
                 add, a5, a5, a7                 # soma elemento atual na soma total
-                addi a6, a6, 1                  # incrementa índice do elemento atual
+                addi a6, a6, 1                  # incrementa quantidade de elementos somados
                 addi a3, a3, 4                  # avança uma posição do vetor (32 bits / 8 = 4, entao incrementa de 4 em 4) 
-                beq zero, zero, sum             # prossegue para a soma do proximo elemento
-divide:         div a0, a5, a4                  # faz a divisao da soma de elementos pela quantidade de elementos
+                bne a4, a6, sum                 # caso não tiver somado todos os elementos, prossegue para próxima soma
+                div a0, a5, a4                  # faz a divisao da soma de elementos pela quantidade de elementos
                 jalr zero, 0(ra)                # retorna do procedimento
 covariancia:    jalr zero, 0(ra)                # retorna do procedimento
 
