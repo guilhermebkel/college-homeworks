@@ -26,13 +26,19 @@ teste2: la a0, vetor2
 
 ##### R2 START MODIFIQUE AQUI START #####
 
-media:          addi x2,x2,-16                  # x2: stack pointer
-                sd x1,8(x2)
-                sd x12,0(x2)
-                ld x12,0(x2)
-                ld x1,8(x2)
-                jalr zero, 0(ra)
-covariancia: jalr zero, 0(ra)
+media:          add a5, zero, zero              # a5: soma dos elementos do vetor
+                add a3, a0, zero                # a3: vetor
+                add a4, a1, zero                # a4: quantidade de elementos do vetor
+                add a6, zero, zero              # a6: índice do elemento atual
+sum:            beq a4, a6, divide              # caso tiver somado todos os elementos, finaliza o calculo da média
+                lw  a7, 0(a3)                   # busca o elemento atual que será somado na soma total
+                add, a5, a5, a7                 # soma elemento atual na soma total
+                addi a6, a6, 1                  # incrementa índice do elemento atual
+                addi a3, a3, 4                  # avança uma posição do vetor (32 bits / 8 = 4, entao incrementa de 4 em 4) 
+                beq zero, zero, sum             # prossegue para a soma do proximo elemento
+divide:         div a0, a5, a4                  # faz a divisao da soma de elementos pela quantidade de elementos
+                jalr zero, 0(ra)                # retorna do procedimento
+covariancia:    jalr zero, 0(ra)                # retorna do procedimento
 
 ##### R2 END MODIFIQUE AQUI END #####
 
