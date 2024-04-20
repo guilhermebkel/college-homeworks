@@ -42,14 +42,14 @@ covariancia:    add a8, zero, zero              # a8: soma dos produtos da difer
                 add a10, a2, zero               # a10: vetor 2
                 add a11, a1, zero               # a11: tamanho dos vetores
                 add a12, zero, zero             # a12: quantidade de elementos processados
-mult:           lw a13, 0(a9)                   # a13: elemento do vetor 1
-                lw a14, 0(a10)                  # a14: elemento do vetor 2
                 add a0, a9, zero                # adiciona vetor 1 como argumento do procedimento de media
                 jal ra, media                   # calcula media dos valores do vetor 1
                 add a15, a0, zero               # a15: media dos valores do vetor 1
                 add a0, a10, zero               # adiciona vetor 2 como argumento do procedimento de media
                 jal ra, media                   # calcula media dos valores do vetor 2
                 add a16, a0, zero               # a16: media dos valores do vetor 2
+mult:           lw a13, 0(a9)                   # a13: elemento do vetor 1
+                lw a14, 0(a10)                  # a14: elemento do vetor 2
                 sub a17, a13, a15               # a17: Xi - media(X)
                 sub a18, a14, a16               # a18: Yi - media(Y)
                 mul a19, a17, a18               # a19: (Xi - media(X)) * (Yi - media(Y))
