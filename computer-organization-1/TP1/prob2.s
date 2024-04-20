@@ -14,20 +14,20 @@ vetor2: .word 1 1 1 1 #Segundo vetor
         addi a1, zero, 4
         jal ra, media
         addi t0, zero, 2
-        bne r0,t0,teste2
+        bne a0,t0,teste2
         addi s0,s0,1
 teste2: la a0, vetor2
         addi a1, zero, 4
         jal ra, media
         addi t0, zero, 1
-        bne r0,t0, FIM
+        bne a0,t0, FIM
         addi s0,s0,1
         beq zero,zero, FIM
 
 ##### R2 START MODIFIQUE AQUI START #####
 
 media: jalr zero, 0(ra)
-variancia: jalr zero, 0(ra)
+covariancia: jalr zero, 0(ra)
 
 ##### R2 END MODIFIQUE AQUI END #####
 
