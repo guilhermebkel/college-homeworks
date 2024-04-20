@@ -26,7 +26,10 @@ teste2: la a0, vetor2
 
 ##### R2 START MODIFIQUE AQUI START #####
 
-media: jalr zero, 0(ra)
+media:          addi x2,x2,-16                  # x2: stack pointer
+                sd x1,8(x2)
+                sd x12,0(x2)
+                jalr zero, 0(ra)
 covariancia: jalr zero, 0(ra)
 
 ##### R2 END MODIFIQUE AQUI END #####
