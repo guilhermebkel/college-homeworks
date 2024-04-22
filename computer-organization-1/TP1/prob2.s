@@ -26,16 +26,15 @@ teste2: la a0, vetor2
 
 ##### R2 START MODIFIQUE AQUI START #####
 
-media:          add a5, zero, zero              # a5: soma dos elementos do vetor
-                add a3, a0, zero                # a3: vetor
-                add a4, a1, zero                # a4: quantidade de elementos do vetor
-                add a6, zero, zero              # a6: quantidade de elementos processados
-sum:            lw  a7, 0(a3)                   # a7: elemento atual
-                add, a5, a5, a7                 # soma elemento atual na soma total
-                addi a6, a6, 1                  # incrementa quantidade de elementos processados
-                addi a3, a3, 4                  # avança uma posição do vetor (32 bits / 8 = 4, entao incrementa de 4 em 4) 
-                bne a4, a6, sum                 # caso não tiver processado todos os elementos, prossegue para próxima soma
-                div a0, a5, a4                  # calcula a média
+media:          add a3, zero, zero              # a3: soma dos elementos do vetor
+                add a4, a0, zero                # a4: vetor
+                add a5, zero, zero              # a5: quantidade de elementos processados
+sum:            lw  a6, 0(a4)                   # a6: elemento atual
+                add, a3, a3, a6                 # soma elemento atual na soma total
+                addi a5, a5, 1                  # incrementa quantidade de elementos processados
+                addi a4, a4, 4                  # avança uma posição do vetor (32 bits / 8 = 4, entao incrementa de 4 em 4) 
+                bne a1, a5, sum                 # caso não tiver processado todos os elementos, prossegue para próxima soma
+                div a0, a3, a1                  # calcula a média
                 jalr zero, 0(ra)                # retorna do procedimento
 covariancia:    add a8, zero, zero              # a8: soma dos produtos da diferença
                 add a12, zero, zero             # a12: quantidade de elementos processados
