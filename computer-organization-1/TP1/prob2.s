@@ -27,23 +27,22 @@ teste2: la a0, vetor2
 ##### R2 START MODIFIQUE AQUI START #####
 
 media:          addi sp, sp, -12                # aloca espaço para 4 variáveis na pilha
-                sw  a3, 0(sp)                   # salva snapshot de a3
-                sw  a4, 4(sp)                   # salva snapshot de a4
-                sw  a5, 8(sp)                   # salva snapshot de a5
-                add a3, zero, zero              # a3: soma dos elementos do vetor
-                add a4, zero, zero              # a4: quantidade de elementos processados
-sum:            lw  a5, 0(a0)                   # a5: elemento atual
-                add, a3, a3, a5                 # soma elemento atual na soma total
-                addi a4, a4, 1                  # incrementa quantidade de elementos processados
+                sw  a1, 0(sp)                   # salva snapshot de a1 (tamanho do vetor)
+                sw  a2, 4(sp)                   # salva snapshot de a2
+                sw  a3, 8(sp)                   # salva snapshot de a3
+                add a2, zero, zero              # a2: soma dos elementos do vetor
+sum:            lw  a3, 0(a0)                   # a3: elemento atual
+                add, a2, a2, a3                 # soma elemento atual na soma total
+                addi a1, a1, -1                 # decrementa quantidade de elementos processados
                 addi a0, a0, 4                  # avança uma posição do vetor (32 bits / 8 = 4, entao incrementa de 4 em 4) 
-                bne a1, a4, sum                 # caso não tiver processado todos os elementos, prossegue para próxima soma
-                div a0, a3, a1                  # calcula a média
-                lw  a3, 0(sp)                   # recupera snapshot de a3
-                lw  a4, 8(sp)                   # recupera snapshot de a5
-                lw  a5, 12(sp)                  # recupera snapshot de a6
+                bne a1, zero, sum               # caso não tiver processado todos os elementos, prossegue para próxima soma
+                lw  a1, 0(sp)                   # recupera snapshot de a1 (tamanho do vetor)
+                div a0, a2, a1                  # calcula a média
+                lw  a2, 4(sp)                   # recupera snapshot de a2
+                lw  a3, 8(sp)                   # recupera snapshot de a3
                 addi sp, sp, 12                 # libera espaço das 4 variáveis na pilha
                 jalr zero, 0(ra)                # retorna do procedimento
-covariancia:    addi sp, sp, -20                # aloca espaço para 4 variáveis na pilha
+covariancia:    addi sp, sp, -20                # aloca espaço para 5 variáveis na pilha
                 sw  a3, 0(sp)                   # salva snapshot de a3
                 sw  a4, 4(sp)                   # salva snapshot de a4
                 sw  a5, 8(sp)                   # salva snapshot de a5
