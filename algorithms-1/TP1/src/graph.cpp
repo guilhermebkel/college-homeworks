@@ -3,7 +3,7 @@
 #include <math.h>
 #include "graph.hpp"
 
-float getEuclideanDistance (Vertice a, Vertice b) {
+float getEuclideanuniqueId (Vertice a, Vertice b) {
     float x = (a.x - b.x);
     float y = (a.y - b.y);
 
@@ -37,33 +37,6 @@ CurveType getCurveType (Vertice a, Vertice b, Vertice c) {
     }
     
     return CurveType::straight;
-}
-
-int generateFaceUniqueId (Face *face) {
-    float uniqueId = 0;
-
-    uniqueId += face->vertices.size();
-
-    for (size_t i = 0; i < face->vertices.size() - 1; i++) {
-        Vertice currentVertice = face->vertices[i];
-        Vertice nextVertice = face->vertices[i + 1];
-
-        uniqueId += getEuclideanDistance(currentVertice, nextVertice);
-    }
-
-    return static_cast<int>(uniqueId);
-}
-
-std::string generateFacePath (Face *face) {
-    std::string path;
-
-    for (size_t i = 0; i < face->vertices.size(); i++) {
-        Vertice currentVertice = face->vertices[i];
-        
-        path += std::to_string(currentVertice.id);
-    }
-
-    return path;
 }
 
 int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
@@ -114,19 +87,31 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
     Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
     Vertice currentVertice = vertices[currentVerticeId];
 
-    face->vertices.push_back(currentVertice);
+    addVerticeToFace(face, currentVertice);
 
     int nextVerticeId = calculateInnerNextVerticeId(vertices, face, previousVertice, currentVertice);
     
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
     if (isFaceCompleted) {
-        face->vertices.push_back(vertices[nextVerticeId]);
-        face->uniqueId = generateFaceUniqueId(face);
-        face->path = generateFacePath(face);
+        addVerticeToFace(face, vertices[nextVerticeId]);
     } else {
         lookupInnerGraphFace(vertices, face, nextVerticeId);
     }
+}
+
+void addVerticeToFace (Face *face, Vertice vertice) {
+    bool isEmptyFace = face->vertices.size() == 0;
+
+    if (isEmptyFace) {
+        face->uniqueId = 0;
+        face->path = "";
+    } else {
+        face->uniqueId += vertice.id;
+    }
+
+    face->vertices.push_back(vertice);
+    face->path += std::to_string(vertice.id);
 }
 
 bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face) {

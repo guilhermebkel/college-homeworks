@@ -47,6 +47,13 @@
 		"stdlib.h": "c",
 		"stdio.h": "c",
 		"fractal.h": "c",
-		"sdl.h": "c"
+		"sdl.h": "c",
+		"bit": "cpp",
+		"chrono": "cpp",
+		"map": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"ratio": "cpp",
+		"cinttypes": "cpp"
 	}
 }

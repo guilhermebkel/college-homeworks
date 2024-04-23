@@ -15,8 +15,8 @@ typedef struct {
 
 typedef struct {
     std::vector<Vertice> vertices;
-    int uniqueId;
     std::string path;
+    int uniqueId;
 } Face;
 
 enum CurveType {
@@ -26,6 +26,7 @@ enum CurveType {
 };
 
 void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
+void addVerticeToFace (Face *face, Vertice vertice);
 bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face);
 
 #endif
