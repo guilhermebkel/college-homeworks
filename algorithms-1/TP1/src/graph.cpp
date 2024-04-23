@@ -51,7 +51,7 @@ int generateFaceUniqueId (Face *face) {
         uniqueId += getEuclideanDistance(currentVertice, nextVertice);
     }
 
-    return static_cast<int>(uniqueId * 10000);
+    return static_cast<int>(uniqueId);
 }
 
 std::string generateFacePath (Face *face) {
@@ -94,12 +94,6 @@ int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Face *face, Vert
                 Vertice neighborVertice = vertices[neighborVerticeId];
                 float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
                 float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
-
-                if (face->vertices.at(0).label == 'i') {
-                    std::cout << previousVertice.label << " " << currentVertice.label;
-                    std::cout << " [" << neighborVertice.label << ": " << neighborVerticeCurveType << "|";
-                    std::cout << nextVertice.label << ": " << nextVerticeCurveType << "] " << lastCurveType << std::endl;
-                }
 
                 bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType == lastCurveType && nextVerticeCurveType != lastCurveType;
                 bool isNeighborVerticeMoreDirected = ((neighborVerticeCurveType == nextVerticeCurveType) || (!faceHasMinCurveTypeCalculationSize)) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
