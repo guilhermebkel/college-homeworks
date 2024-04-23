@@ -3,18 +3,12 @@
 ##### R1 START MODIFIQUE AQUI START #####
 
 vetor1: .word 1 2 3 4 #Primeiro vetor
-vetor2: .word 1 1 5 5 #Segundo vetor
+vetor2: .word 1 1 1 1 #Segundo vetor
 
 ##### R1 END MODIFIQUE AQUI END #####
       
 .text    
 
-        add s0, zero, zero
-        la a0, vetor1
-        la a2, vetor2
-        addi a1, zero, 4
-        jal ra, covariancia
-        beq zero, zero, FIM
         add s0, zero, zero
         la a0, vetor1
         addi a1, zero, 4
