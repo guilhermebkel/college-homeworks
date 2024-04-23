@@ -2,8 +2,8 @@
 
 ##### R1 START MODIFIQUE AQUI START #####
 
-vetor1: .word 1 2 #Primeiro vetor
-vetor2: .word 1 1 #Segundo vetor
+vetor1: .word 1 2 3 4 #Primeiro vetor
+vetor2: .word 1 1 5 5 #Segundo vetor
 
 ##### R1 END MODIFIQUE AQUI END #####
       
@@ -12,7 +12,7 @@ vetor2: .word 1 1 #Segundo vetor
         add s0, zero, zero
         la a0, vetor1
         la a2, vetor2
-        addi a1, zero, 2
+        addi a1, zero, 4
         jal ra, covariancia
         beq zero, zero, FIM
         add s0, zero, zero
@@ -65,6 +65,7 @@ mult:           add a7, a0, zero                # a7: referência temporaria do 
                 add a7, a0, a7                  # a7: endereço do elemento atual do vetor 1
                 lw a6, 0(a7)                    # a6: elemento atual do vetor 1
                 sub a6, a6, a5                  # a6: Xi - media(X)
+                add a7, a0, zero                # a7: referência temporaria do vetor 1
                 add a0, a2, zero                # adiciona vetor 2 como argumento do procedimento de media
                 jal ra, media                   # calcula media dos valores do vetor 2
                 add a5, a0, zero                # a5: media dos valores do vetor 2
