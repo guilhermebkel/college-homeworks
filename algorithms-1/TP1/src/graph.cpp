@@ -66,47 +66,7 @@ std::string generateFacePath (Face *face) {
     return path;
 }
 
-int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Vertice initialVertice, Vertice previousVertice, Vertice currentVertice) {
-    int nextVerticeId = -1;
-
-    for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
-        int neighborVerticeId = currentVertice.neighborVerticesIds[i];
-
-        bool isDuplicatedCheck = neighborVerticeId == previousVertice.id && currentVertice.neighborVerticesIds.size() > 1;
-        bool nextVerticeIdNeedSetup = nextVerticeId == -1;
-
-        if (!isDuplicatedCheck) {
-            if (nextVerticeIdNeedSetup) {
-                nextVerticeId = neighborVerticeId;
-            } else {
-                Vertice nextVertice = vertices[nextVerticeId];
-                float nextVerticeEuclideanDistance = getEuclideanDistance(initialVertice, nextVertice);
-                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
-
-                Vertice neighborVertice = vertices[neighborVerticeId];
-                float neighborVerticeEuclideanDistance = getEuclideanDistance(initialVertice, neighborVertice);
-                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
-
-                bool isNeighborVerticeCloserToInitialVertice = neighborVerticeEuclideanDistance < nextVerticeEuclideanDistance;
-                bool isNeighborVerticeDirectedToInitialVertice = (neighborVerticeEuclideanDistance == nextVerticeEuclideanDistance) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
-                bool neighborHasSingleVerticeInside = neighborVertice.neighborVerticesIds.size() == 1;
-                bool neighborVerticeMustBeNextVertice = isNeighborVerticeCloserToInitialVertice || isNeighborVerticeDirectedToInitialVertice || neighborHasSingleVerticeInside;
-
-                if (neighborVerticeMustBeNextVertice) {
-                    nextVerticeId = neighborVerticeId;
-                }
-
-                if (neighborHasSingleVerticeInside) {
-                    break;
-                }
-            }
-        }
-    }
-
-    return nextVerticeId;
-}
-
-int calculateInnerNextVerticeId2 (std::vector<Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
+int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
     int lastCurveType = -1;
 
     bool faceHasMinCurveTypeCalculationSize = face->vertices.size() >= 3;
@@ -162,7 +122,7 @@ void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int curren
 
     face->vertices.push_back(currentVertice);
 
-    int nextVerticeId = calculateInnerNextVerticeId2(vertices, face, previousVertice, currentVertice);
+    int nextVerticeId = calculateInnerNextVerticeId(vertices, face, previousVertice, currentVertice);
     
     bool isFaceCompleted = nextVerticeId == initialVertice.id;
 
