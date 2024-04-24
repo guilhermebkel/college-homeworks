@@ -1,5 +1,7 @@
 #include <iostream>
 #include <algorithm>
+#include <map>
+#include <vector>
 #include <math.h>
 #include "graph.hpp"
 
@@ -39,7 +41,7 @@ CurveType getCurveType (Vertice a, Vertice b, Vertice c) {
     return CurveType::straight;
 }
 
-int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
+int calculateInnerNextVerticeId (std::map<int, Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
     int lastCurveType = -1;
 
     bool faceHasMinCurveTypeCalculationSize = face->vertices.size() >= 3;
@@ -82,7 +84,7 @@ int calculateInnerNextVerticeId (std::vector<Vertice> vertices, Face *face, Vert
     return nextVerticeId;
 }
 
-void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId) {
+void lookupInnerGraphFace (std::map<int, Vertice> vertices, Face *face, int currentVerticeId) {
     Vertice initialVertice = face->vertices.at(0);
     Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
     Vertice currentVertice = vertices[currentVerticeId];
@@ -114,7 +116,7 @@ void addVerticeToFace (Face *face, Vertice vertice) {
     face->path += std::to_string(vertice.id);
 }
 
-bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face) {
+bool canComputeGraphFace (std::map<int, Vertice> vertices, std::vector<Face> faces, Face face) {
     auto faceIterator = std::find_if(faces.begin(), faces.end(), [&](const Face& existingFace) { return existingFace.uniqueId == face.uniqueId; });
     bool wasFaceAlreadyComputed = faceIterator != faces.end();
     

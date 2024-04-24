@@ -2,6 +2,7 @@
 #define GRAPH_H
 
 #include <vector>
+#include <map>
 #include <iostream>
 
 typedef struct {
@@ -25,8 +26,8 @@ enum CurveType {
     right = 3
 };
 
-void lookupInnerGraphFace (std::vector<Vertice> vertices, Face *face, int currentVerticeId);
+void lookupInnerGraphFace (std::map<int, Vertice> vertices, Face *face, int currentVerticeId);
 void addVerticeToFace (Face *face, Vertice vertice);
-bool canComputeGraphFace (std::vector<Vertice> vertices, std::vector<Face> faces, Face face);
+bool canComputeGraphFace (std::map<int, Vertice> vertices, std::vector<Face> faces, Face face);
 
 #endif
