@@ -6,7 +6,7 @@
 #include "graph.hpp"
 
 int main () {
-	std::map<int, Vertice> vertices = {
+	std::map<int, Vertice> vertices2 = {
 		{ 0, { .label = 'a', .id = 0, .x = 0, .y = 0, .degree = 2, .neighborVerticesIds = {1, 2}}},
 		{ 1, { .label = 'b', .id = 1, .x = 1, .y = 1, .degree = 4, .neighborVerticesIds = {0, 3, 4, 6}}},
 		{ 2, { .label = 'c', .id = 2, .x = 1, .y = -1, .degree = 5, .neighborVerticesIds = {0, 3, 4, 5, 6}}},
@@ -17,7 +17,7 @@ int main () {
 		{ 7, { .label = 'h', .id = 7, .x = -2, .y = 0, .degree = 1, .neighborVerticesIds = {6}}}
 	};
 
-	std::map<int, Vertice> vertices2 = {
+	std::map<int, Vertice> vertices = {
 		{ 0, { .label = 'a', .id = 0, .x = -3, .y = 1, .degree = 2, .neighborVerticesIds = {1, 7}}},
 		{ 1, { .label = 'b', .id = 1, .x = -1, .y = 2, .degree = 5, .neighborVerticesIds = {0, 2, 4, 6, 7}}},
 		{ 2, { .label = 'c', .id = 2, .x = 0.5, .y = 3, .degree = 3, .neighborVerticesIds = {1, 4, 3}}},
