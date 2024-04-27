@@ -12,11 +12,11 @@ typedef struct {
     std::vector<int> neighborVerticesIds;
 } Vertice;
 
-int64_t cross(const Vertice &p1, const Vertice &p2) {
+float cross(const Vertice &p1, const Vertice &p2) {
     return p1.x * p2.y - p1.y * p2.x;
 }
 
-int64_t cross(const Vertice &p, const Vertice &q, const Vertice &r) {
+float cross(const Vertice &p, const Vertice &q, const Vertice &r) {
     return (p.x - q.x) * (r.y - q.y) - (p.y - q.y) * (r.x - q.x);
 }
 
@@ -71,7 +71,7 @@ std::vector<std::vector<size_t>> find_faces(std::vector<Vertice> vertices, std::
             for (size_t j = 0; j < face.size(); j++) {
                 size_t j1 = (j + 1) % face.size();
                 size_t j2 = (j + 2) % face.size();
-                int64_t val = cross(vertices[face[j]], vertices[face[j1]], vertices[face[j2]]);
+                float val = cross(vertices[face[j]], vertices[face[j1]], vertices[face[j2]]);
                 if (val > 0) {
                     sign = 1;
                     break;
