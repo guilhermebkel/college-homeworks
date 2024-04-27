@@ -9,10 +9,10 @@ CurveType getCurveType (Vertice a, Vertice b, Vertice c) {
     double v = a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y);
 
     if (v < 0) {
-        return CurveType::left;
+        return CurveType::right;
     }
     if (v > 0) {
-        return CurveType::right;
+        return CurveType::left;
     }
     
     return CurveType::straight;
@@ -22,7 +22,7 @@ float getRelativeInclination (Vertice a, Vertice b) {
     return atan2(b.y - a.y, b.x - a.x);
 }
 
-float getCurveAngle (Vertice a, Vertice b, Vertice c, bool use) {
+float getCurveAngle (Vertice a, Vertice b, Vertice c) {
     float ABx = b.x - a.x;
     float ABy = b.y - a.y;
     float BCx = c.x - b.x;
@@ -35,21 +35,7 @@ float getCurveAngle (Vertice a, Vertice b, Vertice c, bool use) {
     float angleRad = acos(dotProduct / (magnitudeAB * magnitudeBC));
     float angleDeg = angleRad * 180.0 / M_PI;
 
-    float ABinclination = getRelativeInclination(a, b);
-    float BCinclination = getRelativeInclination(b, c);
-
-    CurveType curveType = getCurveType(a, b, c);
-
-    std::cout << "[" << a.label << b.label << "] " << ABinclination << " .. ";
-    std::cout << "[" << b.label << c.label << "] " << BCinclination << " // ";
-
-    if (
-        a.x > b.x && c.x > b.x
-    ) {
-        return 180 - angleDeg;
-    } else {
-        return 180 - angleDeg;
-    }
+    return 180 - angleDeg;
 }
 
 int calculateInnerNextVerticeId (std::map<int, Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
@@ -74,20 +60,16 @@ int calculateInnerNextVerticeId (std::map<int, Vertice> vertices, Face *face, Ve
                 nextVerticeId = neighborVerticeId;
             } else {
                 Vertice nextVertice = vertices[nextVerticeId];
-                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice, false);
+                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
                 float nextVerticeCurveType = getCurveType(previousVertice, currentVertice, nextVertice);
 
                 Vertice neighborVertice = vertices[neighborVerticeId];
-                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice, false);
+                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
                 float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
 
                 bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType == lastCurveType && nextVerticeCurveType != lastCurveType;
                 bool isNeighborVerticeMoreDirected = ((neighborVerticeCurveType == nextVerticeCurveType) || (!faceHasMinCurveTypeCalculationSize)) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
                 bool neighborVerticeMustBeNextVertice = isNeighborVerticeCorrectlyCurved || isNeighborVerticeMoreDirected;
-
-                std::cout << "[" << previousVertice.label << currentVertice.label << nextVertice.label << "] " << nextVerticeCurveAngle << " - ";
-                std::cout << "[" << previousVertice.label << currentVertice.label << neighborVertice.label << "] " << neighborVerticeCurveAngle << " - ";
-                std::cout << std::endl;
 
                 if (neighborVerticeMustBeNextVertice) {
                     nextVerticeId = neighborVerticeId;
@@ -113,18 +95,20 @@ int calculateOuterNextVerticeId (std::map<int, Vertice> vertices, Face *face, Ve
                 nextVerticeId = neighborVerticeId;
             } else {
                 Vertice nextVertice = vertices[nextVerticeId];
-                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice, true);
+                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
+                float nextVerticeCurveType = getCurveType(previousVertice, currentVertice, nextVertice);
 
                 Vertice neighborVertice = vertices[neighborVerticeId];
-                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice, true);
+                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
+                float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
 
-                bool isNeighborCloserToGraphBorder = neighborVerticeCurveAngle > nextVerticeCurveAngle;
+                bool isNeighborOnGraphBorder = neighborVerticeCurveAngle > nextVerticeCurveAngle;
 
-                std::cout << "[" << previousVertice.label << currentVertice.label << nextVertice.label << "] " << nextVerticeCurveAngle << " - ";
-                std::cout << "[" << previousVertice.label << currentVertice.label << neighborVertice.label << "] " << neighborVerticeCurveAngle << " - ";
+                std::cout << "[" << previousVertice.label << currentVertice.label << nextVertice.label << "] " << nextVerticeCurveType << "; " << nextVerticeCurveAngle << " - ";
+                std::cout << "[" << previousVertice.label << currentVertice.label << neighborVertice.label << "] " << neighborVerticeCurveType << "; " << neighborVerticeCurveAngle << " - ";
                 std::cout << std::endl;
 
-                if (isNeighborCloserToGraphBorder) {
+                if (isNeighborOnGraphBorder) {
                     nextVerticeId = neighborVerticeId;
                 }
             }
@@ -144,7 +128,7 @@ void lookupInnerGraphFace (std::map<int, Vertice> vertices, Face *face, int curr
     int nextVerticeId = -1;
 
     if (initialVertice.label == 'a') {
-        nextVerticeId = calculateInnerNextVerticeId(vertices, face, previousVertice, currentVertice);
+        nextVerticeId = calculateOuterNextVerticeId(vertices, face, previousVertice, currentVertice);
     } else {
         nextVerticeId = calculateInnerNextVerticeId(vertices, face, previousVertice, currentVertice);
     }
