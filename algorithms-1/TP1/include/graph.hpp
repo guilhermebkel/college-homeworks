@@ -29,5 +29,6 @@ enum CurveType {
 void lookupInnerGraphFace (std::map<int, Vertice> vertices, Face *face, int currentVerticeId);
 void addVerticeToFace (Face *face, Vertice vertice);
 bool canComputeGraphFace (std::map<int, Vertice> vertices, std::vector<Face> faces, Face face);
+void addExternalFace(std::map<int, Vertice>& vertices);
 
 #endif

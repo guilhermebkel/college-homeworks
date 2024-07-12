@@ -1,124 +1,145 @@
 #include <iostream>
 #include <vector>
-#include <map>
+#include <cmath>
 #include <algorithm>
 
-typedef struct {
-    char label;
-    int id;
-    float x;
-    float y;
-    int degree;
-    std::vector<int> neighborVerticesIds;
-} Vertice;
+class Vertex; // Forward declaration
 
-float cross(const Vertice &p1, const Vertice &p2) {
-    return p1.x * p2.y - p1.y * p2.x;
-}
+class Edge {
+public:
+    Vertex *from;
+    Vertex *to;
+    double angle;
+    bool visited;
+    Edge *next;
+    Edge *reverse;
 
-float cross(const Vertice &p, const Vertice &q, const Vertice &r) {
-    return (p.x - q.x) * (r.y - q.y) - (p.y - q.y) * (r.x - q.x);
-}
+    Edge(Vertex *from, Vertex *to);
 
-int half(const Vertice &p) {
-    return int(p.y < 0 || (p.y == 0 && p.x < 0));
-}
+    void setReverseEdge(Edge *edge);
 
-// Função para encontrar faces
-std::vector<std::vector<size_t>> find_faces(std::vector<Vertice> vertices, std::map<int, std::vector<int>> adjacencyList) {
-    size_t n = vertices.size();
-    std::vector<std::vector<char>> used(n);
+    friend class Vertex; // Allow Vertex to access private members
+};
 
-    for (size_t i = 0; i < n; i++) {
-        used[i].resize(adjacencyList[i].size());
-        used[i].assign(adjacencyList[i].size(), 0);
-        auto compare = [&](size_t l, size_t r) {
-            Vertice pl = { .x = vertices[l].x - vertices[i].x, .y = vertices[l].y - vertices[i].y };
-            Vertice pr = { .x = vertices[r].x - vertices[i].x, .y = vertices[r].y - vertices[i].y };
-            if (half(pl) != half(pr))
-                return half(pl) < half(pr);
-            return cross(pl, pr) > 0;
-        };
-        std::sort(adjacencyList[i].begin(), adjacencyList[i].end(), compare);
+class Vertex {
+public:
+    int index;
+    struct Point2D {
+        double x, y;
+        Point2D(double x, double y) : x(x), y(y) {}
+    };
+    Point2D point;
+    std::vector<Edge*> outboundEdges;
+
+    Vertex(int index, double x, double y) : index(index), point(x, y) {}
+
+    void addEdge(Edge *edge) {
+        outboundEdges.push_back(edge);
     }
 
-    std::vector<std::vector<size_t>> faces;
+    void sortEdges() {
+        std::sort(outboundEdges.begin(), outboundEdges.end(), [](Edge *e1, Edge *e2) {
+            return e1->angle < e2->angle;
+        });
 
-    for (size_t i = 0; i < n; i++) {
-        for (size_t edge_id = 0; edge_id < adjacencyList[i].size(); edge_id++) {
-            if (used[i][edge_id]) {
-                continue;
-            }
-            std::vector<size_t> face;
-            size_t v = i;
-            size_t e = edge_id;
-            while (!used[v][e]) {
-                used[v][e] = true;
-                face.push_back(v);
-                size_t u = adjacencyList[v][e];
-                size_t e1 = std::lower_bound(adjacencyList[u].begin(), adjacencyList[u].end(), v, [&](size_t l, size_t r) {
-					Vertice pl = { .x = vertices[l].x - vertices[u].x, .y = vertices[l].y - vertices[u].y };
-            		Vertice pr = { .x = vertices[r].x - vertices[u].x, .y = vertices[r].y - vertices[u].y };
-                    if (half(pl) != half(pr))
-                        return half(pl) < half(pr);
-                    return cross(pl, pr) > 0;
-                }) - adjacencyList[u].begin() + 1;
-                if (e1 == adjacencyList[u].size()) {
-                    e1 = 0;
-                }
-                v = u;
-                e = e1;
-            }
-            
-			faces.emplace_back(face);
+        Edge *prev = outboundEdges.back();
+        for (Edge *edge : outboundEdges) {
+            edge->next = prev;
+            prev = edge;
         }
     }
+};
 
-    return faces;
+Edge::Edge(Vertex *from, Vertex *to) : from(from), to(to), visited(false), next(nullptr), reverse(nullptr) {
+    angle = atan2(to->point.y - from->point.y, to->point.x - from->point.x);
+    from->addEdge(this);
+}
+
+void Edge::setReverseEdge(Edge *edge) {
+    reverse = edge;
+    edge->reverse = this;
+}
+
+void printFace(std::vector<Edge*>& face) {
+    for (Edge *edge : face) {
+        std::cout << edge->from->index << " -> ";
+    }
+    std::cout << face.back()->to->index << std::endl;
 }
 
 int main() {
-	std::vector<Vertice> vertices = {
-		{ .label = 'a', .id = 0, .x = 0, .y = 0, .degree = 2, .neighborVerticesIds = {1, 2}},
-		{ .label = 'b', .id = 1, .x = 1, .y = 1, .degree = 4, .neighborVerticesIds = {0, 3, 4, 6}},
-		{ .label = 'c', .id = 2, .x = 1, .y = -1, .degree = 5, .neighborVerticesIds = {0, 3, 4, 5, 6}},
-		{ .label = 'd', .id = 3, .x = 2, .y = 0, .degree = 2, .neighborVerticesIds = {1, 2}},
-		{ .label = 'e', .id = 4, .x = 4, .y = 0, .degree = 3, .neighborVerticesIds = {1, 2, 5}},
-		{ .label = 'f', .id = 5, .x = 4, .y = -1.5, .degree = 2, .neighborVerticesIds = {2, 4}},
-		{ .label = 'g', .id = 6, .x = -3, .y = 0, .degree = 3, .neighborVerticesIds = {1, 2, 7}},
-		{ .label = 'h', .id = 7, .x = -2, .y = 0, .degree = 1, .neighborVerticesIds = {6}}
-	};
+//    std::map<int, Vertice> vertices = {
+//		{ 1, { .label = 'a', .id = 1, .x = 0, .y = 0, .degree = 2, .neighborVerticesIds = {2, 3}}},
+//		{ 2, { .label = 'b', .id = 2, .x = 1, .y = 1, .degree = 4, .neighborVerticesIds = {1, 4, 5, 7}}},
+//		{ 3, { .label = 'c', .id = 3, .x = 1, .y = -1, .degree = 5, .neighborVerticesIds = {1, 4, 5, 6, 7}}},
+//		{ 4, { .label = 'd', .id = 4, .x = 2, .y = 0, .degree = 2, .neighborVerticesIds = {2, 3}}},
+//		{ 5, { .label = 'e', .id = 5, .x = 4, .y = 0, .degree = 3, .neighborVerticesIds = {2, 3, 6}}},
+//		{ 6, { .label = 'f', .id = 6, .x = 4, .y = -1.5, .degree = 2, .neighborVerticesIds = {3, 5}}},
+//		{ 7, { .label = 'g', .id = 7, .x = -3, .y = 0, .degree = 3, .neighborVerticesIds = {2, 3, 8}}},
+//		{ 8, { .label = 'h', .id = 8, .x = -2, .y = 0, .degree = 1, .neighborVerticesIds = {7}}}
+//	};
 
-	std::vector<Vertice> vertices2 = {
-		{ .label = 'a', .id = 0, .x = -3, .y = 1, .degree = 2, .neighborVerticesIds = {1, 7}},
-		{ .label = 'b', .id = 1, .x = -1, .y = 2, .degree = 5, .neighborVerticesIds = {0, 2, 4, 6, 7}},
-		{ .label = 'c', .id = 2, .x = 0.5, .y = 3, .degree = 3, .neighborVerticesIds = {1, 4, 3}},
-		{ .label = 'd', .id = 3, .x = 2.5, .y = 1.65, .degree = 3, .neighborVerticesIds = {2, 4, 5}},
-		{ .label = 'e', .id = 4, .x = 0.5, .y = 1.65, .degree = 5, .neighborVerticesIds = {1, 2, 3, 5, 6}},
-		{ .label = 'f', .id = 5, .x = 2, .y = 0.15, .degree = 4, .neighborVerticesIds = {3, 4, 6, 9}},
-		{ .label = 'g', .id = 6, .x = 0, .y = 0.5, .degree = 6, .neighborVerticesIds = {1, 4, 5, 7, 8, 9}},
-		{ .label = 'h', .id = 7, .x = -1.5, .y = 0.5, .degree = 4, .neighborVerticesIds = {0, 1, 6, 8}},
-		{ .label = 'i', .id = 8, .x = -0.75, .y = -1.5, .degree = 4, .neighborVerticesIds = {6, 7, 9, 10}},
-		{ .label = 'j', .id = 9, .x = 1.75, .y = -1.4, .degree = 5, .neighborVerticesIds = {5, 6, 8, 10, 11}},
-		{ .label = 'k', .id = 10, .x = 0.25, .y = -3, .degree = 3, .neighborVerticesIds = {8, 9, 11}},
-		{ .label = 'l', .id = 11, .x = 2.9, .y = -2.85, .degree = 2, .neighborVerticesIds = {9, 10}}
-	};
+    std::vector<Vertex*> vertices = {
+        new Vertex(1, 0, 0),
+        new Vertex(2, 1, 1),
+        new Vertex(3, 1, -1),
+        new Vertex(4, 2, 0),
+        new Vertex(5, 4, 0),
+        new Vertex(6, 4, -1.5),
+        new Vertex(7, -3, 0),
+        new Vertex(8, -2, 0)
+    };
 
-    std::map<int, std::vector<int>> adjacencyList;
+    std::vector<std::pair<int, int>> graph = {
+        {1, 2}, {1, 3},
+        {2, 4}, {2, 5}, {2, 7},
+        {3, 4}, {3, 5}, {3, 6}, {3, 7},
+        {5, 6},
+        {7, 8}
+    };
 
-	for (size_t i = 0; i < vertices.size(); i++) {
-		adjacencyList[i] = vertices[i].neighborVerticesIds;
-	}
+    std::vector<Edge*> edges;
 
-    std::vector<std::vector<size_t>> faces = find_faces(vertices, adjacencyList);
+    for (auto& edge : graph) {
+        Vertex *from = vertices[edge.first - 1];
+        Vertex *to = vertices[edge.second - 1];
+        edges.push_back(new Edge(from, to));
+        edges.push_back(new Edge(to, from));
 
-    std::cout << "Faces encontradas:" << std::endl;
-    for (const auto& face : faces) {
-        for (size_t vertex_id : face) {
-			Vertice vertice = vertices[vertex_id];
-            std::cout << vertice.label << " ";
+        edges[edges.size() - 2]->setReverseEdge(edges.back());
+    }
+
+    for (auto& vertex : vertices) {
+        vertex->sortEdges();
+    }
+
+    std::vector<std::vector<Edge*>> faces;
+
+    for (auto& edge : edges) {
+        if (edge->visited) {
+            continue;
         }
-        std::cout << std::endl;
+
+        std::vector<Edge*> face;
+        faces.push_back(face);
+
+        Edge *e = edge;
+        do {
+            face.push_back(e);
+            e->visited = true;
+            e = e->reverse->next;
+        } while (e != edge);
+
+        printFace(face);
+    }
+
+    // Limpeza de memória
+    for (auto& vertex : vertices) {
+        delete vertex;
+    }
+
+    for (auto& edge : edges) {
+        delete edge;
     }
 
     return 0;
