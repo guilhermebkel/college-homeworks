@@ -4,21 +4,27 @@
 #include <algorithm>
 #include "graph.hpp"
 
-struct AppInput {
+struct Input {
     std::vector<Vertex> vertices;
     std::vector<std::pair<int, int>> edgesByVertices;
 };
 
-void printFace(std::vector<Edge*>& face) {
-    for (Edge *edge : face) {
-        std::cout << edge->fromVertex->id << " -> ";
-    }
+void printResult(std::vector<std::vector<Edge*>> faces) {
+    std::cout << faces.size() << std::endl;
 
-    std::cout << face.back()->toVertex->id << std::endl;
+    for (auto& face : faces) {
+        std::cout << face.size() + 1 << " ";
+
+        for (Edge *edge : face) {
+            std::cout << edge->fromVertex->id << " ";
+        }
+
+        std::cout << face.back()->toVertex->id << std::endl;
+    }
 }
 
-AppInput readAppInput () {
-    AppInput appInput;
+Input readInput () {
+    Input input;
 
     int verticesCount, edgesCount;
     std::cin >> verticesCount >> edgesCount;
@@ -39,23 +45,23 @@ AppInput readAppInput () {
             vertex.neighborVerticesIds.push_back(neighborVertexId);
 
             if (vertexId < neighborVertexId) {
-                appInput.edgesByVertices.push_back(std::make_pair(vertexId, neighborVertexId));
+                input.edgesByVertices.push_back(std::make_pair(vertexId, neighborVertexId));
             }
         }
 
-        appInput.vertices.push_back(vertex);
+        input.vertices.push_back(vertex);
     }
 
-    return appInput;
+    return input;
 }
 
 int main() {
-    AppInput appInput = readAppInput();
+    Input input = readInput();
 
     std::vector<Vertex*> vertices;
-    std::vector<std::pair<int, int>> edgesByVertices = appInput.edgesByVertices;
+    std::vector<std::pair<int, int>> edgesByVertices = input.edgesByVertices;
 
-    for (auto& vertex : appInput.vertices) {
+    for (auto& vertex : input.vertices) {
         vertices.push_back(&vertex);
     }
 
@@ -101,9 +107,7 @@ int main() {
         faces.push_back(face);
     }
 
-    for (auto& face : faces) {
-        printFace(face);
-    }
+    printResult(faces);
 
     return 0;
 }
