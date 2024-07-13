@@ -8,14 +8,15 @@ CFLAGS = -pg -Wall -c -I $(INC)
 
 EXE = $(BIN)/main
 
-all: build test
-
-build: clean
+test: clean
 	$(CC) $(CFLAGS) -c $(SRC)/app.cpp -pg -o $(OBJ)/app.o
 	$(CC) $(CFLAGS) -c $(SRC)/graph.cpp -pg -o $(OBJ)/graph.o
 	$(CC) $(OBJ)/*.o -pg -o $(EXE) $(LIBS)
+	$(EXE)
 
-test:
+tp: clean
+	$(CC) $(CFLAGS) -c $(SRC)/tp.cpp -pg -o $(OBJ)/tp.o
+	$(CC) $(OBJ)/*.o -pg -o $(EXE) $(LIBS)
 	$(EXE)
 
 clean:
