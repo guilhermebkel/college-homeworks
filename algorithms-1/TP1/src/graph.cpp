@@ -1,172 +1,38 @@
 #include <iostream>
 #include <algorithm>
-#include <map>
+#include <cmath>
 #include <vector>
-#include <math.h>
 #include "graph.hpp"
 
-CurveType getCurveType (Vertice a, Vertice b, Vertice c) {
-    double v = a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y);
-
-    if (v < 0) {
-        return CurveType::right;
-    }
-    if (v > 0) {
-        return CurveType::left;
-    }
-    
-    return CurveType::straight;
+void addEdgeToVertex(Vertex* vertex, Edge *edge) {
+    vertex->outboundEdges.push_back(edge);
 }
 
-float getRelativeInclination (Vertice a, Vertice b) {
-    return atan2(b.y - a.y, b.x - a.x);
-}
+void sortVertexEdges(Vertex* vertex) {
+    std::sort(vertex->outboundEdges.begin(), vertex->outboundEdges.end(), [](Edge *e1, Edge *e2) {
+        return e1->angle < e2->angle;
+    });
 
-float getCurveAngle (Vertice a, Vertice b, Vertice c) {
-    float ABx = b.x - a.x;
-    float ABy = b.y - a.y;
-    float BCx = c.x - b.x;
-    float BCy = c.y - b.y;
+    Edge *previousEdge = vertex->outboundEdges.back();
 
-    float dotProduct = ABx * BCx + ABy * BCy;
-    float magnitudeAB = sqrt(ABx * ABx + ABy * ABy);
-    float magnitudeBC = sqrt(BCx * BCx + BCy * BCy);
-
-    float angleRad = acos(dotProduct / (magnitudeAB * magnitudeBC));
-    float angleDeg = angleRad * 180.0 / M_PI;
-
-    return 180 - angleDeg;
-}
-
-int calculateInnerNextVerticeId (std::map<int, Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
-    int lastCurveType = -1;
-
-    bool faceHasMinCurveTypeCalculationSize = face->vertices.size() >= 3;
-
-    if (faceHasMinCurveTypeCalculationSize) {
-        lastCurveType = getCurveType(face->vertices.at(0), previousVertice, currentVertice);
-    }
-
-    int nextVerticeId = -1;
-
-    for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
-        int neighborVerticeId = currentVertice.neighborVerticesIds[i];
-
-        bool isDuplicatedCheck = neighborVerticeId == previousVertice.id && currentVertice.neighborVerticesIds.size() > 1;
-        bool nextVerticeIdNeedSetup = nextVerticeId == -1;
-
-        if (!isDuplicatedCheck) {
-            if (nextVerticeIdNeedSetup) {
-                nextVerticeId = neighborVerticeId;
-            } else {
-                Vertice nextVertice = vertices[nextVerticeId];
-                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
-                float nextVerticeCurveType = getCurveType(previousVertice, currentVertice, nextVertice);
-
-                Vertice neighborVertice = vertices[neighborVerticeId];
-                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
-                float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
-
-                bool isNeighborVerticeCorrectlyCurved = neighborVerticeCurveType == lastCurveType && nextVerticeCurveType != lastCurveType;
-                bool isNeighborVerticeMoreDirected = ((neighborVerticeCurveType == nextVerticeCurveType) || (!faceHasMinCurveTypeCalculationSize)) && (neighborVerticeCurveAngle < nextVerticeCurveAngle);
-                bool neighborVerticeMustBeNextVertice = isNeighborVerticeCorrectlyCurved || isNeighborVerticeMoreDirected;
-
-                if (neighborVerticeMustBeNextVertice) {
-                    nextVerticeId = neighborVerticeId;
-                }
-            }
-        }
-    }
-
-    return nextVerticeId;
-}
-
-int calculateOuterNextVerticeId (std::map<int, Vertice> vertices, Face *face, Vertice previousVertice, Vertice currentVertice) {
-    int nextVerticeId = -1;
-
-    for (size_t i = 0; i < currentVertice.neighborVerticesIds.size(); i++) {
-        int neighborVerticeId = currentVertice.neighborVerticesIds[i];
-
-        bool isDuplicatedCheck = neighborVerticeId == previousVertice.id && currentVertice.neighborVerticesIds.size() > 1;
-        bool nextVerticeIdNeedSetup = nextVerticeId == -1;
-
-        if (!isDuplicatedCheck) {
-            if (nextVerticeIdNeedSetup) {
-                nextVerticeId = neighborVerticeId;
-            } else {
-                Vertice nextVertice = vertices[nextVerticeId];
-                float nextVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, nextVertice);
-                float nextVerticeCurveType = getCurveType(previousVertice, currentVertice, nextVertice);
-
-                Vertice neighborVertice = vertices[neighborVerticeId];
-                float neighborVerticeCurveAngle = getCurveAngle(previousVertice, currentVertice, neighborVertice);
-                float neighborVerticeCurveType = getCurveType(previousVertice, currentVertice, neighborVertice);
-
-                bool isNeighborOnGraphBorder = neighborVerticeCurveAngle > nextVerticeCurveAngle;
-
-                std::cout << "[" << previousVertice.label << currentVertice.label << nextVertice.label << "] " << nextVerticeCurveType << "; " << nextVerticeCurveAngle << " - ";
-                std::cout << "[" << previousVertice.label << currentVertice.label << neighborVertice.label << "] " << neighborVerticeCurveType << "; " << neighborVerticeCurveAngle << " - ";
-                std::cout << std::endl;
-
-                if (isNeighborOnGraphBorder) {
-                    nextVerticeId = neighborVerticeId;
-                }
-            }
-        }
-    }
-
-    return nextVerticeId;
-}
-
-void lookupInnerGraphFace (std::map<int, Vertice> vertices, Face *face, int currentVerticeId) {
-    Vertice initialVertice = face->vertices.at(0);
-    Vertice previousVertice = face->vertices.at(face->vertices.size() - 1);
-    Vertice currentVertice = vertices[currentVerticeId];
-
-    addVerticeToFace(face, currentVertice);
-
-    int nextVerticeId = -1;
-
-    if (initialVertice.label == 'a') {
-        nextVerticeId = calculateOuterNextVerticeId(vertices, face, previousVertice, currentVertice);
-    } else {
-        nextVerticeId = calculateInnerNextVerticeId(vertices, face, previousVertice, currentVertice);
-    }
-    
-    bool isFaceCompleted = nextVerticeId == initialVertice.id;
-
-    if (isFaceCompleted) {
-        addVerticeToFace(face, vertices[nextVerticeId]);
-    } else {
-        lookupInnerGraphFace(vertices, face, nextVerticeId);
+    for (Edge *edge : vertex->outboundEdges) {
+        edge->nextEdge = previousEdge;
+        previousEdge = edge;
     }
 }
 
-void addVerticeToFace (Face *face, Vertice vertice) {
-    bool isEmptyFace = face->vertices.size() == 0;
+void setReverseEdge(Edge *edge1, Edge *edge2) {
+    edge1->reverseEdge = edge2;
+    edge2->reverseEdge = edge1;
+};
 
-    if (isEmptyFace) {
-        face->uniqueId = 0;
-        face->path = "";
-    } else {
-        face->uniqueId += vertice.id;
-    }
-
-    face->vertices.push_back(vertice);
-    face->path += std::to_string(vertice.id);
-}
-
-bool canComputeGraphFace (std::map<int, Vertice> vertices, std::vector<Face> faces, Face face) {
-    auto faceIterator = std::find_if(faces.begin(), faces.end(), [&](const Face& existingFace) { return existingFace.uniqueId == face.uniqueId; });
-    bool wasFaceAlreadyComputed = faceIterator != faces.end();
-    
-    std::string invertedFacePath = face.path;
-    std::reverse(invertedFacePath.begin(), invertedFacePath.end());
-    bool isFacePathRecursive = invertedFacePath == face.path;
-
-    std::vector<int> initialFaceVerticeNeighborVerticesIds = face.vertices[0].neighborVerticesIds;
-    auto initialFaceVerticeNeihborVerticesIdsIterator = std::find_if(initialFaceVerticeNeighborVerticesIds.begin(), initialFaceVerticeNeighborVerticesIds.end(), [&](int verticeId) { return vertices[verticeId].degree == 1; });
-    bool isInitialFaceVerticeConnectedToSingleDegreeVertice = initialFaceVerticeNeihborVerticesIdsIterator != initialFaceVerticeNeighborVerticesIds.end();
-
-    return !wasFaceAlreadyComputed && !isFacePathRecursive && !isInitialFaceVerticeConnectedToSingleDegreeVertice;
-}
+Edge *createEdge(Vertex *fromVertex, Vertex *toVertex) {
+    return new Edge {
+        .fromVertex = fromVertex,
+        .toVertex = toVertex,
+        .angle = atan2(toVertex->y - fromVertex->y, toVertex->x - fromVertex->x),
+        .visited = false,
+        .nextEdge = nullptr,
+        .reverseEdge = nullptr
+    };
+};
