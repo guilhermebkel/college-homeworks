@@ -4,68 +4,66 @@
 #include <algorithm>
 #include "graph.hpp"
 
+struct AppInput {
+    std::vector<Vertex> vertices;
+    std::vector<std::pair<int, int>> edgesByVertices;
+};
+
 void printFace(std::vector<Edge*>& face) {
     for (Edge *edge : face) {
-        std::cout << edge->fromVertex->label << " -> ";
+        std::cout << edge->fromVertex->id << " -> ";
     }
 
-    std::cout << face.back()->toVertex->label << std::endl;
+    std::cout << face.back()->toVertex->id << std::endl;
+}
+
+AppInput readAppInput () {
+    AppInput appInput;
+
+    int verticesCount, edgesCount;
+    std::cin >> verticesCount >> edgesCount;
+
+    for (int i = 0; i < verticesCount; i++) {
+        int vertexId = i + 1;
+
+        Vertex vertex;
+        vertex.id = vertexId;
+
+        std::cin >> vertex.x >> vertex.y >> vertex.degree;
+
+        for (int j = 0; j < vertex.degree; j++) {
+            int neighborVertexId;
+
+            std::cin >> neighborVertexId;
+
+            vertex.neighborVerticesIds.push_back(neighborVertexId);
+
+            if (vertexId < neighborVertexId) {
+                appInput.edgesByVertices.push_back(std::make_pair(vertexId, neighborVertexId));
+            }
+        }
+
+        appInput.vertices.push_back(vertex);
+    }
+
+    return appInput;
 }
 
 int main() {
-    std::vector<Vertex*> vertices = {
-        new Vertex { .label = 'a', .x = -3, .y = 1 },
-        new Vertex { .label = 'b', .x = -1, .y = 2 },
-        new Vertex { .label = 'c', .x = 0.5, .y = 3 },
-        new Vertex { .label = 'd', .x = 2.5, .y = 1.65 },
-        new Vertex { .label = 'e', .x = 0.5, .y = 1.65 },
-        new Vertex { .label = 'f', .x = 2, .y = 0.15 },
-        new Vertex { .label = 'g', .x = 0, .y = 0.5 },
-        new Vertex { .label = 'h', .x = -1.5, .y = 0.5 },
-        new Vertex { .label = 'i', .x = -0.75, .y = -1.5 },
-        new Vertex { .label = 'j', .x = 1.75, .y = -1.4 },
-        new Vertex { .label = 'k', .x = 0.25, .y = -3 },
-        new Vertex { .label = 'l', .x = 2.9, .y = -2.85 }
-    };
+    AppInput appInput = readAppInput();
 
-    std::vector<std::pair<int, int>> graphUniqueEdges = {
-        {1, 2}, {1, 8},
-        {2, 3}, {2, 5}, {2, 7}, {2, 8},
-        {3, 5}, {3, 4},
-        {4, 5}, {4, 6},
-        {5, 6}, {5, 7},
-        {6, 7}, {6, 10},
-        {7, 8}, {7, 9}, {7, 10},
-        {8, 9},
-        {9, 10}, {9, 11},
-        {10, 11}, {10, 12},
-        {11, 12}
-    };
+    std::vector<Vertex*> vertices;
+    std::vector<std::pair<int, int>> edgesByVertices = appInput.edgesByVertices;
 
-    std::vector<Vertex*> vertices2 = {
-        new Vertex { .label = 'a', .x = 0, .y = 0 },
-        new Vertex { .label = 'b', .x = 1, .y = 1 },
-        new Vertex { .label = 'c', .x = 1, .y = -1 },
-        new Vertex { .label = 'd', .x = 2, .y = 0 },
-        new Vertex { .label = 'e', .x = 4, .y = 0 },
-        new Vertex { .label = 'f', .x = 4, .y = -1.5 },
-        new Vertex { .label = 'g', .x = -3, .y =  0 },
-        new Vertex { .label = 'h', .x = -2, .y =  0 }
-    };
-
-    std::vector<std::pair<int, int>> graphUniqueEdges2 = {
-        {1, 2}, {1, 3},
-        {2, 4}, {2, 5}, {2, 7},
-        {3, 4}, {3, 5}, {3, 6}, {3, 7},
-        {5, 6},
-        {7, 8}
-    };
+    for (auto& vertex : appInput.vertices) {
+        vertices.push_back(&vertex);
+    }
 
     std::vector<Edge*> edges;
 
-    for (auto& edge : graphUniqueEdges) {
-        Vertex *toVertex = vertices[edge.second - 1];
-        Vertex *fromVertex = vertices[edge.first - 1];
+    for (auto& edgeByVertice : edgesByVertices) {
+        Vertex *toVertex = vertices[edgeByVertice.second - 1];
+        Vertex *fromVertex = vertices[edgeByVertice.first - 1];
 
         Edge *toEdge = createEdge(toVertex, fromVertex);
         Edge *fromEdge = createEdge(fromVertex, toVertex);

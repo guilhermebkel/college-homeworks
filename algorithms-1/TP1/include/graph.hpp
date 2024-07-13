@@ -16,7 +16,9 @@ struct Edge {
 };
 
 struct Vertex {
-    char label;
+    int id;
+    int degree;
+    std::vector<int> neighborVerticesIds;
     double x, y;
     std::vector<Edge*> outboundEdges;
 };
