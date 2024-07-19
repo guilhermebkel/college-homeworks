@@ -56,7 +56,8 @@ tuple<vector<int>, int, int> find_min_travel_times(const Graph& graph, int start
 
     int A1 = -1;
     int A2 = -1;
-    
+    bool all_reachable_once = false;
+
     for (int t = tmin; t <= tmax; ++t) {
         for (int u = 0; u < n; ++u) {
             if (V[u].d <= t) {
@@ -72,11 +73,24 @@ tuple<vector<int>, int, int> find_min_travel_times(const Graph& graph, int start
             }
         }
 
-        if (all_reachable) {
-            if (A1 == -1) {
-                A1 = t;
-            }
+        if (all_reachable && !all_reachable_once) {
             A2 = t;
+            all_reachable_once = true;
+        }
+
+        bool all_mutually_reachable = true;
+        for (int u = 0; u < n; ++u) {
+            for (const Edge& edge : graph[u]) {
+                if (edge.year >= t && V[u].d + edge.travel_time != V[edge.to].d) {
+                    all_mutually_reachable = false;
+                    break;
+                }
+            }
+            if (!all_mutually_reachable) break;
+        }
+
+        if (all_mutually_reachable && A1 == -1) {
+            A1 = t;
         }
     }
 
