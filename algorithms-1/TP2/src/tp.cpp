@@ -46,51 +46,19 @@ void earliest_arrival_bfs_explore(const Graph& G, vector<Vertex>& V, int r, int 
     }
 }
 
-// Função para encontrar os tempos mínimos de viagem e os anos A1 e A2
-tuple<vector<int>, int, int> find_min_travel_times(const Graph& graph, int start, int tmin, int tmax) {
+// Função para encontrar os tempos mínimos de viagem
+vector<int> find_min_travel_times(const Graph& graph, int start, int tmin, int tmax) {
     int n = graph.size();
     vector<Vertex> V(n);
     V[start].d = tmin;
     V[start].hops = 0;
     V[start].pi = -1;
 
-    int A1 = -1;
-    int A2 = -1;
-    bool all_reachable_once = false;
-
     for (int t = tmin; t <= tmax; ++t) {
         for (int u = 0; u < n; ++u) {
             if (V[u].d <= t) {
                 earliest_arrival_bfs_explore(graph, V, u, t);
             }
-        }
-
-        bool all_reachable = true;
-        for (int i = 0; i < n; ++i) {
-            if (V[i].d == INT_MAX) {
-                all_reachable = false;
-                break;
-            }
-        }
-
-        if (all_reachable && !all_reachable_once) {
-            A2 = t;
-            all_reachable_once = true;
-        }
-
-        bool all_mutually_reachable = true;
-        for (int u = 0; u < n; ++u) {
-            for (const Edge& edge : graph[u]) {
-                if (edge.year >= t && V[u].d + edge.travel_time != V[edge.to].d) {
-                    all_mutually_reachable = false;
-                    break;
-                }
-            }
-            if (!all_mutually_reachable) break;
-        }
-
-        if (all_mutually_reachable && A1 == -1) {
-            A1 = t;
         }
     }
 
@@ -99,7 +67,7 @@ tuple<vector<int>, int, int> find_min_travel_times(const Graph& graph, int start
         min_times[i] = V[i].d == INT_MAX ? -1 : V[i].d;
     }
 
-    return {min_times, A1, A2};
+    return min_times;
 }
 
 // Função para encontrar o menor custo necessário para conectar todo o reino
@@ -164,10 +132,7 @@ int main() {
     int tmin = 0;  // tempo inicial mínimo
     int tmax = 1000; // tempo máximo (ou um valor apropriado para o seu caso)
     
-    auto result = find_min_travel_times(graph, start, tmin, tmax);
-    vector<int> min_times = get<0>(result);
-    int A1 = get<1>(result);
-    int A2 = get<2>(result);
+    vector<int> min_times = find_min_travel_times(graph, start, tmin, tmax);
     int min_cost = find_min_cost_mst(N, edges);
 
     for (int i = 0; i < N; ++i) {
@@ -178,8 +143,6 @@ int main() {
         }
     }
 
-    cout << A1 << endl;
-    cout << A2 << endl;
     cout << min_cost << endl;
 
     return 0;
