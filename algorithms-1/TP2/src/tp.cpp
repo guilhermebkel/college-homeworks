@@ -92,6 +92,10 @@ bool is_all_mutually_reachable(const Graph& graph, int t) {
                     Q.push(v);
                     reachable_count++;
                 }
+
+                if (edge.year > t) {
+                    return false;
+                }
             }
         }
 
