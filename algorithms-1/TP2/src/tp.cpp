@@ -92,8 +92,6 @@ bool is_all_reachable(const Graph& graph, int start, int t) {
         }
     }
 
-    cout << t << " > " << reachable_count << endl;
-
     return reachable_count == n;
 }
 
