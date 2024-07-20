@@ -70,6 +70,44 @@ vector<int> find_min_travel_times(const Graph& graph, int start, int tmin, int t
     return min_times;
 }
 
+bool is_all_reachable(const Graph& graph, int start, int t) {
+    int n = graph.size();
+    vector<bool> visited(n, false);
+    queue<int> Q;
+    Q.push(start);
+    visited[start] = true;
+    int reachable_count = 1;
+
+    while (!Q.empty()) {
+        int u = Q.front();
+        Q.pop();
+
+        for (const Edge& edge : graph[u]) {
+            int v = edge.to;
+            if (!visited[v] && edge.year <= t) {
+                visited[v] = true;
+                Q.push(v);
+                reachable_count++;
+            }
+        }
+    }
+
+    cout << t << " > " << reachable_count << endl;
+
+    return reachable_count == n;
+}
+
+// Função para encontrar o ano em que todos os vértices são alcançáveis
+int find_year_all_reachable(const Graph& graph, int start, int tmin, int tmax) {
+    for (int t = tmin; t <= tmax; ++t) {
+        if (is_all_reachable(graph, start, t)) {
+            return t;
+        }
+    }
+
+    return -1; // Retorna -1 se não for possível alcançar todos os vértices até tmax
+}
+
 // Função para encontrar o menor custo necessário para conectar todo o reino
 int find_min_cost_mst(int N, vector<Edge>& edges) {
     // Ordena as arestas pelo custo
@@ -134,6 +172,7 @@ int main() {
     
     vector<int> min_times = find_min_travel_times(graph, start, tmin, tmax);
     int min_cost = find_min_cost_mst(N, edges);
+    int year_all_reachable = find_year_all_reachable(graph, start, tmin, tmax);
 
     for (int i = 0; i < N; ++i) {
         if (min_times[i] == -1) {
@@ -142,6 +181,10 @@ int main() {
             cout << min_times[i] << endl;
         }
     }
+
+    cout << "null" << endl;
+
+    cout << year_all_reachable << endl;
 
     cout << min_cost << endl;
 
