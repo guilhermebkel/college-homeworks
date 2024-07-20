@@ -70,57 +70,24 @@ vector<int> find_min_travel_times(const Graph& graph, int start, int tmin, int t
     return min_times;
 }
 
-bool is_all_mutually_reachable(const Graph& graph, int t) {
-    int n = graph.size();
+int find_max_year(const Graph& graph) {
+    int max_year = INT_MIN; // Inicializa com o menor valor possível de int
 
-    // Função auxiliar para verificar se a partir de um vértice todos os outros são alcançáveis
-    auto bfs_reachable_from = [&](int start) {
-        vector<bool> visited(n, false);
-        queue<int> Q;
-        Q.push(start);
-        visited[start] = true;
-        int reachable_count = 1;
-
-        while (!Q.empty()) {
-            int u = Q.front();
-            Q.pop();
-
-            for (const Edge& edge : graph[u]) {
-                int v = edge.to;
-                if (!visited[v] && edge.year <= t) {
-                    visited[v] = true;
-                    Q.push(v);
-                    reachable_count++;
-                }
-
-                if (edge.year > t) {
-                    return false;
-                }
+    for (const auto& edges : graph) {
+        for (const auto& edge : edges) {
+            if (edge.year > max_year) {
+                max_year = edge.year;
             }
-        }
-
-        return reachable_count == n;
-    };
-
-    // Verificar a alcançabilidade mútua para todos os pares de vértices
-    for (int i = 0; i < n; ++i) {
-        if (!bfs_reachable_from(i)) {
-            return false;
         }
     }
 
-    return true;
+    return max_year;
 }
 
 // Função para encontrar o ano em que todos os vértices são mutuamente alcançáveis
-int find_year_all_mutually_reachable(const Graph& graph, int tmin, int tmax) {
-    for (int t = tmin; t <= tmax; ++t) {
-        if (is_all_mutually_reachable(graph, t)) {
-            return t;
-        }
-    }
-
-    return -1; // Retorna -1 se não for possível alcançar todos os vértices mutuamente até tmax
+int find_year_all_mutually_reachable(const Graph& graph) {
+    // heurística: a construtora sempre vai construir todos os canais, então no ultimo ano de construção todos canais serão mutuamente alcançáveis.
+    return find_max_year(graph);
 }
 
 bool is_all_reachable(const Graph& graph, int start, int t) {
@@ -224,7 +191,7 @@ int main() {
     vector<int> min_times = find_min_travel_times(graph, start, tmin, tmax);
     int min_cost = find_min_cost_mst(N, edges);
     int year_all_reachable = find_year_all_reachable(graph, start, tmin, tmax);
-    int year_all_mutually_reachable = find_year_all_mutually_reachable(graph, tmin, tmax);
+    int year_all_mutually_reachable = find_year_all_mutually_reachable(graph);
 
     for (int i = 0; i < N; ++i) {
         if (min_times[i] == -1) {
