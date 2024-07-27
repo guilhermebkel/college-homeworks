@@ -15,18 +15,21 @@ struct Secao {
     int tempoTravessia;
 };
 
+struct Resultado {
+    int pontuacaoMaxima;
+    vector<vector<int>> manobrasPorSecao;
+};
+
 // Função para calcular a pontuação total para uma seção considerando as regras de pontuação
 int calcularPontuacao(const Secao& secao, const vector<Manobra>& manobras, const vector<int>& escolhidas, const vector<int>& escolhidasPrevSecao) {
     int pontuacaoTotal = 0;
     for (int idx : escolhidas) {
         int pj = manobras[idx].pontuacaoBase;
-        // Aplicar penalização se a manobra foi usada na seção anterior
         if (find(escolhidasPrevSecao.begin(), escolhidasPrevSecao.end(), idx) != escolhidasPrevSecao.end()) {
             pj = floor(pj / 2.0);
         }
         pontuacaoTotal += pj;
     }
-    // Multiplicar pela bonificação e pelo número de manobras
     return pontuacaoTotal * escolhidas.size() * secao.fatorBonificacao;
 }
 
@@ -46,28 +49,19 @@ void gerarCombinacoes(const vector<Manobra>& manobras, int tempoDisponivel, vect
     }
 }
 
-int main() {
-    int N, K;
-    cin >> N >> K;
-
-    vector<Secao> secoes(N);
-    for (int i = 0; i < N; ++i) {
-        cin >> secoes[i].fatorBonificacao >> secoes[i].tempoTravessia;
-    }
-
-    vector<Manobra> manobras(K);
-    for (int j = 0; j < K; ++j) {
-        cin >> manobras[j].pontuacaoBase >> manobras[j].tempo;
-    }
-
-    int pontuacaoMaxima = 0;
+// Função para calcular a pontuação máxima total e as manobras selecionadas para cada seção
+Resultado calcularPontuacaoMaximaPorSecao(const vector<Secao>& secoes, const vector<Manobra>& manobras) {
+    int N = secoes.size();
     vector<vector<int>> manobrasPorSecao(N);
+    int pontuacaoMaxima = 0;
+    vector<vector<int>> combinacoes;
+    vector<int> atual;
 
     for (int i = 0; i < N; ++i) {
         int melhorPontuacao = 0;
         vector<int> melhorEscolha;
-        vector<vector<int>> combinacoes;
-        vector<int> atual;
+        combinacoes.clear();
+        atual.clear();
 
         // Gerar todas as combinações de manobras válidas para a seção atual
         gerarCombinacoes(manobras, secoes[i].tempoTravessia, combinacoes, atual, 0);
@@ -86,8 +80,28 @@ int main() {
         manobrasPorSecao[i] = melhorEscolha;
     }
 
-    cout << pontuacaoMaxima << endl;
-    for (const auto& manobras : manobrasPorSecao) {
+    return {pontuacaoMaxima, manobrasPorSecao};
+}
+
+int main() {
+    int N, K;
+    cin >> N >> K;
+
+    vector<Secao> secoes(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> secoes[i].fatorBonificacao >> secoes[i].tempoTravessia;
+    }
+
+    vector<Manobra> manobras(K);
+    for (int j = 0; j < K; ++j) {
+        cin >> manobras[j].pontuacaoBase >> manobras[j].tempo;
+    }
+
+    // Calcular a pontuação máxima e as manobras selecionadas para cada seção
+    Resultado resultado = calcularPontuacaoMaximaPorSecao(secoes, manobras);
+
+    cout << resultado.pontuacaoMaxima << endl;
+    for (const auto& manobras : resultado.manobrasPorSecao) {
         cout << manobras.size();
         for (int m : manobras) {
             cout << " " << m + 1;
