@@ -20,11 +20,13 @@ int calcularPontuacao(const Secao& secao, const vector<Manobra>& manobras, const
     int pontuacaoTotal = 0;
     for (int idx : escolhidas) {
         int pj = manobras[idx].pontuacaoBase;
+        // Aplicar penalização se a manobra foi usada na seção anterior
         if (find(escolhidasPrevSecao.begin(), escolhidasPrevSecao.end(), idx) != escolhidasPrevSecao.end()) {
             pj = floor(pj / 2.0);
         }
         pontuacaoTotal += pj;
     }
+    // Multiplicar pela bonificação e pelo número de manobras
     return pontuacaoTotal * escolhidas.size() * secao.fatorBonificacao;
 }
 
