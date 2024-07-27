@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <limits>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,14 +15,33 @@ struct Secao {
     int tempoTravessia;
 };
 
-// Função para calcular a pontuação total para uma seção
-int calcularPontuacao(const Secao& secao, const vector<Manobra>& manobras, const vector<int>& escolhidas) {
+// Função para calcular a pontuação total para uma seção considerando as regras de pontuação
+int calcularPontuacao(const Secao& secao, const vector<Manobra>& manobras, const vector<int>& escolhidas, const vector<int>& escolhidasPrevSecao) {
     int pontuacaoTotal = 0;
     for (int idx : escolhidas) {
         int pj = manobras[idx].pontuacaoBase;
+        if (find(escolhidasPrevSecao.begin(), escolhidasPrevSecao.end(), idx) != escolhidasPrevSecao.end()) {
+            pj = floor(pj / 2.0);
+        }
         pontuacaoTotal += pj;
     }
-    return pontuacaoTotal * secao.fatorBonificacao;
+    return pontuacaoTotal * escolhidas.size() * secao.fatorBonificacao;
+}
+
+// Função para gerar todas as combinações de manobras válidas
+void gerarCombinacoes(const vector<Manobra>& manobras, int tempoDisponivel, vector<vector<int>>& combinacoes, vector<int>& atual, int start) {
+    int somaTempo = 0;
+    for (int idx : atual) {
+        somaTempo += manobras[idx].tempo;
+    }
+    if (somaTempo <= tempoDisponivel) {
+        combinacoes.push_back(atual);
+    }
+    for (int i = start; i < manobras.size(); ++i) {
+        atual.push_back(i);
+        gerarCombinacoes(manobras, tempoDisponivel, combinacoes, atual, i + 1);
+        atual.pop_back();
+    }
 }
 
 int main() {
@@ -45,16 +64,19 @@ int main() {
     for (int i = 0; i < N; ++i) {
         int melhorPontuacao = 0;
         vector<int> melhorEscolha;
+        vector<vector<int>> combinacoes;
+        vector<int> atual;
 
-        for (int j = 0; j < K; ++j) {
-            if (manobras[j].tempo <= secoes[i].tempoTravessia) {
-                vector<int> escolhaAtual = {j};
-                int pontuacaoAtual = calcularPontuacao(secoes[i], manobras, escolhaAtual);
+        // Gerar todas as combinações de manobras válidas para a seção atual
+        gerarCombinacoes(manobras, secoes[i].tempoTravessia, combinacoes, atual, 0);
 
-                if (pontuacaoAtual > melhorPontuacao) {
-                    melhorPontuacao = pontuacaoAtual;
-                    melhorEscolha = escolhaAtual;
-                }
+        // Avaliar cada combinação
+        for (const auto& combinacao : combinacoes) {
+            int pontuacaoAtual = calcularPontuacao(secoes[i], manobras, combinacao, i > 0 ? manobrasPorSecao[i-1] : vector<int>());
+
+            if (pontuacaoAtual > melhorPontuacao) {
+                melhorPontuacao = pontuacaoAtual;
+                melhorEscolha = combinacao;
             }
         }
 
