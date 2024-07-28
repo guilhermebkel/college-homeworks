@@ -201,13 +201,13 @@ int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years) 
         vector<bool> visited(n, false);
         if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, mid, visited)) {
             tmax = mid;
+            break;
         } else {
             tmin = mid + 1;
         }
     }
 
-    vector<bool> visited(n, false);
-    return has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, tmin, visited) ? tmin : -1;
+    return tmax;
 }
 
 int main() {
