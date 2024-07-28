@@ -189,25 +189,21 @@ bool has_path_with_n_minus_1_edges(const Graph& graph, int u, int target, int ed
     return false;
 }
 
-// Função para encontrar o ano em que existe um caminho de comprimento N-1
-int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years) {
+// Função para encontrar o ano em que existe um caminho de comprimento N-1 a partir de tmin
+int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years, int tmin) {
     int n = graph.size();
-    auto it = years.begin();
-    int tmin = *it;
-    int tmax = *(--years.end());
-
-    while (tmin < tmax) {
-        int mid = tmin + (tmax - tmin) / 2;
-        vector<bool> visited(n, false);
-        if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, mid, visited)) {
-            tmax = mid;
-            break;
-        } else {
-            tmin = mid + 1;
+    vector<bool> visited(n, false);
+    
+    auto it = years.lower_bound(tmin); // Encontrar o menor valor em years >= tmin
+    
+    while (it != years.end()) {
+        int year = *it;
+        if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, year, visited)) {
+            return year;
         }
+        ++it;
     }
-
-    return tmax;
+    return -1; // Se não houver ano que satisfaça a condição
 }
 
 int main() {
@@ -234,20 +230,15 @@ int main() {
 
     vector<int> min_times = find_min_travel_times(graph, start);
     for (int i = 0; i < N; ++i) {
-        if (min_times[i] == -1) {
-            cout << "INF" << endl;
-        } else {
-            cout << min_times[i] << endl;
-        }
+        cout << min_times[i] << endl;
     }
 
-    int year_all_mutually_reachable = find_year_all_mutually_reachable(graph, years);
-    cout << year_all_mutually_reachable << endl;
-
     int year_all_reachable = find_year_all_reachable(graph, start, years, edges);
-    cout << year_all_reachable << endl;
-
+    int year_all_mutually_reachable = find_year_all_mutually_reachable(graph, years, year_all_reachable);
     int min_cost = find_min_cost_mst(N, edges);
+
+    cout << year_all_mutually_reachable << endl;
+    cout << year_all_reachable << endl;
     cout << min_cost << endl;
 
     return 0;
