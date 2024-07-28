@@ -165,6 +165,37 @@ int find_min_cost_mst(int N, vector<Edge>& edges) {
     return min_cost;
 }
 
+// Função para verificar se existe um caminho com exatamente N-1 arestas até o ano t usando DFS
+bool has_path_with_n_minus_1_edges(const Graph& graph, int u, int target, int edges, int t, vector<bool>& visited) {
+    if (edges == 0) {
+        return u == target;
+    }
+    visited[u] = true;
+
+    for (const Edge& edge : graph[u]) {
+        if (edge.year <= t && !visited[edge.to]) {
+            if (has_path_with_n_minus_1_edges(graph, edge.to, target, edges - 1, t, visited)) {
+                return true;
+            }
+        }
+    }
+
+    visited[u] = false;
+    return false;
+}
+
+// Função para encontrar o ano em que existe um caminho de comprimento N-1
+int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years) {
+    int n = graph.size();
+    for (int year : years) {
+        vector<bool> visited(n, false);
+        if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, year, visited)) {
+            return year;
+        }
+    }
+    return -1; // Se não houver ano que satisfaça a condição
+}
+
 int main() {
     int N, M;
     cin >> N >> M;
@@ -193,7 +224,7 @@ int main() {
         }
     }
 
-    int year_all_mutually_reachable = *years.rbegin(); // Último ano
+    int year_all_mutually_reachable = find_year_all_mutually_reachable(graph, years);
     cout << year_all_mutually_reachable << endl;
 
     int year_all_reachable = find_year_all_reachable(graph, start, years);
