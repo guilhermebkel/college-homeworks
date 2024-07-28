@@ -58,22 +58,12 @@ vector<int> find_min_travel_times(const Graph& graph, int start) {
     earliest_arrival_bfs_explore(graph, V, start, 0);
 
     vector<int> min_times(n);
+
     for (int i = 0; i < n; ++i) {
-        min_times[i] = V[i].d == INT_MAX ? -1 : V[i].d;
+        min_times[i] = V[i].d;
     }
 
     return min_times;
-}
-
-// Função para encontrar os anos únicos das arestas
-set<int> find_unique_years(const Graph& graph) {
-    set<int> years;
-    for (const auto& edges : graph) {
-        for (const auto& edge : edges) {
-            years.insert(edge.year);
-        }
-    }
-    return years;
 }
 
 // Função para verificar se todos os vértices são alcançáveis até o ano t
@@ -196,20 +186,23 @@ int main() {
     cin >> N >> M;
     Graph graph(N);
     vector<Edge> edges;
+    set<int> years;
 
     for (int i = 0; i < M; ++i) {
-        int u, v, a, l, c;
-        cin >> u >> v >> a >> l >> c;
-        --u; --v;
-        graph[u].push_back({u, v, a, l, c});
-        graph[v].push_back({v, u, a, l, c});
-        edges.push_back({u, v, a, l, c});
+        int from, to, year, travel_time, cost;
+        cin >> from >> to >> year >> travel_time >> cost;
+
+        --from; --to;
+
+        graph[from].push_back({ .from = from, .to = to, .year = year, .travel_time = travel_time, .cost = cost });
+        graph[to].push_back({ .from = to, .to = from, .year = year, .travel_time = travel_time, .cost = cost });
+        edges.push_back({ .from = from, .to = to, .year = year, .travel_time = travel_time, .cost = cost });
+
+        years.insert(year);
     }
 
     int start = 0; // assumindo que o palácio está no vértice 0
 
-    set<int> years = find_unique_years(graph);
-    
     vector<int> min_times = find_min_travel_times(graph, start);
     for (int i = 0; i < N; ++i) {
         if (min_times[i] == -1) {
