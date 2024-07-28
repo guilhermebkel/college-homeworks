@@ -131,7 +131,7 @@ int find_year_all_reachable(const Graph& graph, int start, const set<int>& years
 
 // Função para encontrar o menor custo necessário para conectar todo o reino (MST)
 int find_min_cost_mst(int N, vector<Edge>& edges) {
-     sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) {
+    sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) {
         return a.cost < b.cost;
     });
 
