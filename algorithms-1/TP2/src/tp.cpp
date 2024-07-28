@@ -187,8 +187,10 @@ bool has_path_with_n_minus_1_edges(const Graph& graph, int u, int target, int ed
 // Função para encontrar o ano em que existe um caminho de comprimento N-1
 int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years) {
     int n = graph.size();
+
+    vector<bool> visited(n, false);
+
     for (int year : years) {
-        vector<bool> visited(n, false);
         if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, year, visited)) {
             return year;
         }
