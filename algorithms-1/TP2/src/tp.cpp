@@ -150,7 +150,7 @@ int find_min_cost_mst(int N, vector<Edge>& edges) {
 }
 
 bool has_path_through_all_vertices(const Graph& graph, int u, int t, vector<bool>& visited, int visited_count) {
-    if (visited_count == graph.size()) {
+    if (visited_count == static_cast<int>(graph.size())) {
         return true;
     }
     visited[u] = true;
