@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <functional>
 #include <set> // Para armazenar anos únicos
+#include <numeric> // Para iota
 
 using namespace std;
 
@@ -66,48 +67,67 @@ vector<int> find_min_travel_times(const Graph& graph, int start) {
     return min_times;
 }
 
-// Função para verificar se todos os vértices são alcançáveis até o ano t
-bool is_all_reachable(const Graph& graph, int start, int t) {
-    int n = graph.size();
-    vector<bool> visited(n, false);
-    queue<int> Q;
-    Q.push(start);
-    visited[start] = true;
-    int reachable_count = 1;
+// Função de união-find com path compression e union by rank
+struct UnionFind {
+    vector<int> parent, rank;
+    int components;
 
-    while (!Q.empty()) {
-        int u = Q.front();
-        Q.pop();
-
-        for (const Edge& edge : graph[u]) {
-            int v = edge.to;
-            if (!visited[v] && edge.year <= t) {
-                visited[v] = true;
-                Q.push(v);
-                reachable_count++;
-            }
-        }
+    UnionFind(int n) : parent(n), rank(n, 0), components(n) {
+        iota(parent.begin(), parent.end(), 0);
     }
 
-    return reachable_count == n;
+    int find(int u) {
+        if (u != parent[u])
+            parent[u] = find(parent[u]);
+        return parent[u];
+    }
+
+    void unite(int u, int v) {
+        int rootU = find(u);
+        int rootV = find(v);
+        if (rootU != rootV) {
+            if (rank[rootU] > rank[rootV]) {
+                parent[rootV] = rootU;
+            } else if (rank[rootU] < rank[rootV]) {
+                parent[rootU] = rootV;
+            } else {
+                parent[rootV] = rootU;
+                rank[rootU]++;
+            }
+            components--;
+        }
+    }
+};
+
+// Função para verificar se todos os vértices são alcançáveis até o ano t
+bool is_all_reachable(const Graph& graph, int start, int t, UnionFind& uf, const vector<Edge>& edges) {
+    for (const Edge& edge : edges) {
+        if (edge.year <= t) {
+            uf.unite(edge.from, edge.to);
+        }
+    }
+    return uf.components == 1;
 }
 
 // Função para encontrar o ano em que todos os vértices são alcançáveis
-int find_year_all_reachable(const Graph& graph, int start, const set<int>& years) {
+int find_year_all_reachable(const Graph& graph, int start, const set<int>& years, const vector<Edge>& edges) {
+    UnionFind uf(graph.size());
     auto it = years.begin();
     int tmin = *it;
     int tmax = *(--years.end());
 
     while (tmin < tmax) {
         int mid = tmin + (tmax - tmin) / 2;
-        if (is_all_reachable(graph, start, mid)) {
+        UnionFind temp_uf = uf; // Copiamos o estado atual do UnionFind para manter as mudanças locais
+        if (is_all_reachable(graph, start, mid, temp_uf, edges)) {
             tmax = mid;
         } else {
             tmin = mid + 1;
         }
     }
 
-    return is_all_reachable(graph, start, tmin) ? tmin : -1;
+    UnionFind final_uf = uf;
+    return is_all_reachable(graph, start, tmin, final_uf, edges) ? tmin : -1;
 }
 
 // Função para encontrar o menor custo necessário para conectar todo o reino (MST)
@@ -215,7 +235,7 @@ int main() {
     int year_all_mutually_reachable = find_year_all_mutually_reachable(graph, years);
     cout << year_all_mutually_reachable << endl;
 
-    int year_all_reachable = find_year_all_reachable(graph, start, years);
+    int year_all_reachable = find_year_all_reachable(graph, start, years, edges);
     cout << year_all_reachable << endl;
 
     int min_cost = find_min_cost_mst(N, edges);
