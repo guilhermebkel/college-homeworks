@@ -27,7 +27,7 @@ struct Edge {
 using Graph = vector<vector<Edge>>;
 
 // Função para explorar o grafo considerando o tempo
-void earliest_arrival_bfs_explore(const Graph& G, vector<Vertex>& V, int r, int t) {
+void earliest_arrival_bfs_explore(const Graph& G, vector<Vertex>& V, int r) {
     queue<int> Q;
     Q.push(r);
 
@@ -37,7 +37,7 @@ void earliest_arrival_bfs_explore(const Graph& G, vector<Vertex>& V, int r, int 
 
         for (const Edge& edge : G[u]) {
             int v = edge.to;
-            if (edge.year >= t && V[v].d > V[u].d + edge.travel_time) {
+            if (V[v].d > V[u].d + edge.travel_time) {
                 V[v].d = V[u].d + edge.travel_time;
                 V[v].pi = u;
                 V[v].hops = V[u].hops + 1;
@@ -55,7 +55,7 @@ vector<int> find_min_travel_times(const Graph& graph, int start) {
     V[start].hops = 0;
     V[start].pi = -1;
 
-    earliest_arrival_bfs_explore(graph, V, start, 0);
+    earliest_arrival_bfs_explore(graph, V, start);
 
     vector<int> min_times(n);
 
