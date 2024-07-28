@@ -4,7 +4,8 @@
 #include <tuple>
 #include <climits>
 #include <algorithm>
-#include <functional> // Para std::function
+#include <functional>
+#include <set> // Para armazenar anos únicos
 
 using namespace std;
 
@@ -47,14 +48,14 @@ void earliest_arrival_bfs_explore(const Graph& G, vector<Vertex>& V, int r, int 
 }
 
 // Função para encontrar os tempos mínimos de viagem
-vector<int> find_min_travel_times(const Graph& graph, int start, int tmin, int tmax) {
+vector<int> find_min_travel_times(const Graph& graph, int start, const set<int>& years) {
     int n = graph.size();
     vector<Vertex> V(n);
-    V[start].d = tmin;
+    V[start].d = 0;
     V[start].hops = 0;
     V[start].pi = -1;
 
-    for (int t = tmin; t <= tmax; ++t) {
+    for (int t : years) {
         for (int u = 0; u < n; ++u) {
             if (V[u].d <= t) {
                 earliest_arrival_bfs_explore(graph, V, u, t);
@@ -70,26 +71,18 @@ vector<int> find_min_travel_times(const Graph& graph, int start, int tmin, int t
     return min_times;
 }
 
-int find_max_year(const Graph& graph) {
-    int max_year = INT_MIN; // Inicializa com o menor valor possível de int
-
+// Função para encontrar os anos únicos das arestas
+set<int> find_unique_years(const Graph& graph) {
+    set<int> years;
     for (const auto& edges : graph) {
         for (const auto& edge : edges) {
-            if (edge.year > max_year) {
-                max_year = edge.year;
-            }
+            years.insert(edge.year);
         }
     }
-
-    return max_year;
+    return years;
 }
 
-// Função para encontrar o ano em que todos os vértices são mutuamente alcançáveis
-int find_year_all_mutually_reachable(const Graph& graph) {
-    // heurística: a construtora sempre vai construir todos os canais, então no ultimo ano de construção todos canais serão mutuamente alcançáveis.
-    return find_max_year(graph);
-}
-
+// Função para verificar se todos os vértices são alcançáveis até o ano t
 bool is_all_reachable(const Graph& graph, int start, int t) {
     int n = graph.size();
     vector<bool> visited(n, false);
@@ -116,24 +109,28 @@ bool is_all_reachable(const Graph& graph, int start, int t) {
 }
 
 // Função para encontrar o ano em que todos os vértices são alcançáveis
-int find_year_all_reachable(const Graph& graph, int start, int tmin, int tmax) {
-    for (int t = tmin; t <= tmax; ++t) {
-        if (is_all_reachable(graph, start, t)) {
-            return t;
+int find_year_all_reachable(const Graph& graph, int start, const set<int>& years) {
+    auto it = years.begin();
+    int tmin = *it;
+    int tmax = *(--years.end());
+
+    while (tmin < tmax) {
+        int mid = tmin + (tmax - tmin) / 2;
+        if (is_all_reachable(graph, start, mid)) {
+            tmax = mid;
+        } else {
+            tmin = mid + 1;
         }
     }
-
-    return -1; // Retorna -1 se não for possível alcançar todos os vértices até tmax
+    return is_all_reachable(graph, start, tmin) ? tmin : -1;
 }
 
-// Função para encontrar o menor custo necessário para conectar todo o reino
+// Função para encontrar o menor custo necessário para conectar todo o reino (MST)
 int find_min_cost_mst(int N, vector<Edge>& edges) {
-    // Ordena as arestas pelo custo
     sort(edges.begin(), edges.end(), [](const Edge& a, const Edge& b) {
         return a.cost < b.cost;
     });
 
-    // Disjoint Set Union (DSU) ou Union-Find para gerenciar componentes conectados
     vector<int> parent(N), rank(N, 0);
     for (int i = 0; i < N; ++i) parent[i] = i;
 
@@ -171,27 +168,26 @@ int find_min_cost_mst(int N, vector<Edge>& edges) {
 int main() {
     int N, M;
     cin >> N >> M;
-
     Graph graph(N);
     vector<Edge> edges;
 
     for (int i = 0; i < M; ++i) {
         int u, v, a, l, c;
         cin >> u >> v >> a >> l >> c;
-        --u; --v; // assumindo que os vértices de entrada são 1-based
+        --u; --v;
         graph[u].push_back({u, v, a, l, c});
         graph[v].push_back({v, u, a, l, c});
         edges.push_back({u, v, a, l, c});
     }
 
     int start = 0; // assumindo que o palácio está no vértice 0
-    int tmin = 0;  // tempo inicial mínimo
-    int tmax = 1000; // tempo máximo (ou um valor apropriado para o seu caso)
+
+    set<int> years = find_unique_years(graph);
     
-    vector<int> min_times = find_min_travel_times(graph, start, tmin, tmax);
+    vector<int> min_times = find_min_travel_times(graph, start, years);
+    int year_all_mutually_reachable = *years.rbegin(); // Último ano
+    int year_all_reachable = find_year_all_reachable(graph, start, years);
     int min_cost = find_min_cost_mst(N, edges);
-    int year_all_reachable = find_year_all_reachable(graph, start, tmin, tmax);
-    int year_all_mutually_reachable = find_year_all_mutually_reachable(graph);
 
     for (int i = 0; i < N; ++i) {
         if (min_times[i] == -1) {
@@ -202,9 +198,7 @@ int main() {
     }
 
     cout << year_all_mutually_reachable << endl;
-
     cout << year_all_reachable << endl;
-
     cout << min_cost << endl;
 
     return 0;
