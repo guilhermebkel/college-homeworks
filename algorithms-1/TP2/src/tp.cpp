@@ -55,13 +55,7 @@ vector<int> find_min_travel_times(const Graph& graph, int start, const set<int>&
     V[start].hops = 0;
     V[start].pi = -1;
 
-    for (int t : years) {
-        for (int u = 0; u < n; ++u) {
-            if (V[u].d <= t) {
-                earliest_arrival_bfs_explore(graph, V, u, t);
-            }
-        }
-    }
+    earliest_arrival_bfs_explore(graph, V, start, 0);
 
     vector<int> min_times(n);
     for (int i = 0; i < n; ++i) {
@@ -83,15 +77,13 @@ set<int> find_unique_years(const Graph& graph) {
 }
 
 // Função para verificar se todos os vértices são alcançáveis até o ano t
-bool is_all_reachable(const Graph& graph, int start, int t, vector<bool>& visited, vector<int>& last_reached) {
+bool is_all_reachable(const Graph& graph, int start, int t) {
     int n = graph.size();
+    vector<bool> visited(n, false);
     queue<int> Q;
-
-    for (int v : last_reached) {
-        Q.push(v);
-    }
-
-    int reachable_count = last_reached.size();
+    Q.push(start);
+    visited[start] = true;
+    int reachable_count = 1;
 
     while (!Q.empty()) {
         int u = Q.front();
@@ -103,7 +95,6 @@ bool is_all_reachable(const Graph& graph, int start, int t, vector<bool>& visite
                 visited[v] = true;
                 Q.push(v);
                 reachable_count++;
-                last_reached.push_back(v);
             }
         }
     }
@@ -117,19 +108,16 @@ int find_year_all_reachable(const Graph& graph, int start, const set<int>& years
     int tmin = *it;
     int tmax = *(--years.end());
 
-    vector<bool> visited(graph.size(), false);
-    visited[start] = true;
-    vector<int> last_reached = {start};
-
     while (tmin < tmax) {
         int mid = tmin + (tmax - tmin) / 2;
-        if (is_all_reachable(graph, start, mid, visited, last_reached)) {
+        if (is_all_reachable(graph, start, mid)) {
             tmax = mid;
         } else {
             tmin = mid + 1;
         }
     }
-    return is_all_reachable(graph, start, tmin, visited, last_reached) ? tmin : -1;
+
+    return is_all_reachable(graph, start, tmin) ? tmin : -1;
 }
 
 // Função para encontrar o menor custo necessário para conectar todo o reino (MST)
@@ -194,9 +182,7 @@ bool has_path_with_n_minus_1_edges(const Graph& graph, int u, int target, int ed
 // Função para encontrar o ano em que existe um caminho de comprimento N-1
 int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years) {
     int n = graph.size();
-
     vector<bool> visited(n, false);
-
     for (int year : years) {
         if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, year, visited)) {
             return year;
