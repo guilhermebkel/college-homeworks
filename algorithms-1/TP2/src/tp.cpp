@@ -149,43 +149,38 @@ int find_min_cost_mst(int N, vector<Edge>& edges) {
     return min_cost;
 }
 
-// Função para verificar se existe um caminho de comprimento N-1 até o ano t
-bool has_path_with_n_minus_1_edges(const Graph& graph, int u, int target, int edges, int t, vector<bool>& visited) {
-    if (edges == 0) {
-        return u == target;
+bool has_path_through_all_vertices(const Graph& graph, int u, int t, vector<bool>& visited, int visited_count) {
+    if (visited_count == graph.size()) {
+        return true;
     }
-
     visited[u] = true;
 
     for (const Edge& edge : graph[u]) {
         if (edge.year <= t && !visited[edge.to]) {
-            if (has_path_with_n_minus_1_edges(graph, edge.to, target, edges - 1, t, visited)) {
+            if (has_path_through_all_vertices(graph, edge.to, t, visited, visited_count + 1)) {
                 return true;
             }
         }
     }
 
     visited[u] = false;
-
     return false;
 }
 
-// Função para encontrar o ano em que existe um caminho de comprimento N-1 a partir de tmin
+// Função para encontrar o ano em que existe um caminho que começa no vértice 0 e passa por todos os vértices do grafo
 int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years, int tmin) {
-    int n = graph.size();
-    vector<bool> visited(n, false);
+    vector<bool> visited(graph.size(), false);
     
-    auto it = years.lower_bound(tmin);
+    auto it = years.lower_bound(tmin); // Encontrar o menor valor em years >= tmin
     
     while (it != years.end()) {
         int year = *it;
-        if (has_path_with_n_minus_1_edges(graph, 0, n - 1, n - 1, year, visited)) {
+        if (has_path_through_all_vertices(graph, 0, year, visited, 1)) {
             return year;
         }
         ++it;
     }
-
-    return -1;
+    return -1; // Se não houver ano que satisfaça a condição
 }
 
 int main() {
