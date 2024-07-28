@@ -48,7 +48,7 @@ void earliest_arrival_bfs_explore(const Graph& G, vector<Vertex>& V, int r, int 
 }
 
 // Função para encontrar os tempos mínimos de viagem
-vector<int> find_min_travel_times(const Graph& graph, int start, const set<int>& years) {
+vector<int> find_min_travel_times(const Graph& graph, int start) {
     int n = graph.size();
     vector<Vertex> V(n);
     V[start].d = 0;
@@ -210,7 +210,7 @@ int main() {
 
     set<int> years = find_unique_years(graph);
     
-    vector<int> min_times = find_min_travel_times(graph, start, years);
+    vector<int> min_times = find_min_travel_times(graph, start);
     for (int i = 0; i < N; ++i) {
         if (min_times[i] == -1) {
             cout << "INF" << endl;
