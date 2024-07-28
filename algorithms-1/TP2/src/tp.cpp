@@ -185,10 +185,6 @@ int main() {
     set<int> years = find_unique_years(graph);
     
     vector<int> min_times = find_min_travel_times(graph, start, years);
-    int year_all_mutually_reachable = *years.rbegin(); // Último ano
-    int year_all_reachable = find_year_all_reachable(graph, start, years);
-    int min_cost = find_min_cost_mst(N, edges);
-
     for (int i = 0; i < N; ++i) {
         if (min_times[i] == -1) {
             cout << "INF" << endl;
@@ -197,8 +193,13 @@ int main() {
         }
     }
 
+    int year_all_mutually_reachable = *years.rbegin(); // Último ano
     cout << year_all_mutually_reachable << endl;
+
+    int year_all_reachable = find_year_all_reachable(graph, start, years);
     cout << year_all_reachable << endl;
+
+    int min_cost = find_min_cost_mst(N, edges);
     cout << min_cost << endl;
 
     return 0;
