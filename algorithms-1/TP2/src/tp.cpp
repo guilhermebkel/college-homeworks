@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <functional>
 #include <set>
+#include <stack>
 
 using namespace std;
 
@@ -149,21 +150,47 @@ int find_min_cost_mst(int N, vector<Edge>& edges) {
     return min_cost;
 }
 
-bool has_path_through_all_vertices(const Graph& graph, int u, int t, vector<bool>& visited, int visited_count) {
-    if (visited_count == static_cast<int>(graph.size())) {
-        return true;
-    }
-    visited[u] = true;
+bool has_path_through_all_vertices(const Graph& graph, int t) {
+    int n = graph.size();
+    vector<bool> visited(n, false);
+    stack<pair<int, int>> stack; // pair<vertex, count of visited vertices>
 
-    for (const Edge& edge : graph[u]) {
-        if (edge.year <= t && !visited[edge.to]) {
-            if (has_path_through_all_vertices(graph, edge.to, t, visited, visited_count + 1)) {
-                return true;
+    stack.push({0, 1}); // Starting from vertex 0, 1 vertex visited
+
+    while (!stack.empty()) {
+        auto current = stack.top();
+        int u = current.first;
+        int visited_count = current.second;
+
+        stack.pop();
+
+        if (visited_count == n) {
+            return true;
+        }
+
+        if (!visited[u]) {
+            visited[u] = true;
+        }
+
+        vector<Edge> edges = graph[u];
+        sort(edges.begin(), edges.end(), [&graph, &visited](const Edge& a, const Edge& b) {
+            int unvisited_a = count_if(graph[a.to].begin(), graph[a.to].end(), [&visited](const Edge& e) { return !visited[e.to]; });
+            int unvisited_b = count_if(graph[b.to].begin(), graph[b.to].end(), [&visited](const Edge& e) { return !visited[e.to]; });
+
+            if (unvisited_a == unvisited_b) {
+                return graph[a.to].size() > graph[b.to].size();
+            }
+
+            return unvisited_a > unvisited_b;
+        });
+
+        for (const Edge& edge : edges) {
+            if (edge.year <= t && !visited[edge.to]) {
+                stack.push({edge.to, visited_count + 1});
             }
         }
     }
 
-    visited[u] = false;
     return false;
 }
 
@@ -175,7 +202,7 @@ int find_year_all_mutually_reachable(const Graph& graph, const set<int>& years, 
     
     while (it != years.end()) {
         int year = *it;
-        if (has_path_through_all_vertices(graph, 0, year, visited, 1)) {
+        if (has_path_through_all_vertices(graph, year)) {
             return year;
         }
         ++it;
