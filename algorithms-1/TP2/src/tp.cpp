@@ -176,8 +176,8 @@ int main() {
 		Edge edge = Edge(fromVertexId, toVertexId, year, travelTime, cost);
 		graph[fromVertexId-1].addEdge(edge);
 		
-		Edge inverse_edge = Edge(toVertexId, fromVertexId, year, travelTime, cost);
-		graph[toVertexId-1].addEdge(inverse_edge);
+		Edge inverseEdge = Edge(toVertexId, fromVertexId, year, travelTime, cost);
+		graph[toVertexId-1].addEdge(inverseEdge);
 	}
 	
 	dijkstraAlgorithm(graph);
