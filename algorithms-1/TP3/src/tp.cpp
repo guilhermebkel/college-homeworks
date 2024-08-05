@@ -1,140 +1,109 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
-#include <algorithm>
-#include <functional>
+#include <array>
+#include <limits>
 
 using namespace std;
 
-struct Manobra {
-    int pontuacaoBase;
-    int tempo;
+struct Trick {
+    int points;
+    int time;
 };
 
-struct Secao {
-    int fatorBonificacao;
-    int tempoTravessia;
+struct Section {
+    int multiplier;
+    int time_limit;
 };
 
-struct Resultado {
-    int pontuacaoMaxima;
-    vector<vector<int>> manobrasPorSecao;
-};
+vector<Section> sections;
+vector<Trick> tricks;
 
-// Função para calcular a pontuação total para uma seção considerando as regras de pontuação
-int calcularPontuacao(const Secao& secao, const vector<Manobra>& manobras, const vector<int>& escolhidas, const vector<int>& escolhidasPrevSecao) {
-    int pontuacaoTotal = 0;
-    for (int idx : escolhidas) {
-        int pj = manobras[idx].pontuacaoBase;
-        if (find(escolhidasPrevSecao.begin(), escolhidasPrevSecao.end(), idx) != escolhidasPrevSecao.end()) {
-            pj = floor(pj / 2.0);
+vector<vector<int> > precompute_score_matrix(int k) {
+    vector<vector<int> > score_matrix(1 << k, vector<int>(1 << k));
+    for (int prev = 0; prev < (1 << k); ++prev) {
+        for (int curr = 0; curr < (1 << k); ++curr) {
+            int score = 0, count = 0;
+            for (int i = 0; i < k; ++i) {
+                if (curr & (1 << i)) {
+                    score += (prev & (1 << i)) ? tricks[i].points / 2 : tricks[i].points;
+                    count++;
+                }
+            }
+            score_matrix[prev][curr] = count > 0 ? score * count : score;
         }
-        pontuacaoTotal += pj;
     }
-    return pontuacaoTotal * escolhidas.size() * secao.fatorBonificacao;
+    return score_matrix;
 }
 
-// Função para gerar todas as combinações de manobras válidas
-void gerarCombinacoes(const vector<Manobra>& manobras, int tempoDisponivel, vector<vector<int>>& combinacoes, vector<int>& atual, size_t start) {
-    int somaTempo = 0;
-    for (int idx : atual) {
-        somaTempo += manobras[idx].tempo;
+int get_max_points(int section, int prev_trick_set, int n, int k, const vector<vector<int> >& score_matrix, 
+                   vector<vector<int> >& dp, vector<vector<bool> >& computed, 
+                   vector<vector<int> >& next_tricks) {
+    if (section == n) return 0;
+
+    if (computed[section][prev_trick_set]) return dp[section][prev_trick_set];
+
+    int max_score = numeric_limits<int>::min();
+    for (int curr_trick_set = 0; curr_trick_set < (1 << k); ++curr_trick_set) {
+        int total_time = 0;
+        for (int i = 0; i < k; ++i) {
+            if (curr_trick_set & (1 << i)) {
+                total_time += tricks[i].time;
+            }
+        }
+
+        if (total_time <= sections[section].time_limit) {
+            int score = score_matrix[prev_trick_set][curr_trick_set] * sections[section].multiplier;
+            int next_score = score + get_max_points(section + 1, curr_trick_set, n, k, score_matrix, dp, computed, next_tricks);
+            if (next_score > max_score) {
+                max_score = next_score;
+                next_tricks[section][prev_trick_set] = curr_trick_set;
+            }
+        }
     }
-    if (somaTempo <= tempoDisponivel) {
-        combinacoes.push_back(atual);
-    }
-    for (size_t i = start; i < manobras.size(); ++i) {
-        atual.push_back(i);
-        gerarCombinacoes(manobras, tempoDisponivel, combinacoes, atual, i + 1);
-        atual.pop_back();
-    }
+
+    computed[section][prev_trick_set] = true;
+    return dp[section][prev_trick_set] = max_score;
 }
 
-// Função para calcular a pontuação máxima total e as manobras selecionadas para cada seção
-Resultado calcularPontuacaoMaximaPorSecao(const vector<Secao>& secoes, const vector<Manobra>& manobras) {
-    size_t N = secoes.size();
-    vector<vector<int>> manobrasPorSecao(N);
+void print_tricks(int n, int k, const vector<vector<int> >& next_tricks) {
+    int curr_trick_set = 0;
+    for (int i = 0; i < n; ++i) {
+        int next_trick_set = next_tricks[i][curr_trick_set];
+        vector<int> tricks_list;
+        for (int j = 0; j < k; ++j) {
+            if (next_trick_set & (1 << j)) tricks_list.push_back(j + 1);
+        }
 
-    // Gerar todas as combinações de manobras válidas para cada seção
-    vector<vector<vector<int>>> combinacoesPorSecao(N);
-    for (size_t i = 0; i < N; ++i) {
-        vector<vector<int>> combinacoes;
-        vector<int> atual;
-        gerarCombinacoes(manobras, secoes[i].tempoTravessia, combinacoes, atual, 0);
-        combinacoesPorSecao[i] = combinacoes;
+        cout << tricks_list.size();
+        for (int trick : tricks_list) cout << " " << trick;
+        cout << endl;
+
+        curr_trick_set = next_trick_set;
     }
-
-    // Considerar todas as combinações de seções (incluir ou não cada combinação)
-    vector<int> escolhaAtual;
-    vector<int> melhorEscolha;
-    int melhorPontuacao = 0;
-
-    function<void(size_t, vector<int>, int)> dfs = [&](size_t secaoIdx, vector<int> escolhidasPrevSecao, int pontuacaoAtual) {
-        if (secaoIdx == N) {
-            if (pontuacaoAtual > melhorPontuacao) {
-                melhorPontuacao = pontuacaoAtual;
-                melhorEscolha = escolhaAtual;
-            }
-            return;
-        }
-
-        // Não escolher nenhuma manobra para a seção atual
-        dfs(secaoIdx + 1, escolhidasPrevSecao, pontuacaoAtual);
-
-        // Escolher cada combinação de manobras para a seção atual
-        for (size_t i = 0; i < combinacoesPorSecao[secaoIdx].size(); ++i) {
-            const auto& combinacao = combinacoesPorSecao[secaoIdx][i];
-            int pontuacaoSecao = calcularPontuacao(secoes[secaoIdx], manobras, combinacao, escolhidasPrevSecao);
-            escolhaAtual.push_back(i);
-            dfs(secaoIdx + 1, combinacao, pontuacaoAtual + pontuacaoSecao);
-            escolhaAtual.pop_back();
-        }
-    };
-
-    dfs(0, {}, 0);
-
-    // Montar a lista de manobras por seção com base na melhor escolha
-    for (size_t i = 0; i < N; ++i) {
-        if (i < melhorEscolha.size()) {
-            size_t escolhaIdx = melhorEscolha[i];
-            if (escolhaIdx < combinacoesPorSecao[i].size()) {
-                manobrasPorSecao[i] = combinacoesPorSecao[i][escolhaIdx];
-            } else {
-                manobrasPorSecao[i].clear(); // Garantir que a seção não tenha manobras se índice inválido
-            }
-        } else {
-            manobrasPorSecao[i].clear(); // Garantir que a seção não tenha manobras se índice inválido
-        }
-    }
-
-    return {melhorPontuacao, manobrasPorSecao};
 }
 
 int main() {
-    int N, K;
-    cin >> N >> K;
+    int n, k;
+    cin >> n >> k;
+    sections.resize(n);
+    tricks.resize(k);
 
-    vector<Secao> secoes(N);
-    for (int i = 0; i < N; ++i) {
-        cin >> secoes[i].fatorBonificacao >> secoes[i].tempoTravessia;
+    for (int i = 0; i < n; ++i) {
+        cin >> sections[i].multiplier >> sections[i].time_limit;
+    }
+    for (int i = 0; i < k; ++i) {
+        cin >> tricks[i].points >> tricks[i].time;
     }
 
-    vector<Manobra> manobras(K);
-    for (int j = 0; j < K; ++j) {
-        cin >> manobras[j].pontuacaoBase >> manobras[j].tempo;
-    }
+    auto score_matrix = precompute_score_matrix(k);
+    vector<vector<int> > dp(n, vector<int>(1 << k, 0));
+    vector<vector<bool> > computed(n, vector<bool>(1 << k, false));
+    vector<vector<int> > next_tricks(n, vector<int>(1 << k, 0));
 
-    // Calcular a pontuação máxima e as manobras selecionadas para cada seção
-    Resultado resultado = calcularPontuacaoMaximaPorSecao(secoes, manobras);
+    int max_score = get_max_points(0, 0, n, k, score_matrix, dp, computed, next_tricks);
+    cout << max_score << endl;
 
-    cout << resultado.pontuacaoMaxima << endl;
-    for (const auto& manobras : resultado.manobrasPorSecao) {
-        cout << manobras.size();
-        for (int m : manobras) {
-            cout << " " << m + 1;
-        }
-        cout << endl;
-    }
+    print_tricks(n, k, next_tricks);
 
     return 0;
 }
