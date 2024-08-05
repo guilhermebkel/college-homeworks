@@ -104,7 +104,7 @@ int main() {
     }
 
     std::cout << maxScore << std::endl;
-    std::vector<std::vector<int> > sections(N);
+    std::vector<std::vector<int>> sections(N);
 
     for (int i = N; i > 0; --i) {
         for (int k = 0; k < K; ++k) {
