@@ -1,109 +1,130 @@
 #include <iostream>
 #include <vector>
-#include <array>
-#include <limits>
+#include <cstring>
+#include <algorithm>
+#include <climits>
+#include <cmath>
 
-using namespace std;
+const int MAX_N = 105;
+const int MAX_K = 15;
+const int MAX_M = 1025;
 
-struct Trick {
-    int points;
-    int time;
-};
+int N, K;
+int multiplier[MAX_N], timeLimit[MAX_N];
+int trickPoints[MAX_K], trickTime[MAX_K];
+long scoreMatrix[MAX_M][MAX_M];
+long dp[MAX_N][MAX_M], previousTricks[MAX_N][MAX_M];
 
-struct Section {
-    int multiplier;
-    int time_limit;
-};
+void preComputeScoreMatrix() {
+    for (int previousTrickIndex = 0; previousTrickIndex < (1 << K); ++previousTrickIndex) {
+        for (int currentTrickIndex = 0; currentTrickIndex < (1 << K); ++currentTrickIndex) {
+            int score = 0;
+            int count = 0;
 
-vector<Section> sections;
-vector<Trick> tricks;
+            for (int trickIndex = 0; trickIndex < K; ++trickIndex) {
+                if (currentTrickIndex & (1 << trickIndex)) {
+                    if (previousTrickIndex & (1 << trickIndex)) {
+                        score += trickPoints[trickIndex] / 2;
+                    } else {
+                        score += trickPoints[trickIndex];
+                    }
 
-vector<vector<int> > precompute_score_matrix(int k) {
-    vector<vector<int> > score_matrix(1 << k, vector<int>(1 << k));
-    for (int prev = 0; prev < (1 << k); ++prev) {
-        for (int curr = 0; curr < (1 << k); ++curr) {
-            int score = 0, count = 0;
-            for (int i = 0; i < k; ++i) {
-                if (curr & (1 << i)) {
-                    score += (prev & (1 << i)) ? tricks[i].points / 2 : tricks[i].points;
                     count++;
                 }
             }
-            score_matrix[prev][curr] = count > 0 ? score * count : score;
+
+            scoreMatrix[previousTrickIndex][currentTrickIndex] = count > 0 ? score * count : score;
         }
     }
-    return score_matrix;
 }
 
-int get_max_points(int section, int prev_trick_set, int n, int k, const vector<vector<int> >& score_matrix, 
-                   vector<vector<int> >& dp, vector<vector<bool> >& computed, 
-                   vector<vector<int> >& next_tricks) {
-    if (section == n) return 0;
+bool fitsTimeLimit(int tricks, int limit) {
+    int totalTime = 0;
 
-    if (computed[section][prev_trick_set]) return dp[section][prev_trick_set];
-
-    int max_score = numeric_limits<int>::min();
-    for (int curr_trick_set = 0; curr_trick_set < (1 << k); ++curr_trick_set) {
-        int total_time = 0;
-        for (int i = 0; i < k; ++i) {
-            if (curr_trick_set & (1 << i)) {
-                total_time += tricks[i].time;
-            }
-        }
-
-        if (total_time <= sections[section].time_limit) {
-            int score = score_matrix[prev_trick_set][curr_trick_set] * sections[section].multiplier;
-            int next_score = score + get_max_points(section + 1, curr_trick_set, n, k, score_matrix, dp, computed, next_tricks);
-            if (next_score > max_score) {
-                max_score = next_score;
-                next_tricks[section][prev_trick_set] = curr_trick_set;
-            }
+    for (int trickIndex = 0; trickIndex < K; ++trickIndex) {
+        if (tricks & (1 << trickIndex)) {
+            totalTime += trickTime[trickIndex];
         }
     }
 
-    computed[section][prev_trick_set] = true;
-    return dp[section][prev_trick_set] = max_score;
+    return totalTime <= limit;
 }
 
-void print_tricks(int n, int k, const vector<vector<int> >& next_tricks) {
-    int curr_trick_set = 0;
-    for (int i = 0; i < n; ++i) {
-        int next_trick_set = next_tricks[i][curr_trick_set];
-        vector<int> tricks_list;
-        for (int j = 0; j < k; ++j) {
-            if (next_trick_set & (1 << j)) tricks_list.push_back(j + 1);
+void calculateMaxPoints() {
+    for (int i = 0; i < MAX_N; ++i) {
+        for (int j = 0; j < MAX_M; ++j) {
+            dp[i][j] = INT_MIN;
         }
+    }
 
-        cout << tricks_list.size();
-        for (int trick : tricks_list) cout << " " << trick;
-        cout << endl;
+    dp[0][0] = 0;
 
-        curr_trick_set = next_trick_set;
+    for (int sectionIndex = 0; sectionIndex < N; ++sectionIndex)  {
+        for (int previousTrickIndex = 0; previousTrickIndex < (1 << K); ++previousTrickIndex) {
+            if (dp[sectionIndex][previousTrickIndex] == INT_MIN) {
+                continue;
+            }
+
+            for (int currentTrickIndex = 0; currentTrickIndex < (1 << K); ++currentTrickIndex) {
+                if (fitsTimeLimit(currentTrickIndex, timeLimit[sectionIndex])) {
+                    long score = scoreMatrix[previousTrickIndex][currentTrickIndex] * multiplier[sectionIndex];
+                    long nextScore = dp[sectionIndex][previousTrickIndex] + score;
+
+                    if (nextScore > dp[sectionIndex + 1][currentTrickIndex]) {
+                        dp[sectionIndex + 1][currentTrickIndex] = nextScore;
+                        previousTricks[sectionIndex + 1][currentTrickIndex] = previousTrickIndex;
+                    }
+                }
+            }
+        }
     }
 }
 
 int main() {
-    int n, k;
-    cin >> n >> k;
-    sections.resize(n);
-    tricks.resize(k);
+    std::cin >> N >> K;
 
-    for (int i = 0; i < n; ++i) {
-        cin >> sections[i].multiplier >> sections[i].time_limit;
-    }
-    for (int i = 0; i < k; ++i) {
-        cin >> tricks[i].points >> tricks[i].time;
+    for (int i = 0; i < N; ++i) {
+        std::cin >> multiplier[i] >> timeLimit[i];
     }
 
-    auto score_matrix = precompute_score_matrix(k);
-    vector<vector<int> > dp(n, vector<int>(1 << k, 0));
-    vector<vector<bool> > computed(n, vector<bool>(1 << k, false));
-    vector<vector<int> > next_tricks(n, vector<int>(1 << k, 0));
+    for (int i = 0; i < K; ++i) {
+        std::cin >> trickPoints[i] >> trickTime[i];
+    }
 
-    int max_score = get_max_points(0, 0, n, k, score_matrix, dp, computed, next_tricks);
-    cout << max_score << endl;
+    preComputeScoreMatrix();
+    calculateMaxPoints();
 
-    print_tricks(n, k, next_tricks);
+    long maxScore = INT_MIN, lastIndex = 0;
+
+    for (int j = 0; j < (1 << K); ++j) {
+        if (dp[N][j] > maxScore) {
+            maxScore = dp[N][j];
+            lastIndex = j;
+        }
+    }
+
+    std::cout << maxScore << std::endl;
+    std::vector<std::vector<int> > sections(N);
+
+    for (int i = N; i > 0; --i) {
+        for (int k = 0; k < K; ++k) {
+            if (lastIndex & (1 << k)) {
+                sections[i-1].push_back(k + 1);
+            }
+        }
+
+        lastIndex = previousTricks[i][lastIndex];
+    }
+    
+    for (const auto& section : sections) {
+        std::cout << section.size();
+
+        for (int trick : section) {
+            std::cout << " " << trick;
+        }
+
+        std::cout << std::endl;
+    }
 
     return 0;
 }
