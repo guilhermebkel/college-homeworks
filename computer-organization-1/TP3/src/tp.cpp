@@ -1,130 +1,153 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include <cstring>
-#include <algorithm>
-#include <climits>
-#include <cmath>
+#include <cstdint>
+#include <iomanip>
+#include <unordered_map>
 
-const int MAX_N = 105;
-const int MAX_K = 15;
-const int MAX_M = 1025;
+struct CacheData {
+    bool valid;
+    uint32_t tag;
+};
 
-int N, K;
-int multiplier[MAX_N], timeLimit[MAX_N];
-int trickPoints[MAX_K], trickTime[MAX_K];
-long scoreMatrix[MAX_M][MAX_M];
-long dp[MAX_N][MAX_M], previousTricks[MAX_N][MAX_M];
+struct CacheLogInfo {
+    uint32_t numSets;
+    uint32_t linesPerSet;
+    uint32_t hits;
+    uint32_t misses;
+};
 
-void preComputeScoreMatrix() {
-    for (int previousTrickIndex = 0; previousTrickIndex < (1 << K); ++previousTrickIndex) {
-        for (int currentTrickIndex = 0; currentTrickIndex < (1 << K); ++currentTrickIndex) {
-            int score = 0;
-            int count = 0;
+class Cache {
+public:
+    Cache(uint32_t cacheSize, uint32_t lineSize, uint32_t numSets) {
+        this->cacheSize = cacheSize;
+        this->lineSize = lineSize;
+        this->numSets = numSets;
+        this->hits = 0;
+        this->misses = 0;
 
-            for (int trickIndex = 0; trickIndex < K; ++trickIndex) {
-                if (currentTrickIndex & (1 << trickIndex)) {
-                    if (previousTrickIndex & (1 << trickIndex)) {
-                        score += trickPoints[trickIndex] / 2;
-                    } else {
-                        score += trickPoints[trickIndex];
-                    }
+        this->numLines = this->cacheSize / this->lineSize;
+        this->linesPerSet = this->numLines / this->numSets;
+        this->store.resize(this->numSets, std::vector<CacheData>(this->linesPerSet));
+    }
 
-                    count++;
-                }
+    void access (uint32_t address) {
+        uint32_t blockAddress = address / this->lineSize;
+        uint32_t setIndex = blockAddress % this->numSets;
+        uint32_t tag = blockAddress / this->numSets;
+
+        bool hit = false;
+
+        for (auto& line : this->store[setIndex]) {
+            if (line.valid && line.tag == tag) {
+                hit = true;
+                break;
+            }
+        }
+
+        if (hit) {
+            this->hits++;
+        } else {
+            this->misses++;
+            uint32_t lineIndex = this->setNextLine[setIndex] % this->linesPerSet;
+            this->store[setIndex][lineIndex] = { true, tag };
+            this->setNextLine[setIndex]++;
+        }
+    }
+
+    std::string getBlockIdentifierByTag(uint32_t tag) {
+        uint32_t rawIdentifier = (tag * this->lineSize) >> 10;
+
+        std::stringstream identifier;
+        identifier << std::hex << std::uppercase << rawIdentifier;
+
+        return identifier.str();
+    }
+
+    CacheData getCacheData (int setIndex, int setLineIndex) {
+        return this->store[setIndex][setLineIndex];
+    }
+
+    CacheLogInfo getCacheLogInfo () {
+        CacheLogInfo cacheLogInfo = {
+            .numSets = this->numSets,
+            .linesPerSet = this->linesPerSet,
+            .hits = this->hits,
+            .misses = this->misses,
+        };
+
+        return cacheLogInfo;
+    }
+
+private:
+    uint32_t cacheSize;
+    uint32_t lineSize;
+    uint32_t numSets;
+    uint32_t numLines;
+    uint32_t linesPerSet;
+    uint32_t hits;
+    uint32_t misses;
+    std::vector<std::vector<CacheData>> store;
+    std::unordered_map<uint32_t, uint32_t> setNextLine;
+};
+
+void logCurrentCacheState(Cache cache, std::ofstream &logFile) {
+    logFile << "================" << std::endl;
+    logFile << "IDX V ** ADDR **" << std::endl;
+
+    CacheLogInfo cacheLogInfo = cache.getCacheLogInfo();
+
+    for (uint32_t setIndex = 0; setIndex < cacheLogInfo.numSets; setIndex++) {
+        for (uint32_t setLineIndex = 0; setLineIndex < cacheLogInfo.linesPerSet; setLineIndex++) {
+            uint32_t lineIndex = setIndex * cacheLogInfo.linesPerSet + setLineIndex;
+            CacheData cacheData = cache.getCacheData(setIndex, setLineIndex);
+
+            logFile << std::setw(3) << std::setfill('0') << lineIndex << " " << cacheData.valid << " ";
+
+            if (cacheData.valid) {
+                logFile << "0x" << std::setw(8) << std::setfill('0') << std::hex << cache.getBlockIdentifierByTag(cacheData.tag) << std::dec;
             }
 
-            scoreMatrix[previousTrickIndex][currentTrickIndex] = count > 0 ? score * count : score;
+            logFile << std::endl;
         }
     }
 }
 
-bool fitsTimeLimit(int tricks, int limit) {
-    int totalTime = 0;
+int main(int argc, char* argv[]) {
+    uint32_t cacheSize = std::stoi(argv[1]);
+    uint32_t lineSize = std::stoi(argv[2]);
+    uint32_t associativity = std::stoi(argv[3]);
 
-    for (int trickIndex = 0; trickIndex < K; ++trickIndex) {
-        if (tricks & (1 << trickIndex)) {
-            totalTime += trickTime[trickIndex];
-        }
+    std::string inputFilePath = argv[4];
+    std::string outputFilePath = "./output.txt";
+
+    uint32_t numSets = cacheSize / (lineSize * associativity);
+
+    Cache cache(cacheSize, lineSize, numSets);
+
+    std::ifstream inputFile(inputFilePath);
+    std::ofstream outputFile(outputFilePath);
+
+    if (!inputFile) {
+        std::cerr << "Error opening input file." << std::endl;
+        return 1;
     }
 
-    return totalTime <= limit;
-}
+    uint32_t address;
 
-void calculateMaxPoints() {
-    for (int i = 0; i < MAX_N; ++i) {
-        for (int j = 0; j < MAX_M; ++j) {
-            dp[i][j] = INT_MIN;
-        }
+    while (inputFile >> std::hex >> address) {
+        cache.access(address);
+        logCurrentCacheState(cache, outputFile);
     }
 
-    dp[0][0] = 0;
+    CacheLogInfo cacheLogInfo = cache.getCacheLogInfo();
 
-    for (int sectionIndex = 0; sectionIndex < N; ++sectionIndex)  {
-        for (int previousTrickIndex = 0; previousTrickIndex < (1 << K); ++previousTrickIndex) {
-            if (dp[sectionIndex][previousTrickIndex] == INT_MIN) {
-                continue;
-            }
+    outputFile << "================" << std::endl;
+    outputFile << "#hits: " << cacheLogInfo.hits << std::endl;
+    outputFile << "#miss: " << cacheLogInfo.misses << std::endl;
 
-            for (int currentTrickIndex = 0; currentTrickIndex < (1 << K); ++currentTrickIndex) {
-                if (fitsTimeLimit(currentTrickIndex, timeLimit[sectionIndex])) {
-                    long score = scoreMatrix[previousTrickIndex][currentTrickIndex] * multiplier[sectionIndex];
-                    long nextScore = dp[sectionIndex][previousTrickIndex] + score;
-
-                    if (nextScore > dp[sectionIndex + 1][currentTrickIndex]) {
-                        dp[sectionIndex + 1][currentTrickIndex] = nextScore;
-                        previousTricks[sectionIndex + 1][currentTrickIndex] = previousTrickIndex;
-                    }
-                }
-            }
-        }
-    }
-}
-
-int main() {
-    std::cin >> N >> K;
-
-    for (int i = 0; i < N; ++i) {
-        std::cin >> multiplier[i] >> timeLimit[i];
-    }
-
-    for (int i = 0; i < K; ++i) {
-        std::cin >> trickPoints[i] >> trickTime[i];
-    }
-
-    preComputeScoreMatrix();
-    calculateMaxPoints();
-
-    long maxScore = INT_MIN, lastIndex = 0;
-
-    for (int j = 0; j < (1 << K); ++j) {
-        if (dp[N][j] > maxScore) {
-            maxScore = dp[N][j];
-            lastIndex = j;
-        }
-    }
-
-    std::cout << maxScore << std::endl;
-    std::vector<std::vector<int>> sections(N);
-
-    for (int i = N; i > 0; --i) {
-        for (int k = 0; k < K; ++k) {
-            if (lastIndex & (1 << k)) {
-                sections[i-1].push_back(k + 1);
-            }
-        }
-
-        lastIndex = previousTricks[i][lastIndex];
-    }
-    
-    for (const auto& section : sections) {
-        std::cout << section.size();
-
-        for (int trick : section) {
-            std::cout << " " << trick;
-        }
-
-        std::cout << std::endl;
-    }
+    inputFile.close();
+    outputFile.close();
 
     return 0;
 }
