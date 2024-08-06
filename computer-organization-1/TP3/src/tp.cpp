@@ -89,7 +89,7 @@ private:
     std::unordered_map<uint32_t, uint32_t> setNextLine;
 };
 
-void logCurrentCacheState(Cache cache, std::ofstream &logFile) {
+void logCacheState(Cache cache, std::ofstream &logFile) {
     logFile << "================" << std::endl;
     logFile << "IDX V ** ADDR **" << std::endl;
 
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]) {
 
     while (inputFile >> std::hex >> address) {
         cache.access(address);
-        logCurrentCacheState(cache, outputFile);
+        logCacheState(cache, outputFile);
     }
 
     CacheLogInfo cacheLogInfo = cache.getCacheLogInfo();
