@@ -69,14 +69,12 @@ public:
     }
 
     CacheLogInfo getCacheLogInfo () {
-        CacheLogInfo cacheLogInfo = {
+        return {
             .numSets = this->numSets,
             .linesPerSet = this->linesPerSet,
             .hits = this->hits,
             .misses = this->misses,
         };
-
-        return cacheLogInfo;
     }
 
 private:
