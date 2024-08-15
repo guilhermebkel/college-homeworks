@@ -70,7 +70,7 @@ void initializeDynamicProgrammingMatrix() {
     dp[0][0] = 0;
 }
 
-void calculateMaxScoreByDynamicProgramming() {
+void calculateMaxScoreWithDynamicProgramming() {
     for (int sectionIndex = 0; sectionIndex < numSections; ++sectionIndex)  {
         for (int previousCombination = 0; previousCombination < (1 << numTricks); ++previousCombination) {
             bool isTrickCombinationUnreachable = dp[sectionIndex][previousCombination] == INT_MIN;
@@ -109,7 +109,7 @@ int main() {
 
     precomputeAllPossibleTrickScores();
     initializeDynamicProgrammingMatrix();
-    calculateMaxScoreByDynamicProgramming();
+    calculateMaxScoreWithDynamicProgramming();
 
     long maxScore = INT_MIN;
     int bestFinalCombination = 0;
