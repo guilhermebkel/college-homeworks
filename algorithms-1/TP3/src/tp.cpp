@@ -1,78 +1,94 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
 #include <algorithm>
 #include <climits>
-#include <cmath>
 
-const int MAX_N = 105;
-const int MAX_K = 15;
-const int MAX_M = 1025;
+const int MAX_SECTIONS = 105;
+const int MAX_TRICKS = 15;
+const int MAX_COMBINATIONS = 1025;
 
-int N, K;
-int multiplier[MAX_N], timeLimit[MAX_N];
-int trickPoints[MAX_K], trickTime[MAX_K];
-long scoreMatrix[MAX_M][MAX_M];
-long dp[MAX_N][MAX_M], previousTricks[MAX_N][MAX_M];
+int numSections, numTricks;
+int sectionMultiplier[MAX_SECTIONS], sectionTimeLimit[MAX_SECTIONS];
+int trickPoints[MAX_TRICKS], trickDuration[MAX_TRICKS];
+long precomputedTrickScores[MAX_COMBINATIONS][MAX_COMBINATIONS];
+long dp[MAX_SECTIONS][MAX_COMBINATIONS], previousTrickCombination[MAX_SECTIONS][MAX_COMBINATIONS];
 
-void preComputeScoreMatrix() {
-    for (int previousTrickIndex = 0; previousTrickIndex < (1 << K); ++previousTrickIndex) {
-        for (int currentTrickIndex = 0; currentTrickIndex < (1 << K); ++currentTrickIndex) {
+void precomputeAllPossibleTrickScores() {
+    for (int previousCombination = 0; previousCombination < (1 << numTricks); ++previousCombination) {
+        for (int currentCombination = 0; currentCombination < (1 << numTricks); ++currentCombination) {
             int score = 0;
-            int count = 0;
+            int numSelectedTricks = 0;
 
-            for (int trickIndex = 0; trickIndex < K; ++trickIndex) {
-                if (currentTrickIndex & (1 << trickIndex)) {
-                    if (previousTrickIndex & (1 << trickIndex)) {
+            for (int trickIndex = 0; trickIndex < numTricks; ++trickIndex) {
+                bool isTrickInCurrentCombination = currentCombination & (1 << trickIndex);
+
+                if (isTrickInCurrentCombination) {
+                    bool isRepeatedTrick = previousCombination & (1 << trickIndex);
+
+                    if (isRepeatedTrick) {
                         score += trickPoints[trickIndex] / 2;
                     } else {
                         score += trickPoints[trickIndex];
                     }
 
-                    count++;
+                    numSelectedTricks++;
                 }
             }
 
-            scoreMatrix[previousTrickIndex][currentTrickIndex] = count > 0 ? score * count : score;
+            bool isThereAnySelectedTrick = numSelectedTricks > 0;
+
+            if (isThereAnySelectedTrick) {
+                precomputedTrickScores[previousCombination][currentCombination] = score * numSelectedTricks;
+            } else {
+                precomputedTrickScores[previousCombination][currentCombination] = score;
+            }
         }
     }
 }
 
-bool fitsTimeLimit(int tricks, int limit) {
+bool trickCombinationCanBeExecutedWithinTimeLimit(int trickCombination, int timeLimit) {
     int totalTime = 0;
 
-    for (int trickIndex = 0; trickIndex < K; ++trickIndex) {
-        if (tricks & (1 << trickIndex)) {
-            totalTime += trickTime[trickIndex];
+    for (int trickIndex = 0; trickIndex < numTricks; ++trickIndex) {
+        bool isTrickPartOfCombination = trickCombination & (1 << trickIndex);
+
+        if (isTrickPartOfCombination) {
+            totalTime += trickDuration[trickIndex];
         }
     }
 
-    return totalTime <= limit;
+    return totalTime <= timeLimit;
 }
 
-void calculateMaxPoints() {
-    for (int i = 0; i < MAX_N; ++i) {
-        for (int j = 0; j < MAX_M; ++j) {
+void initializeDynamicProgrammingMatrix() {
+    for (int i = 0; i < MAX_SECTIONS; ++i) {
+        for (int j = 0; j < MAX_COMBINATIONS; ++j) {
             dp[i][j] = INT_MIN;
         }
     }
 
     dp[0][0] = 0;
+}
 
-    for (int sectionIndex = 0; sectionIndex < N; ++sectionIndex)  {
-        for (int previousTrickIndex = 0; previousTrickIndex < (1 << K); ++previousTrickIndex) {
-            if (dp[sectionIndex][previousTrickIndex] == INT_MIN) {
+void calculateMaxScoreByDynamicProgramming() {
+    for (int sectionIndex = 0; sectionIndex < numSections; ++sectionIndex)  {
+        for (int previousCombination = 0; previousCombination < (1 << numTricks); ++previousCombination) {
+            bool isTrickCombinationUnreachable = dp[sectionIndex][previousCombination] == INT_MIN;
+
+            if (isTrickCombinationUnreachable) {
                 continue;
             }
 
-            for (int currentTrickIndex = 0; currentTrickIndex < (1 << K); ++currentTrickIndex) {
-                if (fitsTimeLimit(currentTrickIndex, timeLimit[sectionIndex])) {
-                    long score = scoreMatrix[previousTrickIndex][currentTrickIndex] * multiplier[sectionIndex];
-                    long nextScore = dp[sectionIndex][previousTrickIndex] + score;
+            for (int currentCombination = 0; currentCombination < (1 << numTricks); ++currentCombination) {
+                if (trickCombinationCanBeExecutedWithinTimeLimit(currentCombination, sectionTimeLimit[sectionIndex])) {
+                    long score = precomputedTrickScores[previousCombination][currentCombination] * sectionMultiplier[sectionIndex];
+                    long newScore = dp[sectionIndex][previousCombination] + score;
 
-                    if (nextScore > dp[sectionIndex + 1][currentTrickIndex]) {
-                        dp[sectionIndex + 1][currentTrickIndex] = nextScore;
-                        previousTricks[sectionIndex + 1][currentTrickIndex] = previousTrickIndex;
+                    bool isNewScoreBetter = newScore > dp[sectionIndex + 1][currentCombination];
+
+                    if (isNewScoreBetter) {
+                        dp[sectionIndex + 1][currentCombination] = newScore;
+                        previousTrickCombination[sectionIndex + 1][currentCombination] = previousCombination;
                     }
                 }
             }
@@ -81,39 +97,46 @@ void calculateMaxPoints() {
 }
 
 int main() {
-    std::cin >> N >> K;
+    std::cin >> numSections >> numTricks;
 
-    for (int i = 0; i < N; ++i) {
-        std::cin >> multiplier[i] >> timeLimit[i];
+    for (int i = 0; i < numSections; ++i) {
+        std::cin >> sectionMultiplier[i] >> sectionTimeLimit[i];
     }
 
-    for (int i = 0; i < K; ++i) {
-        std::cin >> trickPoints[i] >> trickTime[i];
+    for (int i = 0; i < numTricks; ++i) {
+        std::cin >> trickPoints[i] >> trickDuration[i];
     }
 
-    preComputeScoreMatrix();
-    calculateMaxPoints();
+    precomputeAllPossibleTrickScores();
+    initializeDynamicProgrammingMatrix();
+    calculateMaxScoreByDynamicProgramming();
 
-    long maxScore = INT_MIN, lastIndex = 0;
+    long maxScore = INT_MIN;
+    int bestFinalCombination = 0;
 
-    for (int j = 0; j < (1 << K); ++j) {
-        if (dp[N][j] > maxScore) {
-            maxScore = dp[N][j];
-            lastIndex = j;
+    for (int combination = 0; combination < (1 << numTricks); ++combination) {
+        long currentScore = dp[numSections][combination];
+
+        if (currentScore > maxScore) {
+            maxScore = currentScore;
+            bestFinalCombination = combination;
         }
     }
 
     std::cout << maxScore << std::endl;
-    std::vector<std::vector<int>> sections(N);
 
-    for (int i = N; i > 0; --i) {
-        for (int k = 0; k < K; ++k) {
-            if (lastIndex & (1 << k)) {
-                sections[i-1].push_back(k + 1);
+    std::vector<std::vector<int>> sections(numSections);
+
+    for (int i = numSections; i > 0; --i) {
+        for (int trickIndex = 0; trickIndex < numTricks; ++trickIndex) {
+            bool isTrickInBestCombination = bestFinalCombination & (1 << trickIndex);
+
+            if (isTrickInBestCombination) {
+                sections[i-1].push_back(trickIndex + 1);
             }
         }
 
-        lastIndex = previousTricks[i][lastIndex];
+        bestFinalCombination = previousTrickCombination[i][bestFinalCombination];
     }
     
     for (const auto& section : sections) {
