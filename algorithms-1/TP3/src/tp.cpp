@@ -96,6 +96,46 @@ void calculateMaxScoreWithDynamicProgramming() {
     }
 }
 
+void extractBestTrickCombination() {
+    long maxScore = INT_MIN;
+    int bestTrickCombination = 0;
+
+    for (int combination = 0; combination < (1 << numTricks); ++combination) {
+        long currentScore = dp[numSections][combination];
+
+        if (currentScore > maxScore) {
+            maxScore = currentScore;
+            bestTrickCombination = combination;
+        }
+    }
+
+    std::cout << maxScore << std::endl;
+
+    std::vector<std::vector<int>> sections(numSections);
+
+    for (int i = numSections; i > 0; --i) {
+        for (int trickIndex = 0; trickIndex < numTricks; ++trickIndex) {
+            bool isTrickInBestCombination = bestTrickCombination & (1 << trickIndex);
+
+            if (isTrickInBestCombination) {
+                sections[i-1].push_back(trickIndex + 1);
+            }
+        }
+
+        bestTrickCombination = previousTrickCombination[i][bestTrickCombination];
+    }
+    
+    for (const auto& section : sections) {
+        std::cout << section.size();
+
+        for (int trick : section) {
+            std::cout << " " << trick;
+        }
+
+        std::cout << std::endl;
+    }
+}
+
 int main() {
     std::cin >> numSections >> numTricks;
 
@@ -110,44 +150,7 @@ int main() {
     precomputeAllPossibleTrickScores();
     initializeDynamicProgrammingMatrix();
     calculateMaxScoreWithDynamicProgramming();
-
-    long maxScore = INT_MIN;
-    int bestFinalCombination = 0;
-
-    for (int combination = 0; combination < (1 << numTricks); ++combination) {
-        long currentScore = dp[numSections][combination];
-
-        if (currentScore > maxScore) {
-            maxScore = currentScore;
-            bestFinalCombination = combination;
-        }
-    }
-
-    std::cout << maxScore << std::endl;
-
-    std::vector<std::vector<int>> sections(numSections);
-
-    for (int i = numSections; i > 0; --i) {
-        for (int trickIndex = 0; trickIndex < numTricks; ++trickIndex) {
-            bool isTrickInBestCombination = bestFinalCombination & (1 << trickIndex);
-
-            if (isTrickInBestCombination) {
-                sections[i-1].push_back(trickIndex + 1);
-            }
-        }
-
-        bestFinalCombination = previousTrickCombination[i][bestFinalCombination];
-    }
-    
-    for (const auto& section : sections) {
-        std::cout << section.size();
-
-        for (int trick : section) {
-            std::cout << " " << trick;
-        }
-
-        std::cout << std::endl;
-    }
+    extractBestTrickCombination();
 
     return 0;
 }
