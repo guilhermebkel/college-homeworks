@@ -135,20 +135,9 @@ int main(int argc, char* argv[]) {
 
     uint32_t address;
 
-    int consecutiveHitCount = 0;
-
     while (inputFile >> std::hex >> address) {
-        bool hit = cache.access(address);
-
-        if (hit) {
-            consecutiveHitCount++;
-        } else {
-            consecutiveHitCount = 0;
-        }
-
-        if (consecutiveHitCount < 2)  {
-            logCacheState(cache, outputFile);
-        }
+        cache.access(address);
+        logCacheState(cache, outputFile);
     }
 
     CacheLogInfo cacheLogInfo = cache.getCacheLogInfo();
