@@ -6,7 +6,7 @@ INC = include
 BIN = bin
 CFLAGS = -pg -Wall -c -I $(INC)
 
-EXE = $(BIN)/main
+EXE = $(BIN)/simulador
 
 all: build
 

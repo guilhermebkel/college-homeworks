@@ -34,7 +34,7 @@ public:
     void access (uint32_t address) {
         uint32_t blockAddress = address / this->lineSize;
         uint32_t setIndex = blockAddress % this->numSets;
-        uint32_t tag = blockAddress / this->numSets;
+        uint32_t tag = blockAddress;
 
         bool hit = false;
 
