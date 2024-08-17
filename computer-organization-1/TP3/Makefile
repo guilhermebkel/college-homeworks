@@ -8,7 +8,7 @@ CFLAGS = -pg -Wall -c -I $(INC)
 
 EXE = $(BIN)/main
 
-all: build test
+all: build
 
 build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/tp.cpp -pg -o $(OBJ)/tp.o
