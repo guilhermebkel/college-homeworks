@@ -31,7 +31,7 @@ public:
         this->store.resize(this->numSets, std::vector<CacheData>(this->linesPerSet));
     }
 
-    void access (uint32_t address) {
+    bool access (uint32_t address) {
         uint32_t blockAddress = address / this->lineSize;
         uint32_t setIndex = blockAddress % this->numSets;
         uint32_t tag = blockAddress;
@@ -53,6 +53,8 @@ public:
             this->store[setIndex][lineIndex] = { true, tag };
             this->setNextLine[setIndex]++;
         }
+
+        return hit;
     }
 
     std::string getBlockIdentifierByTag(uint32_t tag) {
@@ -133,9 +135,20 @@ int main(int argc, char* argv[]) {
 
     uint32_t address;
 
+    int consecutiveHitCount = 0;
+
     while (inputFile >> std::hex >> address) {
-        cache.access(address);
-        logCacheState(cache, outputFile);
+        bool hit = cache.access(address);
+
+        if (hit) {
+            consecutiveHitCount++;
+        } else {
+            consecutiveHitCount = 0;
+        }
+
+        if (consecutiveHitCount < 2)  {
+            logCacheState(cache, outputFile);
+        }
     }
 
     CacheLogInfo cacheLogInfo = cache.getCacheLogInfo();
