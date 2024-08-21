@@ -98,22 +98,6 @@ void quickSortNonRecursive (std::vector<int> &items, int insertionSortPartitionS
     }
 }
 
-std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
-    std::vector<int> items = arr;
-
-    quickSortNonRecursive(items, DISABLED_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
-    
-    return items;
-}
-
-std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
-    std::vector<int> items = arr;
-    
-    quickSortNonRecursive(items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
-    
-    return items;
-}
-
 void quickSortRecursive(int left, int right, std::vector<int> &items, int insertionSortPartitionSize, bool (*makeComparison)(int, int)) {
     if (mustUseInsertionSortAlgorithm(left, right, insertionSortPartitionSize)) {
         insertionSort(left, right + 1, items, makeComparison);
@@ -145,6 +129,22 @@ std::vector<int> QuicksortRecursivoOrdenacaoInsercao(const std::vector<int> arr)
 
     quickSortRecursive(0, items.size() - 1, items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
 
+    return items;
+}
+
+std::vector<int> QuicksortNaoRecursivoPuro (const std::vector<int> arr) {
+    std::vector<int> items = arr;
+
+    quickSortNonRecursive(items, DISABLED_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    
+    return items;
+}
+
+std::vector<int> QuicksortNaoRecursivoOrdenacaoInsercao(const std::vector<int> arr) {
+    std::vector<int> items = arr;
+    
+    quickSortNonRecursive(items, DEFAULT_INSERTION_SORT_PARTITION_SIZE, makeDefaultSortingComparison);
+    
     return items;
 }
 
