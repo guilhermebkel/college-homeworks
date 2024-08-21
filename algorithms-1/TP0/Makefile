@@ -21,11 +21,6 @@ build: clean
 	$(CC) $(CFLAGS) -c $(SRC)/fibonacci-recursive.cpp -pg -o $(OBJ)/fibonacci-recursive.o
 	$(CC) $(OBJ)/*.o -pg -o $(EXE) $(LIBS)
 
-build-tp: clean
-	$(CC) $(CFLAGS) -c $(SRC)/tp.cpp -pg -o $(OBJ)/tp.o
-	$(CC) $(OBJ)/*.o -pg -o $(EXE) $(LIBS)
-	$(EXE)
-
 test:
 	$(EXE)
 
