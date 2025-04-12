@@ -1,1 +1,4 @@
 sh
+/tests/*.out
+/tests/*.tmp
+/tests/script.sh
