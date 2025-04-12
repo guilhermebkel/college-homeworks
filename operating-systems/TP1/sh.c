@@ -122,14 +122,23 @@ int fork1(void) {
     The function is supposed to create a new process using the `fork()` system call.
     It should print a message if the fork fails, otherwise return the process ID of the child process (or -1 if the fork fails).
     */
-    fprintf(stderr, "Fork function not implemented\n");
-    exit(-1);
+    int pid = fork();
+
+    if (pid < 0) {
+        fprintf(stderr, "Error: fork failed\n");
+        return -1;
+    }
+
+    return pid;
     /* END OF TASK 1 */
 }
 
 void handle_simple_cmd(struct execcmd *ecmd) {
     /* Task 2: Implement the code below to execute simple commands. */
-    fprintf(stderr, "exec not implemented\n");
+    if (execvp(ecmd->argv[0], ecmd->argv) == -1) {
+        fprintf(stderr, "exec: command not found: %s\n", ecmd->argv[0]);
+        exit(1);
+    }
     /* END OF TASK 2 */
 }
 
