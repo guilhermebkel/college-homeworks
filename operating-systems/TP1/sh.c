@@ -154,7 +154,34 @@ void handle_redirection(struct redircmd *rcmd) {
 
 void handle_pipe(struct pipecmd *pcmd, int *p, int r) {
     /* Task 4: Implement the code below to handle pipes. */
-    fprintf(stderr, "pipe not implemented\n");
+    if (pipe(p) < 0) {
+        fprintf(stderr, "pipe creation failed\n");
+        exit(1);
+    }
+    
+    if (fork1() == 0) {
+        // Child process to handle the left side of the pipe
+        close(1);          // Close stdout
+        dup(p[1]);         // Redirect stdout to the pipe's write end
+        close(p[0]);       // Close unused read end
+        close(p[1]);       // Close the original write end (now duplicated)
+        runcmd(pcmd->left);
+    }
+    
+    if (fork1() == 0) {
+        // Child process to handle the right side of the pipe
+        close(0);          // Close stdin
+        dup(p[0]);         // Redirect stdin from the pipe's read end
+        close(p[0]);       // Close the original read end (now duplicated)
+        close(p[1]);       // Close unused write end
+        runcmd(pcmd->right);
+    }
+    
+    // Parent process closes both pipe ends and waits for both children
+    close(p[0]);
+    close(p[1]);
+    wait(NULL);
+    wait(NULL);
     /* END OF TASK 4 */
 }
 
@@ -177,7 +204,15 @@ int main(void) {
         /* Task 5: Explain the purpose of the if statement below and correct the error message.
         Why is the current error message incorrect? Justify the new message. */
         /* Answer:
+            O propósito do if é verificar se o comando digitado começa com "cd ", o que indica que o usuário quer mudar de diretório.
+            Se for o caso, ele remove o caractere de nova linha no final do comando (buf[strlen(buf) - 1] = 0) e tenta mudar para o diretório especificado com chdir(buf + 3).
 
+            A mensagem de erro atual ("process does not exist") está incorreta, porque a função chdir não lida com processos, e sim com diretórios.
+            Quando chdir falha, geralmente é porque o diretório especificado não existe ou não pode ser acessado.
+
+            Uma mensagem correta e mais descritiva seria:
+            fprintf(stderr, "cd: diretório não encontrado\n");
+            Isso informa corretamente ao usuário que houve um problema ao tentar mudar de diretório.
          */
         if (buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' ') {
             buf[strlen(buf) - 1] = 0;
