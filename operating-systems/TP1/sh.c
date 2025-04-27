@@ -141,22 +141,28 @@ int fork1(void) {
     The function is supposed to create a new process using the `fork()` system call.
     It should print a message if the fork fails, otherwise return the process ID of the child process (or -1 if the fork fails).
     */
-    int pid = fork();
+    int child_process_id = fork();
 
-    if (pid < 0) {
-        fprintf(stderr, "Error: fork failed\n");
+    int failed_to_create_child_process = (child_process_id < 0);
+
+    if (failed_to_create_child_process) {
+        fprintf(stderr, "Error: failed to create a new process with fork()\n");
         return -1;
     }
 
-    return pid;
+    return child_process_id;
     /* END OF TASK 1 */
 }
 
 void handle_simple_cmd(struct execcmd *ecmd) {
     /* Task 2: Implement the code below to execute simple commands. */
-    if (execvp(ecmd->argv[0], ecmd->argv) == -1) {
-        fprintf(stderr, "exec: command not found: %s\n", ecmd->argv[0]);
-        exit(1);
+    int execvp_result = execvp(ecmd->argv[0], ecmd->argv);
+
+    int failed_to_execute_command = (execvp_result == -1);
+
+    if (failed_to_execute_command) {
+        fprintf(stderr, "Error: command not found: %s\n", ecmd->argv[0]);
+        exit(EXIT_FAILURE);
     }
     /* END OF TASK 2 */
 }
@@ -164,43 +170,56 @@ void handle_simple_cmd(struct execcmd *ecmd) {
 void handle_redirection(struct redircmd *rcmd) {
     /* Task 3: Implement the code below to handle input/output redirection. */
     close(rcmd->fd);
-    if (open(rcmd->file, rcmd->mode, 0666) < 0) {
-        fprintf(stderr, "open %s failed\n", rcmd->file);
-        exit(1);
+
+    int permission_code_for_read_and_write_access_for_all_users = 0666;
+    int file_descriptor = open(rcmd->file, rcmd->mode, permission_code_for_read_and_write_access_for_all_users);
+    int failed_to_open_file = (file_descriptor < 0);
+
+    if (failed_to_open_file) {
+        fprintf(stderr, "Error: failed to open file: %s\n", rcmd->file);
+        exit(EXIT_FAILURE);
     }
     /* END OF TASK 3 */
 }
 
 void handle_pipe(struct pipecmd *pcmd, int *p, int r) {
     /* Task 4: Implement the code below to handle pipes. */
-    if (pipe(p) < 0) {
-        fprintf(stderr, "pipe creation failed\n");
-        exit(1);
+    int pipe_creation_result = pipe(p);
+    int failed_to_create_pipe = (pipe_creation_result < 0);
+
+    if (failed_to_create_pipe) {
+        fprintf(stderr, "Erro: failed to create pipe\n");
+        exit(EXIT_FAILURE);
     }
-    
-    if (fork1() == 0) {
-        // Child process to handle the left side of the pipe
-        close(1);          // Close stdout
-        dup(p[1]);         // Redirect stdout to the pipe's write end
-        close(p[0]);       // Close unused read end
-        close(p[1]);       // Close the original write end (now duplicated)
-        runcmd(pcmd->left);
+
+    int left_child_pid = fork1();
+    int is_left_child_process = (left_child_pid == 0);
+
+    if (is_left_child_process) {
+        close(1); // Close the standard output descriptor (stdout)
+        dup(p[1]); // Redirect stdout to the write end of the pipe
+        close(p[0]); // Close the read end of the pipe, which will not be used
+        close(p[1]); // Close the original write end of the pipe, as it has been duplicated
+        runcmd(pcmd->left); // Execute the command associated with the left side of the pipe
     }
-    
-    if (fork1() == 0) {
-        // Child process to handle the right side of the pipe
-        close(0);          // Close stdin
-        dup(p[0]);         // Redirect stdin from the pipe's read end
-        close(p[0]);       // Close the original read end (now duplicated)
-        close(p[1]);       // Close unused write end
-        runcmd(pcmd->right);
+
+    int right_child_pid = fork1();
+    int is_right_child_process = (right_child_pid == 0);
+
+    if (is_right_child_process) {
+        close(0); // Close the standard input descriptor (stdin)
+        dup(p[0]); // Redirect stdin to the read end of the pipe
+        close(p[0]); // Close the original read end of the pipe, as it has been duplicated
+        close(p[1]); // Close the write end of the pipe, which will not be used
+        runcmd(pcmd->right); // Execute the command associated with the right side of the pipe
     }
-    
-    // Parent process closes both pipe ends and waits for both children
+
+    // Parent process closes both ends of the pipe and waits for the children
     close(p[0]);
     close(p[1]);
-    wait(NULL);
-    wait(NULL);
+
+    wait(NULL); // Wait for the termination of the first child
+    wait(NULL); // Wait for the termination of the second child
     /* END OF TASK 4 */
 }
 
