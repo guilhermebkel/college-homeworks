@@ -44,7 +44,7 @@ parâmetros especificados na estrutura rcmd. Caso a abertura falhe, é exibida u
 a saída padrão para a escrita do pipe (lado esquerdo do comando) e o outro redireciona a entrada padrão para a leitura do pipe (lado direito).
 Ambos executam seus respectivos comandos com runcmd(). O processo pai fecha os descritores do pipe e espera ambos os filhos com wait().
 
-- Task 5: No loop principal, foi adicionado um if que verifica se o comando digitado começa com "cd ". Se for o caso, o caractere de nova
+- Task 5: No loop principal, existe um if que verifica se o comando digitado começa com "cd ". Se for o caso, o caractere de nova
 linha ao final da entrada é removido e a função chdir() é chamada para alterar o diretório atual. Caso chdir() falhe, uma mensagem de erro
 é exibida. No entanto, a mensagem atual ("process does not exist") é inadequada, pois chdir() lida com diretórios, não com processos.
 
