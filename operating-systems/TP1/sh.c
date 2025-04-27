@@ -160,7 +160,7 @@ void handle_simple_cmd(struct execcmd *ecmd) {
 
     if (failed_to_execute_command) {
         fprintf(stderr, "Error: command not found: %s\n", ecmd->argv[0]);
-        exit(EXIT_FAILURE);
+        exit(1);
     }
     /* END OF TASK 2 */
 }
@@ -175,7 +175,7 @@ void handle_redirection(struct redircmd *rcmd) {
 
     if (failed_to_open_file) {
         fprintf(stderr, "Error: failed to open file: %s\n", rcmd->file);
-        exit(EXIT_FAILURE);
+        exit(1);
     }
     /* END OF TASK 3 */
 }
@@ -187,7 +187,7 @@ void handle_pipe(struct pipecmd *pcmd, int *p, int r) {
 
     if (failed_to_create_pipe) {
         fprintf(stderr, "Error: failed to create pipe\n");
-        exit(EXIT_FAILURE);
+        exit(1);
     }
 
     int left_child_pid = fork1();
