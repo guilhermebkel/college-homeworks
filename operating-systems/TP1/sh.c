@@ -32,27 +32,21 @@ Name guilhermebkel@ufmg.br 100%
 Briefly describe the solutions implemented for this project and justify their choices.
 
 - Task 1: Foi adicionado o código que realiza a chamada fork() para criar um novo processo. Caso o valor retornado seja
-negativo (erro), uma mensagem de erro é exibida com fprintf(stderr, "Error: fork failed\n"), e a função
-retorna -1. Caso contrário, o PID do processo filho é retornado. Essa implementação garante um controle
-básico de erros ao criar processos.
+negativo (erro), uma mensagem de erro é exibida e a função retorna -1. Caso contrário, o PID do processo filho é retornado.
 
 - Task 2: Foi inserido o uso de execvp() para executar comandos simples, passando os argumentos do comando. Em caso de
-falha (retorno -1), uma mensagem de erro personalizada é exibida indicando que o comando não foi encontrado, e o processo
-é encerrado com exit(1). Isso proporciona uma execução semelhante à de shells reais, com tratamento de erros amigável.
+falha (retorno -1), uma mensagem de erro é exibida indicando que o comando não foi encontrado, e o processo é encerrado.
 
-- Task 3: Foi incluído o fechamento do descritor de arquivo original com close(rcmd->fd) e, em seguida, a abertura do
-novo arquivo com open(), utilizando os parâmetros especificados na estrutura rcmd. Caso a abertura falhe, é exibida
-uma mensagem de erro, e o processo é encerrado. Isso permite o redirecionamento correto de entrada ou saída, conforme o tipo de comando.
+- Task 3: Foi incluído o fechamento do descritor de arquivo original e, em seguida, a abertura do novo arquivo, utilizando os
+parâmetros especificados na estrutura rcmd. Caso a abertura falhe, é exibida uma mensagem de erro, e o processo é encerrado.
 
-- Task 4: O código adicionado implementa a criação de um pipe com pipe(p) e a lógica de forquilha de dois processos filhos. Um filho
-redireciona a saída padrão para a escrita do pipe (lado esquerdo do comando) e o outro redireciona a entrada padrão para a leitura
-do pipe (lado direito). Ambos executam seus respectivos comandos com runcmd(). O processo pai fecha os descritores do pipe e espera
-ambos os filhos com wait(). Essa abordagem permite encadear comandos via |.
+- Task 4: O código adicionado implementa a criação de um pipe e a lógica de fork de dois processos filhos. Um filho redireciona
+a saída padrão para a escrita do pipe (lado esquerdo do comando) e o outro redireciona a entrada padrão para a leitura do pipe (lado direito).
+Ambos executam seus respectivos comandos com runcmd(). O processo pai fecha os descritores do pipe e espera ambos os filhos com wait().
 
-- Task 5: No loop principal, foi adicionado um if que verifica se o comando digitado começa com "cd ". Se for o caso, o caractere de
-nova linha final é removido (buf[strlen(buf) - 1] = 0), e chdir() é chamado para trocar o diretório atual. Se chdir() falhar, é
-exibida uma mensagem de erro (a ser corrigida), e o loop continua. Essa lógica implementa um dos únicos comandos que devem ser
-tratados diretamente pelo shell (sem fork), já que cd afeta o processo atual.
+- Task 5: No loop principal, foi adicionado um if que verifica se o comando digitado começa com "cd ". Se for o caso, o caractere de nova
+linha ao final da entrada é removido e a função chdir() é chamada para alterar o diretório atual. Caso chdir() falhe, uma mensagem de erro
+é exibida. No entanto, a mensagem atual ("process does not exist") é inadequada, pois chdir() lida com diretórios, não com processos.
 
 4. Bibliographic references
 
