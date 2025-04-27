@@ -142,7 +142,6 @@ int fork1(void) {
     It should print a message if the fork fails, otherwise return the process ID of the child process (or -1 if the fork fails).
     */
     int child_process_id = fork();
-
     int failed_to_create_child_process = (child_process_id < 0);
 
     if (failed_to_create_child_process) {
@@ -157,7 +156,6 @@ int fork1(void) {
 void handle_simple_cmd(struct execcmd *ecmd) {
     /* Task 2: Implement the code below to execute simple commands. */
     int execvp_result = execvp(ecmd->argv[0], ecmd->argv);
-
     int failed_to_execute_command = (execvp_result == -1);
 
     if (failed_to_execute_command) {
