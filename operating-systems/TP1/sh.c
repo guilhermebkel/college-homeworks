@@ -186,7 +186,7 @@ void handle_pipe(struct pipecmd *pcmd, int *p, int r) {
     int failed_to_create_pipe = (pipe_creation_result < 0);
 
     if (failed_to_create_pipe) {
-        fprintf(stderr, "Erro: failed to create pipe\n");
+        fprintf(stderr, "Error: failed to create pipe\n");
         exit(EXIT_FAILURE);
     }
 
