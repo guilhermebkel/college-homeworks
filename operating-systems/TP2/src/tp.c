@@ -119,7 +119,7 @@ int getPageToEvictByLFU(Frame* memory, unsigned numFrames) {
     return index;
 }
 
-TraceSimulationResult simulateTrace(AppConfig appConfig) {
+TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
     TraceSimulationResult traceSimulationResult = {0, 0, 0};
     clock_t startTime = clock();
     FILE* file = fopen(appConfig.traceFilePath, "r");
@@ -246,7 +246,7 @@ int main(int argc, char* argv[]) {
     appConfig.pageSizeInKB = atoi(argv[3]);
     appConfig.memorySizeInKB = atoi(argv[4]);
 
-    TraceSimulationResult traceSimulationResult = simulateTrace(appConfig);
+    TraceSimulationResult traceSimulationResult = executeTraceSimulation(appConfig);
 
     generateTraceSimulationReport(&appConfig, &traceSimulationResult);
 
