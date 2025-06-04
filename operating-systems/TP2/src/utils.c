@@ -33,22 +33,30 @@ PageTableType turnStringIntoPageTableType(const char* str) {
 }
 
 const char* getReplacementAlgorithmName(ReplacementAlgorithm replacementAlgorithm) {
-	switch (replacementAlgorithm) {
-		case LRU: return "lru";
-		case FIFO: return "fifo";
-		case RANDOM: return "random";
-		case LFU: return "lfu";
-		default: return "desconhecido";
+	if (replacementAlgorithm == LRU) {
+		return "lru";
+	} else if (replacementAlgorithm == FIFO) {
+		return "fifo";
+	} else if (replacementAlgorithm == RANDOM) {
+		return "random";
+	} else if (replacementAlgorithm == LFU) {
+		return "lfu";
+	} else {
+		return "desconhecido";
 	}
 }
 
 const char* getPageTableTypeName(PageTableType type) {
-	switch (type) {
-		case DENSE: return "densa";
-		case HIER2: return "hier2";
-		case HIER3: return "hier3";
-		case INVERTED: return "invertida";
-		default: return "desconhecido";
+	if (type == DENSE) {
+		return "densa";
+	} else if (type == HIER2) {
+		return "hier2";
+	} else if (type == HIER3) {
+		return "hier3";
+	} else if (type == INVERTED) {
+		return "invertida";
+	} else {
+		return "desconhecido";
 	}
 }
 
