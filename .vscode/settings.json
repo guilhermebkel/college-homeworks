@@ -49,6 +49,15 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "dense-page-table.h": "c",
+        "hier2-page-table.h": "c",
+        "hier-2-page-table.h": "c",
+        "hier-3-page-table.h": "c",
+        "inverted-page-table.h": "c",
+        "page-replacement-algorithm.h": "c"
+    },
+    "cSpell.words": [
+        "HIER"
+    ]
 }
