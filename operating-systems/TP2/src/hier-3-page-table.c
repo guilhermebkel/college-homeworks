@@ -36,6 +36,7 @@ void setHier3PageTableFrameIndex(unsigned page, int frameIndex) {
 
 	if (isFirstLevelEmpty) {
 		hier3PageTable[firstLevelIndex] = malloc(sizeof(int*) * HIER_3_LEVEL_ENTRIES);
+
 		for (int secondLevel = 0; secondLevel < HIER_3_LEVEL_ENTRIES; secondLevel++) {
 			hier3PageTable[firstLevelIndex][secondLevel] = NULL;
 		}
@@ -45,6 +46,7 @@ void setHier3PageTableFrameIndex(unsigned page, int frameIndex) {
 
 	if (isSecondLevelEmpty) {
 		hier3PageTable[firstLevelIndex][secondLevelIndex] = malloc(sizeof(int) * HIER_3_LEVEL_ENTRIES);
+
 		for (int thirdLevel = 0; thirdLevel < HIER_3_LEVEL_ENTRIES; thirdLevel++) {
 			hier3PageTable[firstLevelIndex][secondLevelIndex][thirdLevel] = -1;
 		}

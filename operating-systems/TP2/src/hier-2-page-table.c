@@ -17,7 +17,9 @@ int getHier2PageTableFrameIndex(unsigned page) {
 	unsigned firstLevelIndex = page >> 11;
 	unsigned secondLevelIndex = page & (HIER_2_LEVEL_ENTRIES - 1);
 
-	if (!hier2PageTable[firstLevelIndex]) {
+	int hasFirstLevel = hier2PageTable[firstLevelIndex] != NULL;
+
+	if (!hasFirstLevel) {
 		return -1;
 	}
 
@@ -28,12 +30,14 @@ void setHier2PageTableFrameIndex(unsigned page, int frameIndex) {
 	unsigned firstLevelIndex = page >> 11;
 	unsigned secondLevelIndex = page & (HIER_2_LEVEL_ENTRIES - 1);
 
-	if (!hier2PageTable[firstLevelIndex]) {
-			hier2PageTable[firstLevelIndex] = malloc(sizeof(int) * HIER_2_LEVEL_ENTRIES);
+	int hasFirstLevel = hier2PageTable[firstLevelIndex] != NULL;
 
-			for (int secondTableIndex = 0; secondTableIndex < HIER_2_LEVEL_ENTRIES; secondTableIndex++) {
-				hier2PageTable[firstLevelIndex][secondTableIndex] = -1;
-			}
+	if (!hasFirstLevel) {
+		hier2PageTable[firstLevelIndex] = malloc(sizeof(int) * HIER_2_LEVEL_ENTRIES);
+
+		for (int secondTableIndex = 0; secondTableIndex < HIER_2_LEVEL_ENTRIES; secondTableIndex++) {
+			hier2PageTable[firstLevelIndex][secondTableIndex] = -1;
+		}
 	}
 
 	hier2PageTable[firstLevelIndex][secondLevelIndex] = frameIndex;
@@ -45,7 +49,9 @@ void removeHier2PageTableFrameIndex(unsigned page) {
 
 void clearHier2PageTable() {
 	for (int firstTableIndex = 0; firstTableIndex < HIER_2_LEVEL_ENTRIES; firstTableIndex++) {
-		if (hier2PageTable[firstTableIndex]) {
+		int hasFirstLevel = hier2PageTable[firstTableIndex] != NULL;
+
+		if (hasFirstLevel) {
 			free(hier2PageTable[firstTableIndex]);
 		}
 	}

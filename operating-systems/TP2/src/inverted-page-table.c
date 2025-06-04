@@ -28,7 +28,9 @@ int getInvertedPageTableFrameIndex(unsigned page) {
 	InvertedPageEntry* currentEntry = invertedPageTable[pageNumberHash];
 
 	while (currentEntry) {
-		if (currentEntry->pageNumber == page) {
+		int isPageFound = currentEntry->pageNumber == page;
+
+		if (isPageFound) {
 			return currentEntry->frameIndex;
 		}
 
@@ -43,7 +45,9 @@ void setInvertedPageTableFrameIndex(unsigned page, int frameIndex) {
 	InvertedPageEntry* currentEntry = invertedPageTable[pageNumberHash];
 	
 	while (currentEntry) {
-		if (currentEntry->pageNumber == page) {
+		int isPageFound = currentEntry->pageNumber == page;
+
+		if (isPageFound) {
 			currentEntry->frameIndex = frameIndex;
 			return;
 		}
@@ -64,8 +68,12 @@ void removeInvertedPageTableFrameIndex(unsigned page) {
 	InvertedPageEntry* previousEntry = NULL;
 
 	while (currentEntry) {
-		if (currentEntry->pageNumber == page) {
-			if (previousEntry) {
+		int isPageFound = currentEntry->pageNumber == page;
+
+		if (isPageFound) {
+			int isPreviousEntryExists = previousEntry != NULL;
+
+			if (isPreviousEntryExists) {
 				previousEntry->next = currentEntry->next;
 			} else {
 				invertedPageTable[pageNumberHash] = currentEntry->next;

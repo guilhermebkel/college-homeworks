@@ -131,9 +131,9 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 		unsigned pageNumber = address >> pageShiftBits;
 		int frameIndex = getPageTableFrameIndex(appConfig.pageTableType, pageNumber);
 
-		int pageIsInMemory = ((frameIndex != -1) && (memory[frameIndex].pageNumber == pageNumber));
+		int isPageInMemory = ((frameIndex != -1) && (memory[frameIndex].pageNumber == pageNumber));
 
-		if (pageIsInMemory) {
+		if (isPageInMemory) {
 			memory[frameIndex].lastAccessTime = time;
 			memory[frameIndex].accessCount++;
 
@@ -166,7 +166,9 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 				}
 			}
 
-			if (!pageHasBeenPlaced) {
+			int isPageTableFull = !pageHasBeenPlaced;
+
+			if (isPageTableFull) {
 				int evictedPageIndex = getEvictedPageIndex(appConfig.replacementAlgorithm, memory, numFrames);
 
 				if (memory[evictedPageIndex].dirty) {
