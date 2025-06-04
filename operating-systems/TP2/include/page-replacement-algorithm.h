@@ -9,9 +9,9 @@ typedef struct {
 	unsigned loadTime;
 } Frame;
 
-int getPageToEvictByRandom(Frame* memory, unsigned numFrames);
-int getPageToEvictByFIFO(Frame* memory, unsigned numFrames);
-int getPageToEvictByLRU(Frame* memory, unsigned numFrames);
-int getPageToEvictByLFU(Frame* memory, unsigned numFrames);
+int getEvictedPageIndexByRandom(Frame* memory, unsigned numFrames);
+int getEvictedPageIndexByFIFO(Frame* memory, unsigned numFrames);
+int getEvictedPageIndexByLRU(Frame* memory, unsigned numFrames);
+int getEvictedPageIndexByLFU(Frame* memory, unsigned numFrames);
 
 #endif

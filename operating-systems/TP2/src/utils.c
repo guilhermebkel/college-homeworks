@@ -5,20 +5,33 @@
 #include "utils.h"
 
 ReplacementAlgorithm turnStringIntoReplacementAlgorithm(const char* str) {
-	if (strcmp(str, "lru") == 0) return LRU;
-	else if (strcmp(str, "fifo") == 0) return FIFO;
-	else if (strcmp(str, "optimal") == 0) return OPTIMAL;
-	else if (strcmp(str, "random") == 0) return RANDOM;
-	else if (strcmp(str, "lfu") == 0) return LFU;
-	else return -1;
+	if (strcmp(str, "lru") == 0) {
+		return LRU;
+	} else if (strcmp(str, "fifo") == 0) {
+		return FIFO;
+	} else if (strcmp(str, "optimal") == 0) {
+		return OPTIMAL;
+	} else if (strcmp(str, "random") == 0) {
+		return RANDOM;
+	} else if (strcmp(str, "lfu") == 0) {
+		return LFU;
+	} else {
+		return -1;
+	}
 }
 
 PageTableType turnStringIntoPageTableType(const char* str) {
-	if (strcmp(str, "densa") == 0) return DENSE;
-	else if (strcmp(str, "hier2") == 0) return HIER2;
-	else if (strcmp(str, "hier3") == 0) return HIER3;
-	else if (strcmp(str, "invertida") == 0) return INVERTED;
-	else return -1;
+	if (strcmp(str, "densa") == 0) {
+		return DENSE;
+	} else if (strcmp(str, "hier2") == 0) {
+		return HIER2;
+	} else if (strcmp(str, "hier3") == 0) {
+		return HIER3;
+	} else if (strcmp(str, "invertida") == 0) {
+		return INVERTED;
+	} else {
+		return -1;
+	}
 }
 
 const char* getReplacementAlgorithmName(ReplacementAlgorithm replacementAlgorithm) {
@@ -43,7 +56,13 @@ const char* getPageTableTypeName(PageTableType type) {
 }
 
 unsigned calculatePageShiftBits(unsigned pageSizeInKB) {
-	unsigned s = 0, tmp = pageSizeInKB;
-	while (tmp > 1) { tmp >>= 1; s++; }
-	return s;
+	unsigned shiftBits = 0;
+	unsigned pageSize = pageSizeInKB;
+
+	while (pageSize > 1) {
+		pageSize >>= 1;
+		shiftBits++;
+	}
+
+	return shiftBits;
 }

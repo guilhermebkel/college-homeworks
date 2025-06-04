@@ -8,12 +8,12 @@ int* densePageTable;
 void initDensePageTable () {
 	densePageTable = malloc(sizeof(int) * DENSE_PAGE_TABLE_SIZE);
 
-	for (unsigned i = 0; i < DENSE_PAGE_TABLE_SIZE; i++) {
-		densePageTable[i] = -1;
+	for (unsigned pageIndex = 0; pageIndex < DENSE_PAGE_TABLE_SIZE; pageIndex++) {
+		densePageTable[pageIndex] = -1;
 	}
 }
 
-int getDenseFrameIndex(unsigned page) {
+int getDensePageTableFrameIndex(unsigned page) {
 	return densePageTable[page];
 }
 

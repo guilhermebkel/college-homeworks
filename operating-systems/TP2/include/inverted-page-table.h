@@ -2,9 +2,9 @@
 #define INVERTED_PAGE_TABLE_HEADER
 
 void initInvertedPageTable();
-int getInvertedFrameIndex(unsigned page);
-void setInvertedFrameIndex(unsigned page, int frameIndex);
-void removeInvertedFrameIndex(unsigned page);
+int getInvertedPageTableFrameIndex(unsigned page);
+void setInvertedPageTableFrameIndex(unsigned page, int frameIndex);
+void removeInvertedPageTableFrameIndex(unsigned page);
 void clearInvertedPageTable();
 
 #endif

@@ -4,39 +4,56 @@
 
 #include "page-replacement-algorithm.h"
 
-int getPageToEvictByRandom(Frame* memory, unsigned numFrames) {
-	return rand() % numFrames;
+int getEvictedPageIndexByRandom(Frame* memory, unsigned numFrames) {
+	int evictedFrameIndex = rand() % numFrames;
+
+	return evictedFrameIndex;
 }
 
-int getPageToEvictByFIFO(Frame* memory, unsigned numFrames) {
-	int minLoadTime = INT_MAX, index = 0;
-	for (unsigned i = 0; i < numFrames; i++) {
-		if (memory[i].loadTime < minLoadTime) {
-			minLoadTime = memory[i].loadTime;
-			index = i;
+int getEvictedPageIndexByFIFO(Frame* memory, unsigned numFrames) {
+	int oldestLoadTime = INT_MAX;
+	int evictedFrameIndex = 0;
+
+	for (unsigned frameIndex = 0; frameIndex < numFrames; frameIndex++) {
+		int isOlderLoadTime = memory[frameIndex].loadTime < oldestLoadTime;
+
+		if (isOlderLoadTime) {
+			oldestLoadTime = memory[frameIndex].loadTime;
+			evictedFrameIndex = frameIndex;
 		}
 	}
-	return index;
+
+	return evictedFrameIndex;
 }
 
-int getPageToEvictByLRU(Frame* memory, unsigned numFrames) {
-	int oldestTime = INT_MAX, index = 0;
-	for (unsigned i = 0; i < numFrames; i++) {
-		if (memory[i].lastAccessTime < oldestTime) {
-			oldestTime = memory[i].lastAccessTime;
-			index = i;
+int getEvictedPageIndexByLRU(Frame* memory, unsigned numFrames) {
+	int oldestAccessTime = INT_MAX;
+	int evictedFrameIndex = 0;
+
+	for (unsigned frameIndex = 0; frameIndex < numFrames; frameIndex++) {
+		int isOlderAccessTime = memory[frameIndex].lastAccessTime < oldestAccessTime;
+
+		if (isOlderAccessTime) {
+			oldestAccessTime = memory[frameIndex].lastAccessTime;
+			evictedFrameIndex = frameIndex;
 		}
 	}
-	return index;
+
+	return evictedFrameIndex;
 }
 
-int getPageToEvictByLFU(Frame* memory, unsigned numFrames) {
-	int leastAccessed = INT_MAX, index = 0;
-	for (unsigned i = 0; i < numFrames; i++) {
-		if (memory[i].accessCount < leastAccessed) {
-			leastAccessed = memory[i].accessCount;
-			index = i;
+int getEvictedPageIndexByLFU(Frame* memory, unsigned numFrames) {
+	int leastAccessCount = INT_MAX;
+	int evictedFrameIndex = 0;
+
+	for (unsigned frameIndex = 0; frameIndex < numFrames; frameIndex++) {
+		int hasLessAccesses = memory[frameIndex].accessCount < leastAccessCount;
+
+		if (hasLessAccesses) {
+			leastAccessCount = memory[frameIndex].accessCount;
+			evictedFrameIndex = frameIndex;
 		}
 	}
-	return index;
+
+	return evictedFrameIndex;
 }

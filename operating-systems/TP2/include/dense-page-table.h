@@ -2,7 +2,7 @@
 #define DENSE_PAGE_TABLE_HEADER
 
 void initDensePageTable ();
-int getDenseFrameIndex(unsigned page);
+int getDensePageTableFrameIndex(unsigned page);
 void setDenseFrameIndex(unsigned page, int frameIndex);
 void removeDenseFrameIndex(unsigned page);
 void clearDensePageTable();

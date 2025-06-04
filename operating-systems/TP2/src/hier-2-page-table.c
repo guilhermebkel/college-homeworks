@@ -8,35 +8,46 @@ int** hier2PageTable;
 void initHier2PageTable() {
 	hier2PageTable = malloc(sizeof(int*) * HIER_2_LEVEL_ENTRIES);
 
-	for (unsigned i = 0; i < HIER_2_LEVEL_ENTRIES; i++) {
-		hier2PageTable[i] = NULL;
+	for (unsigned pageTableIndex = 0; pageTableIndex < HIER_2_LEVEL_ENTRIES; pageTableIndex++) {
+		hier2PageTable[pageTableIndex] = NULL;
 	}
 }
 
-int getHier2FrameIndex(unsigned page) {
-	unsigned first = page >> 11;
-	unsigned second = page & (HIER_2_LEVEL_ENTRIES - 1);
-	if (!hier2PageTable[first]) return -1;
-	return hier2PageTable[first][second];
-}
+int getHier2PageTableFrameIndex(unsigned page) {
+	unsigned firstLevelIndex = page >> 11;
+	unsigned secondLevelIndex = page & (HIER_2_LEVEL_ENTRIES - 1);
 
-void setHier2FrameIndex(unsigned page, int frameIndex) {
-	unsigned first = page >> 11;
-	unsigned second = page & (HIER_2_LEVEL_ENTRIES - 1);
-	if (!hier2PageTable[first]) {
-			hier2PageTable[first] = malloc(sizeof(int) * HIER_2_LEVEL_ENTRIES);
-			for (int i = 0; i < HIER_2_LEVEL_ENTRIES; i++) hier2PageTable[first][i] = -1;
+	if (!hier2PageTable[firstLevelIndex]) {
+		return -1;
 	}
-	hier2PageTable[first][second] = frameIndex;
+
+	return hier2PageTable[firstLevelIndex][secondLevelIndex];
 }
 
-void removeHier2FrameIndex(unsigned page) {
-	setHier2FrameIndex(page, -1);
+void setHier2PageTableFrameIndex(unsigned page, int frameIndex) {
+	unsigned firstLevelIndex = page >> 11;
+	unsigned secondLevelIndex = page & (HIER_2_LEVEL_ENTRIES - 1);
+
+	if (!hier2PageTable[firstLevelIndex]) {
+			hier2PageTable[firstLevelIndex] = malloc(sizeof(int) * HIER_2_LEVEL_ENTRIES);
+
+			for (int secondTableIndex = 0; secondTableIndex < HIER_2_LEVEL_ENTRIES; secondTableIndex++) {
+				hier2PageTable[firstLevelIndex][secondTableIndex] = -1;
+			}
+	}
+
+	hier2PageTable[firstLevelIndex][secondLevelIndex] = frameIndex;
+}
+
+void removeHier2PageTableFrameIndex(unsigned page) {
+	setHier2PageTableFrameIndex(page, -1);
 }
 
 void clearHier2PageTable() {
-	for (int i = 0; i < HIER_2_LEVEL_ENTRIES; i++) {
-		if (hier2PageTable[i]) free(hier2PageTable[i]);
+	for (int firstTableIndex = 0; firstTableIndex < HIER_2_LEVEL_ENTRIES; firstTableIndex++) {
+		if (hier2PageTable[firstTableIndex]) {
+			free(hier2PageTable[firstTableIndex]);
+		}
 	}
 	
 	free(hier2PageTable);

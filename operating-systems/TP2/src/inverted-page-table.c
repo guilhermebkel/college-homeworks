@@ -8,71 +8,86 @@ int** hier2PageTable;
 int*** hier3PageTable;
 
 typedef struct InvertedPageEntry {
-    unsigned pageNumber;
-    int frameIndex;
-    struct InvertedPageEntry* next;
+	unsigned pageNumber;
+	int frameIndex;
+	struct InvertedPageEntry* next;
 } InvertedPageEntry;
 
 InvertedPageEntry** invertedPageTable;
 
 unsigned hashPageNumber(unsigned page) {
-    return page % INVERTED_TABLE_SIZE;
+	return page % INVERTED_TABLE_SIZE;
 }
 
 void initInvertedPageTable() {
 	invertedPageTable = calloc(INVERTED_TABLE_SIZE, sizeof(InvertedPageEntry*));
 }
 
-int getInvertedFrameIndex(unsigned page) {
-    unsigned hash = hashPageNumber(page);
-    InvertedPageEntry* entry = invertedPageTable[hash];
-    while (entry) {
-        if (entry->pageNumber == page) return entry->frameIndex;
-        entry = entry->next;
-    }
-    return -1;
+int getInvertedPageTableFrameIndex(unsigned page) {
+	unsigned pageNumberHash = hashPageNumber(page);
+	InvertedPageEntry* currentEntry = invertedPageTable[pageNumberHash];
+
+	while (currentEntry) {
+		if (currentEntry->pageNumber == page) {
+			return currentEntry->frameIndex;
+		}
+
+		currentEntry = currentEntry->next;
+	}
+
+	return -1;
 }
 
-void setInvertedFrameIndex(unsigned page, int frameIndex) {
-    unsigned hash = hashPageNumber(page);
-    InvertedPageEntry* entry = invertedPageTable[hash];
-    while (entry) {
-        if (entry->pageNumber == page) {
-            entry->frameIndex = frameIndex;
-            return;
-        }
-        entry = entry->next;
-    }
-    entry = malloc(sizeof(InvertedPageEntry));
-    entry->pageNumber = page;
-    entry->frameIndex = frameIndex;
-    entry->next = invertedPageTable[hash];
-    invertedPageTable[hash] = entry;
+void setInvertedPageTableFrameIndex(unsigned page, int frameIndex) {
+	unsigned pageNumberHash = hashPageNumber(page);
+	InvertedPageEntry* currentEntry = invertedPageTable[pageNumberHash];
+	
+	while (currentEntry) {
+		if (currentEntry->pageNumber == page) {
+			currentEntry->frameIndex = frameIndex;
+			return;
+		}
+
+		currentEntry = currentEntry->next;
+	}
+	
+	InvertedPageEntry* newEntry = malloc(sizeof(InvertedPageEntry));
+	newEntry->pageNumber = page;
+	newEntry->frameIndex = frameIndex;
+	newEntry->next = invertedPageTable[pageNumberHash];
+	invertedPageTable[pageNumberHash] = newEntry;
 }
 
-void removeInvertedFrameIndex(unsigned page) {
-    unsigned hash = hashPageNumber(page);
-    InvertedPageEntry* curr = invertedPageTable[hash];
-    InvertedPageEntry* prev = NULL;
-    while (curr) {
-        if (curr->pageNumber == page) {
-            if (prev) prev->next = curr->next;
-            else invertedPageTable[hash] = curr->next;
-            free(curr);
-            return;
-        }
-        prev = curr;
-        curr = curr->next;
-    }
+void removeInvertedPageTableFrameIndex(unsigned page) {
+	unsigned pageNumberHash = hashPageNumber(page);
+	InvertedPageEntry* currentEntry = invertedPageTable[pageNumberHash];
+	InvertedPageEntry* previousEntry = NULL;
+
+	while (currentEntry) {
+		if (currentEntry->pageNumber == page) {
+			if (previousEntry) {
+				previousEntry->next = currentEntry->next;
+			} else {
+				invertedPageTable[pageNumberHash] = currentEntry->next;
+			}
+
+			free(currentEntry);
+			return;
+		}
+
+		previousEntry = currentEntry;
+		currentEntry = currentEntry->next;
+	}
 }
 
 void clearInvertedPageTable() {
-	for (int i = 0; i < INVERTED_TABLE_SIZE; i++) {
-		InvertedPageEntry* entry = invertedPageTable[i];
-		while (entry) {
-			InvertedPageEntry* temp = entry;
-			entry = entry->next;
-			free(temp);
+	for (int hashIndex = 0; hashIndex < INVERTED_TABLE_SIZE; hashIndex++) {
+		InvertedPageEntry* currentEntry = invertedPageTable[hashIndex];
+
+		while (currentEntry) {
+			InvertedPageEntry* entryToFree = currentEntry;
+			currentEntry = currentEntry->next;
+			free(entryToFree);
 		}
 	}
 

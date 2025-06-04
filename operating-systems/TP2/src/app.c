@@ -25,41 +25,41 @@ void initPageTable(PageTableType type) {
 	}
 }
 
-int getFrameIndex(PageTableType type, unsigned page) {
+int getPageTableFrameIndex(PageTableType type, unsigned page) {
 	if (type == DENSE) {
-		return getDenseFrameIndex(page);
+		return getDensePageTableFrameIndex(page);
 	} else if (type == HIER2) {
-		return getHier2FrameIndex(page);
+		return getHier2PageTableFrameIndex(page);
 	} else if (type == HIER3) {
-		return getHier3FrameIndex(page);
+		return getHier3PageTableFrameIndex(page);
 	} else if (type == INVERTED) {
-		return getInvertedFrameIndex(page);
+		return getInvertedPageTableFrameIndex(page);
 	}
 
 	return -1;
 }
 
-void setFrameIndex(PageTableType type, unsigned page, int frameIndex) {
+void setPageTableFrameIndex(PageTableType type, unsigned page, int frameIndex) {
 	if (type == DENSE) {
 		setDenseFrameIndex(page, frameIndex);
 	} else if (type == HIER2) {
-		setHier2FrameIndex(page, frameIndex);
+		setHier2PageTableFrameIndex(page, frameIndex);
 	} else if (type == HIER3) {
-		setHier3FrameIndex(page, frameIndex);
+		setHier3PageTableFrameIndex(page, frameIndex);
 	} else if (type == INVERTED) {
-		setInvertedFrameIndex(page, frameIndex);
+		setInvertedPageTableFrameIndex(page, frameIndex);
 	}
 }
 
-void removeFrameIndex(PageTableType type, unsigned page) {
+void removePageTableFrameIndex(PageTableType type, unsigned page) {
 	if (type == DENSE) {
 		removeDenseFrameIndex(page);
 	} else if (type == HIER2) {
-		removeHier2FrameIndex(page);
+		removeHier2PageTableFrameIndex(page);
 	} else if (type == HIER3) {
-		removeHier3FrameIndex(page);
+		removeHier3PageTableFrameIndex(page);
 	} else if (type == INVERTED) {
-		removeInvertedFrameIndex(page);
+		removeInvertedPageTableFrameIndex(page);
 	}
 }
 
@@ -75,15 +75,15 @@ void clearPageTable(PageTableType type) {
 	}
 }
 
-int getPageToEvict(ReplacementAlgorithm type, Frame* memory, unsigned numFrames) {
+int getEvictedPageIndex(ReplacementAlgorithm type, Frame* memory, unsigned numFrames) {
 	if (type == RANDOM) {
-		return getPageToEvictByRandom(memory, numFrames);
+		return getEvictedPageIndexByRandom(memory, numFrames);
 	} else if (type == FIFO) {
-		return getPageToEvictByFIFO(memory, numFrames);
+		return getEvictedPageIndexByFIFO(memory, numFrames);
 	} else if (type == LRU) {
-		return getPageToEvictByLRU(memory, numFrames);
+		return getEvictedPageIndexByLRU(memory, numFrames);
 	} else if (type == LFU) {
-		return getPageToEvictByLFU(memory, numFrames);
+		return getEvictedPageIndexByLFU(memory, numFrames);
 	}
 
 	return -1;
@@ -93,7 +93,13 @@ Frame* initMemory(unsigned numFrames) {
 	Frame* memory = malloc(sizeof(Frame) * numFrames);
 
 	for (unsigned i = 0; i < numFrames; i++) {
-		memory[i] = (Frame){-1, 0, 0, 0, 0};
+		memory[i] = (Frame){
+			.pageNumber = -1,
+			.lastAccessTime = 0,
+			.accessCount = 0,
+			.dirty = 0,
+			.loadTime = 0
+		};
 	}
 
 	return memory;
@@ -110,53 +116,73 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 	}
 
 	srand(time(NULL));
-	unsigned s = calculatePageShiftBits(appConfig.pageSizeInKB) + 10;
-	unsigned addr; char rw; unsigned time = 0;
+	unsigned pageShiftBits = calculatePageShiftBits(appConfig.pageSizeInKB) + 10;
+	unsigned address; char rw; unsigned time = 0;
 
 	unsigned numFrames = appConfig.memorySizeInKB / appConfig.pageSizeInKB;
 	Frame* memory = initMemory(numFrames);
 
 	initPageTable(appConfig.pageTableType);
 
-	while (fscanf(file, "%x %c", &addr, &rw) != EOF) {
+	while (fscanf(file, "%x %c", &address, &rw) != EOF) {
 		traceSimulationResult.totalAccesses++;
 		time++;
 
-		unsigned page = addr >> s;
-		int frameIndex = getFrameIndex(appConfig.pageTableType, page);
+		unsigned pageNumber = address >> pageShiftBits;
+		int frameIndex = getPageTableFrameIndex(appConfig.pageTableType, pageNumber);
 
-		if (frameIndex != -1 && memory[frameIndex].pageNumber == page) {
+		int pageIsInMemory = ((frameIndex != -1) && (memory[frameIndex].pageNumber == pageNumber));
+
+		if (pageIsInMemory) {
 			memory[frameIndex].lastAccessTime = time;
 			memory[frameIndex].accessCount++;
 
-			if (rw == 'W') {
+			int isWriteOperation = (rw == 'W');
+
+			if (isWriteOperation) {
 				memory[frameIndex].dirty = 1;
 			}
 		} else {
 			traceSimulationResult.pageFaults++;
-			int placed = 0;
+			int pageHasBeenPlaced = 0;
 
-			for (unsigned i = 0; i < numFrames; i++) {
-				if (memory[i].pageNumber == -1) {
-					memory[i] = (Frame){page, time, 1, (rw == 'W') ? 1 : 0, time};
-					setFrameIndex(appConfig.pageTableType, page, i);
-					placed = 1;
+			for (unsigned currentFrameIndex = 0; currentFrameIndex < numFrames; currentFrameIndex++) {
+				int isEmptyFrame = memory[currentFrameIndex].pageNumber == -1;
+
+				if (isEmptyFrame) {
+					memory[currentFrameIndex] = (Frame){
+						.pageNumber = pageNumber,
+						.lastAccessTime = time,
+						.accessCount = 1,
+						.dirty = (rw == 'W') ? 1 : 0,
+						.loadTime = time
+					};
+
+					setPageTableFrameIndex(appConfig.pageTableType, pageNumber, currentFrameIndex);
+
+					pageHasBeenPlaced = 1;
 					break;
 				}
 			}
 
-			if (!placed) {
-				int evictIndex = getPageToEvict(appConfig.replacementAlgorithm, memory, numFrames);
+			if (!pageHasBeenPlaced) {
+				int evictedPageIndex = getEvictedPageIndex(appConfig.replacementAlgorithm, memory, numFrames);
 
-				if (memory[evictIndex].dirty) {
+				if (memory[evictedPageIndex].dirty) {
 					traceSimulationResult.dirtyPages++;
 				}
 
-				removeFrameIndex(appConfig.pageTableType, memory[evictIndex].pageNumber);
+				removePageTableFrameIndex(appConfig.pageTableType, memory[evictedPageIndex].pageNumber);
 
-				memory[evictIndex] = (Frame){page, time, 1, (rw == 'W') ? 1 : 0, time};
+				memory[evictedPageIndex] = (Frame){
+					.pageNumber = pageNumber,
+					.lastAccessTime = time,
+					.accessCount = 1,
+					.dirty = (rw == 'W') ? 1 : 0,
+					.loadTime = time
+				};
 
-				setFrameIndex(appConfig.pageTableType, page, evictIndex);
+				setPageTableFrameIndex(appConfig.pageTableType, pageNumber, evictedPageIndex);
 			}
 		}
 	}
@@ -167,6 +193,7 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 	clock_t endTime = clock();
 	traceSimulationResult.executionTimeInSeconds = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+
 	return traceSimulationResult;
 }
 
