@@ -4,7 +4,6 @@
 typedef enum {
 	LRU,
 	FIFO,
-	OPTIMAL,
 	RANDOM,
 	LFU
 } ReplacementAlgorithm;

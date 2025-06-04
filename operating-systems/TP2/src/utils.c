@@ -9,8 +9,6 @@ ReplacementAlgorithm turnStringIntoReplacementAlgorithm(const char* str) {
 		return LRU;
 	} else if (strcmp(str, "fifo") == 0) {
 		return FIFO;
-	} else if (strcmp(str, "optimal") == 0) {
-		return OPTIMAL;
 	} else if (strcmp(str, "random") == 0) {
 		return RANDOM;
 	} else if (strcmp(str, "lfu") == 0) {
@@ -40,7 +38,6 @@ const char* getReplacementAlgorithmName(ReplacementAlgorithm replacementAlgorith
 		case FIFO: return "fifo";
 		case RANDOM: return "random";
 		case LFU: return "lfu";
-		case OPTIMAL: return "optimal (não implementado)";
 		default: return "desconhecido";
 	}
 }
