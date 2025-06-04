@@ -148,13 +148,14 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 			for (unsigned currentFrameIndex = 0; currentFrameIndex < numFrames; currentFrameIndex++) {
 				int isEmptyFrame = memory[currentFrameIndex].pageNumber == -1;
+				int isWriteOperation = (rw == 'W');
 
 				if (isEmptyFrame) {
 					memory[currentFrameIndex] = (Frame){
 						.pageNumber = pageNumber,
 						.lastAccessTime = time,
 						.accessCount = 1,
-						.dirty = (rw == 'W') ? 1 : 0,
+						.dirty = isWriteOperation ? 1 : 0,
 						.loadTime = time
 					};
 
@@ -174,11 +175,13 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 				removePageTableFrameIndex(appConfig.pageTableType, memory[evictedPageIndex].pageNumber);
 
+				int isWriteOperation = (rw == 'W');
+
 				memory[evictedPageIndex] = (Frame){
 					.pageNumber = pageNumber,
 					.lastAccessTime = time,
 					.accessCount = 1,
-					.dirty = (rw == 'W') ? 1 : 0,
+					.dirty = isWriteOperation ? 1 : 0,
 					.loadTime = time
 				};
 
