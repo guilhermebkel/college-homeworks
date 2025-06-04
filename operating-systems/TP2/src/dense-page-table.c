@@ -17,12 +17,12 @@ int getDensePageTableFrameIndex(unsigned page) {
 	return densePageTable[page];
 }
 
-void setDenseFrameIndex(unsigned page, int frameIndex) {
+void setDensePageTableFrameIndex(unsigned page, int frameIndex) {
 	densePageTable[page] = frameIndex;
 }
 
-void removeDenseFrameIndex(unsigned page) {
-	setDenseFrameIndex(page, -1);
+void removeDensePageTableFrameIndex(unsigned page) {
+	setDensePageTableFrameIndex(page, -1);
 }
 
 void clearDensePageTable() {

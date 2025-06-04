@@ -41,7 +41,7 @@ int getPageTableFrameIndex(PageTableType type, unsigned page) {
 
 void setPageTableFrameIndex(PageTableType type, unsigned page, int frameIndex) {
 	if (type == DENSE) {
-		setDenseFrameIndex(page, frameIndex);
+		setDensePageTableFrameIndex(page, frameIndex);
 	} else if (type == HIER2) {
 		setHier2PageTableFrameIndex(page, frameIndex);
 	} else if (type == HIER3) {
@@ -53,7 +53,7 @@ void setPageTableFrameIndex(PageTableType type, unsigned page, int frameIndex) {
 
 void removePageTableFrameIndex(PageTableType type, unsigned page) {
 	if (type == DENSE) {
-		removeDenseFrameIndex(page);
+		removeDensePageTableFrameIndex(page);
 	} else if (type == HIER2) {
 		removeHier2PageTableFrameIndex(page);
 	} else if (type == HIER3) {
@@ -75,15 +75,15 @@ void clearPageTable(PageTableType type) {
 	}
 }
 
-int getEvictedPageIndex(ReplacementAlgorithm type, Frame* memory, unsigned numFrames) {
+int getEvictedFrameIndex(ReplacementAlgorithm type, Frame* memory, unsigned numFrames) {
 	if (type == RANDOM) {
-		return getEvictedPageIndexByRandom(memory, numFrames);
+		return getEvictedFrameIndexByRandom(memory, numFrames);
 	} else if (type == FIFO) {
-		return getEvictedPageIndexByFIFO(memory, numFrames);
+		return getEvictedFrameIndexByFIFO(memory, numFrames);
 	} else if (type == LRU) {
-		return getEvictedPageIndexByLRU(memory, numFrames);
+		return getEvictedFrameIndexByLRU(memory, numFrames);
 	} else if (type == LFU) {
-		return getEvictedPageIndexByLFU(memory, numFrames);
+		return getEvictedFrameIndexByLFU(memory, numFrames);
 	}
 
 	return -1;
@@ -128,10 +128,10 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 		traceSimulationResult.totalAccesses++;
 		time++;
 
-		unsigned pageNumber = address >> pageShiftBits;
-		int frameIndex = getPageTableFrameIndex(appConfig.pageTableType, pageNumber);
+		unsigned page = address >> pageShiftBits;
+		int frameIndex = getPageTableFrameIndex(appConfig.pageTableType, page);
 
-		int isPageInMemory = ((frameIndex != -1) && (memory[frameIndex].pageNumber == pageNumber));
+		int isPageInMemory = ((frameIndex != -1) && (memory[frameIndex].pageNumber == page));
 
 		if (isPageInMemory) {
 			memory[frameIndex].lastAccessTime = time;
@@ -152,14 +152,14 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 				if (isEmptyFrame) {
 					memory[currentFrameIndex] = (Frame){
-						.pageNumber = pageNumber,
+						.pageNumber = page,
 						.lastAccessTime = time,
 						.accessCount = 1,
 						.dirty = isWriteOperation ? 1 : 0,
 						.loadTime = time
 					};
 
-					setPageTableFrameIndex(appConfig.pageTableType, pageNumber, currentFrameIndex);
+					setPageTableFrameIndex(appConfig.pageTableType, page, currentFrameIndex);
 
 					pageHasBeenPlaced = 1;
 					break;
@@ -169,25 +169,25 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 			int isPageTableFull = !pageHasBeenPlaced;
 
 			if (isPageTableFull) {
-				int evictedPageIndex = getEvictedPageIndex(appConfig.replacementAlgorithm, memory, numFrames);
+				int evictedFrameIndex = getEvictedFrameIndex(appConfig.replacementAlgorithm, memory, numFrames);
 
-				if (memory[evictedPageIndex].dirty) {
+				if (memory[evictedFrameIndex].dirty) {
 					traceSimulationResult.dirtyPages++;
 				}
 
-				removePageTableFrameIndex(appConfig.pageTableType, memory[evictedPageIndex].pageNumber);
+				removePageTableFrameIndex(appConfig.pageTableType, memory[evictedFrameIndex].pageNumber);
 
 				int isWriteOperation = (rw == 'W');
 
-				memory[evictedPageIndex] = (Frame){
-					.pageNumber = pageNumber,
+				memory[evictedFrameIndex] = (Frame){
+					.pageNumber = page,
 					.lastAccessTime = time,
 					.accessCount = 1,
 					.dirty = isWriteOperation ? 1 : 0,
 					.loadTime = time
 				};
 
-				setPageTableFrameIndex(appConfig.pageTableType, pageNumber, evictedPageIndex);
+				setPageTableFrameIndex(appConfig.pageTableType, page, evictedFrameIndex);
 			}
 		}
 	}

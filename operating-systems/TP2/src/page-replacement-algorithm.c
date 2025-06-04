@@ -4,13 +4,13 @@
 
 #include "page-replacement-algorithm.h"
 
-int getEvictedPageIndexByRandom(Frame* memory, unsigned numFrames) {
+int getEvictedFrameIndexByRandom(Frame* memory, unsigned numFrames) {
 	int evictedFrameIndex = rand() % numFrames;
 
 	return evictedFrameIndex;
 }
 
-int getEvictedPageIndexByFIFO(Frame* memory, unsigned numFrames) {
+int getEvictedFrameIndexByFIFO(Frame* memory, unsigned numFrames) {
 	int oldestLoadTime = INT_MAX;
 	int evictedFrameIndex = 0;
 
@@ -26,7 +26,7 @@ int getEvictedPageIndexByFIFO(Frame* memory, unsigned numFrames) {
 	return evictedFrameIndex;
 }
 
-int getEvictedPageIndexByLRU(Frame* memory, unsigned numFrames) {
+int getEvictedFrameIndexByLRU(Frame* memory, unsigned numFrames) {
 	int oldestAccessTime = INT_MAX;
 	int evictedFrameIndex = 0;
 
@@ -42,7 +42,7 @@ int getEvictedPageIndexByLRU(Frame* memory, unsigned numFrames) {
 	return evictedFrameIndex;
 }
 
-int getEvictedPageIndexByLFU(Frame* memory, unsigned numFrames) {
+int getEvictedFrameIndexByLFU(Frame* memory, unsigned numFrames) {
 	int leastAccessCount = INT_MAX;
 	int evictedFrameIndex = 0;
 

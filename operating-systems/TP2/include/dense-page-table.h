@@ -3,8 +3,8 @@
 
 void initDensePageTable ();
 int getDensePageTableFrameIndex(unsigned page);
-void setDenseFrameIndex(unsigned page, int frameIndex);
-void removeDenseFrameIndex(unsigned page);
+void setDensePageTableFrameIndex(unsigned page, int frameIndex);
+void removeDensePageTableFrameIndex(unsigned page);
 void clearDensePageTable();
 
 #endif
