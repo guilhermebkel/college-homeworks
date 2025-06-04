@@ -222,15 +222,15 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	AppConfig config;
-	config.replacementAlgorithm = turnStringIntoReplacementAlgorithm(argv[1]);
-	config.traceFilePath = argv[2];
-	config.pageSizeInKB = atoi(argv[3]);
-	config.memorySizeInKB = atoi(argv[4]);
-	config.pageTableType = turnStringIntoPageTableType(argv[5]);
+	AppConfig appConfig;
+	appConfig.replacementAlgorithm = turnStringIntoReplacementAlgorithm(argv[1]);
+	appConfig.traceFilePath = argv[2];
+	appConfig.pageSizeInKB = atoi(argv[3]);
+	appConfig.memorySizeInKB = atoi(argv[4]);
+	appConfig.pageTableType = turnStringIntoPageTableType(argv[5]);
 
-	TraceSimulationResult result = executeTraceSimulation(config);
-	generateTraceSimulationReport(&config, &result);
+	TraceSimulationResult result = executeTraceSimulation(appConfig);
+	generateTraceSimulationReport(&appConfig, &result);
 
 	return 0;
 }
