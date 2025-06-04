@@ -92,8 +92,8 @@ int getEvictedFrameIndex(ReplacementAlgorithm type, Frame* memory, unsigned numF
 Frame* initMemory(unsigned numFrames) {
 	Frame* memory = malloc(sizeof(Frame) * numFrames);
 
-	for (unsigned i = 0; i < numFrames; i++) {
-		memory[i] = (Frame){
+	for (unsigned frameIndex = 0; frameIndex < numFrames; frameIndex++) {
+		memory[frameIndex] = (Frame){
 			.pageNumber = -1,
 			.lastAccessTime = 0,
 			.accessCount = 0,
