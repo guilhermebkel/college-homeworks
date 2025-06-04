@@ -171,7 +171,9 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 			if (isPageTableFull) {
 				int evictedFrameIndex = getEvictedFrameIndex(appConfig.replacementAlgorithm, memory, numFrames);
 
-				if (memory[evictedFrameIndex].dirty) {
+				int isPageDirty = memory[evictedFrameIndex].dirty;
+
+				if (isPageDirty) {
 					traceSimulationResult.dirtyPages++;
 				}
 

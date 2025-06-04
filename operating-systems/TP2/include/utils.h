@@ -15,6 +15,14 @@ typedef enum {
 	INVERTED
 } PageTableType;
 
+typedef struct {
+	int pageNumber;
+	unsigned lastAccessTime;
+	unsigned accessCount;
+	int dirty;
+	unsigned loadTime;
+} Frame;
+
 ReplacementAlgorithm turnStringIntoReplacementAlgorithm(const char* str);
 PageTableType turnStringIntoPageTableType(const char* str);
 const char* getReplacementAlgorithmName(ReplacementAlgorithm replacementAlgorithm);
