@@ -61,13 +61,13 @@ const char* getPageTableTypeName(PageTableType type) {
 }
 
 unsigned calculatePageShiftBits(unsigned pageSizeInKB) {
-	unsigned shiftBits = 0;
+	unsigned pageShiftBits = 0;
 	unsigned pageSize = pageSizeInKB;
 
 	while (pageSize > 1) {
 		pageSize >>= 1;
-		shiftBits++;
+		pageShiftBits++;
 	}
 
-	return shiftBits;
+	return pageShiftBits;
 }
