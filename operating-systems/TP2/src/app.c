@@ -185,20 +185,20 @@ void generateTraceSimulationReport(const AppConfig* config, const TraceSimulatio
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 6) {
-			printf("Uso: %s <algoritmo> <arquivo_trace> <tam_pagina_kb> <tam_memoria_kb> <tipo_tabela>\n", argv[0]);
-			return 1;
-    }
+	if (argc != 6) {
+		printf("Uso: %s <algoritmo> <arquivo_trace> <tam_pagina_kb> <tam_memoria_kb> <tipo_tabela>\n", argv[0]);
+		return 1;
+	}
 
-    AppConfig config;
-    config.replacementAlgorithm = turnStringIntoReplacementAlgorithm(argv[1]);
-    config.traceFilePath = argv[2];
-    config.pageSizeInKB = atoi(argv[3]);
-    config.memorySizeInKB = atoi(argv[4]);
-    config.pageTableType = turnStringIntoPageTableType(argv[5]);
+	AppConfig config;
+	config.replacementAlgorithm = turnStringIntoReplacementAlgorithm(argv[1]);
+	config.traceFilePath = argv[2];
+	config.pageSizeInKB = atoi(argv[3]);
+	config.memorySizeInKB = atoi(argv[4]);
+	config.pageTableType = turnStringIntoPageTableType(argv[5]);
 
-    TraceSimulationResult result = executeTraceSimulation(config);
-    generateTraceSimulationReport(&config, &result);
+	TraceSimulationResult result = executeTraceSimulation(config);
+	generateTraceSimulationReport(&config, &result);
 
-    return 0;
+	return 0;
 }
