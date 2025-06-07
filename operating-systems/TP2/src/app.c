@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 #include <time.h>
-#include <stdint.h>
 
 #include "dense-page-table.h"
 #include "hier-2-page-table.h"

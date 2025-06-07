@@ -55,7 +55,8 @@
         "hier-2-page-table.h": "c",
         "hier-3-page-table.h": "c",
         "inverted-page-table.h": "c",
-        "page-replacement-algorithm.h": "c"
+        "page-replacement-algorithm.h": "c",
+        "stdlib.h": "c"
     },
     "cSpell.words": [
         "HIER"
