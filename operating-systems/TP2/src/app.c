@@ -115,7 +115,9 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 	srand(time(NULL));
 	unsigned pageShiftBits = calculatePageShiftBits(appConfig.pageSizeInKB) + 10;
-	unsigned address; char rw; unsigned time = 0;
+	unsigned address;
+	char rw;
+	unsigned time = 0;
 
 	unsigned numFrames = appConfig.memorySizeInKB / appConfig.pageSizeInKB;
 	Frame* memory = initMemory(numFrames);
