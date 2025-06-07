@@ -39,15 +39,9 @@ $(OBJ)/app.o: $(SRC)/app.c $(INC)/app.h
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
-test1: $(EXE)
+test: $(EXE)
 	$(EXE) lru ./input/arquivo.log 4 128 densa
 	$(EXE) lru ./input/compilador.log 4 128 densa
 	$(EXE) lru ./input/compressor.log 4 128 densa
 	$(EXE) lru ./input/matriz.log 4 128 densa
 	$(EXE) lru ./input/simulador.log 4 128 densa
-
-test2: $(EXE)
-	$(EXE) lru ./input/simulador.log 4 128 densa
-	$(EXE) lru ./input/simulador.log 4 128 hier2
-	$(EXE) lru ./input/simulador.log 4 128 hier3
-	$(EXE) lru ./input/simulador.log 4 128 invertida
