@@ -13,22 +13,22 @@ echo "Scenario,TraceFile,Algorithm,PageTableType,PageSizeKB,MemorySizeKB,TotalAc
 
 run_simulation() {
     local scenario="$1"
-    local trace="$2"
-    local algo="$3"
+    local trace_file="$2"
+    local algorithm_type="$3"
     local page_size="$4"
     local memory_size="$5"
-    local pt_type="$6"
+    local page_table_type="$6"
 
-    echo "[$scenario] Executando: $trace | $algo | ${page_size}KB | ${memory_size}KB | $pt_type"
+    echo "[$scenario] Executando: $trace_file | $algorithm_type | ${page_size}KB | ${memory_size}KB | $page_table_type"
 
-    output="$("$SIMULATOR_EXE" "$algo" "$trace" "$page_size" "$memory_size" "$pt_type")"
+    output="$("$SIMULATOR_EXE" "$algorithm_type" "$trace_file" "$page_size" "$memory_size" "$page_table_type")"
 
     total_accesses=$(echo "$output" | grep "Total de acessos:" | awk '{print $4}')
     page_faults=$(echo "$output" | grep "Páginas lidas:" | awk '{print $3}')
     dirty_pages=$(echo "$output" | grep "Páginas escritas:" | awk '{print $3}')
     exec_time=$(echo "$output" | grep "Tempo de execução:" | awk '{print $4}')
 
-    echo "$scenario,$trace,$algo,$pt_type,$page_size,$memory_size,$total_accesses,$page_faults,$dirty_pages,$exec_time" >> "$OUTPUT_FILE"
+    echo "$scenario,$trace_file,$algorithm_type,$page_table_type,$page_size,$memory_size,$total_accesses,$page_faults,$dirty_pages,$exec_time" >> "$OUTPUT_FILE"
 }
 
 # Cenário 1: Página Fixa (4KB), Memória Variável
