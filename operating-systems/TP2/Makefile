@@ -40,8 +40,4 @@ clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
 test: $(EXE)
-	$(EXE) lru ./input/arquivo.log 4 128 densa
-	$(EXE) lru ./input/compilador.log 4 128 densa
-	$(EXE) lru ./input/compressor.log 4 128 densa
-	$(EXE) lru ./input/matriz.log 4 128 densa
-	$(EXE) lru ./input/simulador.log 4 128 densa
+	$(EXE) lru ./input/arquivo-de-teste-reduzido.log 4 128 densa debug

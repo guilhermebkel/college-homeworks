@@ -9,6 +9,7 @@ typedef struct {
 	char* traceFilePath;
 	unsigned pageSizeInKB;
 	unsigned memorySizeInKB;
+	int debugMode;
 } AppConfig;
 
 typedef struct {

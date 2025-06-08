@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdarg.h>
 
 #include "dense-page-table.h"
 #include "hier-2-page-table.h"
@@ -87,6 +88,41 @@ int getEvictedFrameIndex(ReplacementAlgorithm type, Frame* memory, unsigned numF
 	return -1;
 }
 
+void printDebugStartupMessage(AppConfig appConfig, unsigned numFrames, unsigned pageShiftBits) {
+	if (appConfig.debugMode) {
+		printf("--- MODO DE DEPURACAO ATIVADO ---\n");
+		printf("Configuracao: Algoritmo=%s, Tabela=%s, Pagina=%uKB, Memoria=%uKB\n",
+			getReplacementAlgorithmName(appConfig.replacementAlgorithm),
+			getPageTableTypeName(appConfig.pageTableType),
+			appConfig.pageSizeInKB, appConfig.memorySizeInKB);
+		printf("Numero de Quadros: %u\n", numFrames);
+		printf("Bits de Deslocamento (s): %u\n", pageShiftBits);
+		printf("----------------------------------\n\n");
+	}
+}
+
+void printDebugMemoryState(AppConfig appConfig, const Frame* memory, unsigned numFrames) {
+	if (appConfig.debugMode) {
+		printf("[DEBUG] Estado Atual da Memória:\n");
+
+    for (unsigned i = 0; i < numFrames; i++) {
+			printf("[DEBUG] Quadro %u: Página %d (Último Acesso: %u, Contagem: %u, Suja: %d, Tempo Carga: %u)\n", i, memory[i].pageNumber, memory[i].lastAccessTime, memory[i].accessCount, memory[i].dirty, memory[i].loadTime);
+    }
+	}
+}
+
+void printDebugMessage(AppConfig appConfig, const char* format, ...) {
+	if (appConfig.debugMode) {
+		va_list args;
+		va_start(args, format);
+
+		printf("[DEBUG] ");
+		vprintf(format, args);
+
+		va_end(args);
+	}
+}
+
 Frame* initMemory(unsigned numFrames) {
 	Frame* memory = malloc(sizeof(Frame) * numFrames);
 
@@ -133,7 +169,11 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 		int isPageInMemory = ((frameIndex != -1) && (memory[frameIndex].pageNumber == page));
 
+		printDebugMessage(appConfig, "Tempo %u: Acesso ao endereco 0x%x (%c) -> Pagina Virtual %u\n", time, address, rw, page);
+
 		if (isPageInMemory) {
+			printDebugMessage(appConfig, "ACERTO (HIT): Pagina %u encontrada no Quadro %d.\n", page, frameIndex);
+
 			memory[frameIndex].lastAccessTime = time;
 			memory[frameIndex].accessCount++;
 
@@ -141,9 +181,14 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 			if (isWriteOperation) {
 				memory[frameIndex].dirty = 1;
+
+				printDebugMessage(appConfig, "Operacao de ESCRITA: Quadro %d marcado como SUJO.\n", frameIndex);
 			}
 		} else {
 			traceSimulationResult.pageFaults++;
+
+			printDebugMessage(appConfig, "FALHA DE PAGINA (PAGE FAULT): Pagina %u nao esta na memoria.\n", page);
+
 			int pageHasBeenPlaced = 0;
 
 			for (unsigned currentFrameIndex = 0; currentFrameIndex < numFrames; currentFrameIndex++) {
@@ -161,6 +206,12 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 					setPageTableFrameIndex(appConfig.pageTableType, page, currentFrameIndex);
 
+					printDebugMessage(appConfig, "Pagina %u carregada no Quadro VAZIO %u.\n", page, currentFrameIndex);
+
+					if (isWriteOperation) {
+						printDebugMessage(appConfig, "Operacao de ESCRITA: Quadro %u marcado como SUJO.\n", currentFrameIndex);
+					}
+
 					pageHasBeenPlaced = 1;
 					break;
 				}
@@ -170,11 +221,14 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 
 			if (isPageTableFull) {
 				int evictedFrameIndex = getEvictedFrameIndex(appConfig.replacementAlgorithm, memory, numFrames);
-
+				unsigned evictedPage = memory[evictedFrameIndex].pageNumber;
 				int isPageDirty = memory[evictedFrameIndex].dirty;
+
+				printDebugMessage(appConfig, "Memoria CHEIA. Algoritmo %s selecionou Quadro %d para substituicao (Pagina %u).\n", getReplacementAlgorithmName(appConfig.replacementAlgorithm), evictedFrameIndex, evictedPage);
 
 				if (isPageDirty) {
 					traceSimulationResult.dirtyPages++;
+					printDebugMessage(appConfig, "Pagina %u (Quadro %d) estava SUJA e sera ESCRITA de volta no disco.\n", evictedPage, evictedFrameIndex);
 				}
 
 				removePageTableFrameIndex(appConfig.pageTableType, memory[evictedFrameIndex].pageNumber);
@@ -190,8 +244,16 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 				};
 
 				setPageTableFrameIndex(appConfig.pageTableType, page, evictedFrameIndex);
+
+				printDebugMessage(appConfig, "Pagina %u carregada no Quadro %d.\n", page, evictedFrameIndex);
+
+				if (isWriteOperation) {
+					printDebugMessage(appConfig, "Operacao de ESCRITA: Quadro %d marcado como SUJO.\n", evictedFrameIndex);
+				}
 			}
 		}
+
+		printDebugMessage(appConfig, "----------------------------------\n\n");
 	}
 
 	fclose(file);
@@ -219,17 +281,13 @@ void generateTraceSimulationReport(const AppConfig* config, const TraceSimulatio
 }
 
 int main(int argc, char* argv[]) {
-	if (argc != 6) {
-		printf("Uso: %s <algoritmo> <arquivo_trace> <tam_pagina_kb> <tam_memoria_kb> <tipo_tabela>\n", argv[0]);
-		return 1;
-	}
-
 	AppConfig appConfig;
 	appConfig.replacementAlgorithm = turnStringIntoReplacementAlgorithm(argv[1]);
 	appConfig.traceFilePath = argv[2];
 	appConfig.pageSizeInKB = atoi(argv[3]);
 	appConfig.memorySizeInKB = atoi(argv[4]);
 	appConfig.pageTableType = turnStringIntoPageTableType(argv[5]);
+	appConfig.debugMode = argc == 7 ? 1 : 0;
 
 	TraceSimulationResult result = executeTraceSimulation(appConfig);
 	generateTraceSimulationReport(&appConfig, &result);
