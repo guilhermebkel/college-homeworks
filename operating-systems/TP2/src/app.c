@@ -88,29 +88,6 @@ int getEvictedFrameIndex(ReplacementAlgorithm type, Frame* memory, unsigned numF
 	return -1;
 }
 
-void printDebugStartupMessage(AppConfig appConfig, unsigned numFrames, unsigned pageShiftBits) {
-	if (appConfig.debugMode) {
-		printf("--- MODO DE DEPURACAO ATIVADO ---\n");
-		printf("Configuracao: Algoritmo=%s, Tabela=%s, Pagina=%uKB, Memoria=%uKB\n",
-			getReplacementAlgorithmName(appConfig.replacementAlgorithm),
-			getPageTableTypeName(appConfig.pageTableType),
-			appConfig.pageSizeInKB, appConfig.memorySizeInKB);
-		printf("Numero de Quadros: %u\n", numFrames);
-		printf("Bits de Deslocamento (s): %u\n", pageShiftBits);
-		printf("----------------------------------\n\n");
-	}
-}
-
-void printDebugMemoryState(AppConfig appConfig, const Frame* memory, unsigned numFrames) {
-	if (appConfig.debugMode) {
-		printf("[DEBUG] Estado Atual da Memória:\n");
-
-    for (unsigned i = 0; i < numFrames; i++) {
-			printf("[DEBUG] Quadro %u: Página %d (Último Acesso: %u, Contagem: %u, Suja: %d, Tempo Carga: %u)\n", i, memory[i].pageNumber, memory[i].lastAccessTime, memory[i].accessCount, memory[i].dirty, memory[i].loadTime);
-    }
-	}
-}
-
 void printDebugMessage(AppConfig appConfig, const char* format, ...) {
 	if (appConfig.debugMode) {
 		va_list args;
