@@ -258,6 +258,15 @@ void generateTraceSimulationReport(const AppConfig* config, const TraceSimulatio
 }
 
 int main(int argc, char* argv[]) {
+	// 5 argumentos: simulador <algoritmo> <arquivo_trace> <tam_pagina_kb> <tam_memoria_kb> <tipo_tabela>
+	// 6 argumentos: simulador <algoritmo> <arquivo_trace> <tam_pagina_kb> <tam_memoria_kb> <tipo_tabela> <debug_flag>
+	if (argc < 6 || argc > 7) {
+		printf("Uso: %s <algoritmo> <arquivo_trace> <tam_pagina_kb> <tam_memoria_kb> <tipo_tabela> [debug_flag]\n", argv[0]);
+		printf("Exemplo sem debug: %s lru arquivo.log 4 128 densa\n", argv[0]);
+		printf("Exemplo com debug: %s lru arquivo.log 4 128 densa debug\n", argv[0]);
+		return 1;
+	}
+
 	AppConfig appConfig;
 	appConfig.replacementAlgorithm = turnStringIntoReplacementAlgorithm(argv[1]);
 	appConfig.traceFilePath = argv[2];
