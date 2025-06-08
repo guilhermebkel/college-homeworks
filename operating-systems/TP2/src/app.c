@@ -244,7 +244,7 @@ TraceSimulationResult executeTraceSimulation(AppConfig appConfig) {
 }
 
 void generateTraceSimulationReport(const AppConfig* config, const TraceSimulationResult* result) {
-	printf("Executando o simulador...\n");
+	printf("=> Resultado da simulação:\n");
 	printf("Arquivo de entrada: %s\n", config->traceFilePath);
 	printf("Tamanho da memória: %u KB\n", config->memorySizeInKB);
 	printf("Tamanho das páginas: %u KB\n", config->pageSizeInKB);
